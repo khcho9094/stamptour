@@ -310,10 +310,17 @@ header .head_back span {
     line-height: 50px;
     font-family:inaviL;
 }
-/* 추후 swiper로 변경 및 삭제 */
-.tour_start_wrap .swiper img {
-    width:240px;
-    padding-left: 25px;
+.swiper_1 {
+    padding-left: 25px!important;
+    width: 100%;
+}
+.swiper_1 .slide {
+    width: 240px;
+    height:140px;
+    background-image: url('../images/dummy_img/img_1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .tour_start_wrap .content {
     font-size: 12px;
@@ -1113,10 +1120,10 @@ header .head_back span {
 =============================================*/
 
 /* 추후 swiper로 변경 및 삭제 */
-.tour_sub_wrap .swiper img {
+/* .tour_sub_wrap .swiper img {
     width:240px;
     padding-left: 25px;
-}
+} */
 .tour_sub_wrap .desc_box {
     padding: 10px 25px 35px;
 }

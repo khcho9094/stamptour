@@ -6,15 +6,20 @@
         <div class="title">
             스탬프 투어로 즐기는 부안관광
         </div>
-        <div class="swiper">
-            <img src="@/assets/images/dummy_img/img_1.jpg" alt="임시이미지">
-        </div>
+        <swiper :options="swiperOption" class="swiper_1">
+            <swiper-slide
+              class="slide"
+              :style="{ 'backgroundImage': `url(${img})` }"
+              v-for="(img) in imgs"
+              v-bind:key="img">
+            </swiper-slide>
+        </swiper>
         <div class="content">
             부안군은 군산시와는 바다로 접경하고, 북동으로 김제시,
             남동으로는 정읍시, 남으로는 고창군과 접해있다.
             해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
             새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.
+            접해있다.<br/>
             동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
             반도이며, 남서부는 변산이 겹겹이 쌓여있고
             북동부는 넓고 비옥한 평야를 이루고 있고
@@ -23,7 +28,7 @@
             남동으로는 정읍시, 남으로는 고창군과 접해있다.
             해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
             새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.
+            접해있다.<br/>
             동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
             반도이며, 남서부는 변산이 겹겹이 쌓여있고
             북동부는 넓고 비옥한 평야를 이루고 있고
@@ -32,7 +37,7 @@
             남동으로는 정읍시, 남으로는 고창군과 접해있다.
             해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
             새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.
+            접해있다.<br/>
             동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
             반도이며, 남서부는 변산이 겹겹이 쌓여있고
             북동부는 넓고 비옥한 평야를 이루고 있고
@@ -45,7 +50,7 @@
             남동으로는 정읍시, 남으로는 고창군과 접해있다.
             해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
             새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.
+            접해있다.<br/>
             동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
             반도이며, 남서부는 변산이 겹겹이 쌓여있고
             북동부는 넓고 비옥한 평야를 이루고 있고
@@ -66,6 +71,23 @@ export default {
   name: 'intro',
   components: {
     Head
+  },
+  data () {
+    return {
+      swiperOption: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      },
+      imgs: [
+        require('@/assets/images/dummy_img/img_1.jpg'),
+        require('@/assets/images/dummy_img/img_2.jpg'),
+        require('@/assets/images/dummy_img/img_4.jpg'),
+        require('@/assets/images/dummy_img/img_5.jpg')
+      ]
+    }
+  },
+  mounted () {
+    console.log(this.swiper)
   }
 }
 </script>
