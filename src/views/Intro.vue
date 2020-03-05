@@ -6,7 +6,7 @@
         <div class="title">
             스탬프 투어로 즐기는 부안관광
         </div>
-        <swiper :options="swiperOption" class="swiper_1">
+        <swiper :options="swiperOption" class="swiper">
             <swiper-slide
               class="slide"
               :style="{ 'backgroundImage': `url(${img})` }"
@@ -68,14 +68,14 @@
 <script>
 import Head from '@/components/Head.vue'
 export default {
-  name: 'intro',
+  name: 'Intro',
   components: {
     Head
   },
   data () {
     return {
       swiperOption: {
-        slidesPerView: 2,
+        slidesPerView: 'auto',
         spaceBetween: 10
       },
       imgs: [
@@ -91,3 +91,16 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .swiper {
+    padding-left: 25px!important;
+    width: 100%;
+  }
+  .swiper .slide {
+      width: 240px;
+      height:140px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+  }
+</style>

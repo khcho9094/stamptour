@@ -5,7 +5,7 @@
       </div>
       <div class="head_back" v-else>
           <img src="@/assets/images/back.png" alt="back">
-          <span>스탬프 교환 상품</span>
+          <span>{{title}}</span>
       </div>
       <button v-show="name === 'main'" class="r_type2 home">홈가기</button>
       <button v-bind:class="headBtn">{{btnType[name]}}</button>
@@ -16,7 +16,8 @@ export default {
   name: 'haed',
   props: {
     type: String,
-    name: String
+    name: String,
+    title: String
   },
   data () {
     return {

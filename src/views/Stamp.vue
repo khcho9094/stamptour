@@ -1,7 +1,7 @@
 <template>
-  <div class="tour_detail">
+  <div class="view_stamp">
     <!-- 헤더 -->
-    <Head type='back' name='tour_detail' title="채석강 (전북 서해안권 국가지질공원)" />
+    <Head type='back' name='view_stamp' title="스탬프명" />
     <div class="tour_sub_wrap">
         <StampSwiper />
         <StampInfo />
@@ -13,7 +13,7 @@ import Head from '@/components/Head.vue'
 import StampSwiper from '@/components/StampSwiper.vue'
 import StampInfo from '@/components/StampInfo.vue'
 export default {
-  name: 'Detail',
+  name: 'Stamp',
   components: {
     Head,
     StampSwiper,

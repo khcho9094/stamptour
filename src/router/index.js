@@ -15,7 +15,7 @@ const routes = [
     // 스탬프 상세 보기
     path: '/stamp',
     name: 'Stamp',
-    component: () => import('../views/ViewStamp.vue')
+    component: () => import('../views/Stamp.vue')
   },
   {
     // 투어 시작

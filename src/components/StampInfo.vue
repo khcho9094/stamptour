@@ -1,25 +1,5 @@
 <template>
-  <div class="view_stamp">
-    <!-- 헤더 -->
-    <Head type='back' name='view_stamp' />
-    <!-- <header>
-        <div class="head_back">
-            <img src="@/assets/images/back.png" alt="back">
-            <span>스탬프 타이틀</span>
-        </div>
-    </header> -->
-    <div class="tour_sub_wrap">
-        <div class="swiper_img_box">
-            <div class="swiper_img"></div>
-            <div class="num">1 / 8</div>
-        </div>
-        <div class="notice_box">
-            <div class="notice">Notice</div>
-            <div class="txt">
-                태양의 후예 촬영지 관광 안내소에서<br/>
-                전자 스탬프로 획득가능
-            </div>
-        </div>
+    <div>
         <div class="service_info type2">
             <div class="title">행사</div>
             <div class="info">
@@ -57,7 +37,7 @@
                     외국어 안내서비스<br/>
                     <span>
                         문화 관광 해설사 (지질공원 해설사) 안내 가능<br/>
-                        문의 063-581-5114, 063-584-2114
+                        문의 063-581-5114, 063-584-2114<br/>
                         사전예약필수
                     </span>
                 </p>
@@ -79,14 +59,9 @@
             </div>
         </div>
     </div>
-  </div>
 </template>
 <script>
-import Head from '@/components/Head.vue'
 export default {
-  name: 'viewStamp',
-  components: {
-    Head
-  }
+  name: 'StampInfo'
 }
 </script>
