@@ -4,7 +4,9 @@
           <img src="@/assets/images/logo_1.png" alt="title_logo">
       </div>
       <div class="head_back" v-else>
-          <img src="@/assets/images/back.png" alt="back">
+          <div class="back_box">
+            <img src="@/assets/images/back.png" alt="back">
+          </div>
           <span>{{title}}</span>
       </div>
       <button v-show="name === 'main'" class="r_type2 home">홈가기</button>
