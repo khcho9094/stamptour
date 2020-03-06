@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 export default {
   name: 'List',
@@ -58,6 +59,16 @@ export default {
     }
   },
   mounted () {
+    const backImg = document.getElementsByClassName('back_img')
+    for (let i = 0; i < backImg.length; i++) {
+      const element = backImg[i]
+      const width = element.offsetWidth
+      element.style.height = `${width}px`
+    }
+    this.$store.dispatch('loadDummyData')
+  },
+  computed: {
+    ...mapState(['dummyData'])
   }
 }
 </script>
