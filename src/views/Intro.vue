@@ -2,7 +2,7 @@
   <div class="intro">
     <!-- 헤더 -->
     <Head type='logo' name='intro' />
-    <PopupIntro :visible='visible' />
+    <PopupIntro :visible='visible' :count='count'  />
     <div class="tour_start_wrap">
         <div class="title">
             {{introData.mingle_title}}
@@ -29,6 +29,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import router from '@/router'
 import Head from '@/components/Head.vue'
 import PopupIntro from '@/components/PopupIntro.vue'
 export default {
@@ -43,7 +44,9 @@ export default {
         slidesPerView: 'auto',
         spaceBetween: 10
       },
-      visible: false
+      visible: false,
+      count: 5,
+      pageOut: false
     }
   },
   computed: {
@@ -52,12 +55,32 @@ export default {
   },
   methods: {
     tourStartButton () {
-      this.visible = !this.visible
+      const check = document.getElementById('tour_off')
+      if (check.checked) {
+        this.visible = !this.visible
+        this.closeCount()
+      } else {
+        // 메인 이동
+        router.push('/')
+      }
+    },
+    closeCount () {
+      const interval = setInterval(() => {
+        this.count--
+        if (this.count === 0) {
+          clearInterval(interval)
+          router.push('/')
+        } else if (this.pageOut) {
+          clearInterval(interval)
+        }
+      }, 1000)
     }
   },
   mounted () {
     // this.$store.dispatch('loadIntroImage')
-    console.log(this.introImage)
+  },
+  destroyed () {
+    this.pageOut = true
   }
 }
 </script>
