@@ -21,6 +21,9 @@ export default {
     GiftPoint,
     GiftList,
     GiftGuide
+  },
+  mounted () {
+    this.$store.dispatch('loadGiftData')
   }
 }
 </script>

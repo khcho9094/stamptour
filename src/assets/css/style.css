@@ -959,7 +959,8 @@ header .head_back span {
     width:28px;
     margin:0 6px;
     position: relative;
-    top: 3px;
+    /* top: 3px; */
+    vertical-align: middle;
 }
 .tour_sub_wrap ul.gift_list li span {
     display: inline-block;
@@ -972,6 +973,8 @@ header .head_back span {
     position: absolute;
     top: 0;
     right: -15px;
+}
+.tour_sub_wrap ul.gift_list li .gift_icon.on {
     cursor: pointer;
 }
 .tour_sub_wrap ul.gift_list li .gift_icon img {
@@ -1088,13 +1091,18 @@ header .head_back span {
     font-size: 12px;
     font-family: inaviL;
     line-height: 18px;
-    padding-left: 12px;
+    /* padding-left: 12px; */
+}
+.tour_sub_wrap .service_info .info p table td:first-child {
+    padding-left: 3px;
+    padding-right: 5px;
+    vertical-align: top;
 }
 .tour_sub_wrap .service_info.type1 .info p {
-    background-image: url('../images/dot2.png');
+    /* background-image: url('../images/dot2.png');
     background-repeat: no-repeat;
     background-size: 2px;
-    background-position: top 8px left 4px;
+    background-position: top 8px left 4px; */
     margin-bottom: 2px;
     color:#000;
 }
