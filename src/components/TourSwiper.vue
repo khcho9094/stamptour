@@ -4,16 +4,13 @@
         <swiper-slide
           class="slide"
           :style="{ 'backgroundImage': `url(${data})` }"
-          v-for="(data, idx) in TourInfoData.image"
+          v-for="(data, idx) in introImage"
           v-bind:key="idx">
         </swiper-slide>
     </swiper>
     <div class="desc_box">
         <p>
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시, 남동으로는 정읍시, 남으로는 고창군과 접해있다
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시, 남동으로는 정읍시, 남으로는 고창군과 접해있다
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시, 남동으로는 정읍시, 남으로는 고창군과 접해있다
-            와는 바다로 접경하고, 북동으로 김제시, 남동으로는 정읍시, 남으로는 고창군과 접해있다
+          {{introData.mingle_desc_basic}}
         </p>
         <span>지역 설명 전체 보기+</span>
     </div>
@@ -39,10 +36,11 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadTourInfoData')
+    this.$store.dispatch('loadIntroData')
   },
   computed: {
-    ...mapState(['TourInfoData'])
+    ...mapState(['introData']),
+    ...mapState(['introImage'])
     // ...mapGetters(['tourInfoImage'])
   }
 }

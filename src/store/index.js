@@ -9,12 +9,12 @@ export default new Vuex.Store({
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
     introData: {},
     introImage: [],
-    TourInfoData: {},
     TourData: [],
     FoodData: [],
     LodgMentData: [],
     LeportsData: [],
-    ShoppingData: []
+    ShoppingData: [],
+    apiData: []
   },
   mutations: {
     setIntroData (state, data) {
@@ -25,26 +25,25 @@ export default new Vuex.Store({
         state.introImage.push(imgPath)
       })
     },
-    setTourInfoData (state, data) {
-      state.TourInfoData = data.response.content
-      console.log('tourinfo')
-      console.log(data)
-    },
     setTourData (state, data) {
       state.TourData = data.content.list
-      console.log(state.TourData)
+      state.apiData = data.content.list
     },
     setFoodData (state, data) {
       state.FoodData = data.content.list
+      state.apiData = data.content.list
     },
     setLodgMentData (state, data) {
       state.LodgMentData = data.content.list
+      state.apiData = data.content.list
     },
     setLeportsData (state, data) {
       state.LeportsData = data.content.list
+      state.apiData = data.content.list
     },
     setShoppingData (state, data) {
       state.ShoppingData = data.content.list
+      state.apiData = data.content.list
     }
   },
   actions: {
@@ -64,21 +63,11 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    loadTourInfoData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/courses/get_course_item.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&status=&view_count=300&page=0&token=&lon=&lat='
-      Vue
-        .jsonp(url)
-        .then(respnose => {
-          console.log('jsonp get')
-          console.log(respnose)
-          commit('setTourInfoData', respnose)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
+    /*
+     주변 축제 행사 API
+     */
     loadTourData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=39&view_count=15&page=1&listType=S&lon=&lat='
+      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=15&view_count=15&page=1&listType=S&lon=&lat='
       Vue
         .jsonp(url)
         .then(response => {
@@ -88,8 +77,11 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    /*
+     주변 음식점 API
+     */
     loadFoodData ({ stage, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=15&view_count=15&page=1&listType=S&lon=&lat='
+      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=39&view_count=15&page=1&listType=S&lon=&lat='
       Vue
         .jsonp(url)
         .then(response => {
@@ -100,6 +92,9 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    /*
+     주변 숙소 API
+     */
     loadLodgMentData ({ state, commit }) {
       const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=32&view_count=15&page=1&listType=S&lon=&lat='
       Vue
@@ -112,6 +107,9 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    /*
+     주변 체험 관광 API
+     */
     loadLeportsData ({ state, commit }) {
       const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=28&view_count=15&page=1&listType=S&lon=&lat='
       Vue
@@ -124,6 +122,9 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    /*
+     주변 쇼핑 API
+     */
     loadShoppingData ({ state, commit }) {
       const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=38&view_count=15&page=1&listType=S&lon=&lat='
       Vue

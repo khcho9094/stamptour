@@ -1,10 +1,10 @@
 <template>
   <div class="tour_list">
     <!-- 헤더 -->
-    <Head type='back' name='tour_list' title="축제 공연 행사" />
+    <Head type='back' name='tour_list' id='t_head' title="축제" />
     <div class="tour_sub_wrap back_gray">
         <ul class="view_list">
-             <li v-for="(data, idx) in TourData" v-bind:key="idx">
+             <li v-for="(data, idx) in apiData" v-bind:key="idx">
                 <div class="back_img" :style="{ 'backgroundImage': `url(${data.image})` }" ></div>
                 <h2>{{data.title}}</h2>
                 <p>{{data.dist}}Km</p>
@@ -25,17 +25,34 @@ export default {
     return {
     }
   },
+  created () {
+  },
   mounted () {
-    // const backImg = document.getElementsByClassName('back_img')
-    // for (let i = 0; i < backImg.length; i++) {
-    //   const element = backImg[i]
-    //   const width = element.offsetWidth
-    //   element.style.height = `${width}px`
-    // }
-    this.$store.dispatch('loadTourData')
+    const type = this.$route.query.type
+    // 주변 축제
+    if (type === 'T') {
+      document.getElementById('t_head').getElementsByTagName('span')[0].innerHTML = '주변 축제 공연행사'
+      this.$store.dispatch('loadTourData')
+    // 주변 음식점
+    } else if (type === 'F') {
+      document.getElementById('t_head').getElementsByTagName('span')[0].innerHTML = '주변 음식점'
+      this.$store.dispatch('loadFoodData')
+    // 주변 숙소
+    } else if (type === 'LM') {
+      document.getElementById('t_head').getElementsByTagName('span')[0].innerHTML = '주변 숙소'
+      this.$store.dispatch('loadLodgMentData')
+    // 주변 레포츠
+    } else if (type === 'L') {
+      document.getElementById('t_head').getElementsByTagName('span')[0].innerHTML = '주변 체험관광'
+      this.$store.dispatch('loadLeportsData')
+    // 주변 쇼핑
+    } else if (type === 'S') {
+      document.getElementById('t_head').getElementsByTagName('span')[0].innerHTML = '주변 쇼핑'
+      this.$store.dispatch('loadShoppingData')
+    }
   },
   computed: {
-    ...mapState(['TourData'])
+    ...mapState(['apiData'])
   }
 }
 </script>
