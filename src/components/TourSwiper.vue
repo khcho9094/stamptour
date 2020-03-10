@@ -3,9 +3,9 @@
     <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"
-          :style="{ 'backgroundImage': `url(${img})` }"
-          v-for="(img) in imgs"
-          v-bind:key="img">
+          :style="{ 'backgroundImage': `url(${data})` }"
+          v-for="(data, idx) in TourInfoData.image"
+          v-bind:key="idx">
         </swiper-slide>
     </swiper>
     <div class="desc_box">
@@ -20,6 +20,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'TourSwiper',
   data () {
@@ -27,14 +28,22 @@ export default {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 10
-      },
-      imgs: [
-        require('@/assets/images/dummy_img/img_1.jpg'),
-        require('@/assets/images/dummy_img/img_2.jpg'),
-        require('@/assets/images/dummy_img/img_4.jpg'),
-        require('@/assets/images/dummy_img/img_5.jpg')
-      ]
+      }
+      // ,
+      // imgs: [
+      //   require('@/assets/images/dummy_img/img_1.jpg'),
+      //   require('@/assets/images/dummy_img/img_2.jpg'),
+      //   require('@/assets/images/dummy_img/img_4.jpg'),
+      //   require('@/assets/images/dummy_img/img_5.jpg')
+      // ]
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadTourInfoData')
+  },
+  computed: {
+    ...mapState(['TourInfoData'])
+    // ...mapGetters(['tourInfoImage'])
   }
 }
 </script>
