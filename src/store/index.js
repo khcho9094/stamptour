@@ -6,22 +6,32 @@ Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 export default new Vuex.Store({
   state: {
-    dummyData: []
+    domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
+    introData: {},
+    introImage: []
   },
   mutations: {
-    setDummyData (state, data) {
-      state.dummyData = data
+    setIntroData (state, data) {
+      state.introData = data.info
+      // 이미지 url
+      data.image.map((val) => {
+        const imgPath = `${val.image_thumb_url}/${val.mingle_image_name}`
+        state.introImage.push(imgPath)
+      })
     }
   },
   actions: {
-    // dummy data test
-    loadDummyData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/courses/get_course_item.jsonp?mingleCode=SzActcWN5QXozxDixoG4zQ==&status=RECOMMEND&view_count=300&page=0&token=0A485F303C2CCC1332CAE46E50D72062C9A8290335D26E6D8998545C3F47317F9EC02E96E57F27F6&lon=&lat=&callback=callback&_=1583479339986'
+    /*
+    - 투어소개 기본정보
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+    */
+    loadIntroData ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/serviceInfo.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==`
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
-          commit('setDummyData', response.response)
+          commit('setIntroData', response.response.content)
         })
         .catch(err => {
           console.log(err)

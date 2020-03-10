@@ -2,75 +2,40 @@
   <div class="intro">
     <!-- 헤더 -->
     <Head type='logo' name='intro' />
+    <PopupIntro :visible='visible' />
     <div class="tour_start_wrap">
         <div class="title">
-            스탬프 투어로 즐기는 부안관광
+            {{introData.mingle_title}}
         </div>
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
               class="slide"
               :style="{ 'backgroundImage': `url(${img})` }"
-              v-for="(img) in imgs"
-              v-bind:key="img">
+              v-for="(img, idx) in introImage"
+              v-bind:key="idx">
             </swiper-slide>
         </swiper>
         <div class="content">
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시,
-            남동으로는 정읍시, 남으로는 고창군과 접해있다.
-            해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
-            새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.<br/>
-            동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
-            반도이며, 남서부는 변산이 겹겹이 쌓여있고
-            북동부는 넓고 비옥한 평야를 이루고 있고
-            변산 8경을 비롯해 풍부한 자연, 문화, 관광 유산을 보유하고 있다.
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시,
-            남동으로는 정읍시, 남으로는 고창군과 접해있다.
-            해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
-            새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.<br/>
-            동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
-            반도이며, 남서부는 변산이 겹겹이 쌓여있고
-            북동부는 넓고 비옥한 평야를 이루고 있고
-            변산 8경을 비롯해 풍부한 자연, 문화, 관광 유산을 보유하고 있다.
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시,
-            남동으로는 정읍시, 남으로는 고창군과 접해있다.
-            해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
-            새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.<br/>
-            동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
-            반도이며, 남서부는 변산이 겹겹이 쌓여있고
-            북동부는 넓고 비옥한 평야를 이루고 있고
-            변산 8경을 비롯해 풍부한 자연, 문화, 관광 유산을 보유하고 있다.
-            동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
-            반도이며, 남서부는 변산이 겹겹이 쌓여있고
-            북동부는 넓고 비옥한 평야를 이루고 있고
-            변산 8경을 비롯해 풍부한 자연, 문화, 관광 유산을 보유하고 있다.
-            부안군은 군산시와는 바다로 접경하고, 북동으로 김제시,
-            남동으로는 정읍시, 남으로는 고창군과 접해있다.
-            해안선은 동진강 하구에서부터 줄포면 우포리까지 99km 였으나
-            새만금 방조제가 완공되면서 현재 66km의 해안선이 바다와
-            접해있다.<br/>
-            동쪽이 낮고 서쪽이 높은 지형으로 황해에 불쑥 나와있는
-            반도이며, 남서부는 변산이 겹겹이 쌓여있고
-            북동부는 넓고 비옥한 평야를 이루고 있고
-            변산 8경을 비롯해 풍부한 자연, 문화, 관광 유산을 보유하고 있다.
+            {{introData.mingle_desc}}
         </div>
         <div class="tour_start_box">
             <div class="chkbox">
                 <input type="checkbox" id="tour_off"  name="tour_off"> <label for="tour_off">일주일동안 보지않기</label>
             </div>
-            <button>투어 시작하기</button>
+            <button @click="tourStartButton">투어 시작하기</button>
         </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
+import PopupIntro from '@/components/PopupIntro.vue'
 export default {
   name: 'Intro',
   components: {
-    Head
+    Head,
+    PopupIntro
   },
   data () {
     return {
@@ -78,16 +43,21 @@ export default {
         slidesPerView: 'auto',
         spaceBetween: 10
       },
-      imgs: [
-        require('@/assets/images/dummy_img/img_1.jpg'),
-        require('@/assets/images/dummy_img/img_2.jpg'),
-        require('@/assets/images/dummy_img/img_4.jpg'),
-        require('@/assets/images/dummy_img/img_5.jpg')
-      ]
+      visible: false
+    }
+  },
+  computed: {
+    ...mapState(['introData']),
+    ...mapState(['introImage'])
+  },
+  methods: {
+    tourStartButton () {
+      this.visible = !this.visible
     }
   },
   mounted () {
-    console.log(this.swiper)
+    // this.$store.dispatch('loadIntroImage')
+    console.log(this.introImage)
   }
 }
 </script>

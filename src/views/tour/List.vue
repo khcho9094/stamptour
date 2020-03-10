@@ -14,7 +14,6 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 export default {
   name: 'List',
@@ -65,10 +64,8 @@ export default {
       const width = element.offsetWidth
       element.style.height = `${width}px`
     }
-    this.$store.dispatch('loadDummyData')
   },
   computed: {
-    ...mapState(['dummyData'])
   }
 }
 </script>
