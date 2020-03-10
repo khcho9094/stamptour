@@ -1,41 +1,12 @@
 <template>
     <ul class="gift_list">
-        <li>
-            <div class="point">12P</div>
-            <img class="gift_img" src="@/assets/images/dummy_img/gift_img_1.png" alt="gift">
-            <span>2천원 상당 gs25 편의점 쿠폰</span>
-            <div class="gift_icon on">
-                <img src="@/assets/images/icon_gift.png" alt="gift">
-                <div class="dot"></div>
-            </div>
-            <div class="line"></div>
-        </li>
-        <li>
-            <div class="point">40P</div>
-            <img class="gift_img" src="@/assets/images/dummy_img/gift_img_1.png" alt="gift">
-            <span>3천원 상당 gs25 편의점 쿠폰</span>
-            <div class="gift_icon on">
-                <img src="@/assets/images/icon_gift.png" alt="gift">
-                <div class="dot"></div>
-            </div>
-            <div class="line"></div>
-        </li>
-        <li>
-            <div class="point">80P</div>
-            <img class="gift_img" src="@/assets/images/dummy_img/gift_img_2.png" alt="gift">
-            <span>6천원 상당 베스킨라빈스 쿠폰</span>
-            <div class="gift_icon">
-                <img src="@/assets/images/icon_gift.png" alt="gift">
-                <div class="dot"></div>
-            </div>
-            <div class="line"></div>
-        </li>
-        <li>
-            <div class="point">100P</div>
-            <img class="gift_img" src="@/assets/images/dummy_img/gift_img_3.png" alt="gift">
-            <span>9천원 상당 뚜레쥬르 쿠폰</span>
-            <div class="gift_icon">
-                <img src="@/assets/images/icon_gift.png" alt="gift">
+        <li v-for="(data, idx) in giftData" v-bind:key="idx">
+            <div class="point">{{data.mingle_count}}P</div>
+            <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
+            <span>{{data.mingle_gift_title}}</span>
+            <div class="gift_icon" :class="dotOn(data)">
+                <!-- <img src="@/assets/images/icon_gift.png" alt="gift"> -->
+                <img :src="giftOn(data)" alt="gift">
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
@@ -43,7 +14,33 @@
     </ul>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'GiftList'
+  name: 'GiftList',
+  computed: {
+    ...mapState(['giftData'])
+  },
+  methods: {
+    // 점 표시
+    dotOn (data) {
+      let dot = ''
+      if (data.mingle_gift_receive === 'Y') {
+        dot = 'on'
+      }
+      return dot
+    },
+    // 선물 아이콘 on/off
+    giftOn (data) {
+      let img = ''
+      if (data.mingle_gift_receive === 'Y') {
+        img = 'icon_gift'
+      } else {
+        img = 'icon_gift_off'
+      }
+      return require(`@/assets/images/${img}.png`)
+    }
+  },
+  mounted () {
+  }
 }
 </script>
