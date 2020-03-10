@@ -1,7 +1,7 @@
 <template>
   <header>
       <div class="logo" v-if="type == 'logo'" >
-          <img src="@/assets/images/logo_1.png" alt="title_logo">
+          <img :src="introData.image_logo" alt="title_logo">
       </div>
       <div class="head_back" v-else>
           <div class="back_box">
@@ -9,11 +9,12 @@
           </div>
           <span>{{title}}</span>
       </div>
-      <button v-show="name === 'main'" class="r_type2 home">홈가기</button>
-      <button v-bind:class="headBtn">{{btnType[name]}}</button>
+      <button v-show="name === 'main'" class="r_type2 home" @click="goHome">홈가기</button>
+      <button v-bind:class="headBtn" @click="moreClick">{{btnType[name]}}</button>
   </header>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'haed',
   props: {
@@ -40,7 +41,21 @@ export default {
         }
       })
       return btnClass
+    },
+    ...mapState(['introData'])
+  },
+  methods: {
+    moreClick () {
+      if (this.name === 'main') {
+        this.$emit('moreBtn')
+      }
+    },
+    goHome () {
+      console.log('gohome')
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadIntroData')
   }
 }
 </script>
