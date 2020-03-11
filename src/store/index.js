@@ -7,8 +7,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    introData: {},
-    introImage: [],
+    introData: {}, // 투어소개 정보
+    introImage: [], // 투어소개 이미지
+    giftData: [], // 선물 정보
+    myPoint: 0, // 보유 포인트
+    totalData: {}, // 기존 코스 정보
+    userInfo: {}, // 유저 정보
     TourData: [],
     FoodData: [],
     LodgMentData: [],
