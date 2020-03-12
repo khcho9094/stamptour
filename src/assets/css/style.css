@@ -1196,8 +1196,12 @@ header .head_back span {
     width:calc(50% - 5px);
     position: relative;
 }
-.tour_sub_wrap .sur_place ul.list li img {
+.tour_sub_wrap .sur_place ul.list li .backImg {
     width:100%;
+    height: 25vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     margin-bottom:10px;
 }
 .tour_sub_wrap .sur_place ul.list li:first-child {
