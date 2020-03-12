@@ -21,7 +21,6 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">26</span>
                     </div>
-                    <div class="position">위치보기</div>
                     <div class="progress_box">
                         <div class="p_back">
                             <div class="progress"></div>
@@ -43,7 +42,6 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">26</span>
                     </div>
-                    <div class="position">위치보기</div>
                 </div>
             </li>
             <li>
@@ -59,7 +57,6 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">26</span>
                     </div>
-                    <div class="position">위치보기</div>
                 </div>
             </li>
             <li>
@@ -74,7 +71,6 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">26</span>
                     </div>
-                    <div class="position">위치보기</div>
                 </div>
             </li>
         </ul>

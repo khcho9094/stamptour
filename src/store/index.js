@@ -13,6 +13,10 @@ export default new Vuex.Store({
     myPoint: 0, // 보유 포인트
     totalData: {}, // 기존 코스 정보
     userInfo: {}, // 유저 정보
+    stampCommon: {}, // 스탬프 개요
+    stampIntro: {}, // 스탬프 소개
+    stampImage: {}, // 스탬프 이미지
+    stampMethod: {}, // 스탬프 방법
     TourData: [],
     FoodData: [],
     LodgMentData: [],
@@ -36,6 +40,12 @@ export default new Vuex.Store({
     setTotalData (state, data) {
       state.totalData = data
       state.userInfo = data.view
+    },
+    setStampData (state, data) {
+      state.stampCommon = data.COMMON
+      state.stampIntro = data.INTRO
+      state.stampImage = data.IMAGE
+      state.stampMethod = data.METHOD
     },
     setTourInfoData (state, data) {
       state.TourInfoData = data.response.content
@@ -109,6 +119,25 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setTotalData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    - 스탬프정보 보기
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+      badge_id / 배지id / 필수
+      contentTypeId / 관광공사 CONTNET Type / 필수
+      contentId / 관광공사 CONTNET Id / 필수
+    */
+    loadStampData ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=12&contentId=128982&callback=callback&_=1583895150627&badge_id=971123`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setStampData', response.response.content)
         })
         .catch(err => {
           console.log(err)
