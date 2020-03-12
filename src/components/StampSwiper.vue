@@ -3,29 +3,27 @@
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
               class="slide"
-              :style="{ 'backgroundImage': `url(${data.originimgurl})` }"
-              v-for="(data, idx) in apiDetailData.IMAGE"
-              v-bind:key="idx">
+              :style="{ 'backgroundImage': `url(${img})` }"
+              v-for="(img) in imgArray()"
+              v-bind:key="img">
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
-        <!-- <div class="swiper_img_box">
-            <div class="swiper_img"></div>
-            <div class="num">1 / 8</div>
-        </div> -->
         <div class="notice_box">
             <div class="notice">Notice</div>
             <div class="txt">
-                태양의 후예 촬영지 관광 안내소에서<br/>
-                전자 스탬프로 획득가능
+              {{method.mingle_badge_type_desc}}
             </div>
         </div>
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'StampSwiper',
+  props: {
+    method: Object,
+    images: Object
+  },
   data () {
     return {
       swiperOption: {
@@ -35,24 +33,19 @@ export default {
           el: '.swiper-pagination',
           type: 'fraction'
         }
-      },
-      imgs: [
-        require('@/assets/images/dummy_img/img_1.jpg'),
-        require('@/assets/images/dummy_img/img_2.jpg'),
-        require('@/assets/images/dummy_img/img_4.jpg'),
-        require('@/assets/images/dummy_img/img_5.jpg')
-      ]
+      }
     }
   },
-  mounted () {
-    // const contentId = this.$route.query.contentId
-    // const contentTypeId = this.$route.query.contentTypeId
-    // this.$store.state.contentId = contentId
-    // this.$store.state.contentTypeId = contentTypeId
-    this.$store.dispatch('loadApiDetailData')
-  },
-  computed: {
-    ...mapState(['apiDetailData'])
+  methods: {
+    imgArray () {
+      const arr = []
+      for (const key in this.images) {
+        if (key !== 'total') {
+          arr.push(this.images[key].originimgurl)
+        }
+      }
+      return arr
+    }
   }
 }
 </script>

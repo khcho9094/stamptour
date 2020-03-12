@@ -761,6 +761,7 @@ header .head_back span {
 .course_box ul.list li {
     overflow: hidden;
     margin-bottom: 13px;
+    cursor: pointer;
 }
 .course_box ul.list li:last-child {
     margin-bottom: 0;
@@ -1099,27 +1100,20 @@ header .head_back span {
     vertical-align: top;
 }
 .tour_sub_wrap .service_info.type1 .info p {
-    /* background-image: url('../images/dot2.png');
-    background-repeat: no-repeat;
-    background-size: 2px;
-    background-position: top 8px left 4px; */
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     color:#000;
 }
 .tour_sub_wrap .service_info.type2 .info p {
-    background-image: url('../images/dot3.png');
-    background-repeat: no-repeat;
-    background-size: 2px;
-    background-position: top 8px left 4px;
-    margin-bottom: 2px;
-    color:#c86550;
+    margin-bottom: 1px;
+    color:#000;
 }
 .tour_sub_wrap .service_info.type3 .info p {
     color:#000;
     padding-left: 0;
 }
-.tour_sub_wrap .service_info.type2 .info p span {
-    color:#000;
+.tour_sub_wrap .service_info.type2 .info p strong {
+    color:#c86550;
+    font-weight: normal;
 }
 .tour_sub_wrap .service_info.type3 .info p span {
     color:rgba(0, 0, 0, 0.5);
