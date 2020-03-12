@@ -3,9 +3,9 @@
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
               class="slide"
-              :style="{ 'backgroundImage': `url(${img})` }"
-              v-for="(img) in imgs"
-              v-bind:key="img">
+              :style="{ 'backgroundImage': `url(${data.originimgurl})` }"
+              v-for="(data, idx) in apiDetailData.IMAGE"
+              v-bind:key="idx">
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
@@ -23,6 +23,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'StampSwiper',
   data () {
@@ -42,6 +43,16 @@ export default {
         require('@/assets/images/dummy_img/img_5.jpg')
       ]
     }
+  },
+  mounted () {
+    // const contentId = this.$route.query.contentId
+    // const contentTypeId = this.$route.query.contentTypeId
+    // this.$store.state.contentId = contentId
+    // this.$store.state.contentTypeId = contentTypeId
+    this.$store.dispatch('loadApiDetailData')
+  },
+  computed: {
+    ...mapState(['apiDetailData'])
   }
 }
 </script>

@@ -7,6 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
+    contentId: null,
+    contentTypeId: null,
+    badge_id: null,
     introData: {},
     introImage: [],
     TourData: [],
@@ -14,7 +17,9 @@ export default new Vuex.Store({
     LodgMentData: [],
     LeportsData: [],
     ShoppingData: [],
-    apiData: []
+    apiData: [],
+    serviceLinkData: [],
+    apiDetailData: []
   },
   mutations: {
     setIntroData (state, data) {
@@ -35,28 +40,58 @@ export default new Vuex.Store({
     },
     setTourInfoData (state, data) {
       state.TourInfoData = data.response.content
-      console.log('tourinfo')
-      console.log(data)
     },
     setTourData (state, data) {
       state.TourData = data.content.list
       state.apiData = data.content.list
+      data.content.list.map((val, index) => {
+        const apiUrl = '/tour/detail?contentId=' + val.contentid + '&contentTypeId=' + val.contenttypeid
+        state.TourData[index].apiUrl = apiUrl
+        state.apiData[index].apiUrl = apiUrl
+      })
     },
     setFoodData (state, data) {
       state.FoodData = data.content.list
       state.apiData = data.content.list
+      data.content.list.map((val, index) => {
+        const apiUrl = '/tour/detail?contentId=' + val.contentid + '&contentTypeId=' + val.contenttypeid
+        state.FoodData[index].apiUrl = apiUrl
+        state.apiData[index].apiUrl = apiUrl
+      })
     },
     setLodgMentData (state, data) {
       state.LodgMentData = data.content.list
       state.apiData = data.content.list
+      data.content.list.map((val, index) => {
+        const apiUrl = '/tour/detail?contentId=' + val.contentid + '&contentTypeId=' + val.contenttypeid
+        state.LodgMentData[index].apiUrl = apiUrl
+        state.apiData[index].apiUrl = apiUrl
+      })
     },
     setLeportsData (state, data) {
       state.LeportsData = data.content.list
       state.apiData = data.content.list
+      data.content.list.map((val, index) => {
+        const apiUrl = '/tour/detail?contentId=' + val.contentid + '&contentTypeId=' + val.contenttypeid
+        state.LeportsData[index].apiUrl = apiUrl
+        state.apiData[index].apiUrl = apiUrl
+      })
     },
     setShoppingData (state, data) {
       state.ShoppingData = data.content.list
       state.apiData = data.content.list
+      data.content.list.map((val, index) => {
+        const apiUrl = '/tour/detail?contentId=' + val.contentid + '&contentTypeId=' + val.contenttypeid
+        state.ShoppingData[index].apiUrl = apiUrl
+        state.apiData[index].apiUrl = apiUrl
+      })
+    },
+    setServiceLinkData (state, data) {
+      state.serviceLinkData = data.content.servicelink_info
+      console.log(data.content.servicelink_info)
+    },
+    setApiDetailData (state, data) {
+      state.apiDetailData = data.content
     }
   },
   actions: {
@@ -189,6 +224,31 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response)
           commit('setShoppingData', response.response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    9-1 주변 관광정보(하단 관련서비스 정보)
+    */
+    loadServiceLinkData ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourServiceLink.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setServiceLinkData', response.response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadApiDetailData ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=${state.contentTypeId}&contentId=${state.contentId}&badge_id=${state.badge_id}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setApiDetailData', response.response)
         })
         .catch(err => {
           console.log(err)

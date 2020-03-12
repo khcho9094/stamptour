@@ -7,7 +7,7 @@
           </div>
           <ul class="list">
               <li v-for="(data, idx) in TourData.slice(0, 2)" v-bind:key="idx" >
-                  <img :src=data.image alt="">
+                  <a :href=data.apiUrl><img :src=data.image alt=""></a>
                   <h2>{{data.title}}</h2>
                   <p>여기에서 {{data.dist}}km</p>
               </li>
@@ -20,7 +20,7 @@
           </div>
           <ul class="list">
               <li v-for="(data, idx) in FoodData.slice(0, 2)" v-bind:key="idx" >
-                  <img :src=data.image alt="">
+                  <a :href=data.apiUrl><img :src=data.image alt=""></a>
                   <h2>{{data.title}}</h2>
                   <p>여기에서 {{data.dist}}km</p>
               </li>
@@ -33,7 +33,7 @@
           </div>
           <ul class="list">
               <li v-for="(data, idx) in LodgMentData.slice(0, 2)" v-bind:key="idx" >
-                  <img :src=data.image alt="">
+                  <a :href=data.apiUrl><img :src=data.image alt=""></a>
                   <h2>{{data.title}}</h2>
                   <p>여기에서 {{data.dist}}km</p>
               </li>
@@ -46,7 +46,7 @@
           </div>
           <ul class="list">
               <li v-for="(data, idx) in LeportsData.slice(0, 2)" v-bind:key="idx" >
-                  <img :src=data.image alt="">
+                  <a :href=data.apiUrl><img :src=data.image alt=""></a>
                   <h2>{{data.title}}</h2>
                   <p>여기에서 {{data.dist}}km</p>
               </li>
@@ -59,7 +59,7 @@
           </div>
           <ul class="list">
               <li v-for="(data, idx) in ShoppingData.slice(0, 2)" v-bind:key="idx" >
-                  <img :src=data.image alt="">
+                  <a :href=data.apiUrl><img :src=data.image alt=""></a>
                   <h2>{{data.title}}</h2>
                   <p>여기에서 {{data.dist}}km</p>
               </li>
