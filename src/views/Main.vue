@@ -33,13 +33,20 @@ export default {
         slidesPerView: 1,
         spaceBetween: 25
       },
-      visible: false
+      visible: false,
+      params: {
+        order: 'pop',
+        status: 'ALL'
+      }
     }
   },
   methods: {
     handleMoreButton () {
       this.visible = !this.visible
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadMainData', this.params)
   }
 }
 </script>

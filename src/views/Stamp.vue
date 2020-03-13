@@ -30,7 +30,7 @@ export default {
   methods: {
   },
   mounted () {
-    this.$store.dispatch('loadStampData')
+    this.$store.dispatch('loadStampData', JSON.parse(localStorage.stampDetail))
   }
 }
 </script>

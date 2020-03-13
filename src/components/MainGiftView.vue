@@ -1,13 +1,26 @@
 <template>
     <div class="gift_box">
         <div class="gift_price">
-            87000원 상당의 선물이 가득!!
+            {{sumPrice}}원 상당의 선물이 가득!!
         </div><br/>
-        <button class="view">선물 모두보기</button>
+        <button class="view" @click="goGift">선물 모두보기</button>
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import router from '@/router'
 export default {
-  name: 'MainGiftView'
+  name: 'MainGiftView',
+  computed: {
+    ...mapState(['sumPrice'])
+  },
+  methods: {
+    goGift () {
+      router.push('/gift')
+    }
+  },
+  mounted () {
+    this.$store.dispatch('loadGiftDataNew')
+  }
 }
 </script>
