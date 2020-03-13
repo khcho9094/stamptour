@@ -1317,7 +1317,7 @@ header .head_back span {
     height: 40px;
     border-radius: 50%;
     margin-right: 13px;
-    background-image: url('../images/default.png');
+    /* background-image: url('../images/default.png'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

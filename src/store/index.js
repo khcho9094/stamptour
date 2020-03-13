@@ -23,7 +23,9 @@ export default new Vuex.Store({
     stampImage: {}, // 스탬프 이미지
     stampMethod: {}, // 스탬프 방법
     mainStampList: [], // 메인 스탬프 리스트
-    sumPrice: 0, // 전체 선물 가격
+    sumPrice: 0, // 전체 선물 가격,
+    memberList: [], // 참가자 명단
+    memberCount: '0', // 참가자 수
     TourData: [],
     FoodData: [],
     LodgMentData: [],
@@ -70,6 +72,11 @@ export default new Vuex.Store({
     },
     setMainData (state, data) {
       state.mainStampList = data.stamplist_info
+    },
+    setMemberData (state, data) {
+      // 배열 합치기
+      state.memberList = state.memberList.concat(data.list)
+      state.memberCount = data.total.CHALLENGE
     },
     // =================================================================
     setTourInfoData (state, data) {
@@ -229,6 +236,26 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setMainData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    - 참가자 보기
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+      token / 토큰 / 옵션
+      status / CHALLENGE / 옵션
+      view_count / 출력갯수 / 옵션
+      page / 페이지 / 옵션
+    */
+    loadMemberData ({ state, commit }, pageCount) {
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=10&page=${pageCount}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMemberData', response.response.content)
         })
         .catch(err => {
           console.log(err)
