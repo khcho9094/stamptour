@@ -78,7 +78,6 @@ export default {
       this.$store.dispatch('loadMainData', this.params)
     },
     stampDetail (sid) {
-      // this.$store.dispatch('loadStampData', sid)
       localStorage.stampDetail = JSON.stringify(sid)
       router.push('/stamp')
     }

@@ -3,7 +3,7 @@
     <!-- 헤더 -->
     <Head type='back' name='view_stamp' :title='stampCommon.title' />
     <div class="tour_sub_wrap">
-        <StampSwiper :method='stampMethod' :images='stampImage'  />
+        <StampSwiper :method='stampMethod.mingle_badge_type_desc' :images='stampImage'  />
         <StampInfo :intro='stampIntro' :common='stampCommon' />
     </div>
   </div>

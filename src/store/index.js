@@ -28,12 +28,12 @@ export default new Vuex.Store({
     sumPrice: 0, // 전체 선물 가격,
     memberList: [], // 참가자 명단
     memberCount: '0', // 참가자 수
-    TourData: [],
-    FoodData: [],
-    LodgMentData: [],
-    LeportsData: [],
-    ShoppingData: [],
-    apiData: [],
+    TourData: [], // 축제공연행사
+    FoodData: [], // 음식점
+    LodgMentData: [], // 숙박업소
+    LeportsData: [], // 체험관광
+    ShoppingData: [], // 쇼핑
+    tourListData: [], // 투어 리스트
     serviceLinkData: [],
     apiDetailData: []
   },
@@ -86,6 +86,22 @@ export default new Vuex.Store({
       // 배열 합치기
       state.memberList = state.memberList.concat(data.list)
       state.memberCount = data.total.CHALLENGE
+    },
+    setTourTotalData (state, data) {
+      if (data.name === 'party') {
+        state.TourData = data.list
+      } else if (data.name === 'food') {
+        state.FoodData = data.list
+      } else if (data.name === 'hotel') {
+        state.LodgMentData = data.list
+      } else if (data.name === 'exp') {
+        state.LeportsData = data.list
+      } else {
+        state.ShoppingData = data.list
+      }
+    },
+    setTourListData (state, data) {
+      state.tourListData = data.list
     },
     // =================================================================
     setTourInfoData (state, data) {
@@ -293,68 +309,39 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    loadTourData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=15&view_count=15&page=1&listType=S&lon=&lat='
+    // 아래 5개 api 통합 - khcho
+    loadTourTotalData ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
       Vue
         .jsonp(url)
         .then(response => {
-          commit('setTourData', response.response)
+          response.response.content.name = data.ename
+          commit('setTourTotalData', response.response.content)
         })
         .catch(err => {
           console.log(err)
         })
     },
-    /*
-     주변 음식점 API
-     */
-    loadFoodData ({ stage, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=39&view_count=15&page=1&listType=S&lon=&lat='
+    // 투어 리스트
+    loadTourListData ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
       Vue
         .jsonp(url)
         .then(response => {
-          commit('setFoodData', response.response)
+          response.response.content.name = data.ename
+          commit('setTourListData', response.response.content)
         })
         .catch(err => {
           console.log(err)
         })
     },
-    /*
-     주변 숙소 API
-     */
-    loadLodgMentData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=32&view_count=15&page=1&listType=S&lon=&lat='
+    // 투어 상세
+    loadTourDetail ({ state, commit }, data) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.contenttypeid}&contentId=${data.contentid}&badge_id=null`
       Vue
         .jsonp(url)
         .then(response => {
-          commit('setLodgMentData', response.response)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    /*
-     주변 체험 관광 API
-     */
-    loadLeportsData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=28&view_count=15&page=1&listType=S&lon=&lat='
-      Vue
-        .jsonp(url)
-        .then(response => {
-          commit('setLeportsData', response.response)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    /*
-     주변 쇼핑 API
-     */
-    loadShoppingData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=%27%27&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=38&view_count=15&page=1&listType=S&lon=&lat='
-      Vue
-        .jsonp(url)
-        .then(response => {
-          commit('setShoppingData', response.response)
+          commit('setStampData', response.response.content)
         })
         .catch(err => {
           console.log(err)
@@ -369,17 +356,6 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setServiceLinkData', response.response)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    loadApiDetailData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=${state.contentTypeId}&contentId=${state.contentId}&badge_id=${state.badge_id}`
-      Vue
-        .jsonp(url)
-        .then(response => {
-          commit('setApiDetailData', response.response)
         })
         .catch(err => {
           console.log(err)

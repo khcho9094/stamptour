@@ -3,7 +3,7 @@
     <!-- 헤더 -->
     <Head type='back' name='view_stamp' :title='stampCommon.title' />
     <div class="tour_sub_wrap">
-        <StampSwiper :method='stampMethod' :images='stampImage'  />
+        <StampSwiper :images='stampImage'  />
         <StampInfo :intro='stampIntro' :common='stampCommon' />
     </div>
   </div>
@@ -25,12 +25,17 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod'])
+    ...mapState(['stampCommon', 'stampIntro', 'stampImage'])
   },
   methods: {
   },
   mounted () {
-    this.$store.dispatch('loadStampData')
+    this.$store.dispatch('loadTourDetail', JSON.parse(localStorage.tourDetail))
+  },
+  destroyed () {
+    this.$store.state.stampCommon = {}
+    this.$store.state.stampIntro = {}
+    this.$store.state.stampImage = {}
   }
 }
 </script>

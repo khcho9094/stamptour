@@ -9,10 +9,10 @@
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
-        <div class="notice_box" v-if="badgeTypeChk()">
+        <div class="notice_box" v-if="method">
             <div class="notice">Notice</div>
             <div class="txt">
-              {{method.mingle_badge_type_desc}}
+              {{method}}
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
 export default {
   name: 'StampSwiper',
   props: {
-    method: Object,
+    method: String,
     images: Object
   },
   data () {

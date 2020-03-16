@@ -39,6 +39,8 @@ export default {
       e.stopPropagation()
       if (data === '투어 참가자') {
         router.push('/member')
+      } else if (data === '주번 관광정보') {
+        router.push('/tour')
       }
     }
   }
