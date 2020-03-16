@@ -62,6 +62,9 @@ export default {
   },
   computed: {
     ...mapState(['apiData'])
+  },
+  destroyed () {
+    this.$store.state.apiData = []
   }
 }
 </script>

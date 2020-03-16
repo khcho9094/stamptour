@@ -1,15 +1,16 @@
 <template>
   <div class="tour">
     <!-- 헤더 -->
-    <Head type='back' name='tour' title="스탬프 투어로 즐기는 부안관광" />
+    <Head type='back' name='tour' :title='introData.mingle_title' />
     <div class="tour_sub_wrap">
-        <TourSwiper />
+        <TourSwiper :introData='introData' :introImage='introImage'/>
         <TourPlace />
         <TourService />
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 import TourSwiper from '@/components/TourSwiper.vue'
 import TourPlace from '@/components/TourPlace.vue'
@@ -21,6 +22,17 @@ export default {
     TourSwiper,
     TourPlace,
     TourService
+  },
+  data () {
+    return {
+    }
+  },
+  mounted () {
+    this.$store.dispatch('loadIntroData')
+  },
+  computed: {
+    ...mapState(['introData']),
+    ...mapState(['introImage'])
   }
 }
 </script>

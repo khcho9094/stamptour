@@ -31,6 +31,12 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadStampData')
+  },
+  destroyed () {
+    this.$store.state.stampCommon = {}
+    this.$store.state.stampIntro = {}
+    this.$store.state.stampImage = {}
+    this.$store.state.stampMethod = {}
   }
 }
 </script>
