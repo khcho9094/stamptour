@@ -37,7 +37,7 @@ export default {
   created () {
   },
   mounted () {
-    const type = this.$route.query.type
+    const type = this.$store.state.apiType
     // 주변 축제
     if (type === 'T') {
       this.headTitle = '주변 축제 공연행사'

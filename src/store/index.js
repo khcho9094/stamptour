@@ -7,9 +7,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    contentId: null,
-    contentTypeId: null,
-    badge_id: null,
+    contentId: null, // 투어 API content ID 값
+    contentTypeId: null, // 투어 API content type Id 값
+    badge_id: null, // 투어 API에 전달할 스탬프 Id 값
+    apiType: null, // 투어 리스트 타입 값
     introData: {}, // 투어소개 정보
     introImage: [], // 투어소개 이미지
     giftData: [], // 선물 정보
@@ -20,9 +21,9 @@ export default new Vuex.Store({
     stampIntro: {}, // 스탬프 소개
     stampImage: {}, // 스탬프 이미지
     stampMethod: {}, // 스탬프 방법
-    TourData: [],
-    FoodData: [],
-    LodgMentData: [],
+    TourData: [], // 주변 관광정보
+    FoodData: [], // 주변 음식점
+    LodgMentData: [], // 주변 숙소
     LeportsData: [],
     ShoppingData: [],
     apiData: [],
@@ -102,7 +103,6 @@ export default new Vuex.Store({
     },
     setServiceLinkData (state, data) {
       state.serviceLinkData = data.content.servicelink_info
-      console.log(data.content.servicelink_info)
     },
     setApiDetailData (state, data) {
       state.apiDetailData = data.content
@@ -168,7 +168,7 @@ export default new Vuex.Store({
       contentId / 관광공사 CONTNET Id / 필수
     */
     loadStampData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=12&contentId=128982&callback=callback&_=1583895150627&badge_id=971123`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=12&contentId=128982&badge_id=971123`
       Vue
         .jsonp(url)
         .then(response => {
@@ -183,8 +183,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(respnose => {
-          console.log('jsonp get')
-          console.log(respnose)
           commit('setTourInfoData', respnose)
         })
         .catch(err => {
@@ -210,7 +208,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
           commit('setFoodData', response.response)
         })
         .catch(err => {
@@ -225,7 +222,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
           commit('setLodgMentData', response.response)
         })
         .catch(err => {
@@ -240,7 +236,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
           commit('setLeportsData', response.response)
         })
         .catch(err => {
@@ -255,7 +250,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
           commit('setShoppingData', response.response)
         })
         .catch(err => {

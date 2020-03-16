@@ -9,7 +9,7 @@
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
-        <div class="notice_box">
+        <div class="notice_box" v-if="badgeTypeChk()">
             <div class="notice">Notice</div>
             <div class="txt">
               {{method.mingle_badge_type_desc}}
@@ -45,6 +45,14 @@ export default {
         }
       }
       return arr
+    },
+    badgeTypeChk () {
+      const typeDesc = this.method
+      if (typeDesc !== undefined) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }

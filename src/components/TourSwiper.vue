@@ -20,19 +20,16 @@
 import { mapState } from 'vuex'
 export default {
   name: 'TourSwiper',
+  methods: {
+  },
   data () {
     return {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 10
-      }
-      // ,
-      // imgs: [
-      //   require('@/assets/images/dummy_img/img_1.jpg'),
-      //   require('@/assets/images/dummy_img/img_2.jpg'),
-      //   require('@/assets/images/dummy_img/img_4.jpg'),
-      //   require('@/assets/images/dummy_img/img_5.jpg')
-      // ]
+      },
+      mingle_basic_desc: this.$store.state.introData.mingle_desc_basic,
+      desc: ''
     }
   },
   mounted () {
