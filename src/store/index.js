@@ -23,6 +23,7 @@ export default new Vuex.Store({
     stampImage: {}, // 스탬프 이미지
     stampMethod: {}, // 스탬프 방법
     mainStampList: [], // 메인 스탬프 리스트
+    mainRecommendList: [], // 메인 추천 스탬프 리스트
     sumPrice: 0, // 전체 선물 가격,
     memberList: [], // 참가자 명단
     memberCount: '0', // 참가자 수
@@ -72,6 +73,13 @@ export default new Vuex.Store({
     },
     setMainData (state, data) {
       state.mainStampList = data.stamplist_info
+    },
+    setMainRecommend (state, data) {
+      const array = Array.from(Array(Math.round(data.stamplist_info.length / 2)), () => [])
+      data.stamplist_info.map((val, idx) => {
+        array[parseInt(idx / 2)].push(val)
+      })
+      state.mainRecommendList = array
     },
     setMemberData (state, data) {
       // 배열 합치기
@@ -236,6 +244,17 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setMainData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMainRecommend ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMainRecommend', response.response.content)
         })
         .catch(err => {
           console.log(err)

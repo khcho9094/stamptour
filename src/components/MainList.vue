@@ -8,7 +8,9 @@
         </div>
         <ul class="list">
             <li v-for="(data, idx) in mainStampList" v-bind:key="idx" @click="stampDetail(data)">
-                <div class="box_lt">
+                <div
+                  class="box_lt"
+                  :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
                     <img :class="(data.user_mingle_badge_get_stamp_yn === 'N')?'p_icon':'c_icon'" :src="iconImg(data.mingle_badge_type, data.user_mingle_badge_get_stamp_yn)" alt="course_icon"><br/>
                     <span v-show="data.user_mingle_badge_get_stamp_yn === 'N'">{{data.user_mingle_badge_point}}P</span>
                 </div>

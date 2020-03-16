@@ -8,7 +8,6 @@
             <div
               class="user_img"
               :style="{ 'background-image': memberProfile(data) }">
-              <!-- :style="{ 'backgroundImage': (data.profile) ? `url(http://resource.tranggle.com/profile/${data.profile})` : require('@/assets/images/default.png')}"> -->
             </div>
             <p>{{(data.member_nickname)?data.member_nickname:data.user_mingle_member_id}}</p>
             <span>{{data.user_mingle_gift_point}}</span>
