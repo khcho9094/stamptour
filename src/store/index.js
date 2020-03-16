@@ -7,6 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
+    token: '79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB', // 임시 토큰
+    mingleCode: '/GN62eV1c4Q78ghWNMWRsQ==',
     contentId: null, // 투어 API content ID 값
     contentTypeId: null, // 투어 API content type Id 값
     badge_id: null, // 투어 API에 전달할 스탬프 Id 값
@@ -21,9 +23,14 @@ export default new Vuex.Store({
     stampIntro: {}, // 스탬프 소개
     stampImage: {}, // 스탬프 이미지
     stampMethod: {}, // 스탬프 방법
-    TourData: [], // 주변 관광정보
-    FoodData: [], // 주변 음식점
-    LodgMentData: [], // 주변 숙소
+    mainStampList: [], // 메인 스탬프 리스트
+    mainRecommendList: [], // 메인 추천 스탬프 리스트
+    sumPrice: 0, // 전체 선물 가격,
+    memberList: [], // 참가자 명단
+    memberCount: '0', // 참가자 수
+    TourData: [],
+    FoodData: [],
+    LodgMentData: [],
     LeportsData: [],
     ShoppingData: [],
     apiData: [],
@@ -40,8 +47,20 @@ export default new Vuex.Store({
       })
     },
     setGiftData (state, data) {
+      let sum = 0
       state.giftData = data
       state.myPoint = data[0].user_mingle_gift_point
+      data.map((val) => {
+        sum += parseInt(val.mingle_count)
+      })
+      state.sumPrice = sum
+    },
+    setGiftDataNew (state, data) {
+      let sum = 0
+      data.map((val) => {
+        sum += parseInt(val.mingle_gift_price)
+      })
+      state.sumPrice = sum
     },
     setTotalData (state, data) {
       state.totalData = data
@@ -53,6 +72,22 @@ export default new Vuex.Store({
       state.stampImage = data.IMAGE
       state.stampMethod = data.METHOD
     },
+    setMainData (state, data) {
+      state.mainStampList = data.stamplist_info
+    },
+    setMainRecommend (state, data) {
+      const array = Array.from(Array(Math.round(data.stamplist_info.length / 2)), () => [])
+      data.stamplist_info.map((val, idx) => {
+        array[parseInt(idx / 2)].push(val)
+      })
+      state.mainRecommendList = array
+    },
+    setMemberData (state, data) {
+      // 배열 합치기
+      state.memberList = state.memberList.concat(data.list)
+      state.memberCount = data.total.CHALLENGE
+    },
+    // =================================================================
     setTourInfoData (state, data) {
       state.TourInfoData = data.response.content
     },
@@ -115,7 +150,7 @@ export default new Vuex.Store({
       mingleCode / 서비스코드 / 필수
     */
     loadIntroData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/serviceInfo.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==`
+      const url = `${state.domain}/v2/mingle/stamptour/serviceInfo.jsonp?mingleCode=${state.mingleCode}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -132,11 +167,28 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadGiftData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/courses/getUserPoint.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&token=0A485F303C2CCC137E2687F44FEC75F0C9A8290335D26E6D8998545C3F47317F9EC02E96E57F27F6`
+      const url = `${state.domain}/v2/mingle/courses/getUserPoint.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
           commit('setGiftData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    - 선물소개 NEW stampTourMainGiftInfo
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+      token / 토큰정보 / 필수
+    */
+    loadGiftDataNew ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setGiftDataNew', response.response.content)
         })
         .catch(err => {
           console.log(err)
@@ -149,7 +201,7 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadTotalData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/courses/get_course_item.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&token=0A485F303C2CCC137E2687F44FEC75F0C9A8290335D26E6D8998545C3F47317F9EC02E96E57F27F6`
+      const url = `${state.domain}/v2/mingle/courses/get_course_item.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -167,8 +219,9 @@ export default new Vuex.Store({
       contentTypeId / 관광공사 CONTNET Type / 필수
       contentId / 관광공사 CONTNET Id / 필수
     */
-    loadStampData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=&mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&contentTypeId=12&contentId=128982&badge_id=971123`
+
+    loadStampData ({ state, commit }, data) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.mingle_badge_content_type}&contentId=${data.mingle_badge_content_id}&badge_id=${data.mingle_badge_id}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -178,6 +231,57 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    /*
+    - 메인 스탬프 투어
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+      token / 토큰 / 옵션
+      order / 출력순서 / 옵션
+      status / 완료여부확인 / 옵션
+    */
+    loadMainData ({ state, commit }, params) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMainData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMainRecommend ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMainRecommend', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    - 참가자 보기
+    - 파라미터
+      mingleCode / 서비스코드 / 필수
+      token / 토큰 / 옵션
+      status / CHALLENGE / 옵션
+      view_count / 출력갯수 / 옵션
+      page / 페이지 / 옵션
+    */
+    loadMemberData ({ state, commit }, pageCount) {
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=10&page=${pageCount}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMemberData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // ===========================================================================================================================
     loadTourInfoData ({ state, commit }) {
       const url = 'https://api.tranggle.com/v2/mingle/courses/get_course_item.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&status=&view_count=300&page=0&token=&lon=&lat='
       Vue

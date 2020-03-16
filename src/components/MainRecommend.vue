@@ -6,53 +6,26 @@
         </div>
 
         <swiper :options="swiperOption" class="swiper">
-            <swiper-slide>
+            <swiper-slide
+              v-for="(data, idx) in mainRecommendList"
+              v-bind:key="idx">
                 <ul class="next_stamp">
-                    <li>
-                        <img class="simg" src="@/assets/images/dummy_img/img_1.jpg" alt="img">
-                        <h2>해파랑 1길 노을따라 걷기</h2>
-                        <p>여기에서 28km</p>
+                    <li
+                      v-for="(val, index) in data"
+                      v-bind:key="index"
+                      @click="stampDetail(val)">
+                        <div
+                          class="backImg"
+                          :style="{ 'backgroundImage': `url(${val.mingle_badge_image})` }">
+                        </div>
+                        <h2>{{val.info_badge_name}}</h2>
+                        <p>여기에서 {{parseInt(val.distance)}}km</p>
                         <div class="stamp_count">
                             <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                             <span class="stxt">스탬프</span>
-                            <span class="snum">26</span>
+                            <span class="snum">{{val.mingle_stat_badge_count}}</span>
                         </div>
                         <div class="ns_mark">다음 스탬프</div>
-                    </li>
-                    <li>
-                        <img class="simg" src="@/assets/images/dummy_img/img_2.jpg" alt="img">
-                        <h2>해파랑 3길 노을보며 걷기</h2>
-                        <p class="txt">여기에서 9km</p>
-                        <div class="stamp_count">
-                            <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
-                            <span class="stxt">스탬프</span>
-                            <span class="snum">42</span>
-                        </div>
-                    </li>
-                </ul>
-            </swiper-slide>
-            <swiper-slide>
-                <ul class="next_stamp">
-                    <li>
-                        <img class="simg" src="@/assets/images/dummy_img/img_1.jpg" alt="img">
-                        <h2>해파랑 1길 노을따라 걷기</h2>
-                        <p>여기에서 28km</p>
-                        <div class="stamp_count">
-                            <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
-                            <span class="stxt">스탬프</span>
-                            <span class="snum">26</span>
-                        </div>
-                        <div class="ns_mark">다음 스탬프</div>
-                    </li>
-                    <li>
-                        <img class="simg" src="@/assets/images/dummy_img/img_2.jpg" alt="img">
-                        <h2>해파랑 3길 노을보며 걷기</h2>
-                        <p class="txt">여기에서 9km</p>
-                        <div class="stamp_count">
-                            <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
-                            <span class="stxt">스탬프</span>
-                            <span class="snum">42</span>
-                        </div>
                     </li>
                 </ul>
             </swiper-slide>
@@ -60,6 +33,8 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import router from '@/router'
 export default {
   name: 'MainRecommend',
   data () {
@@ -69,6 +44,18 @@ export default {
         spaceBetween: 25
       }
     }
+  },
+  computed: {
+    ...mapState(['mainRecommendList'])
+  },
+  methods: {
+    stampDetail (sid) {
+      localStorage.stampDetail = JSON.stringify(sid)
+      router.push('/stamp')
+    }
+  },
+  mounted () {
+    this.$store.dispatch('loadMainRecommend')
   }
 }
 </script>

@@ -4,7 +4,7 @@
           <img :src="introData.image_logo" alt="title_logo">
       </div>
       <div class="head_back" v-else>
-          <div class="back_box">
+          <div class="back_box" @click="goBack">
             <img src="@/assets/images/back.png" alt="back">
           </div>
           <span>{{title}}</span>
@@ -15,6 +15,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import router from '@/router'
 export default {
   name: 'haed',
   props: {
@@ -52,6 +53,9 @@ export default {
     },
     goHome () {
       console.log('gohome')
+    },
+    goBack () {
+      router.go(-1)
     }
   },
   mounted () {

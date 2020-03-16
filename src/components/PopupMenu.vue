@@ -2,7 +2,7 @@
     <div class="pop_overay_2" v-show="visible" @click="moreClick">
         <div class="pop_cont">
             <ul>
-                <li v-for="(data, idx) in btnArr" v-bind:key="idx" @click="menuBtn(idx, $event)">
+                <li v-for="(data, idx) in btnArr" v-bind:key="idx" @click="menuBtn(data, idx, $event)">
                     {{data}}
                 </li>
             </ul>
@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import router from '@/router'
 export default {
   name: 'PopupMenu',
   props: {
@@ -34,8 +35,11 @@ export default {
     //   e.stopPropagation()
       this.$emit('moreBtn')
     },
-    menuBtn (idx, e) {
+    menuBtn (data, idx, e) {
       e.stopPropagation()
+      if (data === '투어 참가자') {
+        router.push('/member')
+      }
     }
   }
 }
