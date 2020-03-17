@@ -9,35 +9,30 @@
         </swiper-slide>
     </swiper>
     <div class="desc_box">
-        <div v-html="mingleDesc()"></div>
-        <span v-on:click="moreContent()" id="moreBtn">지역 설명 전체 보기+</span>
+        <p id="elli">
+          {{introData.mingle_desc_basic}}
+        </p>
+        <span v-on:click="moreContent()" v-text="allView"></span>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: 'TourSwiper',
+  data () {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 10
+      },
+      allView: '지역 설명 전체 보기+'
+    }
+  },
   props: {
     introData: Object,
     introImage: Array
   },
   methods: {
-    mingleDesc () {
-      const content = this.introData.mingle_desc_basic
-      const showChar = 80
-      const ellipsestext = '...'
-
-      if (content !== undefined) {
-        if (content.length > showChar) {
-          const c = content.substr(0, showChar)
-          const h = content.substr(showChar, content.length - showChar)
-          const html = c + '<div id="moreellipses">' + ellipsestext + '&nbsp;</div><div id="morecontent" style="display:none;"><div>' + h + '</div>&nbsp;&nbsp;</div>'
-          return html
-        } else {
-          return content
-        }
-      }
-    },
     imageData () {
       const arr = []
       for (const key in this.introImage) {
@@ -47,16 +42,12 @@ export default {
       return arr
     },
     moreContent () {
-      document.getElementById('moreellipses').style.display = 'none'
-      document.getElementById('morecontent').style.display = 'block'
-      document.getElementById('moreBtn').style.display = 'none'
-    }
-  },
-  data () {
-    return {
-      swiperOption: {
-        slidesPerView: 'auto',
-        spaceBetween: 10
+      if (document.getElementById('elli').style.display === 'block') {
+        document.getElementById('elli').style.display = '-webkit-box'
+        this.allView = '지역 설명 전체 보기+'
+      } else {
+        document.getElementById('elli').style.display = 'block'
+        this.allView = '지역 설명 닫기-'
       }
     }
   }
