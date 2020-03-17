@@ -7,6 +7,7 @@
     <MainRecommend />
     <MainList />
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
+    <PopupSns :snsVisible='snsVisible' v-on:moreSnsBtn='handleMoreSnsButton'/>
   </div>
 </template>
 <script>
@@ -17,6 +18,7 @@ import MainGiftView from '@/components/MainGiftView.vue'
 import MainRecommend from '@/components/MainRecommend.vue'
 import MainList from '@/components/MainList.vue'
 import Popup from '@/components/PopupMenu.vue'
+import PopupSns from '@/components/PopupSns.vue'
 export default {
   name: 'Main',
   components: {
@@ -25,7 +27,8 @@ export default {
     MainGiftView,
     MainRecommend,
     MainList,
-    Popup
+    Popup,
+    PopupSns
   },
   data () {
     return {
@@ -34,6 +37,7 @@ export default {
         spaceBetween: 25
       },
       visible: false,
+      snsVisible: false,
       params: {
         order: 'pop',
         status: 'ALL'
@@ -43,6 +47,10 @@ export default {
   methods: {
     handleMoreButton () {
       this.visible = !this.visible
+    },
+    handleMoreSnsButton () {
+      console.log('in')
+      this.snsVisible = !this.snsVisible
     }
   },
   mounted () {
