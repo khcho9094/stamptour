@@ -2,12 +2,13 @@
   <div class="main">
     <!-- 헤더 -->
     <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
-    <MainStamp v-on:giftBtn='handleGiftButton' />
+    <MainStamp />
     <MainGiftView />
     <MainRecommend />
     <MainList />
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
     <PopupGift />
+    <PopupSns :snsVisible='snsVisible' v-on:moreSnsBtn='handleMoreSnsButton'/>
   </div>
 </template>
 <script>
@@ -19,6 +20,7 @@ import MainRecommend from '@/components/MainRecommend.vue'
 import MainList from '@/components/MainList.vue'
 import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
+import PopupSns from '@/components/PopupSns.vue'
 export default {
   name: 'Main',
   components: {
@@ -28,7 +30,8 @@ export default {
     MainRecommend,
     MainList,
     Popup,
-    PopupGift
+    PopupGift,
+    PopupSns
   },
   data () {
     return {
@@ -38,6 +41,7 @@ export default {
       },
       visible: false,
       visibleGift: false,
+      snsVisible: false,
       params: {
         order: 'pop',
         status: 'ALL'
@@ -48,8 +52,9 @@ export default {
     handleMoreButton () {
       this.visible = !this.visible
     },
-    handleGiftButton () {
-      this.visibleGift = true
+    handleMoreSnsButton () {
+      console.log('in')
+      this.snsVisible = !this.snsVisible
     }
   },
   mounted () {

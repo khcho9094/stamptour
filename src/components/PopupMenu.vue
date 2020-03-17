@@ -41,6 +41,8 @@ export default {
         router.push('/member')
       } else if (data === '주번 관광정보') {
         router.push('/tour')
+      } else if (data === '공유하기') {
+        this.$emit('moreSnsBtn')
       }
     }
   }
