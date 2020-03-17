@@ -58,6 +58,7 @@ export default {
       const check = document.getElementById('tour_off')
       if (check.checked) {
         this.visible = !this.visible
+        this.$cookie.set('setIntro', 'Y', 7)
         this.closeCount()
       } else {
         // 메인 이동

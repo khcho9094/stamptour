@@ -3,91 +3,103 @@
       <div class="title">
           내가 찍은 스탬프
           <span class="count">
-              <em>2</em>
+              <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
-              <em>30</em>
+              <em>{{this.allStampCount}}</em>
           </span>
       </div>
       <swiper :options="swiperOption" class="swiper">
-        <swiper-slide class="slide">
+        <swiper-slide
+          class="slide"
+          v-for="index in swiperPaging()"
+          v-bind:key="index">
             <ul class="stamp_list">
-                <li class="complete">
+                <li v-for="(data, idx) in stampList(index)" v-bind:key="idx">
                     <div class="box">
-                        <img class="round" src="@/assets/images/complete.png" alt="">
-                    </div>
-                    <div class="line">line</div>
-                </li>
-                <li class="complete">
-                    <div class="box">
-                        <img class="round" src="@/assets/images/complete.png" alt="">
-                    </div>
-                    <div class="line">line</div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <img class="gift" src="@/assets/images/dummy_img/gift_img_1.png" alt="">
-                    </div>
-                    <div class="line">line</div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <span>4</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <span>5</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <img class="gift" src="@/assets/images/dummy_img/gift_img_2.png" alt="">
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <span>7</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <span>8</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <span>9</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="box">
-                        <img class="round" src="@/assets/images/dot_round.png" alt="">
-                        <img class="gift" src="@/assets/images/dummy_img/gift_img_3.png" alt="">
+                        <img class="round" :src="completeChk(data.num)">
+                        <img class="gift" v-if="giftChk(data.num)" :src="giftIcon(data.num)" @click="giftClick(data.num)">
+                        <span v-else>{{data.num}}</span>
                     </div>
                 </li>
             </ul>
         </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
-      <div class="paging">1 / 20</div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'MainStamp',
   data () {
     return {
       swiperOption: {
         slidesPerView: 1,
-        spaceBetween: 10
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction'
+        }
       }
     }
+  },
+  computed: {
+    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'mainStampList'])
+  },
+  methods: {
+    swiperPaging () {
+      let count = 0
+      if (this.allStampCount) {
+        count = Math.ceil(this.allStampCount / 10)
+      }
+      return count
+    },
+    stampList (idx) {
+      const end = idx * 10
+      const start = end - 10
+      return this.mainStampList.slice(start, end)
+    },
+    giftChk (num) {
+      let chk = false
+      this.giftData.map((data) => {
+        if (parseInt(data.mingle_count) === num) {
+          chk = true
+        }
+      })
+      return chk
+    },
+    giftIcon (num) {
+      let gift = ''
+      this.giftData.map((data) => {
+        if (parseInt(data.mingle_count) === num) {
+          gift = `https://m.tranggle.com/html/images/mingle/${data.mingle_gift_image}`
+        }
+      })
+      return gift
+    },
+    completeChk (num) {
+      let complete = ''
+      const idc = document.getElementsByClassName('round')
+      if (num > this.getStampCount) {
+        complete = require('@/assets/images/dot_round.png')
+      } else {
+        if (idc[num - 1]) {
+          idc[num - 1].style.zIndex = 999
+        }
+        complete = require('@/assets/images/complete.png')
+      }
+      return complete
+    },
+    giftClick (num) {
+      this.giftData.map((data) => {
+        if (parseInt(data.mingle_count) === num) {
+          this.$store.dispatch('openPopupGift', data)
+        }
+      })
+    }
+  },
+  mounted () {
+    this.$store.dispatch('loadGiftData')
   }
 }
 </script>
