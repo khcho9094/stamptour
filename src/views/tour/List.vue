@@ -4,9 +4,8 @@
     <Head type='back' name='tour_list' id='t_head' :title="headTitle()" />
     <div class="tour_sub_wrap back_gray">
         <ul class="view_list">
-             <li v-for="(data, idx) in tourListData" v-bind:key="idx">
-                <!-- <a :href=data.apiUrl><div class="back_img" :style="{ 'backgroundImage': `url(${data.image})` }" ></div></a> -->
-                <a v-on:click="apiDetailOn(data.contentid, data.contenttypeid)"><div class="back_img" :style="{ 'backgroundImage': `url(${data.image})` }" ></div></a>
+             <li v-for="(data, idx) in tourListData" v-bind:key="idx" @click="apiDetailOn(data)">
+                <div class="back_img" :style="{ 'backgroundImage': `url(${data.image})` }" ></div>
                 <h2>{{data.title}}</h2>
                 <p>{{data.dist}}Km</p>
              </li>
@@ -27,9 +26,8 @@ export default {
     }
   },
   methods: {
-    apiDetailOn: function (contentid, contenttypeid) {
-      this.$store.state.contentId = contentid
-      this.$store.state.contentTypeId = contenttypeid
+    apiDetailOn (data) {
+      localStorage.tourDetail = JSON.stringify(data)
       this.$router.push('/tour/detail')
     },
     headTitle () {
