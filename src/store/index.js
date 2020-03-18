@@ -178,7 +178,6 @@ export default new Vuex.Store({
     },
     setSnsOpen (state, data) {
       state.snsOpen = data
-      console.log(state.snsOpen)
     }
   },
   actions: {
