@@ -6,6 +6,7 @@
         <TourSwiper :introData='introData' :introImage='introImage'/>
         <TourPlace />
         <TourService />
+        <PopupSns />
     </div>
   </div>
 </template>
@@ -15,13 +16,15 @@ import Head from '@/components/Head.vue'
 import TourSwiper from '@/components/TourSwiper.vue'
 import TourPlace from '@/components/TourPlace.vue'
 import TourService from '@/components/TourService.vue'
+import PopupSns from '@/components/PopupSns.vue'
 export default {
   name: 'Tour',
   components: {
     Head,
     TourSwiper,
     TourPlace,
-    TourService
+    TourService,
+    PopupSns
   },
   data () {
     return {

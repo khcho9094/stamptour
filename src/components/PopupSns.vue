@@ -43,7 +43,7 @@ export default {
   name: 'PopupSns',
   data () {
     return {
-        getParentUrl: parent.location.href
+        getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode
         // os : function () {
         // }
     }

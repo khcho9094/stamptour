@@ -8,7 +8,7 @@
     <MainList />
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
     <PopupGift />
-    <PopupSns :snsVisible='snsVisible' v-on:moreSnsBtn='handleMoreSnsButton'/>
+    <PopupSns />
   </div>
 </template>
 <script>
