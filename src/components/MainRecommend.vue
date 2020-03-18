@@ -2,7 +2,7 @@
     <div class="recom_stamp">
         <div class="title">
             <h1> <img src="@/assets/images/stamp_icon_1.png" alt="icon"> 완주를 위한 추천 스탬프</h1>
-            <span>지도보기 <img src="@/assets/images/arrow_1.png" alt="arr"></span>
+            <span @click="mapView">지도보기 <img src="@/assets/images/arrow_1.png" alt="arr"></span>
         </div>
 
         <swiper :options="swiperOption" class="swiper">
@@ -52,6 +52,16 @@ export default {
     stampDetail (sid) {
       localStorage.stampDetail = JSON.stringify(sid)
       router.push('/stamp')
+    },
+    mapView () {
+      let tranggle3
+      if (/Android/i.test(navigator.userAgent)) {
+        tranggle3.tranggle_callback('map_view_event', '{}')
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = 'tranggle_callback://map_view_event'
+      } else {
+        return false
+      }
     }
   },
   mounted () {
