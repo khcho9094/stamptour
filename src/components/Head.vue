@@ -64,18 +64,20 @@ export default {
       }
     },
     goBack () {
-      let tranggle3
-      if (document.referrer !== '') {
-        this.$router.go(-1)
-      } else {
-        if (/Android/i.test(navigator.userAgent)) {
-          tranggle3.tranggle_callback('back_btn_event', '{}')
-        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-          window.location = 'tranggle_callback://back_btn_event'
-        } else {
-          return false
-        }
-      }
+      console.log(this.$route)
+      this.$router.go(-1)
+      // let tranggle3
+      // if (document.referrer !== '') {
+      //   this.$router.go(-1)
+      // } else {
+      //   if (/Android/i.test(navigator.userAgent)) {
+      //     tranggle3.tranggle_callback('back_btn_event', '{}')
+      //   } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      //     window.location = 'tranggle_callback://back_btn_event'
+      //   } else {
+      //     return false
+      //   }
+      // }
     }
   },
   mounted () {
