@@ -489,7 +489,7 @@ header .head_back span {
 
 .stamp_box ul.stamp_list {
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .stamp_box ul.stamp_list li {
     float: left;

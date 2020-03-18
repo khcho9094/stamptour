@@ -53,9 +53,14 @@ export default {
       this.visible = !this.visible
     },
     handleMoreSnsButton () {
-      console.log('in')
       this.snsVisible = !this.snsVisible
     }
+  },
+  beforeCreate () {
+    this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
+  },
+  beforeMount () {
+    this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
   },
   mounted () {
     this.$store.dispatch('loadMainData', this.params)
