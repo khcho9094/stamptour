@@ -4,7 +4,7 @@
             <div class="point">{{data.mingle_count}}P</div>
             <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
             <span>{{data.mingle_gift_title}}</span>
-            <div class="gift_icon" :class="dotOn(data)">
+            <div class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
                 <!-- <img src="@/assets/images/icon_gift.png" alt="gift"> -->
                 <img :src="giftOn(data)" alt="gift">
                 <div class="dot"></div>
@@ -38,6 +38,11 @@ export default {
         img = 'icon_gift_off'
       }
       return require(`@/assets/images/${img}.png`)
+    },
+    giftReceive (data) {
+      if (data.mingle_gift_receive === 'Y') {
+        this.$store.dispatch('openPopupGift', data)
+      }
     }
   },
   mounted () {

@@ -217,6 +217,19 @@ header .head_back span {
     padding:66px 0 30px;
     font-family:inaviL;
 }
+.pop_overay .pop_cont .text_2 .gift_receive {
+    font-size: 18px;
+    color:#010101;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-family:inaviM;
+}
+.pop_overay .pop_cont .text_2 .gift_receive b {
+    color:#c86550;
+}
+.pop_overay .pop_cont .text_2 .gift_receive span {
+    
+}
 .pop_overay .pop_cont .text_3 {
     padding:30px;
     background:#fff;
@@ -277,12 +290,12 @@ header .head_back span {
 
 
 
-.pop_overay .pop_cont .text_2 span {
+.pop_overay .pop_cont .text_2 > span {
     color:#c86550;
     display: block;
     margin-bottom: 20px;
 }
-.pop_overay .pop_cont .text_2 span img {
+.pop_overay .pop_cont .text_2 > span img {
     width:30px;
     position: relative;
     top: -2px;
@@ -300,6 +313,17 @@ header .head_back span {
     margin:0;
     padding:0;
     font-family:inaviM;
+}
+.pop_overay .pop_cont button.type1 {
+    display: inline-block;
+    width:50%;
+}
+.pop_overay .pop_cont button.type2 {
+    display: inline-block;
+    width:50%;
+}
+.pop_overay .pop_cont button.type1 {
+    border-right: 1px solid #fff;
 }
 
 .pop_overay_2 {

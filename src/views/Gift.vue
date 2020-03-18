@@ -6,6 +6,7 @@
         <GiftPoint />
         <GiftList />
         <GiftGuide />
+        <PopupGiftReceive />
     </div>
   </div>
 </template>
@@ -14,13 +15,15 @@ import Head from '@/components/Head.vue'
 import GiftPoint from '@/components/GiftPoint.vue'
 import GiftList from '@/components/GiftList.vue'
 import GiftGuide from '@/components/GiftGuide.vue'
+import PopupGiftReceive from '@/components/PopupGiftReceive.vue'
 export default {
   name: 'Gift',
   components: {
     Head,
     GiftPoint,
     GiftList,
-    GiftGuide
+    GiftGuide,
+    PopupGiftReceive
   },
   mounted () {
     this.$store.dispatch('loadGiftData')
