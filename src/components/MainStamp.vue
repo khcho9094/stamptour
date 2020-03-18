@@ -16,7 +16,7 @@
             <ul class="stamp_list">
                 <li v-for="(data, idx) in stampList(index)" v-bind:key="idx">
                     <div class="box">
-                        <img class="round" :src="completeChk(data.num)">
+                        <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
                         <img class="gift" v-if="giftChk(data.num)" :src="giftIcon(data.num)" @click="giftClick(data.num)">
                         <span v-else>{{data.num}}</span>
                     </div>
@@ -79,16 +79,21 @@ export default {
     },
     completeChk (num) {
       let complete = ''
-      const idc = document.getElementsByClassName('round')
       if (num > this.getStampCount) {
         complete = require('@/assets/images/dot_round.png')
       } else {
-        if (idc[num - 1]) {
-          idc[num - 1].style.zIndex = 999
-        }
         complete = require('@/assets/images/complete.png')
       }
       return complete
+    },
+    zIn (num) {
+      let zindex = 0
+      if (num > this.getStampCount) {
+        zindex = 0
+      } else {
+        zindex = 999
+      }
+      return zindex
     },
     giftClick (num) {
       this.giftData.map((data) => {

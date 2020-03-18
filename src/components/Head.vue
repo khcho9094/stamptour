@@ -15,7 +15,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import router from '@/router'
 export default {
   name: 'haed',
   props: {
@@ -55,10 +54,28 @@ export default {
       }
     },
     goHome () {
-      console.log('gohome')
+      let tranggle3
+      if (/Android/i.test(navigator.userAgent)) {
+        tranggle3.tranggle_callback('go_home_event', '{}')
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = 'tranggle_callback://go_home_event'
+      } else {
+        return false
+      }
     },
     goBack () {
-      router.go(-1)
+      let tranggle3
+      if (document.referrer !== '') {
+        this.$router.go(-1)
+      } else {
+        if (/Android/i.test(navigator.userAgent)) {
+          tranggle3.tranggle_callback('back_btn_event', '{}')
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location = 'tranggle_callback://back_btn_event'
+        } else {
+          return false
+        }
+      }
     }
   },
   mounted () {
