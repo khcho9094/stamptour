@@ -42,7 +42,9 @@ export default {
       } else if (data === '주번 관광정보') {
         router.push('/tour')
       } else if (data === '공유하기') {
-        this.$emit('moreSnsBtn')
+        // this.$emit('moreSnsBtn')
+        const openChk = this.$store.state.snsOpen
+        this.$store.dispatch('loadSnsPopup', openChk)
       }
     }
   }
