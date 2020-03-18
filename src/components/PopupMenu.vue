@@ -42,9 +42,17 @@ export default {
       } else if (data === '주번 관광정보') {
         router.push('/tour')
       } else if (data === '공유하기') {
-        // this.$emit('moreSnsBtn')
         const openChk = this.$store.state.snsOpen
         this.$store.dispatch('loadSnsPopup', openChk)
+      } else if (data === '스탬프 획득방법') {
+        let tranggle3
+        if (/Android/i.test(navigator.userAgent)) {
+          tranggle3.tranggle_callback('tutorial_event', '{}')
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location = 'tranggle_callback://tutorial_event'
+        } else {
+          return false
+        }
       }
     }
   }
