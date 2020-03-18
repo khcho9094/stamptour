@@ -48,6 +48,9 @@ export default {
     moreClick () {
       if (this.name === 'main') {
         this.$emit('moreBtn')
+      } else if (this.name === 'tour') {
+        const openChk = this.$store.state.snsOpen
+        this.$store.dispatch('loadSnsPopup', openChk)
       }
     },
     goHome () {
