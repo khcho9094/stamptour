@@ -34,21 +34,17 @@
         </div>
     </div>
 </template>
-<script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-// Kakao.init('828d44097dad7a0d78c5606097547119');
-import router from '@/router'
 import { mapState } from 'vuex'
 export default {
   name: 'PopupSns',
   data () {
     return {
-        getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode
-        // os : function () {
-        // }
+      getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode
     }
   },
   computed: {
+    ...mapState(['snsOpen'])
   },
   methods: {
     closeBtn () {
@@ -56,26 +52,25 @@ export default {
       this.$store.dispatch('loadSnsPopup', openChk)
     },
     smsShare () {
-        var btm_url = parent.location.href
-        var getServiceCode = this.$store.state.mingleCode
-        if(btm_url.match("mingleCode") == null){
-            btm_url = btm_url+"?mingleCode=" + getServiceCode
-        }
-        var devider = '?'
-        var varUA = navigator.userAgent.toLowerCase()
-        var os = null
-        if (varUA.indexOf('android') > -1) {
-            os = 'android'
-        } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-            os = 'ios'
-        } else {
-            os = 'order'
-        }
-        if (os === 'ios') {
-            devider = '&'
-        }
-        this.$router.push('sms:' + devider + 'body:' + btm_url)
-
+      var btmUrl = parent.location.href
+      var getServiceCode = this.$store.state.mingleCode
+      if (btmUrl.match('mingleCode') == null) {
+        btmUrl = btmUrl + '?mingleCode=' + getServiceCode
+      }
+      var devider = '?'
+      var varUA = navigator.userAgent.toLowerCase()
+      var os = null
+      if (varUA.indexOf('android') > -1) {
+        os = 'android'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        os = 'ios'
+      } else {
+        os = 'order'
+      }
+      if (os === 'ios') {
+        devider = '&'
+      }
+      location.href = 'sms:' + devider + 'body:' + btmUrl
     },
     facebookShare () {
       const url = parent.location.href
@@ -94,85 +89,85 @@ export default {
       window.open(settingUrl, 'Share to facebook', popOption)
     },
     kakaoShare () {
-      const url = parent.location.href
-      const getServiceCode = this.$store.state.mingleCode
-      const title = '공유테스트'
-      const shareImage = 'https://m.tranggle.com/html/images/mingle/001/shareImage.jpg'
-      const desc = '공유 설명 입력칸 테스트'
+      var url = parent.location.href
+      var getServiceCode = this.$store.state.mingleCode
+      var title = '공유테스트'
+      var shareImage = 'https://m.tranggle.com/html/images/mingle/001/shareImage.jpg'
+      var setUrl = null
+      var desc = '공유 설명 입력칸 테스트'
       if (location.search !== '' || !url.match('mingleCode')) {
-        const setUrl = url + '&mingleCode=' + getServiceCode
-      } else if (location.search == "" && !url.match('mingleCode')) {
-        const setUrl = url + '?mingleCode=' + getServiceCode
+        setUrl = url + '&mingleCode=' + getServiceCode
+      } else if (location.search === '' && !url.match('mingleCode')) {
+        setUrl = url + '?mingleCode=' + getServiceCode
       }
+      // eslint-disable-next-line no-undef
       Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
           title: title,
           description: desc,
-          imageUrl: image_src,
+          imageUrl: shareImage,
           link: {
             mobileWebUrl: setUrl,
             webUrl: setUrl
           }
         },
         buttons: [
-                {
-                title: title,
-                link:   {
-                        mobileWebUrl: url,
-                        webUrl: url
-                    }
-                }
-            ]
-        })
+          {
+            title: title,
+            link: {
+              mobileWebUrl: url,
+              webUrl: url
+            }
+          }
+        ]
+      })
     },
     kakaoStoryShare () {
-        const url = parent.location.href
-        const getServiceCode = this.$store.state.mingleCode
-        const title = '공유테스트'
-        const shareImage = 'https://m.tranggle.com/html/images/mingle/001/shareImage.jpg'
-        const desc = '공유 설명 입력칸 테스트'
-        if (location.search != '' || !url.match('mingleCode')){
-            const setUrl = url + '&mingleCode=' + getServiceCode
-        }else if (location.search == "" && !url.match("mingleCode")){
-            const setUrl = url + '?mingleCode=' + getServiceCode
+      var url = parent.location.href
+      var getServiceCode = this.$store.state.mingleCode
+      var title = '공유테스트'
+      var shareImage = 'https://m.tranggle.com/html/images/mingle/001/shareImage.jpg'
+      var setUrl = null
+      if (location.search !== '' || !url.match('mingleCode')) {
+        setUrl = url + '&mingleCode=' + getServiceCode
+      } else if (location.search === '' && !url.match('mingleCode')) {
+        setUrl = url + '?mingleCode=' + getServiceCode
+      }
+      // eslint-disable-next-line no-undef
+      Kakao.Story.open({
+        url: setUrl,
+        text: title,
+        urlInfo: {
+          title: title,
+          images: shareImage
         }
-        Kakao.Story.open({
-            url: url,
-            text: title,
-            urlInfo : {
-                title: title,
-                images: shareImage,
-            }
-        });
+      })
     },
     bandShare () {
-        const filter = 'win16|win32|win64|mac|macintel'
-        const url = parent.location.href
-        const title = '공유테스트'
-        const getServiceCode = this.$store.state.mingleCode
-        if(location.search != "" && !url.match("mingleCode")){
-            const shareUrl = url+"&mingleCode="+getServiceCode;
-        }else if(location.search === '' && !url.match("mingleCode")){
-            const shareUrl = url+"?mingleCode="+getServiceCode;
-        }
+      var filter = 'win16|win32|win64|mac|macintel'
+      var url = parent.location.href
+      var title = '공유테스트'
+      var getServiceCode = this.$store.state.mingleCode
+      var shareUrl = null
+      if (location.search !== '' && !url.match('mingleCode')) {
+        shareUrl = url + '&mingleCode=' + getServiceCode
+      } else if (location.search === '' && !url.match('mingleCode')) {
+        shareUrl = url + '?mingleCode=' + getServiceCode
+      }
 
-        if ( navigator.platform ) {
-            if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
-                // mobile
-                const settingUrl = "bandapp://create/post?text="+encodeURIComponent(title +"\n")+encodeURIComponent(url);
-                location.href = settingUrl;
-
-            } else {
-                // pc
-                const settingUrl = "http://www.band.us/plugin/share?body="+encodeURIComponent(title + "\n")+encodeURIComponent(url);
-                location.href = settingUrl;
-            }
+      if (navigator.platform) {
+        if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+          // mobile
+          const settingUrl = 'bandapp://create/post?text=' + encodeURIComponent(title + '\n') + encodeURIComponent(shareUrl)
+          location.href = settingUrl
+        } else {
+          // pc
+          const settingUrl = 'http://www.band.us/plugin/share?body=' + encodeURIComponent(title + '\n') + encodeURIComponent(shareUrl)
+          location.href = settingUrl
         }
+      }
     }
-  },
-  computed: {
-    ...mapState(['snsOpen'])
   },
   mounted () {
   }
