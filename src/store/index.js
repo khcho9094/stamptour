@@ -47,6 +47,7 @@ export default new Vuex.Store({
     tourListData: [], // 투어 리스트
     serviceLinkData: [],
     apiDetailData: [],
+    snsOpen: false,
     popupGift: { open: false }
   },
   mutations: {
@@ -174,6 +175,10 @@ export default new Vuex.Store({
     },
     setApiDetailData (state, data) {
       state.apiDetailData = data.content
+    },
+    setSnsOpen (state, data) {
+      state.snsOpen = data
+      console.log(state.snsOpen)
     }
   },
   actions: {
@@ -366,6 +371,13 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    /*
+    공유하기 팝업
+    */
+    loadSnsPopup ({ state, commit }, data) {
+      const openYn = !data
+      commit('setSnsOpen', openYn)
     },
     /*
     선물팝업 view
