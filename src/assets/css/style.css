@@ -285,7 +285,8 @@ header .head_back span {
 .pop_overay .pop_cont .text_2 span img {
     width:30px;
     position: relative;
-    top: 2px;
+    top: -2px;
+    vertical-align: middle;
 }
 .pop_overay .pop_cont button {
     display: block;
@@ -488,6 +489,7 @@ header .head_back span {
 
 .stamp_box ul.stamp_list {
     overflow: hidden;
+    margin-bottom: 10px;
 }
 .stamp_box ul.stamp_list li {
     float: left;
@@ -522,7 +524,8 @@ header .head_back span {
     display: none;
 }
 .stamp_box ul.stamp_list li .box img.round {
-    width: 100%
+    width: 100%;
+    position: relative;
 }
 .stamp_box ul.stamp_list li .box img.gift {
     width: 25px;
@@ -534,6 +537,7 @@ header .head_back span {
     -moz-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 .stamp_box ul.stamp_list li .box span {
     font-family:inaviB;
@@ -1358,6 +1362,15 @@ header .head_back span {
     background-position: top 3px left 4px;
     margin-top: 7px;
 }
-
-
+.swiper-pagination {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family:inaviM;
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom:3px!important;
+}
 

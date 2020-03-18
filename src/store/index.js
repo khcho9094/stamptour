@@ -6,9 +6,18 @@ Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 export default new Vuex.Store({
   state: {
+    // SzActcWN5QXozxDixoG4zQ== 코리아둘레길
+    // /GN62eV1c4Q78ghWNMWRsQ== 부안
+    // QAAPpA7foDPqF3zEzdvHrw== 구로
+    // M0ZRcktVl8H3kJaRKq3Irg== 양천
+    // HvbQjGJR2yF9vTu8m2TUZQ== 태백
+    // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행
+    // vSi8Z9QlNS5wushabGnrhA== 평화누리길
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    token: '79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB', // 임시 토큰
-    mingleCode: '/GN62eV1c4Q78ghWNMWRsQ==',
+    token: '0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD', // 임시 토큰
+    // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
+    // 79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB tranggleqa
+    mingleCode: 'SzActcWN5QXozxDixoG4zQ==',
     contentId: null, // 투어 API content ID 값
     contentTypeId: null, // 투어 API content type Id 값
     badge_id: null, // 투어 API에 전달할 스탬프 Id 값
@@ -24,6 +33,8 @@ export default new Vuex.Store({
     stampImage: {}, // 스탬프 이미지
     stampMethod: {}, // 스탬프 방법
     mainStampList: [], // 메인 스탬프 리스트
+    allStampCount: null, // 모든 스탬프 갯수
+    getStampCount: 0, // 획득 스탬프 갯수
     mainRecommendList: [], // 메인 추천 스탬프 리스트
     sumPrice: 0, // 전체 선물 가격,
     memberList: [], // 참가자 명단
@@ -36,7 +47,8 @@ export default new Vuex.Store({
     tourListData: [], // 투어 리스트
     serviceLinkData: [],
     apiDetailData: [],
-    snsOpen: false
+    snsOpen: false,
+    popupGift: { open: false }
   },
   mutations: {
     setIntroData (state, data) {
@@ -75,6 +87,11 @@ export default new Vuex.Store({
     },
     setMainData (state, data) {
       state.mainStampList = data.stamplist_info
+      state.mainStampList.map((data, idx) => {
+        state.mainStampList[idx].num = idx + 1
+      })
+      state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
+      state.getStampCount = parseInt(data.stampget_info.badge_get_count)
     },
     setMainRecommend (state, data) {
       const array = Array.from(Array(Math.round(data.stamplist_info.length / 2)), () => [])
@@ -303,17 +320,6 @@ export default new Vuex.Store({
         })
     },
     // ===========================================================================================================================
-    loadTourInfoData ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/courses/get_course_item.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==&status=&view_count=300&page=0&token=&lon=&lat='
-      Vue
-        .jsonp(url)
-        .then(respnose => {
-          commit('setTourInfoData', respnose)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
     // 아래 5개 api 통합 - khcho
     loadTourTotalData ({ state, commit }, data) {
       const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
@@ -356,7 +362,7 @@ export default new Vuex.Store({
     9-1 주변 관광정보(하단 관련서비스 정보)
     */
     loadServiceLinkData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourServiceLink.jsonp?mingleCode=/GN62eV1c4Q78ghWNMWRsQ==`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourServiceLink.jsonp?mingleCode=${state.mingleCode}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -372,6 +378,17 @@ export default new Vuex.Store({
     loadSnsPopup ({ state, commit }, data) {
       const openYn = !data
       commit('setSnsOpen', openYn)
+    },
+    /*
+    선물팝업 view
+    */
+    openPopupGift ({ state }, data) {
+      state.popupGift = data
+      if (Object.keys(data).length > 0) {
+        state.popupGift.open = true
+      } else {
+        state.popupGift.open = false
+      }
     }
   },
   modules: {
