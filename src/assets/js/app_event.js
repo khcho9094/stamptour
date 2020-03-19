@@ -56,7 +56,6 @@ function iosChkCoodEvent () {
  */
 // eslint-disable-next-line no-unused-vars
 export function chkCoordinate () {
-  var tranggle3 = null
   tranggle3.tranggle_callback('chk_coordinate')
 }
 
