@@ -13,6 +13,7 @@ export default {
   },
   beforeMount () {
     this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
+    this.$store.dispatch('setToken', this.$cookie.get('login_token'))
   }
 }
 </script>

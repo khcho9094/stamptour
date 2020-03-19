@@ -69,7 +69,9 @@ export default new Vuex.Store({
     },
     setGiftData (state, data) {
       state.giftData = data
-      state.myPoint = data[0].user_mingle_gift_point
+      if (data[0].user_mingle_gift_point) {
+        state.myPoint = data[0].user_mingle_gift_point
+      }
     },
     setGiftDataNew (state, data) {
       let sum = 0
@@ -220,6 +222,18 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 토큰이 없을때
+    loadGiftNoToken ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/intro/serviceInfo.jsonp?mingleCode=${state.mingleCode}&token=`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setGiftData', response.response.content.gift)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     /*
     - 선물소개 NEW stampTourMainGiftInfo
     - 파라미터
@@ -294,6 +308,9 @@ export default new Vuex.Store({
         })
     },
     loadMainRecommend ({ state, commit }) {
+      if (state.token === null) {
+        state.token = ''
+      }
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH`
       Vue
         .jsonp(url)
@@ -400,6 +417,12 @@ export default new Vuex.Store({
     */
     setMingleCode ({ state }, data) {
       state.mingleCode = data
+    },
+    /*
+    token 세팅
+    */
+    setToken ({ state }, data) {
+      state.token = data
     },
     /*
     배지등록(전자스탬프)
