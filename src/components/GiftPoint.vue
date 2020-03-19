@@ -2,7 +2,7 @@
     <div class="point_view">
         <div class="p_name">
             {{userInfo.member_nickname}}님의 포인트
-            <img src="@/assets/images/refresh.png" alt="refresh">
+            <img src="@/assets/images/refresh.png" alt="refresh" @click="pointRefresh">
         </div>
         <div class="point">{{myPoint}}<span>P</span></div>
     </div>
@@ -14,6 +14,11 @@ export default {
   computed: {
     ...mapState(['myPoint']),
     ...mapState(['userInfo'])
+  },
+  methods: {
+    pointRefresh () {
+      alert('포인트 정보를 조회하였습니다.')
+    }
   }
 }
 </script>
