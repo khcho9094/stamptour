@@ -14,5 +14,23 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      function set_coordinate (lon, lat) {
+        var chkLon = 0
+        var chkLat = 0
+        chkLon = Math.floor(parseInt(lon))
+        chkLat = Math.floor(parseInt(lat))
+        if (lon !== '-1' && chkLon !== '=1') {
+          console.log(chkLon)
+        } else {
+          console.log('0')
+        }
+        if (lat !== '-1' && chkLat !== '=1') {
+          console.log(chkLat)
+        } else {
+          console.log('0')
+        }
+      }
+    </script>
   </body>
 </html>

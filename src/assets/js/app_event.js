@@ -63,27 +63,6 @@ export function chkCoordinate () {
 }
 
 /**
- * 안드로이드 좌표값 요청 이벤트
- */
-// eslint-disable-next-line no-unused-vars
-export function set_coordinate (lon, lat) {
-  var chkLon = 0
-  var chkLat = 0
-  chkLon = Math.floor(parseInt(lon))
-  chkLat = Math.floor(parseInt(lat))
-  if (lon !== '-1' && chkLon !== '=1') {
-    console.log(chkLon)
-  } else {
-    console.log('0')
-  }
-  if (lat !== '-1' && chkLat !== '=1') {
-    console.log(chkLat)
-  } else {
-    console.log('0')
-  }
-}
-
-/**
  * 코리아 둘레길 아이디 전달 이벤트
  */
 // eslint-disable-next-line no-unused-vars
