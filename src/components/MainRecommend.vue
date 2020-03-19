@@ -3,6 +3,7 @@
         <div class="title">
             <h1> <img src="@/assets/images/stamp_icon_1.png" alt="icon"> 완주를 위한 추천 스탬프</h1>
             <span @click="mapView">지도보기 <img src="@/assets/images/arrow_1.png" alt="arr"></span>
+            <span><button @click="stampAuth()">전자스탬프 호출테스트</button></span>
         </div>
 
         <swiper :options="swiperOption" class="swiper">
@@ -62,6 +63,31 @@ export default {
       } else {
         return false
       }
+    },
+    stampAuth () {
+      // eslint-disable-next-line no-undef
+      esp.setBackgroundColor('#000000')
+      // eslint-disable-next-line no-undef
+      esp.setBackgroundOpacity('0.6')
+      // eslint-disable-next-line no-undef
+      esp.setDescription('<p style="color:black;background-color:#FFFFFF">화면에 스탬프를 찍어 주세요.<br/>닫기 버튼(X)이 보이지 않을 경우<br/> 어두운 바탕으로 이동해 보세요.</p>')
+      // eslint-disable-next-line no-undef
+      esp.setLoadingYn('Y')
+      // eslint-disable-next-line no-undef
+      esp.setIconYn('Y')
+      // eslint-disable-next-line no-undef
+      esp.showEchossCertificationPage({
+        // eslint-disable-next-line no-undef
+        regionCode: esp.REGION_CODE_TYPE.KOREA,
+        // eslint-disable-next-line no-undef
+        languageCode: esp.LANGUAGE_CODE_TYPE.KOREAN,
+        userCode: 'stamptour',
+        licenseId: 'p6d441067c76f43bdb5767dee1b85d742',
+        authKey: '',
+        extData: { }
+      }, function (errorCode, errorMessage) {
+        alert('스템프 인증 호출에 실패하였습니다.')
+      })
     }
   },
   mounted () {
