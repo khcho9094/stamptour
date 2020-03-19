@@ -42,7 +42,7 @@ export default {
       })
       return btnClass
     },
-    ...mapState(['introData'])
+    ...mapState(['introData', 'giftSolo'])
   },
   methods: {
     moreClick () {
@@ -65,19 +65,18 @@ export default {
     },
     goBack () {
       console.log(this.$route)
-      this.$router.go(-1)
-      // let tranggle3
-      // if (document.referrer !== '') {
-      //   this.$router.go(-1)
-      // } else {
-      //   if (/Android/i.test(navigator.userAgent)) {
-      //     tranggle3.tranggle_callback('back_btn_event', '{}')
-      //   } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      //     window.location = 'tranggle_callback://back_btn_event'
-      //   } else {
-      //     return false
-      //   }
-      // }
+      if ((this.$route.name === 'Gift' && this.giftSolo) || this.$route.name === 'Stamp') {
+        if (/Android/i.test(navigator.userAgent)) {
+          // eslint-disable-next-line no-undef
+          tranggle3.tranggle_callback('back_btn_event', '{}')
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location = 'tranggle_callback://back_btn_event'
+        } else {
+          return false
+        }
+      } else {
+        this.$router.go(-1)
+      }
     }
   },
   mounted () {

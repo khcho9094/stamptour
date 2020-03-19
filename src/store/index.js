@@ -14,7 +14,7 @@ export default new Vuex.Store({
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    token: 'DCE618C8A7238BE1CA3EE283B8FF614F0FBF2E5362D044EB4BD927E366B77308C5A409154A438F5188FCAD34CCC3EF95', // 임시 토큰
+    token: '', // 임시 토큰
     // VueCookie.get('login_token'),
     // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
     // 79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB tranggleqa
@@ -56,7 +56,8 @@ export default new Vuex.Store({
     snsOpen: false,
     popupGift: { open: false },
     successBadge: {}, // 성공 배지 정보
-    badgeRegister: {} // 성공 메세지
+    badgeRegister: {}, // 성공 메세지
+    giftSolo: true // 선물페이지 단독페이지 여부
   },
   mutations: {
     setIntroData (state, data) {
@@ -424,6 +425,9 @@ export default new Vuex.Store({
     setToken ({ state }, data) {
       state.token = data
     },
+    setGiftRoute ({ state }, data) {
+      state.giftSolo = data
+    },
     /*
     배지등록(전자스탬프)
     */
@@ -432,7 +436,6 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          console.log(response)
           state.successBadge = data
           commit('setBadgeRegister', response)
         })
