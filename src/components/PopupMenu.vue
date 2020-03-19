@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       btnArr: [
-        '주번 관광정보',
+        '주변 관광정보',
         '스탬프 획득방법',
         '투어 참가자',
         '공유하기'
@@ -39,7 +39,7 @@ export default {
       e.stopPropagation()
       if (data === '투어 참가자') {
         router.push('/member')
-      } else if (data === '주번 관광정보') {
+      } else if (data === '주변 관광정보') {
         router.push('/tour')
       } else if (data === '공유하기') {
         const openChk = this.$store.state.snsOpen

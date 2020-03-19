@@ -29,7 +29,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import router from '@/router'
 export default {
   name: 'MainList',
   data () {
@@ -79,7 +78,20 @@ export default {
     },
     stampDetail (sid) {
       localStorage.stampDetail = JSON.stringify(sid)
-      router.push('/stamp')
+      if (sid && sid.mingle_badge_content_type === '0' && sid.mingle_badge_content_id === '0') {
+        location.href = sid.mingle_badge_order_url
+        // let tranggle3
+        // const url = sid.mingle_badge_order_url
+        // if (/Android/i.test(navigator.userAgent)) {
+        //   tranggle3.tranggle_callback('external_links', `{\\'url\\':\\'${url} \\'}`)
+        // } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        //   window.location = `tranggle://external_links?url=${url}`
+        // } else {
+        //   location.href = url
+        // }
+      } else {
+        this.$router.push('/stamp')
+      }
     }
   }
 }

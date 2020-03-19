@@ -14,7 +14,7 @@ export default new Vuex.Store({
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    token: '0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD', // 임시 토큰
+    token: 'DCE618C8A7238BE1CA3EE283B8FF614F0FBF2E5362D044EB4BD927E366B77308C5A409154A438F5188FCAD34CCC3EF95', // 임시 토큰
     // VueCookie.get('login_token'),
     // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
     // 79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB tranggleqa
@@ -66,13 +66,8 @@ export default new Vuex.Store({
       })
     },
     setGiftData (state, data) {
-      let sum = 0
       state.giftData = data
       state.myPoint = data[0].user_mingle_gift_point
-      data.map((val) => {
-        sum += parseInt(val.mingle_count)
-      })
-      state.sumPrice = sum
     },
     setGiftDataNew (state, data) {
       let sum = 0

@@ -57,11 +57,14 @@ export default {
     }
   },
   beforeCreate () {
-    this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
+    // console.log(this.$cookie.get('setIntro'))
+    // if (!this.$cookie.get('setIntro')) {
+    //   this.$router.push('/intro')
+    // }
   },
-  beforeMount () {
-    this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
-  },
+  // beforeMount () {
+  //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
+  // },
   mounted () {
     this.$store.dispatch('loadMainData', this.params)
   }
