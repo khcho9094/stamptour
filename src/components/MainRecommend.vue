@@ -50,19 +50,13 @@ export default {
   methods: {
     stampDetail (sid) {
       localStorage.stampDetail = JSON.stringify(sid)
-      if (sid && sid.mingle_badge_content_type === '0' && sid.mingle_badge_content_id === '0') {
-        location.href = sid.mingle_badge_order_url
-        // let tranggle3
-        // const url = sid.mingle_badge_order_url
-        // if (/Android/i.test(navigator.userAgent)) {
-        //   tranggle3.tranggle_callback('external_links', `{\\'url\\':\\'${url} \\'}`)
-        // } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        //   window.location = `tranggle://external_links?url=${url}`
-        // } else {
-        //   location.href = url
-        // }
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('stamp_loc', `{\\'lat\\':\\'${sid.info_org_lat} \\',\\'lon\\':\\'${sid.info_org_lon} \\',\\'badge_id\\':\\'${sid.mingle_badge_id} \\'}`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://stamp_loc?lat=${sid.info_org_lat}&lon=${sid.info_org_lon}&badge_Id=${sid.mingle_badge_id}`
       } else {
-        this.$router.push('/stamp')
+        return false
       }
     },
     mapView () {

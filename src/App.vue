@@ -7,7 +7,6 @@
 export default {
   name: 'App',
   beforeCreate () {
-    console.log(this.$route.query.mingleCode)
     if (this.$route.query.mingleCode) {
       this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
     }

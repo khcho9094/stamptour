@@ -54,8 +54,8 @@ export default {
       }
     },
     goHome () {
-      let tranggle3
       if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
         tranggle3.tranggle_callback('go_home_event', '{}')
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         window.location = 'tranggle_callback://go_home_event'
