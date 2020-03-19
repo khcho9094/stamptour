@@ -21,6 +21,7 @@ import MainList from '@/components/MainList.vue'
 import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Main',
   components: {
@@ -61,6 +62,7 @@ export default {
     // if (!this.$cookie.get('setIntro')) {
     //   this.$router.push('/intro')
     // }
+    appEvent.chkCoordinate()
   },
   // beforeMount () {
   //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))

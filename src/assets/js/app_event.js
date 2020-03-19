@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 function chkUserAgent () {
   var varUA = navigator.userAgent.toLowerCase()
   var os = null
@@ -16,11 +17,12 @@ function chkUserAgent () {
  * 전자 스탬프 획득 시 안내 이벤트
  */
 // eslint-disable-next-line no-unused-vars
-function stampGetEvent () {
+export function stampGetEvent () {
   var os = chkUserAgent
   var url = null
   if (os === 'android') {
-    url = "tranggle3.tranggle_callback('stamp_get','{}')"
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('stamp_get', '{}')
   } else if (os === 'ios') {
     url = '/tranggle_callback://stamp_get'
     window.location = url
@@ -31,11 +33,11 @@ function stampGetEvent () {
  * 앱에서 링크 팝업 띄위기 위한 이벤트
  */
 // eslint-disable-next-line no-unused-vars
-function externalLinks (url) {
+export function externalLinks (url) {
   var os = chkUserAgent
   if (os === 'android') {
-    var setUrl = "tranggle3.tranggle_callback('external_links','{\\'url\\':\\'" + url + "\\'}')"
-    console.log(setUrl)
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('external_links', "{\\'url\\':\\'" + url + "\\'}")
   } else if (os === 'ios') {
     window.location = 'tranggle://external_links?url=' + url
   } else {
@@ -47,7 +49,7 @@ function externalLinks (url) {
  * 아이폰 좌표값 요쳥 이벤트
  */
 // eslint-disable-next-line no-unused-vars
-function iosChkCoodEvent () {
+export function iosChkCoodEvent () {
   window.location = 'tranggle://chk_coordinate'
 }
 
@@ -55,30 +57,9 @@ function iosChkCoodEvent () {
  * 안드로이드 좌표값 요청 이벤트
  */
 // eslint-disable-next-line no-unused-vars
-function chkCoordinate () {
-  var tranggle3 = null
-  tranggle3.tranggle_callback('chk_coordinate')
-}
-
-/**
- * 안드로이드 좌표값 요청 이벤트
- */
-// eslint-disable-next-line no-unused-vars
-function setCoordinate (lon, lat) {
-  var chkLon = 0
-  var chkLat = 0
-  chkLon = Math.floor(parseInt(lon))
-  chkLat = Math.floor(parseInt(lat))
-  if (lon !== '-1' && chkLon !== '=1') {
-    console.log(chkLon)
-  } else {
-    console.log('0')
-  }
-  if (lat !== '-1' && chkLat !== '=1') {
-    console.log(chkLat)
-  } else {
-    console.log('0')
-  }
+export function chkCoordinate () {
+  // eslint-disable-next-line no-undef
+  tranggle3.tranggle_callback('chk_coordinate', '{}')
 }
 
 /**
