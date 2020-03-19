@@ -54,7 +54,9 @@ export default new Vuex.Store({
     serviceLinkData: [],
     apiDetailData: [],
     snsOpen: false,
-    popupGift: { open: false }
+    popupGift: { open: false },
+    successBadge: {}, // 성공 배지 정보
+    badgeRegister: {} // 성공 메세지
   },
   mutations: {
     setIntroData (state, data) {
@@ -179,6 +181,9 @@ export default new Vuex.Store({
     },
     setSnsOpen (state, data) {
       state.snsOpen = data
+    },
+    setBadgeRegister (state, data) {
+      state.badgeRegister = data
     }
   },
   actions: {
@@ -395,6 +400,22 @@ export default new Vuex.Store({
     */
     setMingleCode ({ state }, data) {
       state.mingleCode = data
+    },
+    /*
+    배지등록(전자스탬프)
+    */
+    loadBadgeRegister ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/badgeV2/badgeRegister.jsonp?badgeId=${data.mingle_badge_id}&token=${state.token}&registDatetime=&isTimeCheck=Y&AppVer=A_1_3.10.4`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          console.log(response)
+          state.successBadge = data
+          commit('setBadgeRegister', response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

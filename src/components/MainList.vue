@@ -22,6 +22,7 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
                     </div>
+                    <div class="position" v-if="data.mingle_badge_type === 'STAMP' && data.user_mingle_badge_get_stamp_yn !== 'Y'" @click="stampAuth($event, data)">위치보기</div>
                 </div>
             </li>
         </ul>
@@ -91,6 +92,77 @@ export default {
         // }
       } else {
         this.$router.push('/stamp')
+      }
+    },
+    stampAuth (e, data) {
+      e.stopPropagation()
+      console.log(data)
+      // this.$store.dispatch('loadBadgeRegister', data)
+      // eslint-disable-next-line no-undef
+      esp.setBackgroundColor('#000000')
+      // eslint-disable-next-line no-undef
+      esp.setBackgroundOpacity('0.6')
+      // eslint-disable-next-line no-undef
+      esp.setDescription('<p style="color:black;background-color:#FFFFFF">화면에 스탬프를 찍어 주세요.<br/>닫기 버튼(X)이 보이지 않을 경우<br/> 어두운 바탕으로 이동해 보세요.</p>')
+      // eslint-disable-next-line no-undef
+      esp.setLoadingYn('Y')
+      // eslint-disable-next-line no-undef
+      esp.setIconYn('Y')
+      // eslint-disable-next-line no-undef
+      esp.showEchossCertificationPage({
+        // eslint-disable-next-line no-undef
+        regionCode: esp.REGION_CODE_TYPE.KOREA,
+        // eslint-disable-next-line no-undef
+        languageCode: esp.LANGUAGE_CODE_TYPE.KOREAN,
+        userCode: 'stamptour',
+        licenseId: 'p6d441067c76f43bdb5767dee1b85d742',
+        authKey: '',
+        extData: { }
+      }, function (errorCode, errorMessage) {
+        alert('스템프 인증 호출에 실패하였습니다.')
+      })
+      // eslint-disable-next-line no-undef
+      esp.certSuccess = (result) => {
+        if (result.merchant) {
+          if (result.merchant === data.mingle_merchant_code) {
+            this.$store.dispatch('loadBadgeRegister', this.electroStampInfo)
+          } else {
+            alert('찍은 전자 스탬프 정보가 다릅니다.')
+          }
+        }
+      }
+    },
+    getPlatformInfo (method, url, params, succFunc, failFunc) {
+      let xmlhttp
+      if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest()
+      } else {
+        // eslint-disable-next-line no-undef
+        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+      }
+      xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === 4) {
+          if (xmlhttp.status === 200) {
+            const response = JSON.parse(xmlhttp.response)
+            if (response.resCd !== '0000') {
+              failFunc()
+              return
+            }
+            succFunc(response.result)
+          } else {
+            failFunc()
+          }
+        }
+      }
+      xmlhttp.open(method, url, true)
+      xmlhttp.setRequestHeader('Content-type', 'application/json')
+      xmlhttp.setRequestHeader('Accept', 'application/json')
+      xmlhttp.setRequestHeader('Accept-Language', 'ko')
+      xmlhttp.setRequestHeader('Authorization', 'Basic ' + btoa('74bc2962-6856-41b6-b523-7f16baabb856:32356635343964622D363736312D343332382D383766392D343139346131656564323839'))
+      if (method === 'GET') {
+        xmlhttp.send()
+      } else {
+        xmlhttp.send(JSON.stringify(params))
       }
     }
   }
