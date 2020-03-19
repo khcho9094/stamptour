@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 function chkUserAgent () {
   var varUA = navigator.userAgent.toLowerCase()
   var os = null
@@ -65,7 +66,7 @@ export function chkCoordinate () {
  * 안드로이드 좌표값 요청 이벤트
  */
 // eslint-disable-next-line no-unused-vars
-function setCoordinate (lon, lat) {
+export function set_coordinate (lon, lat) {
   var chkLon = 0
   var chkLat = 0
   chkLon = Math.floor(parseInt(lon))
