@@ -14,7 +14,7 @@ export default new Vuex.Store({
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
-    token: 'DCE618C8A7238BE1CA3EE283B8FF614F0FBF2E5362D044EB4BD927E366B77308C5A409154A438F5188FCAD34CCC3EF95', // 임시 토큰
+    token: '', // 임시 토큰
     // VueCookie.get('login_token'),
     // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
     // 79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB tranggleqa
@@ -56,7 +56,10 @@ export default new Vuex.Store({
     snsOpen: false,
     popupGift: { open: false },
     lon: 0, // 경도
-    lat: 0 // 위도
+    lat: 0, // 위도
+    successBadge: {}, // 성공 배지 정보
+    badgeRegister: {}, // 성공 메세지
+    giftSolo: true // 선물페이지 단독페이지 여부
   },
   mutations: {
     setIntroData (state, data) {
@@ -69,7 +72,9 @@ export default new Vuex.Store({
     },
     setGiftData (state, data) {
       state.giftData = data
-      state.myPoint = data[0].user_mingle_gift_point
+      if (data[0].user_mingle_gift_point) {
+        state.myPoint = data[0].user_mingle_gift_point
+      }
     },
     setGiftDataNew (state, data) {
       let sum = 0
@@ -181,6 +186,9 @@ export default new Vuex.Store({
     },
     setSnsOpen (state, data) {
       state.snsOpen = data
+    },
+    setBadgeRegister (state, data) {
+      state.badgeRegister = data
     }
   },
   actions: {
@@ -212,6 +220,18 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setGiftData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 토큰이 없을때
+    loadGiftNoToken ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/intro/serviceInfo.jsonp?mingleCode=${state.mingleCode}&token=`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setGiftData', response.response.content.gift)
         })
         .catch(err => {
           console.log(err)
@@ -291,6 +311,9 @@ export default new Vuex.Store({
         })
     },
     loadMainRecommend ({ state, commit }) {
+      if (state.token === null) {
+        state.token = ''
+      }
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH`
       Vue
         .jsonp(url)
@@ -397,6 +420,30 @@ export default new Vuex.Store({
     */
     setMingleCode ({ state }, data) {
       state.mingleCode = data
+    },
+    /*
+    token 세팅
+    */
+    setToken ({ state }, data) {
+      state.token = data
+    },
+    setGiftRoute ({ state }, data) {
+      state.giftSolo = data
+    },
+    /*
+    배지등록(전자스탬프)
+    */
+    loadBadgeRegister ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/badgeV2/badgeRegister.jsonp?badgeId=${data.mingle_badge_id}&token=${state.token}&registDatetime=&isTimeCheck=Y&AppVer=A_1_3.10.4`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          state.successBadge = data
+          commit('setBadgeRegister', response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

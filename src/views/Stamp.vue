@@ -30,7 +30,12 @@ export default {
   methods: {
   },
   mounted () {
-    this.$store.dispatch('loadStampData', JSON.parse(localStorage.stampDetail))
+    this.$store.dispatch('loadStampData', {
+      mingle_badge_id: this.$route.query.badge_id,
+      mingle_badge_content_type: this.$route.query.contentTypeId,
+      mingle_badge_content_id: this.$route.query.contentId
+    })
+    // this.$store.dispatch('loadStampData', JSON.parse(localStorage.stampDetail))
   },
   destroyed () {
     this.$store.state.stampCommon = {}

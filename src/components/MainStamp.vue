@@ -1,6 +1,6 @@
 <template>
   <div class="stamp_box">
-      <div class="title">
+      <div class="title" v-if="this.token">
           내가 찍은 스탬프
           <span class="count">
               <em>{{this.getStampCount}}</em>
@@ -8,6 +8,7 @@
               <em>{{this.allStampCount}}</em>
           </span>
       </div>
+      <div class="title" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"
@@ -44,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'mainStampList'])
+    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'mainStampList', 'token'])
   },
   methods: {
     swiperPaging () {
@@ -104,7 +105,11 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadGiftData')
+    if (this.token) {
+      this.$store.dispatch('loadGiftData')
+    } else {
+      this.$store.dispatch('loadGiftNoToken')
+    }
   }
 }
 </script>

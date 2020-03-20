@@ -45,8 +45,8 @@ export default {
         const openChk = this.$store.state.snsOpen
         this.$store.dispatch('loadSnsPopup', openChk)
       } else if (data === '스탬프 획득방법') {
-        let tranggle3
         if (/Android/i.test(navigator.userAgent)) {
+          // eslint-disable-next-line no-undef
           tranggle3.tranggle_callback('tutorial_event', '{}')
         } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
           window.location = 'tranggle_callback://tutorial_event'

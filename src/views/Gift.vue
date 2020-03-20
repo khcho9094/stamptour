@@ -16,6 +16,7 @@ import GiftPoint from '@/components/GiftPoint.vue'
 import GiftList from '@/components/GiftList.vue'
 import GiftGuide from '@/components/GiftGuide.vue'
 import PopupGiftReceive from '@/components/PopupGiftReceive.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'Gift',
   components: {
@@ -25,8 +26,15 @@ export default {
     GiftGuide,
     PopupGiftReceive
   },
+  computed: {
+    ...mapState(['token'])
+  },
   mounted () {
-    this.$store.dispatch('loadGiftData')
+    if (this.token) {
+      this.$store.dispatch('loadGiftData')
+    } else {
+      this.$store.dispatch('loadGiftNoToken')
+    }
   }
 }
 </script>

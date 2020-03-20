@@ -878,7 +878,7 @@ header .head_back span {
 }
 .course_box ul.list li .box_lt img.c_icon {
     width: 47px;
-    margin-top: 13px;
+    margin-top: 10px;
 }
 .course_box ul.list li .box_lt span {
     color:#3bb9fa;
@@ -939,7 +939,7 @@ header .head_back span {
     text-indent: -9999px;
     width: 35px;
     height: 35px;
-    background-image: url('../images/point.png');
+    background-image: url('../images/stamp_press.png');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -955,7 +955,7 @@ header .head_back span {
     bottom: 0;
     right: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 99;
 }
 .course_box ul.list li .box_rt .progress_box .p_back {
     float: left;
@@ -1454,3 +1454,7 @@ header .head_back span {
     bottom:3px!important;
 }
 
+#echossStampLayer {
+    z-index: 100;
+    position: fixed!important;
+}
