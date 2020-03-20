@@ -59,6 +59,7 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
   mounted () {
+    this.handleScroll()
     this.$store.dispatch('loadMemberData', this.memberPage)
   },
   updated () {
