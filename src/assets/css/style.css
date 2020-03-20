@@ -1450,9 +1450,6 @@ header .head_back span {
     position: relative;
     bottom: 5px;
 }
-.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom:0px!important;
-}
 
 #echossStampLayer {
     z-index: 100;
