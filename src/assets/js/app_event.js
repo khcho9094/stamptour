@@ -37,7 +37,7 @@ export function externalLinks (url) {
   var os = chkUserAgent()
   if (os === 'android') {
     // eslint-disable-next-line no-undef
-    tranggle3.tranggle_callback('external_links', `{ url: ${url} }`)
+    tranggle3.tranggle_callback('external_links', `{ 'url': '${url}' }`)
   } else if (os === 'ios') {
     window.location = 'tranggle://external_links?url=' + url
   } else {
