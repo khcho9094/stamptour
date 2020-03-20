@@ -18,7 +18,7 @@ function chkUserAgent () {
  */
 // eslint-disable-next-line no-unused-vars
 export function stampGetEvent () {
-  var os = chkUserAgent
+  var os = chkUserAgent()
   var url = null
   if (os === 'android') {
     // eslint-disable-next-line no-undef
@@ -34,7 +34,7 @@ export function stampGetEvent () {
  */
 // eslint-disable-next-line no-unused-vars
 export function externalLinks (url) {
-  var os = chkUserAgent
+  var os = chkUserAgent()
   if (os === 'android') {
     // eslint-disable-next-line no-undef
     tranggle3.tranggle_callback('external_links', `{ url: ${url} }`)
