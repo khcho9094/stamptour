@@ -59,7 +59,8 @@ export default new Vuex.Store({
     lat: 0, // 위도
     successBadge: {}, // 성공 배지 정보
     badgeRegister: {}, // 성공 메세지
-    giftSolo: true // 선물페이지 단독페이지 여부
+    giftSolo: true, // 선물페이지 단독페이지 여부
+    durunubiCheck: 0
   },
   mutations: {
     setIntroData (state, data) {
@@ -189,6 +190,9 @@ export default new Vuex.Store({
     },
     setBadgeRegister (state, data) {
       state.badgeRegister = data
+    },
+    setDurunubiCheck (state, data) {
+      state.durunubiCheck = data
     }
   },
   actions: {
@@ -442,6 +446,29 @@ export default new Vuex.Store({
           commit('setBadgeRegister', response)
         })
         .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    두루누비 아이디 연동 체크
+     */
+    loadDurunubiCheck ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?token=${data}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setDurunubiCheck', response.response.content.DATA.count)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadSnsPoint ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/courses/setSnsPoint.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+        }).catch(err => {
           console.log(err)
         })
     }
