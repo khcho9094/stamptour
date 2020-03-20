@@ -43,6 +43,7 @@ export default {
         router.push('/tour')
       } else if (data === '공유하기') {
         const openChk = this.$store.state.snsOpen
+        this.$store.dispatch('loadSnsPoint')
         this.$store.dispatch('loadSnsPopup', openChk)
       } else if (data === '스탬프 획득방법') {
         if (/Android/i.test(navigator.userAgent)) {

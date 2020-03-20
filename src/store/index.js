@@ -56,11 +56,14 @@ export default new Vuex.Store({
     apiDetailData: [],
     snsOpen: false,
     popupGift: { open: false },
+    lon: 0, // 경도
+    lat: 0, // 위도
     successBadge: {}, // 성공 배지 정보
     badgeRegister: {}, // 성공 메세지
     giftSolo: true, // 선물페이지 단독페이지 여부
     areaList: [], // 권역 리스트
-    areaCode: '' // 권역 코드
+    areaCode: '', // 권역 코드
+    durunubiCheck: 0
   },
   mutations: {
     setIntroData (state, data) {
@@ -196,6 +199,9 @@ export default new Vuex.Store({
     },
     setAreaList (state, data) {
       state.areaList = data
+    },
+    setDurunubiCheck (state, data) {
+      state.durunubiCheck = data
     }
   },
   actions: {
@@ -365,7 +371,7 @@ export default new Vuex.Store({
     // ===========================================================================================================================
     // 아래 5개 api 통합 - khcho
     loadTourTotalData ({ state, commit }, data) {
-      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -378,7 +384,7 @@ export default new Vuex.Store({
     },
     // 투어 리스트
     loadTourListData ({ state, commit }, data) {
-      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -477,6 +483,29 @@ export default new Vuex.Store({
           commit('setAreaList', response.response.content)
         })
         .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    두루누비 아이디 연동 체크
+     */
+    loadDurunubiCheck ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?token=${data}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setDurunubiCheck', response.response.content.DATA.count)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadSnsPoint ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/courses/setSnsPoint.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+        }).catch(err => {
           console.log(err)
         })
     }

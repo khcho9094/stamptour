@@ -50,6 +50,7 @@ export default {
         this.$emit('moreBtn')
       } else if (this.name === 'tour') {
         const openChk = this.$store.state.snsOpen
+        this.$store.dispatch('loadSnsPoint')
         this.$store.dispatch('loadSnsPopup', openChk)
       }
     },

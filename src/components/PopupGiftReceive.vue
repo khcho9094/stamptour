@@ -25,6 +25,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'PopupGiftReceive',
   data () {
@@ -57,9 +58,18 @@ export default {
       }
     },
     durunubiCheck (ev) {
-      if (ev.target.checked) {
-        alert('두루누비 계정 확인')
+      this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
+
+      if (this.$store.state.durunubiCheck === 0) {
+        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+          appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
+        } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {
+          appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=ios')
+        }
       }
+      // if (ev.target.checked) {
+      //   alert('두루누비 계정 확인')
+      // }
     }
   },
   mounted () {

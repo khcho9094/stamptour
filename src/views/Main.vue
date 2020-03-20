@@ -63,7 +63,11 @@ export default {
     // if (!this.$cookie.get('setIntro')) {
     //   this.$router.push('/intro')
     // }
-    appEvent.chkCoordinate()
+    if (this.$cookie.get('total_stamp_yn') === 'Y') {
+      appEvent.chkCoordinate()
+      this.$store.state.lon = localStorage.getItem('setLon')
+      this.$store.state.lat = localStorage.getItem('setLat')
+    }
   },
   // beforeMount () {
   //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
