@@ -1488,3 +1488,7 @@ header .head_back span {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+/* go_top */
+.go_top {position:fixed; left:50%; margin-left: -62px; bottom:18px; cursor:pointer; z-index:99;}
+.go_top img {width:124px;}
