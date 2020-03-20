@@ -9,6 +9,7 @@
     <title>스탬프투어 통합</title>
     <script src="https://developer.echoss.co.kr/sdk/echoss-service-provider-min.js"></script>
     <script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
     <script>Kakao.init('828d44097dad7a0d78c5606097547119');</script>
   </head>
   <body>
@@ -20,16 +21,43 @@
         var chkLat = 0
         chkLon = Math.floor(parseInt(lon))
         chkLat = Math.floor(parseInt(lat))
-        if (lon !== '-1' && chkLon !== '=1') {
-          console.log(chkLon)
+        if (lon !== '-1' && chkLon !== '-1') {
+          localStorage.setItem('setLon',chkLon)
         } else {
-          console.log('0')
+          localStorage.setItem('setLon',chkLon)
         }
-        if (lat !== '-1' && chkLat !== '=1') {
-          console.log(chkLat)
+        if (lat !== '-1' && chkLat !== '-1') {
+          localStorage.setItem('setLat',chkLat)
         } else {
-          console.log('0')
+          localStorage.setItem('setLat',chkLat)
         }
+      }
+
+      function getCookie(name) {
+          name += "=";
+          var arr = decodeURIComponent(document.cookie).split(';');
+          for (var i = 0; i < arr.length; i++) {
+            var c = arr[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+          }
+          return "";
+      }
+
+      function getDurunubi (id, eid) {
+        setDurunubi(id, eid)
+      }
+
+      function setDurunubi(id, eid){
+        var token = getCookie('login_token')
+        $.ajax({
+          type:"post",
+          url:"http://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?status=INSERT&token=" + token + "&site_id=DURUNUBIAPP&d_id=" + id +"&de_id=" + eid,
+          dataType:"jsonp",
+          jsonpCallback : "callback",
+          success:function(data){
+          }
+        });
       }
     </script>
   </body>

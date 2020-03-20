@@ -54,7 +54,9 @@ export default new Vuex.Store({
     serviceLinkData: [],
     apiDetailData: [],
     snsOpen: false,
-    popupGift: { open: false }
+    popupGift: { open: false },
+    lon: 0, // 경도
+    lat: 0 // 위도
   },
   mutations: {
     setIntroData (state, data) {
@@ -322,7 +324,7 @@ export default new Vuex.Store({
     // ===========================================================================================================================
     // 아래 5개 api 통합 - khcho
     loadTourTotalData ({ state, commit }, data) {
-      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -335,7 +337,7 @@ export default new Vuex.Store({
     },
     // 투어 리스트
     loadTourListData ({ state, commit }, data) {
-      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=&lat=`
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
         .then(response => {
