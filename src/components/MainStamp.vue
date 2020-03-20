@@ -118,4 +118,7 @@ export default {
     .swiper {
         width: 100%;
     }
+    .swiper-pagination {
+      bottom: 0px;
+    }
 </style>

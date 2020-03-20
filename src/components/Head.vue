@@ -66,7 +66,6 @@ export default {
       }
     },
     goBack () {
-      console.log(this.$route)
       if ((this.$route.name === 'Gift' && this.giftSolo) || this.$route.name === 'Stamp') {
         if (/Android/i.test(navigator.userAgent)) {
           // eslint-disable-next-line no-undef

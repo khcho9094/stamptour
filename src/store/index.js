@@ -449,7 +449,7 @@ export default new Vuex.Store({
     token 세팅
     */
     setToken ({ state }, data) {
-      state.token = data
+      state.token = data || ''
     },
     setGiftRoute ({ state }, data) {
       state.giftSolo = data

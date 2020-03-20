@@ -12,10 +12,10 @@
                     {{popupGift.mingle_gift_title}}
                 </span>
                 <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='">
-                  <input type="checkbox" id="durunubi"  name="durunubi" @change="durunubiCheck($event)"> <label for="durunubi">두루누비 계정확인</label>
+                  <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
                 <div class="check">
-                  <input type="checkbox" id="personal"  name="personal" @change="checkStatus($event)"> <label for="personal">개인정보 제3자 제공동의</label>
+                  <input type="checkbox" id="personal"  name="personal" v-model="personal"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>
@@ -30,7 +30,8 @@ export default {
   name: 'PopupGiftReceive',
   data () {
     return {
-      goGift: false
+      durunubi: false,
+      personal: false
     }
   },
   computed: {
@@ -41,21 +42,16 @@ export default {
       this.$store.dispatch('openPopupGift', {})
     },
     receiveGift () {
-      if (this.goGift) {
-        alert('선물 받기')
-      } else {
+      if (!this.durunubi && this.mingleCode === 'SzActcWN5QXozxDixoG4zQ==') {
+        alert('두루누비 계정 확인이 필요합니다.')
+      } else if (!this.personal) {
         alert('개인정보 제3자 제공동의가 필요합니다.')
+      } else {
+        alert('선물 받기')
       }
     },
     imgIcon () {
       return `https://m.tranggle.com/html/images/mingle/${this.popupGift.mingle_gift_image}`
-    },
-    checkStatus (ev) {
-      if (ev.target.checked) {
-        this.goGift = true
-      } else {
-        this.goGift = false
-      }
     },
     durunubiCheck (ev) {
       this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
@@ -67,9 +63,6 @@ export default {
           appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=ios')
         }
       }
-      // if (ev.target.checked) {
-      //   alert('두루누비 계정 확인')
-      // }
     }
   },
   mounted () {
