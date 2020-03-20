@@ -45,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['mainRecommendList'])
+    ...mapState(['mainRecommendList', 'areaCode'])
   },
   methods: {
     stampDetail (sid) {
@@ -60,11 +60,11 @@ export default {
       }
     },
     mapView () {
-      let tranggle3
       if (/Android/i.test(navigator.userAgent)) {
-        tranggle3.tranggle_callback('map_view_event', '{}')
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('map_view_event', `{\\'area_code\\':\\'${this.areaCode}\\'}`)
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = 'tranggle_callback://map_view_event'
+        window.location = `tranggle_callback://map_view_event?area_code=${this.areaCode}`
       } else {
         return false
       }

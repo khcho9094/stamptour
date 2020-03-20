@@ -1451,10 +1451,40 @@ header .head_back span {
     bottom: 5px;
 }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom:3px!important;
+    bottom:0px!important;
 }
 
 #echossStampLayer {
     z-index: 100;
     position: fixed!important;
+}
+
+/* 권역별 스타일 추가 */
+.area_box {
+    background: #faf7f1;
+    padding: 5px 25px 12px;
+}
+.area_box select {
+    width:100%;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inaviM;
+    color: #c86550;
+    border-radius: 5px;
+    border: 1px solid #d0a287;
+    position: relative;
+    background-image: url('../images/sd_arrow.png');
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: top 10px right 10px;
+    padding-right: 30px;
+}
+.area_box select option {
+    width:200px;
+    font-size: 12px;
+    font-family: inaviM;
+    color: #c86550;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

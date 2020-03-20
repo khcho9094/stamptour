@@ -45,7 +45,8 @@ export default {
       snsVisible: false,
       params: {
         order: 'pop',
-        status: 'ALL'
+        status: 'ALL',
+        areaCode: '0'
       }
     }
   },

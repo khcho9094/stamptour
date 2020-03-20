@@ -6,6 +6,14 @@
                 <input type="checkbox" id="complete_off"  name="complete_off" @change="checkStatus($event)"> <label for="complete_off">완료 코스 숨기기</label>
             </div>
         </div>
+        <div class="area_box" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+            <select name="areaInfo" id="areaInfo" v-model="params.areaCode" @change="setArea">
+              <option v-bind:value="'0'">전체</option>
+              <option v-for="(data, idx) in areaList" v-bind:key="idx" v-bind:value="data.mingle_area_code">
+                {{data.mingle_area_title}}
+              </option>
+            </select>
+        </div>
         <ul class="list">
             <li v-for="(data, idx) in mainStampList" v-bind:key="idx" @click="stampDetail(data)">
                 <div
@@ -40,12 +48,13 @@ export default {
       ],
       params: {
         order: 'pop',
-        status: 'ALL'
+        status: 'ALL',
+        areaCode: '0'
       }
     }
   },
   computed: {
-    ...mapState(['mainStampList'])
+    ...mapState(['mainStampList', 'areaList', 'mingleCode'])
   },
   methods: {
     iconImg (type, stamp) {
@@ -74,6 +83,10 @@ export default {
       }
       this.listCall()
     },
+    setArea () {
+      this.$store.dispatch('setAreaCode', this.params.areaCode)
+      this.listCall()
+    },
     listCall () {
       this.$store.dispatch('loadMainData', this.params)
     },
@@ -88,15 +101,9 @@ export default {
       } else {
         return false
       }
-      // if (sid && sid.mingle_badge_content_type === '0' && sid.mingle_badge_content_id === '0') {
-      //   location.href = sid.mingle_badge_order_url
-      // } else {
-      //   this.$router.push('/stamp')
-      // }
     },
     stampAuth (e, data) {
       e.stopPropagation()
-      console.log(data)
       // this.$store.dispatch('loadBadgeRegister', data)
       // eslint-disable-next-line no-undef
       esp.setBackgroundColor('#000000')
@@ -165,6 +172,9 @@ export default {
         xmlhttp.send(JSON.stringify(params))
       }
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadAreaList')
   }
 }
 </script>

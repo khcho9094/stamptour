@@ -6,13 +6,13 @@ Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 export default new Vuex.Store({
   state: {
-    // SzActcWN5QXozxDixoG4zQ== 코리아둘레길
-    // /GN62eV1c4Q78ghWNMWRsQ== 부안
-    // QAAPpA7foDPqF3zEzdvHrw== 구로
-    // M0ZRcktVl8H3kJaRKq3Irg== 양천
-    // HvbQjGJR2yF9vTu8m2TUZQ== 태백
-    // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행
-    // vSi8Z9QlNS5wushabGnrhA== 평화누리길
+    // SzActcWN5QXozxDixoG4zQ== 코리아둘레길(권역, 갯수)
+    // /GN62eV1c4Q78ghWNMWRsQ== 부안 (포인트)
+    // QAAPpA7foDPqF3zEzdvHrw== 구로 (인증서1개, 포인트)
+    // M0ZRcktVl8H3kJaRKq3Irg== 양천 (봉사 신청 2개, 포인트)
+    // HvbQjGJR2yF9vTu8m2TUZQ== 태백 (포인트)
+    // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행(권역, 참여신청, 갯수)
+    // vSi8Z9QlNS5wushabGnrhA== 평화누리길 (선물 1개, 갯수)
     domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
     token: '', // 임시 토큰
     // VueCookie.get('login_token'),
@@ -40,6 +40,7 @@ export default new Vuex.Store({
     stampMethod: {}, // 스탬프 방법
     mainStampList: [], // 메인 스탬프 리스트
     allStampCount: null, // 모든 스탬프 갯수
+    stampAll: [], // 모든 스탬프
     getStampCount: 0, // 획득 스탬프 갯수
     mainRecommendList: [], // 메인 추천 스탬프 리스트
     sumPrice: 0, // 전체 선물 가격,
@@ -57,7 +58,9 @@ export default new Vuex.Store({
     popupGift: { open: false },
     successBadge: {}, // 성공 배지 정보
     badgeRegister: {}, // 성공 메세지
-    giftSolo: true // 선물페이지 단독페이지 여부
+    giftSolo: true, // 선물페이지 단독페이지 여부
+    areaList: [], // 권역 리스트
+    areaCode: '' // 권역 코드
   },
   mutations: {
     setIntroData (state, data) {
@@ -93,11 +96,14 @@ export default new Vuex.Store({
     },
     setMainData (state, data) {
       state.mainStampList = data.stamplist_info
-      state.mainStampList.map((data, idx) => {
-        state.mainStampList[idx].num = idx + 1
-      })
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
+    },
+    setMainAll (state, data) {
+      state.stampAll = data.stamplist_info
+      state.stampAll.map((data, idx) => {
+        state.stampAll[idx].num = idx + 1
+      })
     },
     setMainRecommend (state, data) {
       const array = Array.from(Array(Math.round(data.stamplist_info.length / 2)), () => [])
@@ -187,6 +193,9 @@ export default new Vuex.Store({
     },
     setBadgeRegister (state, data) {
       state.badgeRegister = data
+    },
+    setAreaList (state, data) {
+      state.areaList = data
     }
   },
   actions: {
@@ -298,11 +307,22 @@ export default new Vuex.Store({
       status / 완료여부확인 / 옵션
     */
     loadMainData ({ state, commit }, params) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}`
       Vue
         .jsonp(url)
         .then(response => {
           commit('setMainData', response.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMainAll ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=pop&status=ALL&group=`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMainAll', response.response.content)
         })
         .catch(err => {
           console.log(err)
@@ -428,6 +448,9 @@ export default new Vuex.Store({
     setGiftRoute ({ state }, data) {
       state.giftSolo = data
     },
+    setAreaCode ({ state }, data) {
+      state.areaCode = data
+    },
     /*
     배지등록(전자스탬프)
     */
@@ -438,6 +461,20 @@ export default new Vuex.Store({
         .then(response => {
           state.successBadge = data
           commit('setBadgeRegister', response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    권역별 리스트 (코리아둘레길, 테마10선)
+    */
+    loadAreaList ({ state, commit }, data) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourAreaCode.jsonp?mingleCode=${state.mingleCode}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setAreaList', response.response.content)
         })
         .catch(err => {
           console.log(err)

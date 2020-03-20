@@ -45,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'mainStampList', 'token'])
+    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'token', 'stampAll'])
   },
   methods: {
     swiperPaging () {
@@ -58,7 +58,7 @@ export default {
     stampList (idx) {
       const end = idx * 10
       const start = end - 10
-      return this.mainStampList.slice(start, end)
+      return this.stampAll.slice(start, end)
     },
     giftChk (num) {
       let chk = false
@@ -110,6 +110,7 @@ export default {
     } else {
       this.$store.dispatch('loadGiftNoToken')
     }
+    this.$store.dispatch('loadMainAll')
   }
 }
 </script>
