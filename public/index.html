@@ -21,15 +21,15 @@
         var chkLat = 0
         chkLon = Math.floor(parseInt(lon))
         chkLat = Math.floor(parseInt(lat))
-        if (lon !== '-1' && chkLon !== '-1') {
+        if (lon !== -1 && chkLon !== -1) {
           localStorage.setItem('setLon',chkLon)
         } else {
-          localStorage.setItem('setLon',chkLon)
+          localStorage.setItem('setLon','0')
         }
-        if (lat !== '-1' && chkLat !== '-1') {
+        if (lat !== -1 && chkLat !== -1) {
           localStorage.setItem('setLat',chkLat)
         } else {
-          localStorage.setItem('setLat',chkLat)
+          localStorage.setItem('setLat','0')
         }
       }
 

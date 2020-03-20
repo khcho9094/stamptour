@@ -501,7 +501,7 @@ export default new Vuex.Store({
         })
     },
     loadSnsPoint ({ state, commit }) {
-      const url = `https://api.tranggle.com/v2/mingle/courses/setSnsPoint.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `api.tranggle.com/v2/mingle/stamptour/setSnsPoint.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
