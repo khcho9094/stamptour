@@ -21,7 +21,7 @@ import MainList from '@/components/MainList.vue'
 import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
-import * as appEvent from '@/assets/js/app_event.js'
+// import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Main',
   components: {
@@ -63,11 +63,11 @@ export default {
     // if (!this.$cookie.get('setIntro')) {
     //   this.$router.push('/intro')
     // }
-    if (this.$cookie.get('total_stamp_yn') === 'Y') {
-      appEvent.chkCoordinate()
-      this.$store.state.lon = localStorage.getItem('setLon')
-      this.$store.state.lat = localStorage.getItem('setLat')
-    }
+    // if (this.$cookie.get('total_stamp_yn') === 'Y') {
+    //   appEvent.chkCoordinate()
+    //   this.$store.state.lon = localStorage.getItem('setLon')
+    //   this.$store.state.lat = localStorage.getItem('setLat')
+    // }
   },
   // beforeMount () {
   //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))

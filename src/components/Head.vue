@@ -15,6 +15,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'haed',
   props: {
@@ -78,6 +79,13 @@ export default {
       } else {
         this.$router.go(-1)
       }
+    }
+  },
+  beforeCreate () {
+    if (this.$cookie.get('total_stamp_yn') === 'Y') {
+      appEvent.chkCoordinate()
+      this.$store.state.lon = localStorage.getItem('setLon')
+      this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
   mounted () {
