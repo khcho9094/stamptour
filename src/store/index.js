@@ -17,7 +17,7 @@ export default new Vuex.Store({
     token: '', // 임시 토큰
     // VueCookie.get('login_token'),
     // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
-    // 79ECEFF50B01A6D11F2506BB7B28E5302F81627681FC31F763C5BCED89434298371E11C46499F7AE195ED9E5E2AEDEAB tranggleqa
+    // DCE618C8A7238BE1CA3EE283B8FF614FF4337E5587D1260B4BD927E366B77308C9C488AA2A0813B3617AAFDFDFA45ACBE2F21B907B5A32AD whrjsgml111
     buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소
     guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소
     yanchanAuthUrl: 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc', // 양천 봉사활동 인증서 신청 주소
@@ -56,14 +56,15 @@ export default new Vuex.Store({
     apiDetailData: [],
     snsOpen: false,
     popupGift: { open: false },
+    popupStampSuccess: false,
     lon: 0, // 경도
     lat: 0, // 위도
-    successBadge: {}, // 성공 배지 정보
     badgeRegister: {}, // 성공 메세지
     giftSolo: true, // 선물페이지 단독페이지 여부
     areaList: [], // 권역 리스트
     areaCode: '', // 권역 코드
-    durunubiCheck: 0
+    durunubiCheck: 0,
+    memberInfo: {} // 회원 정보(주소, 연락처)
   },
   mutations: {
     setIntroData (state, data) {
@@ -86,6 +87,8 @@ export default new Vuex.Store({
         sum += parseInt(val.mingle_gift_price)
       })
       state.sumPrice = sum
+      state.memberInfo.address = data[0].member_address
+      state.memberInfo.mobile = data[0].member_mobile
     },
     setTotalData (state, data) {
       state.totalData = data
@@ -465,8 +468,12 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          state.successBadge = data
-          commit('setBadgeRegister', response)
+          if (response.response.code === '00') {
+            state.popupStampSuccess = true
+            commit('setBadgeRegister', response)
+          } else {
+            alert(response.response.message)
+          }
         })
         .catch(err => {
           console.log(err)
@@ -506,6 +513,21 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
         }).catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    선물 신청
+    */
+    loadGiftReceive ({ state, commit }, data) {
+      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift_no=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          alert(response.response.message)
+          this.dispatch('openPopupGift', {})
+        })
+        .catch(err => {
           console.log(err)
         })
     }

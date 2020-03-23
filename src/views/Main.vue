@@ -9,6 +9,7 @@
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
     <PopupGift />
     <PopupSns />
+    <PopupStampSuccess />
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@ import MainList from '@/components/MainList.vue'
 import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
+import PopupStampSuccess from '@/components/PopupStampSuccess.vue'
 // import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Main',
@@ -32,7 +34,8 @@ export default {
     MainList,
     Popup,
     PopupGift,
-    PopupSns
+    PopupSns,
+    PopupStampSuccess
   },
   data () {
     return {

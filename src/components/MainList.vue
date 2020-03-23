@@ -30,7 +30,7 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
                     </div>
-                    <div class="position" v-if="data.mingle_badge_type === 'STAMP' && data.user_mingle_badge_get_stamp_yn !== 'Y'" @click="stampAuth($event, data)">위치보기</div>
+                    <div class="position" v-if="data.mingle_badge_type === 'STAMP' && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">위치보기</div>
                 </div>
             </li>
         </ul>
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['mainStampList', 'areaList', 'mingleCode'])
+    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token'])
   },
   methods: {
     iconImg (type, stamp) {
@@ -91,7 +91,6 @@ export default {
       this.$store.dispatch('loadMainData', this.params)
     },
     stampDetail (sid) {
-      console.log(sid)
       localStorage.stampDetail = JSON.stringify(sid)
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
@@ -104,7 +103,7 @@ export default {
     },
     stampAuth (e, data) {
       e.stopPropagation()
-      // this.$store.dispatch('loadBadgeRegister', data)
+      this.$store.dispatch('loadBadgeRegister', data)
       // eslint-disable-next-line no-undef
       esp.setBackgroundColor('#000000')
       // eslint-disable-next-line no-undef
@@ -128,15 +127,53 @@ export default {
       }, function (errorCode, errorMessage) {
         alert('스템프 인증 호출에 실패하였습니다.')
       })
+      // let isShow = false
+      // let stampNo = ''
+      // setTimeout(() => {
+      //   if (document.getElementById('echossIcon') !== null && document.getElementById('echossIcon') !== undefined) {
+      //     if (!isShow) {
+      //       document.getElementsByClassName('echoss_input_auth_btn')[0].onclick = () => {
+      //         stampNo = document.getElementById('echoss_icon_stamp_no_input').value
+      //       }
+      //       isShow = true
+      //     }
+      //   }
+      // }, 100)
+
       // eslint-disable-next-line no-undef
       esp.certSuccess = (result) => {
         if (result.merchant) {
           if (result.merchant === data.mingle_merchant_code) {
-            this.$store.dispatch('loadBadgeRegister', this.electroStampInfo)
+            this.$store.dispatch('loadBadgeRegister', data).then(() => {
+              if (/Android/i.test(navigator.userAgent)) {
+                // eslint-disable-next-line no-undef
+                tranggle3.tranggle_callback('stamp_get', '{}')
+              } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location = 'tranggle_callback://stamp_get'
+              } else {
+                return false
+              }
+            })
           } else {
             alert('찍은 전자 스탬프 정보가 다릅니다.')
           }
+        } else {
+          alert('merchant 코드가 없습니다.')
         }
+        // else {
+        //   this.getPlatformInfo ('GET', `https://platform-function.echoss.co.kr/fcm/gateway/token/${this.token}`, null, (data) => {
+        //     // OTP
+        //     if (data.stamp === 'GEN') {
+        //       const params = new Object()
+        //       params.key = 'p49e0d4dc086741d7bd36cc0098850299'
+        //       params.stampNo = stampNo
+        //       this.getPlatformInfo ('POST', 'https://platform-core.echoss.co.kr/cmm/stamps/detail', params, (res) => {
+        //         this.$store.dispatch('loadBadgeRegister', data)
+        //       })
+        //     }
+        //   // eslint-disable-next-line no-undef
+        //   }, function(){})
+        // }
       }
     },
     getPlatformInfo (method, url, params, succFunc, failFunc) {
