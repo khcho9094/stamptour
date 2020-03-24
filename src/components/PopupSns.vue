@@ -91,11 +91,11 @@ export default {
     kakaoShare () {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
-      var title = '공유테스트'
+      var title = '통합 스탬프 투어'
       var shareImage = 'http://m.tranggle.com/html/images/mingle/001/d1db53c31f1ced7cf1e09e1b32602871.png'
       var setUrl = null
-      var desc = '공유 설명 입력칸 테스트'
-      if (location.search !== '' || !url.match('mingleCode')) {
+      var desc = '통합 스탬프 투어로 전국 명소를 다녀보세요'
+      if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
@@ -126,10 +126,10 @@ export default {
     kakaoStoryShare () {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
-      var title = '공유테스트'
+      var title = '통합 스탬프 투어'
       var shareImage = 'http://m.tranggle.com/html/images/mingle/001/d1db53c31f1ced7cf1e09e1b32602871.png'
       var setUrl = null
-      if (location.search !== '' || !url.match('mingleCode')) {
+      if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
@@ -147,7 +147,7 @@ export default {
     bandShare () {
       var filter = 'win16|win32|win64|mac|macintel'
       var url = parent.location.href
-      var title = '공유테스트'
+      var title = '통합 스탬프 투어'
       var getServiceCode = this.$store.state.mingleCode
       var shareUrl = null
       if (location.search !== '' && !url.match('mingleCode')) {
