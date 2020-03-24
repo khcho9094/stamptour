@@ -99,6 +99,8 @@ export default {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        setUrl = url
       }
       // eslint-disable-next-line no-undef
       Kakao.Link.sendDefault({
@@ -133,6 +135,8 @@ export default {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        setUrl = url
       }
       // eslint-disable-next-line no-undef
       Kakao.Story.open({
