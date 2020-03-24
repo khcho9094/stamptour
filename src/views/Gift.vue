@@ -6,7 +6,7 @@
         <GiftPoint />
         <GiftList />
         <GiftGuide />
-        <PopupGiftReceive />
+        <PopupGiftReceive  v-if="popupGift.open"/>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
     PopupGiftReceive
   },
   computed: {
-    ...mapState(['token'])
+    ...mapState(['token', 'popupGift'])
   },
   mounted () {
     if (this.token) {
