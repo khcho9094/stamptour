@@ -1,7 +1,7 @@
 <template>
     <ul class="gift_list">
         <li v-for="(data, idx) in giftData" v-bind:key="idx">
-            <div class="point">{{data.mingle_count}}P</div>
+            <div class="point">{{data.mingle_count}}{{unit}}</div>
             <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
             <span>{{data.mingle_gift_title}}</span>
             <div class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
@@ -17,8 +17,13 @@
 import { mapState } from 'vuex'
 export default {
   name: 'GiftList',
+  data () {
+    return {
+      unit: ''
+    }
+  },
   computed: {
-    ...mapState(['giftData'])
+    ...mapState(['giftData', 'stampCodeInfo', 'mingleCode'])
   },
   methods: {
     // 점 표시
@@ -43,9 +48,19 @@ export default {
       if (data.mingle_gift_receive === 'Y') {
         this.$store.dispatch('openPopupGift', data)
       }
+    },
+    setStamp () {
+      this.stampCodeInfo.map((data) => {
+        if (data.code === this.mingleCode && data.info === 'point') {
+          this.unit = 'P'
+        } else if (data.code === this.mingleCode && data.info === 'number') {
+          this.unit = '개'
+        }
+      })
     }
   },
   mounted () {
+    this.setStamp()
   }
 }
 </script>

@@ -20,7 +20,7 @@
                   class="box_lt"
                   :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
                     <img :class="(data.user_mingle_badge_get_stamp_yn === 'N')?'p_icon':'c_icon'" :src="iconImg(data.mingle_badge_type, data.user_mingle_badge_get_stamp_yn)" alt="course_icon"><br/>
-                    <span v-show="data.user_mingle_badge_get_stamp_yn === 'N'">{{data.user_mingle_badge_point}}P</span>
+                    <span v-show="data.user_mingle_badge_get_stamp_yn === 'N' && setStamp()">{{data.user_mingle_badge_point}}P</span>
                 </div>
                 <div class="box_rt">
                     <h2>{{data.info_badge_name}}</h2>
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token'])
+    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo'])
   },
   methods: {
     iconImg (type, stamp) {
@@ -101,6 +101,17 @@ export default {
       } else {
         return false
       }
+    },
+    setStamp () {
+      let tg = false
+      this.stampCodeInfo.map((data) => {
+        if (data.code === this.mingleCode && data.info === 'point') {
+          tg = true
+        } else if (data.code === this.mingleCode && data.info === 'number') {
+          tg = false
+        }
+      })
+      return tg
     },
     stampAuth (e, data) {
       e.stopPropagation()
