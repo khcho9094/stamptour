@@ -1,5 +1,5 @@
 <template>
-    <div class="pop_overay" v-if="popupGift.open">
+    <div class="pop_overay">
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
@@ -103,6 +103,10 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadGiftDataNew')
+  },
+  destroyed () {
+    // this.$router.go()
+    this.$store.dispatch('loadGiftData')
   }
 }
 </script>

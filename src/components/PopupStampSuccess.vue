@@ -1,5 +1,5 @@
 <template>
-    <div class="pop_overay" v-if="popupStampSuccess">
+    <div class="pop_overay">
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_stamp.png" alt="icon">
             <div class="text_2">
@@ -23,7 +23,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['badgeRegister', 'popupStampSuccess'])
+    ...mapState(['badgeRegister'])
   },
   methods: {
     closeBtn () {
@@ -34,6 +34,9 @@ export default {
     // }
   },
   mounted () {
+  },
+  destroyed () {
+    this.$router.go()
   }
 }
 </script>

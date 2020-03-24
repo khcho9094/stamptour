@@ -9,11 +9,12 @@
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
     <PopupGift />
     <PopupSns />
-    <PopupStampSuccess />
+    <PopupStampSuccess v-if="popupStampSuccess" />
   </div>
 </template>
 <script>
 // @ is an alias to /src
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 import MainStamp from '@/components/MainStamp.vue'
 import MainGiftView from '@/components/MainGiftView.vue'
@@ -52,6 +53,9 @@ export default {
         areaCode: '0'
       }
     }
+  },
+  computed: {
+    ...mapState(['popupStampSuccess'])
   },
   methods: {
     handleMoreButton () {

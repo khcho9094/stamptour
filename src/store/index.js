@@ -520,7 +520,7 @@ export default new Vuex.Store({
     선물 신청
     */
     loadGiftReceive ({ state, commit }, data) {
-      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift_no=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {

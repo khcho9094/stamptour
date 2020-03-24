@@ -104,7 +104,7 @@ export default {
     },
     stampAuth (e, data) {
       e.stopPropagation()
-      this.$store.dispatch('loadBadgeRegister', data)
+      // this.$store.dispatch('loadBadgeRegister', data)
       // eslint-disable-next-line no-undef
       esp.setBackgroundColor('#000000')
       // eslint-disable-next-line no-undef
@@ -128,19 +128,6 @@ export default {
       }, function (errorCode, errorMessage) {
         alert('스템프 인증 호출에 실패하였습니다.')
       })
-      // let isShow = false
-      // let stampNo = ''
-      // setTimeout(() => {
-      //   if (document.getElementById('echossIcon') !== null && document.getElementById('echossIcon') !== undefined) {
-      //     if (!isShow) {
-      //       document.getElementsByClassName('echoss_input_auth_btn')[0].onclick = () => {
-      //         stampNo = document.getElementById('echoss_icon_stamp_no_input').value
-      //       }
-      //       isShow = true
-      //     }
-      //   }
-      // }, 100)
-
       // eslint-disable-next-line no-undef
       esp.certSuccess = (result) => {
         if (result.merchant) {
@@ -161,53 +148,6 @@ export default {
         } else {
           alert('merchant 코드가 없습니다.')
         }
-        // else {
-        //   this.getPlatformInfo ('GET', `https://platform-function.echoss.co.kr/fcm/gateway/token/${this.token}`, null, (data) => {
-        //     // OTP
-        //     if (data.stamp === 'GEN') {
-        //       const params = new Object()
-        //       params.key = 'p49e0d4dc086741d7bd36cc0098850299'
-        //       params.stampNo = stampNo
-        //       this.getPlatformInfo ('POST', 'https://platform-core.echoss.co.kr/cmm/stamps/detail', params, (res) => {
-        //         this.$store.dispatch('loadBadgeRegister', data)
-        //       })
-        //     }
-        //   // eslint-disable-next-line no-undef
-        //   }, function(){})
-        // }
-      }
-    },
-    getPlatformInfo (method, url, params, succFunc, failFunc) {
-      let xmlhttp
-      if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest()
-      } else {
-        // eslint-disable-next-line no-undef
-        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
-      }
-      xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState === 4) {
-          if (xmlhttp.status === 200) {
-            const response = JSON.parse(xmlhttp.response)
-            if (response.resCd !== '0000') {
-              failFunc()
-              return
-            }
-            succFunc(response.result)
-          } else {
-            failFunc()
-          }
-        }
-      }
-      xmlhttp.open(method, url, true)
-      xmlhttp.setRequestHeader('Content-type', 'application/json')
-      xmlhttp.setRequestHeader('Accept', 'application/json')
-      xmlhttp.setRequestHeader('Accept-Language', 'ko')
-      xmlhttp.setRequestHeader('Authorization', 'Basic ' + btoa('74bc2962-6856-41b6-b523-7f16baabb856:32356635343964622D363736312D343332382D383766392D343139346131656564323839'))
-      if (method === 'GET') {
-        xmlhttp.send()
-      } else {
-        xmlhttp.send(JSON.stringify(params))
       }
     }
   },
