@@ -26,8 +26,8 @@
                     </li>
                 </ul>
                 <div class="url_w">
-                    <input type="text" id="txt_url" name="txt_url" :value="getParentUrl">
-                    <span>주소복사</span>
+                    <input type="text" id="txt_url" name="txt_url" :value="parentUrl()">
+                    <span v-on:click="clipBord()">주소복사</span>
                 </div>
             </div>
             <button v-on:click="closeBtn()">닫기</button>
@@ -40,7 +40,21 @@ export default {
   name: 'PopupSns',
   data () {
     return {
-      getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode
+      getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode,
+      parentUrl () {
+        var url = parent.location.href
+        var setUrl = null
+        var getServiceCode = this.$store.state.mingleCode
+        if (location.search !== '' && !url.match('mingleCode')) {
+          setUrl = url + '&mingleCode=' + getServiceCode
+        } else if (location.search === '' && !url.match('mingleCode')) {
+          setUrl = url + '?mingleCode=' + getServiceCode
+        } else {
+          setUrl = url
+        }
+        this.$store.state.tourShareUrl = setUrl
+        return setUrl
+      }
     }
   },
   computed: {
@@ -51,13 +65,7 @@ export default {
       const openChk = this.$store.state.snsOpen
       this.$store.dispatch('loadSnsPopup', openChk)
     },
-    smsShare () {
-      var btmUrl = parent.location.href
-      var getServiceCode = this.$store.state.mingleCode
-      if (btmUrl.match('mingleCode') == null) {
-        btmUrl = btmUrl + '?mingleCode=' + getServiceCode
-      }
-      var devider = '?'
+    phoneChk () {
       var varUA = navigator.userAgent.toLowerCase()
       var os = null
       if (varUA.indexOf('android') > -1) {
@@ -67,6 +75,16 @@ export default {
       } else {
         os = 'order'
       }
+      return os
+    },
+    smsShare () {
+      var btmUrl = parent.location.href
+      var getServiceCode = this.$store.state.mingleCode
+      if (btmUrl.match('mingleCode') == null) {
+        btmUrl = btmUrl + '?mingleCode=' + getServiceCode
+      }
+      var devider = '?'
+      var os = this.phoneChk()
       if (os === 'ios') {
         devider = '&'
       }
@@ -173,6 +191,40 @@ export default {
           location.href = settingUrl
         }
       }
+    },
+    clipBord () {
+      // eslint-disable-next-line no-unused-vars
+      var el = document.getElementById('txt_url')
+      el = (typeof el === 'string') ? document.querySelector(el) : el
+      var os = this.phoneChk()
+      if (os === 'ios') {
+        // save current contentEditable/readOnly status
+        var editable = el.contentEditable
+        var readOnly = el.readOnly
+
+        // convert to editable with readonly to stop iOS keyboard opening
+        el.contentEditable = true
+        el.readOnly = true
+
+        // create a selectable range
+        var range = document.createRange()
+        range.selectNodeContents(el)
+
+        // select the range
+        var selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        el.setSelectionRange(0, 999999)
+
+        // restore contentEditable/readOnly to original state
+        el.contentEditable = editable
+        el.readOnly = readOnly
+      } else {
+        el.select()
+      }
+      // execute copy command
+      document.execCommand('copy')
+      alert('클립보드에 복사 되었습니다.')
     }
   },
   mounted () {

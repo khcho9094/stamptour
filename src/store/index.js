@@ -64,7 +64,8 @@ export default new Vuex.Store({
     areaList: [], // 권역 리스트
     areaCode: '', // 권역 코드
     durunubiCheck: 0,
-    memberInfo: {} // 회원 정보(주소, 연락처)
+    memberInfo: {}, // 회원 정보(주소, 연락처)
+    tourShareUrl: '' // 클립보드 공유 주소 저장
   },
   mutations: {
     setIntroData (state, data) {
