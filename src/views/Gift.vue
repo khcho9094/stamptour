@@ -29,6 +29,12 @@ export default {
   computed: {
     ...mapState(['token', 'popupGift'])
   },
+  beforeCreate () {
+    if (this.$route.query.mingleCode) {
+      this.$store.state.mingleCode = this.$route.query.mingleCode
+      this.$store.dispatch('setGiftRoute', false)
+    }
+  },
   mounted () {
     if (this.token) {
       this.$store.dispatch('loadGiftData')
