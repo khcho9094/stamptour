@@ -99,6 +99,8 @@ export default {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        setUrl = url
       }
       // eslint-disable-next-line no-undef
       Kakao.Link.sendDefault({
@@ -133,6 +135,8 @@ export default {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         setUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        setUrl = url
       }
       // eslint-disable-next-line no-undef
       Kakao.Story.open({
@@ -140,7 +144,7 @@ export default {
         text: title,
         urlInfo: {
           title: title,
-          images: shareImage
+          images: [shareImage]
         }
       })
     },
@@ -154,6 +158,8 @@ export default {
         shareUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         shareUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        shareUrl = url
       }
 
       if (navigator.platform) {

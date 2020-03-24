@@ -552,7 +552,7 @@ export default new Vuex.Store({
     스탬프 투어의 스탬프 또는 기프티콘 변경시 회원정보 업데이트 하는 API
     */
     loadMingleVersionChk ({ state, commit }) {
-      const url = `${state.domain}//v2/mingle/stamptour/mingleVersionCheck?mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/stamptour/mingleVersionCheck?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
