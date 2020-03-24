@@ -158,6 +158,8 @@ export default {
         shareUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
         shareUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        shareUrl = url
       }
 
       if (navigator.platform) {
