@@ -144,7 +144,7 @@ export default {
         text: title,
         urlInfo: {
           title: title,
-          images: shareImage
+          images: [shareImage]
         }
       })
     },
