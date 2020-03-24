@@ -7,7 +7,8 @@
                     <img :src="imgIcon()" alt="gs25">
                     {{popupGift.mingle_gift_title}}
                 </span>
-                해당 선물 획득까지<br/>{{this.popupGift.mingle_count - this.getStampCount}}개의 스탬프가 남았습니다.
+                <div v-if="setStamp()">해당 선물 획득까지<br/>{{this.popupGift.mingle_count - this.myPoint}} POINT 남았습니다.</div>
+                <div v-else>해당 선물 획득까지<br/>{{this.popupGift.mingle_count - this.getStampCount}}개의 스탬프가 남았습니다.</div>
             </div>
             <button @click="closeBtn">닫기</button>
         </div>
@@ -22,7 +23,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupGift', 'getStampCount'])
+    ...mapState(['popupGift', 'getStampCount', 'stampCodeInfo', 'mingleCode', 'myPoint'])
   },
   methods: {
     closeBtn () {
@@ -30,6 +31,17 @@ export default {
     },
     imgIcon () {
       return `https://m.tranggle.com/html/images/mingle/${this.popupGift.mingle_gift_image}`
+    },
+    setStamp () {
+      let tg = false
+      this.stampCodeInfo.map((data) => {
+        if (data.code === this.mingleCode && data.info === 'point') {
+          tg = true
+        } else if (data.code === this.mingleCode && data.info === 'number') {
+          tg = false
+        }
+      })
+      return tg
     }
   },
   mounted () {

@@ -23,6 +23,15 @@ export default new Vuex.Store({
     yanchanAuthUrl: 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc', // 양천 봉사활동 인증서 신청 주소
     yanchanAuthUrl2: 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8', // 양천 봉사활동 인증서 신청 주소2
     peaceAuthUrl: 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M', // 평화누리길 인증서 신청 주소
+    stampCodeInfo: [
+      { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number' },
+      { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point' },
+      { name: '구로', code: 'QAAPpA7foDPqF3zEzdvHrw==', info: 'point' },
+      { name: '양천', code: 'M0ZRcktVl8H3kJaRKq3Irg==', info: 'point' },
+      { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point' },
+      { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number' },
+      { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number' }
+    ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
     contentTypeId: null, // 투어 API content type Id 값
@@ -65,7 +74,8 @@ export default new Vuex.Store({
     areaCode: '', // 권역 코드
     durunubiCheck: 0,
     memberInfo: {}, // 회원 정보(주소, 연락처)
-    tourShareUrl: '' // 클립보드 공유 주소 저장
+    tourShareUrl: '', // 클립보드 공유 주소 저장
+    allStampPoint: 0 // 총 포인트
   },
   mutations: {
     setIntroData (state, data) {
@@ -77,10 +87,17 @@ export default new Vuex.Store({
       })
     },
     setGiftData (state, data) {
+      let total = 0
       state.giftData = data
       if (data[0].user_mingle_gift_point) {
         state.myPoint = data[0].user_mingle_gift_point
       }
+      data.map((val) => {
+        if (parseInt(val.mingle_count) > total) {
+          total = parseInt(val.mingle_count)
+        }
+      })
+      state.allStampPoint = total
     },
     setGiftDataNew (state, data) {
       let sum = 0

@@ -4,7 +4,7 @@
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
                 <div class="gift_receive">
-                  <b>{{popupGift.mingle_count}}P</b> 달성!!<br/>
+                  <b>{{popupGift.mingle_count}}{{unit}}</b> 달성!!<br/>
                   <span>축하합니다!!</span>
                 </div>
                 <span>
@@ -49,11 +49,12 @@ export default {
     return {
       durunubi: false,
       personal: false,
-      popup: false
+      popup: false,
+      unit: ''
     }
   },
   computed: {
-    ...mapState(['popupGift', 'mingleCode', 'memberInfo'])
+    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo'])
   },
   methods: {
     closeBtn () {
@@ -99,10 +100,20 @@ export default {
     },
     goInsert () {
       location.href = 'https://stage.m.tranggle.com:4081/mingle/intro/total_account_setting'
+    },
+    setStamp () {
+      this.stampCodeInfo.map((data) => {
+        if (data.code === this.mingleCode && data.info === 'point') {
+          this.unit = 'P'
+        } else if (data.code === this.mingleCode && data.info === 'number') {
+          this.unit = '개'
+        }
+      })
     }
   },
   mounted () {
     this.$store.dispatch('loadGiftDataNew')
+    this.setStamp()
   },
   destroyed () {
     // this.$router.go()
