@@ -23,6 +23,9 @@ export default {
     }
   },
   beforeCreate () {
+    if (this.$route.query.minglecode) {
+      this.$route.query.mingleCode = this.$route.query.minglecode
+    }
     if (this.$route.query.mingleCode) {
       this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
     }

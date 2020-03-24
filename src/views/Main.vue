@@ -3,7 +3,7 @@
     <!-- 헤더 -->
     <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
     <MainStamp />
-    <MainGiftView />
+    <MainGiftView v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='" />
     <MainRecommend />
     <MainList />
     <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
@@ -55,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess'])
+    ...mapState(['popupStampSuccess', 'mingleCode'])
   },
   methods: {
     handleMoreButton () {
