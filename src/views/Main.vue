@@ -66,19 +66,11 @@ export default {
     }
   },
   beforeCreate () {
-    // console.log(this.$cookie.get('setIntro'))
-    // if (!this.$cookie.get('setIntro')) {
-    //   this.$router.push('/intro')
-    // }
-    // if (this.$cookie.get('total_stamp_yn') === 'Y') {
-    //   appEvent.chkCoordinate()
-    //   this.$store.state.lon = localStorage.getItem('setLon')
-    //   this.$store.state.lat = localStorage.getItem('setLat')
-    // }
+    // 인트로 페이지로
+    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
+      this.$router.push('/intro')
+    }
   },
-  // beforeMount () {
-  //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
-  // },
   mounted () {
     this.$store.dispatch('loadMainData', this.params)
   }

@@ -50,8 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['introData']),
-    ...mapState(['introImage'])
+    ...mapState(['introData', 'introImage'])
   },
   methods: {
     tourStartButton () {

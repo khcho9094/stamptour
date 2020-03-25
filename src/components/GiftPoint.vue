@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     pointRefresh () {
-      alert('포인트 정보를 조회하였습니다.')
+      alert('스탬프 정보를 조회하였습니다.')
     },
     setStamp () {
       this.stampCodeInfo.map((data) => {
