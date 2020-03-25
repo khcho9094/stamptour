@@ -12,6 +12,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import TourSwiper from '@/components/TourSwiper.vue'
 import TourPlace from '@/components/TourPlace.vue'
@@ -30,12 +31,19 @@ export default {
     return {
     }
   },
+  beforeCreate () {
+    // 로그인페이지에서 total_stamp_yn 쿠키값 세팅
+    if (this.$cookie.get('total_stamp_yn') === 'Y') {
+      appEvent.chkCoordinate()
+      this.$store.state.lon = localStorage.getItem('setLon')
+      this.$store.state.lat = localStorage.getItem('setLat')
+    }
+  },
   mounted () {
     this.$store.dispatch('loadIntroData')
   },
   computed: {
-    ...mapState(['introData']),
-    ...mapState(['introImage'])
+    ...mapState(['introData', 'introImage'])
   }
 }
 </script>

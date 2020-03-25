@@ -15,6 +15,7 @@
 <script>
 // @ is an alias to /src
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import MainStamp from '@/components/MainStamp.vue'
 import MainGiftView from '@/components/MainGiftView.vue'
@@ -24,7 +25,6 @@ import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
 import PopupStampSuccess from '@/components/PopupStampSuccess.vue'
-// import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Main',
   components: {
@@ -69,6 +69,12 @@ export default {
     // 인트로 페이지로
     if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
       this.$router.push('/intro')
+    }
+    // 로그인페이지에서 total_stamp_yn 쿠키값 세팅
+    if (this.$cookie.get('total_stamp_yn') === 'Y') {
+      appEvent.chkCoordinate()
+      this.$store.state.lon = localStorage.getItem('setLon')
+      this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
   mounted () {
