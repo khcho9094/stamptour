@@ -40,7 +40,7 @@ export default {
   beforeMount () {
     this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
     this.$store.dispatch('setToken', this.$cookie.get('login_token'))
-    // this.$store.state.enc_member = this.$cookie.get('set_enc')
+    this.$store.state.enc_member = this.$cookie.get('set_enc')
   },
   created () {
     window.addEventListener('scroll', this.handleScroll)

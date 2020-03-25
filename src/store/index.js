@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import VueCookie from 'vue-cookie'
+import VueCookie from 'vue-cookie'
 
 Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -76,9 +76,9 @@ export default new Vuex.Store({
     memberInfo: {}, // 회원 정보(주소, 연락처)
     tourShareUrl: '', // 클립보드 공유 주소 저장
     allStampPoint: 0, // 총 포인트
-    enc_member: 'E25693D564BFEA502E1144945006ED87', // 암호화 된 회원 아이디
-    mingleCodeArr: '' // 포인트 합산에 보낼 스탬프 투어 코드 리스트
-
+    enc_member: '', // 암호화 된 회원 아이디
+    mingleCodeArr: '', // 포인트 합산에 보낼 스탬프 투어 코드 리스트
+    sumApiChkCode: '' // 포인트 합산 후 결과 값 저장
   },
   mutations: {
     setIntroData (state, data) {
@@ -226,6 +226,10 @@ export default new Vuex.Store({
     },
     setDurunubiCheck (state, data) {
       state.durunubiCheck = data
+    },
+    setCompleteSum (state, data) {
+      // state.sumApiChkCode = data.code
+      VueCookie.delete(state.enc_member)
     }
   },
   actions: {
@@ -563,6 +567,19 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+        })
+    },
+    /*
+    스탬프 획득 후 저장 되는 쿠키 값에 있는 서비스 코드 값들을 다시 한번 포인트 합산 요청 하는 API
+    */
+    loadPointSumApi ({ state, commit }) {
+      const url = `${state.domain}/v2/mingle/stamptour/userPointUpdate.jsonp?token=${state.token}&app_data=${state.mingleCodeArr}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            commit('setCompleteSum', response.response)
+          }
         })
     }
   },
