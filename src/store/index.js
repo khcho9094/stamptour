@@ -77,8 +77,8 @@ export default new Vuex.Store({
     tourShareUrl: '', // 클립보드 공유 주소 저장
     allStampPoint: 0, // 총 포인트
     enc_member: 'E25693D564BFEA502E1144945006ED87', // 암호화 된 회원 아이디
-    mingleCodeArr: '' // 포인트 합산에 보낼 스탬프 투어 코드 리스트
-
+    mingleCodeArr: '', // 포인트 합산에 보낼 스탬프 투어 코드 리스트
+    introPopup: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -480,6 +480,10 @@ export default new Vuex.Store({
     },
     setAreaCode ({ state }, data) {
       state.areaCode = data
+    },
+    // intro 팝업
+    setIntroPopup ({ state }, data) {
+      state.introPopup = data
     },
     /*
     배지등록(전자스탬프)

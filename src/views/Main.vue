@@ -1,15 +1,18 @@
 <template>
-  <div class="main">
-    <!-- 헤더 -->
-    <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
-    <MainStamp />
-    <MainGiftView v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='" />
-    <MainRecommend />
-    <MainList />
-    <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
-    <PopupGift />
-    <PopupSns />
-    <PopupStampSuccess v-if="popupStampSuccess" />
+  <div>
+    <div class="main" v-if="!introPopup">
+      <!-- 헤더 -->
+      <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
+      <MainStamp />
+      <MainGiftView v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='" />
+      <MainRecommend />
+      <MainList />
+      <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
+      <PopupGift />
+      <PopupSns />
+      <PopupStampSuccess v-if="popupStampSuccess" />
+    </div>
+    <Intro v-else/>
   </div>
 </template>
 <script>
@@ -25,6 +28,7 @@ import Popup from '@/components/PopupMenu.vue'
 import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
 import PopupStampSuccess from '@/components/PopupStampSuccess.vue'
+import Intro from '@/components/Intro.vue'
 export default {
   name: 'Main',
   components: {
@@ -36,7 +40,8 @@ export default {
     Popup,
     PopupGift,
     PopupSns,
-    PopupStampSuccess
+    PopupStampSuccess,
+    Intro
   },
   data () {
     return {
@@ -55,7 +60,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup'])
   },
   methods: {
     handleMoreButton () {
@@ -81,15 +86,21 @@ export default {
       })
       this.$store.state.mingleCodeArr = mingleCodeArr
     }
-    // 인트로 페이지로
-    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
-      this.$router.push('/intro')
-    }
     // 로그인페이지에서 total_stamp_yn 쿠키값 세팅
     if (this.$cookie.get('total_stamp_yn') === 'Y') {
       appEvent.chkCoordinate()
       this.$store.state.lon = localStorage.getItem('setLon')
       this.$store.state.lat = localStorage.getItem('setLat')
+    }
+  },
+  beforeMount () {
+    // 인트로 페이지로
+    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
+      const query = Object.assign({}, this.$route.query)
+      delete query.mingleCode
+      this.$router.replace({ query })
+      console.log(this.$route)
+      this.$store.dispatch('setIntroPopup', true)
     }
   },
   mounted () {
