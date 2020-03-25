@@ -81,10 +81,11 @@ export default {
       })
       this.$store.state.mingleCodeArr = mingleCodeArr
     }
+    // 인트로 페이지로
+    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
+      this.$router.push('/intro')
+    }
   },
-  // beforeMount () {
-  //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
-  // },
   mounted () {
     this.$store.dispatch('loadMainData', this.params)
   }

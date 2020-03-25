@@ -15,7 +15,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'haed',
   props: {
@@ -53,6 +52,8 @@ export default {
         const openChk = this.$store.state.snsOpen
         this.$store.dispatch('loadSnsPoint')
         this.$store.dispatch('loadSnsPopup', openChk)
+      } else if (this.name === 'intro') {
+        this.goHome()
       }
     },
     goHome () {
@@ -66,7 +67,7 @@ export default {
       }
     },
     goBack () {
-      if ((this.$route.name === 'Gift' && this.giftSolo) || this.$route.name === 'Stamp') {
+      if ((this.$route.name === 'Gift' && !this.giftSolo) || this.$route.name === 'Stamp') {
         if (/Android/i.test(navigator.userAgent)) {
           // eslint-disable-next-line no-undef
           tranggle3.tranggle_callback('back_btn_event', '{}')
@@ -78,13 +79,6 @@ export default {
       } else {
         this.$router.go(-1)
       }
-    }
-  },
-  beforeCreate () {
-    if (this.$cookie.get('total_stamp_yn') === 'Y') {
-      appEvent.chkCoordinate()
-      this.$store.state.lon = localStorage.getItem('setLon')
-      this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
   mounted () {

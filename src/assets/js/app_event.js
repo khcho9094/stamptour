@@ -46,20 +46,18 @@ export function externalLinks (url) {
 }
 
 /**
- * 아이폰 좌표값 요쳥 이벤트
- */
-// eslint-disable-next-line no-unused-vars
-export function iosChkCoodEvent () {
-  window.location = 'tranggle://chk_coordinate'
-}
-
-/**
- * 안드로이드 좌표값 요청 이벤트
+ * 좌표값 요청 이벤트
  */
 // eslint-disable-next-line no-unused-vars
 export function chkCoordinate () {
-  // eslint-disable-next-line no-undef
-  tranggle3.tranggle_callback('chk_coordinate', '{}')
+  if (/Android/i.test(navigator.userAgent)) {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('chk_coordinate', '{}')
+  } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    window.location = 'tranggle_callback://chk_coordinate'
+  } else {
+    return false
+  }
 }
 
 /**

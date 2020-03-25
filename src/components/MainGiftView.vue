@@ -16,12 +16,10 @@ export default {
   },
   methods: {
     goGift () {
-      this.$store.dispatch('setGiftRoute', false)
       router.push('/gift')
     }
   },
   mounted () {
-    this.$store.dispatch('setGiftRoute', true)
     this.$store.dispatch('loadGiftDataNew')
   }
 }
