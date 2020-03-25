@@ -41,7 +41,6 @@ export default new Vuex.Store({
     introImage: [], // 투어소개 이미지
     giftData: [], // 선물 정보
     myPoint: 0, // 보유 포인트
-    totalData: {}, // 기존 코스 정보
     userInfo: {}, // 유저 정보
     stampCommon: {}, // 스탬프 개요
     stampIntro: {}, // 스탬프 소개
@@ -113,7 +112,6 @@ export default new Vuex.Store({
       state.memberInfo.mobile = data[0].member_mobile
     },
     setTotalData (state, data) {
-      state.totalData = data
       state.userInfo = data.view
     },
     setStampData (state, data) {
@@ -400,7 +398,7 @@ export default new Vuex.Store({
     // ===========================================================================================================================
     // 아래 5개 api 통합 - khcho
     loadTourTotalData ({ state, commit }, data) {
-      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=15&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
+      const url = `https://api.tranggle.com/v2/mingle/tourapi/getList.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.typeId}&view_count=2&page=1&listType=S&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
         .then(response => {

@@ -84,7 +84,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadIntroData')
-    this.$store.dispatch('loadTotalData')
+    // this.$store.dispatch('loadTotalData')
   }
 }
 </script>

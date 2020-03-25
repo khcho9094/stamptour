@@ -44,6 +44,7 @@ export default {
     } else {
       this.$store.dispatch('loadGiftNoToken')
     }
+    this.$store.dispatch('loadTotalData')
   }
 }
 </script>
