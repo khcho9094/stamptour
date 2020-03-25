@@ -66,15 +66,21 @@ export default {
     }
   },
   beforeCreate () {
-    // console.log(this.$cookie.get('setIntro'))
-    // if (!this.$cookie.get('setIntro')) {
-    //   this.$router.push('/intro')
-    // }
-    // if (this.$cookie.get('total_stamp_yn') === 'Y') {
-    //   appEvent.chkCoordinate()
-    //   this.$store.state.lon = localStorage.getItem('setLon')
-    //   this.$store.state.lat = localStorage.getItem('setLat')
-    // }
+    // 합산 해야 하는 스탬프투어 코드 쿠키 존재 여부 체크
+    if (this.$cookie.get(this.$store.state.enc_member)) {
+      const data = JSON.parse(this.$cookie.get(this.$store.state.enc_member))
+      let mingleCodeArr = ''
+      let cnt = 1
+      data.content.map(val => {
+        if (data.content.length > cnt) {
+          mingleCodeArr += `${val.mingleCode},`
+        } else {
+          mingleCodeArr += `${val.mingleCode}`
+        }
+        cnt += 1
+      })
+      this.$store.state.mingleCodeArr = mingleCodeArr
+    }
   },
   // beforeMount () {
   //   this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))

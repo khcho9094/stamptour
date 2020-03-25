@@ -10,11 +10,16 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'TourService',
   methods: {
     serviceLink (link) {
-      window.open(link)
+      if (this.$cookie.get('total_stamp_yn') === 'Y') {
+        appEvent.externalLinks(link)
+      } else {
+        window.open(link)
+      }
     }
   },
   mounted () {
