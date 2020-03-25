@@ -66,6 +66,21 @@ export default {
     }
   },
   beforeCreate () {
+    // 합산 해야 하는 스탬프투어 코드 쿠키 존재 여부 체크
+    if (this.$cookie.get(this.$store.state.enc_member)) {
+      const data = JSON.parse(this.$cookie.get(this.$store.state.enc_member))
+      let mingleCodeArr = ''
+      let cnt = 1
+      data.content.map(val => {
+        if (data.content.length > cnt) {
+          mingleCodeArr += `${val.mingleCode},`
+        } else {
+          mingleCodeArr += `${val.mingleCode}`
+        }
+        cnt += 1
+      })
+      this.$store.state.mingleCodeArr = mingleCodeArr
+    }
     // 인트로 페이지로
     if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
       this.$router.push('/intro')
