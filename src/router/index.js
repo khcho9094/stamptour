@@ -17,12 +17,12 @@ const routes = [
     name: 'Stamp',
     component: () => import('../views/Stamp.vue')
   },
-  {
-    // 투어 시작
-    path: '/intro',
-    name: 'Intro',
-    component: () => import('../views/Intro.vue')
-  },
+  // {
+  //   // 투어 시작
+  //   path: '/intro',
+  //   name: 'Intro',
+  //   component: () => import('../views/Intro.vue')
+  // },
   {
     // 선물 보기
     path: '/gift',

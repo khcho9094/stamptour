@@ -7,7 +7,6 @@
   </div>
 </template>
 <script>
-import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'App',
   data () {
@@ -29,12 +28,6 @@ export default {
     }
     if (this.$route.query.mingleCode) {
       this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
-    }
-    // 로그인페이지에서 total_stamp_yn 쿠키값 세팅
-    if (this.$cookie.get('total_stamp_yn') === 'Y') {
-      appEvent.chkCoordinate()
-      this.$store.state.lon = localStorage.getItem('setLon')
-      this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
   beforeMount () {

@@ -78,7 +78,8 @@ export default new Vuex.Store({
     allStampPoint: 0, // 총 포인트
     enc_member: '', // 암호화 된 회원 아이디
     mingleCodeArr: '', // 포인트 합산에 보낼 스탬프 투어 코드 리스트
-    sumApiChkCode: '' // 포인트 합산 후 결과 값 저장
+    sumApiChkCode: '', // 포인트 합산 후 결과 값 저장
+    introPopup: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -484,6 +485,10 @@ export default new Vuex.Store({
     },
     setAreaCode ({ state }, data) {
       state.areaCode = data
+    },
+    // intro 팝업
+    setIntroPopup ({ state }, data) {
+      state.introPopup = data
     },
     /*
     배지등록(전자스탬프)

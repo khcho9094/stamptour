@@ -29,7 +29,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import router from '@/router'
 import Head from '@/components/Head.vue'
 import PopupIntro from '@/components/PopupIntro.vue'
 export default {
@@ -61,7 +60,7 @@ export default {
         this.closeCount()
       } else {
         // 메인 이동
-        router.push('/')
+        this.$store.dispatch('setIntroPopup', false)
       }
     },
     closeCount () {
@@ -69,7 +68,7 @@ export default {
         this.count--
         if (this.count === 0) {
           clearInterval(interval)
-          router.push('/')
+          this.$store.dispatch('setIntroPopup', false)
         } else if (this.pageOut) {
           clearInterval(interval)
         }

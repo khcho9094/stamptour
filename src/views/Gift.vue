@@ -7,16 +7,18 @@
         <GiftList />
         <GiftGuide />
         <PopupGiftReceive  v-if="popupGift.open"/>
+        <PopupSns />
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 import GiftPoint from '@/components/GiftPoint.vue'
 import GiftList from '@/components/GiftList.vue'
 import GiftGuide from '@/components/GiftGuide.vue'
 import PopupGiftReceive from '@/components/PopupGiftReceive.vue'
-import { mapState } from 'vuex'
+import PopupSns from '@/components/PopupSns.vue'
 export default {
   name: 'Gift',
   components: {
@@ -24,7 +26,8 @@ export default {
     GiftPoint,
     GiftList,
     GiftGuide,
-    PopupGiftReceive
+    PopupGiftReceive,
+    PopupSns
   },
   computed: {
     ...mapState(['token', 'popupGift'])

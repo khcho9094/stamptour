@@ -13,7 +13,6 @@
     </div>
 </template>
 <script>
-import router from '@/router'
 export default {
   name: 'PopupMenu',
   props: {
@@ -32,7 +31,7 @@ export default {
   },
   methods: {
     closeBtn () {
-      router.push('/')
+      this.$store.dispatch('setIntroPopup', false)
     }
   },
   mounted () {

@@ -27,7 +27,8 @@ export default {
       btnType: {
         intro: 'close',
         main: 'more',
-        tour: 'share'
+        tour: 'share',
+        gift: 'share'
       }
     }
   },
@@ -48,7 +49,7 @@ export default {
     moreClick () {
       if (this.name === 'main') {
         this.$emit('moreBtn')
-      } else if (this.name === 'tour') {
+      } else if (this.name === 'tour' || this.name === 'gift') {
         const openChk = this.$store.state.snsOpen
         this.$store.dispatch('loadSnsPoint')
         this.$store.dispatch('loadSnsPopup', openChk)
