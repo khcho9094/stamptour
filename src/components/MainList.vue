@@ -88,7 +88,6 @@ export default {
       this.listCall()
     },
     listCall () {
-      this.$store.dispatch('loadMingleVersionChk')
       this.$store.dispatch('loadMainData', this.params)
     },
     stampDetail (sid) {
@@ -164,6 +163,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadAreaList')
+    this.$store.dispatch('loadMingleVersionChk')
   }
 }
 </script>
