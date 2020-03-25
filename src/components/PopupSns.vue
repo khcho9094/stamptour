@@ -110,7 +110,7 @@ export default {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
       var title = '통합 스탬프 투어'
-      var shareImage = 'http://m.tranggle.com/html/images/mingle/001/d1db53c31f1ced7cf1e09e1b32602871.png'
+      var shareImage = `${location.origin}/sns_share.png`
       var setUrl = null
       var desc = '통합 스탬프 투어로 전국 명소를 다녀보세요'
       if (location.search !== '' && !url.match('mingleCode')) {
@@ -147,7 +147,7 @@ export default {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
       var title = '통합 스탬프 투어'
-      var shareImage = 'http://m.tranggle.com/html/images/mingle/001/d1db53c31f1ced7cf1e09e1b32602871.png'
+      var shareImage = `${location.origin}/sns_share.png`
       var setUrl = null
       if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
