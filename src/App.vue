@@ -23,8 +23,21 @@ export default {
     }
   },
   beforeCreate () {
+    const mArr = [
+      'SzActcWN5QXozxDixoG4zQ==',
+      '/GN62eV1c4Q78ghWNMWRsQ==',
+      'QAAPpA7foDPqF3zEzdvHrw==',
+      'M0ZRcktVl8H3kJaRKq3Irg==',
+      'HvbQjGJR2yF9vTu8m2TUZQ==',
+      'iQxiUpF8ZfaGodRQJ6s0mg==',
+      'vSi8Z9QlNS5wushabGnrhA=='
+    ]
     if (this.$route.query.minglecode) {
-      this.$route.query.mingleCode = this.$route.query.minglecode
+      mArr.map((data) => {
+        if (data.toLowerCase() === this.$route.query.minglecode) {
+          this.$route.query.mingleCode = data
+        }
+      })
     }
     if (this.$route.query.mingleCode) {
       this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
