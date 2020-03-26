@@ -1,7 +1,9 @@
 <template>
     <ul class="gift_list">
         <li v-for="(data, idx) in giftData" v-bind:key="idx">
-            <div class="point">{{data.mingle_count}}{{unit}}</div>
+            <div class="point" v-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='"><span class="stxt">잼버리<br/>코스</span></div>
+            <div class="point" v-else-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"><span class="stxt">{{test(data)}}</span></div>
+            <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
             <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
             <span>{{data.mingle_gift_title}}</span>
             <div class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
@@ -57,6 +59,15 @@ export default {
           this.unit = '개'
         }
       })
+    },
+    test (data) {
+      let val = ''
+      if (data.mingle_user_gift_no === '433145') {
+        val = 4
+      } else {
+        val = 7
+      }
+      return `${val}개 획득시`
     }
   },
   mounted () {

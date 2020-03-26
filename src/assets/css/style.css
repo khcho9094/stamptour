@@ -1047,6 +1047,13 @@ header .head_back span {
     text-align: center;
     font-family: inaviB;
 }
+.tour_sub_wrap ul.gift_list li .point .stxt {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 1.2;
+    vertical-align: middle;
+    word-break: keep-all
+}
 .tour_sub_wrap ul.gift_list li .gift_img {
     display: inline-block;
     width:28px;
@@ -1055,7 +1062,7 @@ header .head_back span {
     /* top: 3px; */
     vertical-align: middle;
 }
-.tour_sub_wrap ul.gift_list li span {
+.tour_sub_wrap ul.gift_list li > span {
     display: inline-block;
     font-family: inaviL;
     font-size: 12px;

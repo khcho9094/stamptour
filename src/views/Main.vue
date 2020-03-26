@@ -119,7 +119,6 @@ export default {
       const query = Object.assign({}, this.$route.query)
       delete query.mingleCode
       this.$router.replace({ query })
-      console.log(this.$route)
       this.$store.dispatch('setIntroPopup', true)
     }
   },

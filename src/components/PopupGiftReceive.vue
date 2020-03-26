@@ -3,7 +3,14 @@
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
-                <div class="gift_receive">
+                <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='">
+                  <b>잼버리 코스</b> 완성!!<br/>
+                  <span>축하합니다!!</span>
+                </div>
+                <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='">
+                  <b>봉사점수 신청하기</b><br/>
+                </div>
+                <div class="gift_receive" v-else>
                   <b>{{popupGift.mingle_count}}{{unit}}</b> 달성!!<br/>
                   <span>축하합니다!!</span>
                 </div>
@@ -19,7 +26,8 @@
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>
-            <button class="type2" @click="receiveGift">모바일 상품권 받기</button>
+            <!-- <button class="type2" @click="receiveGift">모바일 상품권 받기</button> -->
+            <button class="type2" @click="receiveGift">{{receiveBtn(popupGift)}}</button>
             <!-- 개인정보 확인 -->
             <div class="person_pop" v-show="popup">
               <div class="title">개인정보 제3자 제공동의가 필요합니다.</div>
@@ -66,7 +74,27 @@ export default {
       } else if (!this.personal) {
         alert('개인정보 제3자 제공동의가 필요합니다.')
       } else {
-        this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
+        if (this.popupGift.mingle_gift_add_point === 'AUTH') {
+          let url = ''
+          if (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==') {
+            url = 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3'
+          } else if (this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==') {
+            url = 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA'
+          } else if (this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
+            if (this.popupGift.mingle_user_gift_no === '433145') {
+              url = 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc'
+            } else {
+              url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
+            }
+          } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
+            url = 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M'
+          }
+          if (url) {
+            appEvent.externalLinks(url)
+          }
+        } else {
+          this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
+        }
       }
     },
     imgIcon () {
@@ -109,6 +137,18 @@ export default {
           this.unit = '개'
         }
       })
+    },
+    receiveBtn (data) {
+      let val = ''
+      if (data.mingle_gift_add_point === 'AUTH' && (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==' || this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==')) {
+        val = '인증서 신청하기'
+      } else if (data.mingle_gift_add_point === 'AUTH' && this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
+        val = '봉사점수 신청하기'
+      } else {
+        val = '모바일 상품권 받기'
+      }
+      console.log(data)
+      return val
     }
   },
   mounted () {
