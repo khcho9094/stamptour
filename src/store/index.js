@@ -18,11 +18,11 @@ export default new Vuex.Store({
     // VueCookie.get('login_token'),
     // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
     // DCE618C8A7238BE1CA3EE283B8FF614FF4337E5587D1260B4BD927E366B77308C9C488AA2A0813B3617AAFDFDFA45ACBE2F21B907B5A32AD whrjsgml111
-    buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소
-    guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소
-    yanchanAuthUrl: 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc', // 양천 봉사활동 인증서 신청 주소
-    yanchanAuthUrl2: 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8', // 양천 봉사활동 인증서 신청 주소2
-    peaceAuthUrl: 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M', // 평화누리길 인증서 신청 주소
+    buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소 (잼버리 코스) 인증서 신청하기
+    guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소 (100P) 인증서 신청하기
+    yanchanAuthUrl: 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc', // 양천 봉사활동 인증서 신청 주소 (4개스탬프획득시) 봉사점수 신청하기
+    yanchanAuthUrl2: 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8', // 양천 봉사활동 인증서 신청 주소2 (3개스탬프획득시)
+    peaceAuthUrl: 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M', // 평화누리길 인증서 신청 주소 (12개) 인증서 신청하기
     stampCodeInfo: [
       { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number' },
       { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point' },
