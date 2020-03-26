@@ -29,7 +29,7 @@ export default {
   },
   methods: {
   },
-  mounted () {
+  created () {
     this.$store.dispatch('loadTourDetail', JSON.parse(localStorage.tourDetail))
   },
   destroyed () {

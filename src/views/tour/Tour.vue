@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadIntroData')
+    // this.$store.dispatch('loadIntroData')
   },
   computed: {
     ...mapState(['introData', 'introImage'])

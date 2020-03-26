@@ -31,6 +31,12 @@
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
                     </div>
                     <div class="position" v-if="data.mingle_badge_type === 'STAMP' && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">위치보기</div>
+                    <div class="progress_box" v-if="progressOn(data)">
+                        <div class="p_back">
+                            <div class="progress" :style="{'width':progressWidth(data)}"></div>
+                        </div>
+                        <span>{{progressWidth(data)}}</span>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -38,6 +44,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'MainList',
   data () {
@@ -50,7 +57,8 @@ export default {
         order: 'pop',
         status: 'ALL',
         areaCode: '0'
-      }
+      },
+      progressData: this.localData()
     }
   },
   computed: {
@@ -112,6 +120,37 @@ export default {
       })
       return tg
     },
+    progressWidth (data) {
+      let pdata = 0
+      if (this.progressData) {
+        this.progressData.content.map((val) => {
+          if (data.mingle_badge_id === val.badge && val.rate > 0) {
+            pdata = val.rate
+          }
+        })
+      }
+      return `${pdata}%`
+    },
+    progressOn (data) {
+      let pOn = false
+      if (this.progressData) {
+        this.progressData.content.map((val) => {
+          if (data.mingle_badge_id === val.badge && val.rate > 0) {
+            pOn = true
+          }
+        })
+      }
+      return pOn
+    },
+    localData () {
+      let val = {}
+      if (/Android/i.test(navigator.userAgent)) {
+        val = JSON.parse(localStorage.united_android)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        val = JSON.parse(localStorage.united_ios)
+      }
+      return val
+    },
     stampAuth (e, data) {
       e.stopPropagation()
       // this.$store.dispatch('loadBadgeRegister', data)
@@ -160,6 +199,9 @@ export default {
         }
       }
     }
+  },
+  beforeCreate () {
+    appEvent.trackProgress()
   },
   mounted () {
     this.$store.dispatch('loadAreaList')

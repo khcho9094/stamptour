@@ -89,7 +89,7 @@ export default {
       return arr
     }
   },
-  mounted () {
+  created () {
     // 아래 5개 통합
     this.tourTotal.map((data) => {
       this.$store.dispatch('loadTourTotalData', data)
