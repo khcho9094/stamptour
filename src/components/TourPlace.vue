@@ -65,7 +65,8 @@ export default {
     },
     apiDetailOn (data) {
       localStorage.tourDetail = JSON.stringify(data)
-      this.$router.push('/tour/detail')
+      this.$store.dispatch('loadTourDetail', JSON.parse(localStorage.tourDetail))
+      // this.$router.push('/tour/detail')
     },
     iconImg (data) {
       return require(`@/assets/images/icon_t_${data.num}.png`)

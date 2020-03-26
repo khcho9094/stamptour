@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueCookie from 'vue-cookie'
+import router from '@/router'
 
 Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -429,6 +430,11 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setStampData', response.response.content)
+          router.push('/tour/detail').catch(err => {
+            if (err === 'NavigationDuplicated') {
+              throw err
+            }
+          })
         })
         .catch(err => {
           console.log(err)
