@@ -36,6 +36,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'PopupSns',
   data () {
@@ -94,7 +95,14 @@ export default {
       const url = parent.location.href
       const getServiceCode = this.$store.state.mingleCode
 
-      const setUrl = url + '?mingleCode=' + getServiceCode
+      var setUrl = null
+      if (location.search !== '' && !url.match('mingleCode')) {
+        setUrl = url + '&mingleCode=' + getServiceCode
+      } else if (location.search === '' && !url.match('mingleCode')) {
+        setUrl = url + '?mingleCode=' + getServiceCode
+      } else {
+        setUrl = url
+      }
 
       const shareUrl = encodeURIComponent(setUrl)
 
@@ -104,7 +112,11 @@ export default {
       'app_id=287066011402705' +
       '&display=popup' +
       '&href=' + shareUrl
-      window.open(settingUrl, 'Share to facebook', popOption)
+      if (this.$cookie.get('total_stamp_yn') === 'Y') {
+        appEvent.externalLinks(settingUrl)
+      } else {
+        window.open(settingUrl, 'Share to facebook', popOption)
+      }
     },
     kakaoShare () {
       var url = parent.location.href
