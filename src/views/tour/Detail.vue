@@ -33,9 +33,9 @@ export default {
     this.$store.dispatch('loadTourDetail', JSON.parse(localStorage.tourDetail))
   },
   destroyed () {
-    this.$store.state.stampCommon = {}
-    this.$store.state.stampIntro = {}
-    this.$store.state.stampImage = {}
+    // this.$store.state.stampCommon = {}
+    // this.$store.state.stampIntro = {}
+    // this.$store.state.stampImage = {}
   }
 }
 </script>
