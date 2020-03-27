@@ -12,6 +12,7 @@
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
+            <div class="giftDday" v-if="dotOn(data) === 'on'">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>
@@ -68,6 +69,39 @@ export default {
         val = 7
       }
       return `${val}개 획득시`
+    },
+    dDay (data) {
+      const text1 = data.mingle_gift_end_date.split(' ')[0].split('-')
+      const text2 = data.mingle_gift_end_date.split(' ')[1].split(':')
+      const Dday = new Date(
+        parseInt(text1[0]),
+        parseInt(text1[1]) - 1, // 월 -1
+        parseInt(text1[2]),
+        parseInt(text2[0]),
+        parseInt(text2[1]),
+        parseInt(text2[2])
+      )
+      const now = new Date()
+      const gap = now.getTime() - Dday.getTime()
+      let text = ''
+      let result = 0
+      result = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1
+      if (result > 1) {
+        text = `${result}일전`
+      } else {
+        result = Math.floor(gap / (1000 * 60 * 60)) * -1
+        if (result > 1) {
+          text = `${result}시간전`
+        } else {
+          result = Math.floor(gap / (1000 * 60)) * -1
+          if (result > 1) {
+            text = `${result}분전`
+          } else {
+            text = ''
+          }
+        }
+      }
+      return `신청 유효 기간 만료 ${text}`
     }
   },
   mounted () {
