@@ -122,7 +122,7 @@ export default {
     },
     progressWidth (data) {
       let pdata = 0
-      if (this.progressData) {
+      if (Object.keys(this.progressData).length) {
         this.progressData.content.map((val) => {
           if (data.mingle_badge_id === val.badge && val.rate > 0) {
             pdata = val.rate
@@ -133,7 +133,7 @@ export default {
     },
     progressOn (data) {
       let pOn = false
-      if (this.progressData) {
+      if (Object.keys(this.progressData).length) {
         this.progressData.content.map((val) => {
           if (data.mingle_badge_id === val.badge && val.rate > 0) {
             pOn = true
@@ -144,9 +144,9 @@ export default {
     },
     localData () {
       let val = {}
-      if (/Android/i.test(navigator.userAgent)) {
+      if (/Android/i.test(navigator.userAgent) && localStorage.united_android) {
         val = JSON.parse(localStorage.united_android)
-      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent) && localStorage.united_ios) {
         val = JSON.parse(localStorage.united_ios)
       }
       return val
