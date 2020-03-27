@@ -71,6 +71,10 @@ export default {
     }
   },
   mounted () {
+    if (localStorage.giftopen) {
+      this.$store.dispatch('openPopupGift', JSON.parse(localStorage.giftopen))
+      localStorage.removeItem('giftopen')
+    }
     this.setStamp()
   }
 }
