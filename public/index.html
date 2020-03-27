@@ -30,12 +30,12 @@
         chkLon = Math.floor(parseInt(lon))
         chkLat = Math.floor(parseInt(lat))
         if (lon !== -1 && chkLon !== -1) {
-          localStorage.setItem('setLon',chkLon)
+          localStorage.setItem('setLon',lon)
         } else {
           localStorage.setItem('setLon','0')
         }
         if (lat !== -1 && chkLat !== -1) {
-          localStorage.setItem('setLat',chkLat)
+          localStorage.setItem('setLat',lat)
         } else {
           localStorage.setItem('setLat','0')
         }
@@ -66,6 +66,9 @@
           success:function(data){
           }
         });
+      }
+
+      function set_track_progress () {
       }
     </script>
   </body>

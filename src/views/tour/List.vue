@@ -7,7 +7,7 @@
              <li v-for="(data, idx) in tourListData" v-bind:key="idx" @click="apiDetailOn(data)">
                 <div class="back_img" :style="{ 'backgroundImage': `url(${data.image})` }" ></div>
                 <h2>{{data.title}}</h2>
-                <p>{{data.dist}}Km</p>
+                <p>{{chkDist(data.dist)}}</p>
              </li>
         </ul>
     </div>
@@ -33,6 +33,15 @@ export default {
     },
     headTitle () {
       return JSON.parse(localStorage.tourType).name
+    },
+    chkDist (dist) {
+      if (parseInt(dist) > 999) {
+        dist = (parseInt(dist) / 1000).toFixed(1)
+        dist = dist + 'km'
+      } else {
+        dist = dist + 'm'
+      }
+      return dist
     }
   },
   beforeCreate () {
