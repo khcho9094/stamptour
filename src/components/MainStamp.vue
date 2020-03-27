@@ -10,7 +10,7 @@
               <em>{{this.allStampPoint}}</em>
           </span>
       </div>
-      <div class="title" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
+      <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"
@@ -39,7 +39,7 @@
               <em>{{this.allStampCount}}</em>
           </span>
       </div>
-      <div class="title" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
+      <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"
@@ -170,9 +170,19 @@ export default {
         }
       })
       return chk
+    },
+    loginOpen () {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('go_home_event', '{}')
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = 'tranggle_callback://go_home_event'
+      } else {
+        return false
+      }
     }
   },
-  mounted () {
+  created () {
     if (this.token) {
       this.$store.dispatch('loadGiftData')
     } else {

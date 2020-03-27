@@ -78,7 +78,11 @@ export default {
           return false
         }
       } else {
-        this.$router.go(-1)
+        if (this.$route.name === 'Gift') {
+          this.$router.push('/')
+        } else {
+          this.$router.go(-1)
+        }
       }
     }
   },
