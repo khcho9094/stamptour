@@ -30,7 +30,7 @@
                         <span class="stxt">스탬프</span>
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
                     </div>
-                    <div class="position" v-if="data.mingle_badge_type === 'STAMP' && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">위치보기</div>
+                    <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
                     <div class="progress_box" v-if="progressOn(data)">
                         <div class="p_back">
                             <div class="progress" :style="{'width':progressWidth(data)}"></div>
