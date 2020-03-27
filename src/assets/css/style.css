@@ -148,9 +148,6 @@ header button.share {
     background-size: 15px;
     background-position: center;
 }
-header .head_back {
-    
-}
 header .head_back .back_box {
     display: inline-block;
     cursor: pointer;
@@ -250,7 +247,7 @@ header .head_back span {
     content: '';
     position: absolute;
     left: 0;
-    top: 1px;
+    top: 0;
     width: 10px;
     height: 10px;
     text-align: center;
@@ -260,17 +257,20 @@ header .head_back span {
 }
 .pop_overay .pop_cont .text_2 .check input[type="checkbox"]:checked + label:before {
    background: #fff;
-   border-color: #000000;
+   border-color: #fff;
 }
 .pop_overay .pop_cont .text_2 .check input[type="checkbox"]:checked + label:after {
-   content: '';
-   position: absolute;
-   top: 4px;
-   left: 3px;
-   width: 6px;
-   height: 6px;
-   background: #000000;
-   border-radius: 100%;
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    background-image:url('../images/checked3.png');
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    border-radius: 100%;
 }
 .pop_overay .pop_cont .text_2 .gift_receive {
     font-size: 18px;
@@ -281,9 +281,6 @@ header .head_back span {
 }
 .pop_overay .pop_cont .text_2 .gift_receive b {
     color:#c86550;
-}
-.pop_overay .pop_cont .text_2 .gift_receive span {
-    
 }
 .pop_overay .pop_cont .text_3 {
     padding:30px;
@@ -496,7 +493,7 @@ header .head_back span {
      content: '';
      position: absolute;
      left: 0;
-     top: 1px;
+     top: 0;
      width: 10px;
      height: 10px;
      text-align: center;
@@ -506,17 +503,20 @@ header .head_back span {
 }
 .tour_start_wrap .tour_start_box .chkbox input[type="checkbox"]:checked + label:before {
     background: #fff;
-    border-color: #3bb9fa;
+    border-color: #fff;
 }
 
 .tour_start_wrap .tour_start_box .chkbox input[type="checkbox"]:checked + label:after {
     content: '';
     position: absolute;
-    top: 4px;
-    left: 3px;
-    width: 6px;
-    height: 6px;
-    background: #3bb9fa;
+    top: 0px;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    background-image:url('../images/checked.png');
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
     border-radius: 100%;
 }
 /*============================================
@@ -577,10 +577,6 @@ header .head_back span {
     margin-bottom: 15px;
     position: relative;
 }
-.stamp_box ul.stamp_list li.complete {
-    
-}
-
 .stamp_box ul.stamp_list li .line {
     display: none;
     text-indent: -9999px;
@@ -766,10 +762,6 @@ header .head_back span {
     background:#835fa1;
     padding:4px 8px;
 }
-
-.course_box {
-
-}
 .course_box .sort {
     background: #faf7f1;
     height:50px;
@@ -824,7 +816,7 @@ header .head_back span {
      content: '';
      position: absolute;
      left: 0;
-     top: 1px;
+     top: 0;
      width: 10px;
      height: 10px;
      text-align: center;
@@ -834,16 +826,19 @@ header .head_back span {
 }
 .course_box .sort .complete_hide input[type="checkbox"]:checked + label:before {
     background: #fff;
-    border-color: #d0a287;
+    border-color: #fff;
 }
 .course_box .sort .complete_hide input[type="checkbox"]:checked + label:after {
     content: '';
     position: absolute;
-    top: 4px;
-    left: 3px;
-    width: 6px;
-    height: 6px;
-    background: #d0a287;
+    top: 0px;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    background-image:url('../images/checked2.png');
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
     border-radius: 100%;
 }
 
@@ -1523,9 +1518,6 @@ header .head_back span {
     margin-top: 5px;
     margin-left: 5px;
 }
-.person_pop .ptxt .cont span {
-    
-}
 .person_pop .ptxt .cont .nodata {
     line-height: 1.6;
     color:#999;
@@ -1557,8 +1549,6 @@ header .head_back span {
 .person_pop .ptxt .agree span.on {
     opacity: 1;
     cursor: pointer;
-}
-.stamp_success {
 }
 .stamp_success h3 {
     margin-bottom: 5px;

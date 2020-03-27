@@ -51,6 +51,9 @@ export default {
   created () {
     window.addEventListener('scroll', this.handleScroll)
   },
+  mounted () {
+    this.$store.dispatch('loadIntroData')
+  },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll)
   }

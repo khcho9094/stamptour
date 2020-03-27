@@ -1,7 +1,7 @@
 <template>
   <header>
       <div class="logo" v-if="type == 'logo'" >
-          <img :src="introData.image_logo" alt="title_logo">
+          <img :src="introData.image_logo" alt="">
       </div>
       <div class="head_back" v-else>
           <div class="back_box" @click="goBack">
@@ -83,8 +83,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadIntroData')
-    // this.$store.dispatch('loadTotalData')
+    // this.$store.dispatch('loadIntroData')
   }
 }
 </script>

@@ -39,9 +39,6 @@ export default {
       this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
-  mounted () {
-    // this.$store.dispatch('loadIntroData')
-  },
   computed: {
     ...mapState(['introData', 'introImage'])
   }
