@@ -12,7 +12,7 @@
                         :style="{ 'backgroundImage': `url(${val.image})` }"
                         ></div>
                   <h2>{{val.title}}</h2>
-                  <p>여기에서 {{val.dist}}km</p>
+                  <p>여기에서 {{chkDist(val.dist)}}</p>
               </li>
           </ul>
       </div>
@@ -88,6 +88,15 @@ export default {
         arr = this.ShoppingData
       }
       return arr
+    },
+    chkDist (dist) {
+      if (parseInt(dist) > 999) {
+        dist = (parseInt(dist) / 1000).toFixed(1)
+        dist = dist + 'km'
+      } else {
+        dist = dist + 'm'
+      }
+      return dist
     }
   },
   created () {
