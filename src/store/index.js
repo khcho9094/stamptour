@@ -14,11 +14,9 @@ export default new Vuex.Store({
     // HvbQjGJR2yF9vTu8m2TUZQ== 태백 (포인트)
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행(권역, 참여신청, 갯수)
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길 (선물 1개, 갯수)
-    domain: 'https://stage.api.tranggle.com:4081', // 공통 URL
+    domain: 'https://api.tranggle.com', // 공통 URL
+    domainTest: 'https://stage.api.tranggle.com:4081', // 공통 URL Test
     token: '', // 임시 토큰
-    // VueCookie.get('login_token'),
-    // 0A485F303C2CCC133AD94AA94C8B6346C9A8290335D26E6D74F33019072AAEC6E1F4FF7AB074BCB75E816AD1DE9802AD 오마왕
-    // DCE618C8A7238BE1CA3EE283B8FF614FF4337E5587D1260B4BD927E366B77308C9C488AA2A0813B3617AAFDFDFA45ACBE2F21B907B5A32AD whrjsgml111
     buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소 (잼버리 코스) 인증서 신청하기
     guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소 (100P) 인증서 신청하기
     yanchanAuthUrl: 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc', // 양천 봉사활동 인증서 신청 주소 (4개스탬프획득시) 봉사점수 신청하기
@@ -160,7 +158,6 @@ export default new Vuex.Store({
     setTourListData (state, data) {
       state.tourListData = data.list
     },
-    // =================================================================
     setTourInfoData (state, data) {
       state.TourInfoData = data.response.content
     },

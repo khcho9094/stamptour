@@ -29,6 +29,11 @@ export default {
   },
   methods: {
   },
+  beforeCreate () {
+    if (this.$route.query.mingleCode) {
+      this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
+    }
+  },
   mounted () {
     this.$store.dispatch('loadStampData', {
       mingle_badge_id: this.$route.query.badge_id,

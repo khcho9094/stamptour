@@ -101,7 +101,6 @@ export default {
           }
           cnt += 1
         })
-        console.log(mingleCodeArr)
         this.$store.state.mingleCodeArr = mingleCodeArr
         this.$store.dispatch('loadPointSumApi')
       }
@@ -114,11 +113,15 @@ export default {
     }
   },
   beforeMount () {
+    if (localStorage.setIntroPopup) {
+      this.$store.dispatch('setIntroPopup', true)
+    }
     // 인트로 페이지로
     if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
       const query = Object.assign({}, this.$route.query)
       delete query.mingleCode
       this.$router.replace({ query })
+      localStorage.setIntroPopup = 'Y'
       this.$store.dispatch('setIntroPopup', true)
     }
   },

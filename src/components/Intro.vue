@@ -61,6 +61,7 @@ export default {
       } else {
         // 메인 이동
         this.$store.dispatch('setIntroPopup', false)
+        localStorage.removeItem('setIntroPopup')
       }
     },
     closeCount () {
@@ -69,6 +70,7 @@ export default {
         if (this.count === 0) {
           clearInterval(interval)
           this.$store.dispatch('setIntroPopup', false)
+          localStorage.removeItem('setIntroPopup')
         } else if (this.pageOut) {
           clearInterval(interval)
         }

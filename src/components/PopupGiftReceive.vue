@@ -148,7 +148,6 @@ export default {
       } else {
         val = '모바일 상품권 받기'
       }
-      console.log(data)
       return val
     }
   },

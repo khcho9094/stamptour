@@ -32,6 +32,7 @@ export default {
   methods: {
     closeBtn () {
       this.$store.dispatch('setIntroPopup', false)
+      localStorage.removeItem('setIntroPopup')
     }
   },
   mounted () {
