@@ -35,6 +35,7 @@ export default {
   beforeCreate () {
     if (this.$route.query.mingleCode) {
       this.$store.state.mingleCode = this.$route.query.mingleCode
+      this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
       this.$store.dispatch('setGiftRoute', false)
     }
   },
