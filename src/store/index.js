@@ -587,6 +587,13 @@ export default new Vuex.Store({
             commit('setCompleteSum', response.response)
           }
         })
+    },
+    loadStampUserApply ({ state, commit }, data, date) {
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourUserApply.jsonp?token=${state.token}&app_data=${state.mingleCode}|${data.mingle_badge_id}|${date}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+        })
     }
   },
   modules: {
