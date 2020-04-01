@@ -122,7 +122,7 @@ export default {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
       var title = '전국 스탬프 투어'
-      var shareImage = `${location.origin}/sns_share.png`
+      var shareImage = `${location.origin}/sns_share_2.png`
       var setUrl = null
       var desc = '전국 스탬프 투어로 전국 명소를 다녀보세요'
       if (location.search !== '' && !url.match('mingleCode')) {
@@ -148,7 +148,7 @@ export default {
           {
             title: title,
             link: {
-              mobileWebUrl: this.openAppLink(url),
+              androidExecParams: this.openAppLink(url),
               webUrl: this.openAppLink(url)
             }
           }
@@ -169,7 +169,7 @@ export default {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
       var title = '전국 스탬프 투어'
-      var shareImage = `${location.origin}/sns_share.png`
+      var shareImage = `${location.origin}/sns_share_2.png`
       var setUrl = null
       if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
