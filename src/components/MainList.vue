@@ -181,6 +181,11 @@ export default {
       esp.certSuccess = (result) => {
         if (result.merchant) {
           if (result.merchant === data.mingle_merchant_code) {
+            var today = new Date()
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+            var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+            var dateTime = date + ' ' + time
+            this.$store.dispatch('loadStampUserApply', data, dateTime)
             this.$store.dispatch('loadBadgeRegister', data).then(() => {
               if (/Android/i.test(navigator.userAgent)) {
                 // eslint-disable-next-line no-undef
@@ -198,6 +203,13 @@ export default {
           alert('merchant 코드가 없습니다.')
         }
       }
+    },
+    getTime () {
+      const today = new Date()
+      const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+      const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+      const dateTime = date + ' ' + time
+      return dateTime
     }
   },
   beforeCreate () {
