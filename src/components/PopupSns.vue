@@ -148,8 +148,8 @@ export default {
           {
             title: title,
             link: {
-              mobileWebUrl: openAppLink(url),
-              webUrl: openAppLink(url)
+              mobileWebUrl: this.openAppLink(url),
+              webUrl: this.openAppLink(url)
             }
           }
         ]
