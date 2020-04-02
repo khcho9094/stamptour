@@ -142,9 +142,9 @@ export default {
       var url = parent.location.href
       // var getServiceCode = this.$store.state.mingleCode
       var title = '올댓스탬프'
-      var shareImage = `${location.origin}/sns_share.png`
+      var shareImage = `${location.origin}/sns_share_3.png`
       // var setUrl = null
-      var desc = '혜택받는 전국 스탬프 투어 ‘올댓스탬프’ 앱으로 투어도 즐기고 혜택도 받아보세요.'
+      var desc = '‘올댓스탬프’ 앱으로 투어도 즐기고 혜택도 받아보세요.'
       // if (location.search !== '' && !url.match('mingleCode')) {
       //   setUrl = url + '&mingleCode=' + getServiceCode
       // } else if (location.search === '' && !url.match('mingleCode')) {
@@ -166,7 +166,7 @@ export default {
         },
         buttons: [
           {
-            title: title,
+            title: '앱 설치 또는 열기',
             link: {
               androidExecParams: this.openAppLink(url),
               webUrl: this.openAppLink(url)
@@ -191,7 +191,7 @@ export default {
     //   var url = parent.location.href
     //   var getServiceCode = this.$store.state.mingleCode
       var title = '올댓스탬프'
-      var shareImage = `${location.origin}/sns_share.png`
+      var shareImage = `${location.origin}/sns_share_3.png`
       //   var setUrl = null
       //   if (location.search !== '' && !url.match('mingleCode')) {
       //     setUrl = url + '&mingleCode=' + getServiceCode
