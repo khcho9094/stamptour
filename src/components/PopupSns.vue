@@ -139,7 +139,7 @@ export default {
       }
     },
     kakaoShare () {
-      var url = parent.location.href
+      // var url = parent.location.href
       // var getServiceCode = this.$store.state.mingleCode
       var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share_3.png`
@@ -160,32 +160,24 @@ export default {
           description: desc,
           imageUrl: shareImage,
           link: {
-            androidExecParams: this.openAppLink(url),
-            webUrl: this.openAppLink(url)
+            androidExecParams: 'market://details?id=com.beaglemap.unitedstampapp',
+            iosExecParams: 'https://apps.apple.com/us/app/id1501448481',
+            mobileWebUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp',
+            webUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
           }
         },
         buttons: [
           {
             title: '앱 설치 또는 열기',
             link: {
-              androidExecParams: this.openAppLink(url),
-              webUrl: this.openAppLink(url)
+              androidExecParams: 'market://details?id=com.beaglemap.unitedstampapp',
+              iosExecParams: 'https://apps.apple.com/us/app/id1501448481',
+              mobileWebUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp',
+              webUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
             }
           }
         ]
       })
-    },
-    openAppLink (cUrl) {
-      var varUA = navigator.userAgent.toLowerCase()
-      var url = ''
-      if (varUA.indexOf('android') > -1) {
-        url = 'market://details?id=com.beaglemap.unitedstampapp'
-      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        url = 'https://apps.apple.com/us/app/id1501448481'
-      } else {
-        url = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
-      }
-      return url
     },
     kakaoStoryShare () {
     //   var url = parent.location.href
