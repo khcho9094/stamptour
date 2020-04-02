@@ -182,6 +182,8 @@ export default {
         url = 'market://details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
         url = cUrl
+      } else {
+        url = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       return url
     },
