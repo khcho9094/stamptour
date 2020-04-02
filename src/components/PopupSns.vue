@@ -121,10 +121,10 @@ export default {
     kakaoShare () {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
-      var title = '전국 스탬프 투어'
+      var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share_2.png`
       var setUrl = null
-      var desc = '전국 스탬프 투어로 전국 명소를 다녀보세요'
+      var desc = '혜택받는 전국 스탬프 투어 ‘올댓스탬프’ 앱으로 투어도 즐기고 혜택도 받아보세요.'
       if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
@@ -168,7 +168,7 @@ export default {
     kakaoStoryShare () {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
-      var title = '전국 스탬프 투어'
+      var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share_2.png`
       var setUrl = null
       if (location.search !== '' && !url.match('mingleCode')) {
@@ -191,7 +191,7 @@ export default {
     bandShare () {
       var filter = 'win16|win32|win64|mac|macintel'
       var url = parent.location.href
-      var title = '전국 스탬프 투어'
+      var title = '올댓스탬프'
       var getServiceCode = this.$store.state.mingleCode
       var shareUrl = null
       if (location.search !== '' && !url.match('mingleCode')) {
