@@ -140,18 +140,18 @@ export default {
     },
     kakaoShare () {
       var url = parent.location.href
-      var getServiceCode = this.$store.state.mingleCode
+      // var getServiceCode = this.$store.state.mingleCode
       var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share.png`
-      var setUrl = null
+      // var setUrl = null
       var desc = '혜택받는 전국 스탬프 투어 ‘올댓스탬프’ 앱으로 투어도 즐기고 혜택도 받아보세요.'
-      if (location.search !== '' && !url.match('mingleCode')) {
-        setUrl = url + '&mingleCode=' + getServiceCode
-      } else if (location.search === '' && !url.match('mingleCode')) {
-        setUrl = url + '?mingleCode=' + getServiceCode
-      } else {
-        setUrl = url
-      }
+      // if (location.search !== '' && !url.match('mingleCode')) {
+      //   setUrl = url + '&mingleCode=' + getServiceCode
+      // } else if (location.search === '' && !url.match('mingleCode')) {
+      //   setUrl = url + '?mingleCode=' + getServiceCode
+      // } else {
+      //   setUrl = url
+      // }
       // eslint-disable-next-line no-undef
       Kakao.Link.sendDefault({
         objectType: 'feed',
@@ -160,8 +160,8 @@ export default {
           description: desc,
           imageUrl: shareImage,
           link: {
-            mobileWebUrl: setUrl,
-            webUrl: setUrl
+            androidExecParams: this.openAppLink(url),
+            webUrl: this.openAppLink(url)
           }
         },
         buttons: [
@@ -181,7 +181,7 @@ export default {
       if (varUA.indexOf('android') > -1) {
         url = 'market://details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        url = cUrl
+        url = 'https://apps.apple.com/us/app/id1501448481'
       } else {
         url = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
