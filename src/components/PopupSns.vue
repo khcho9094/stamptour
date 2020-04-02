@@ -43,17 +43,25 @@ export default {
     return {
       getParentUrl: parent.location.href + '?mingleCode=' + this.$store.state.mingleCode,
       parentUrl () {
-        var url = parent.location.href
+        // var url = parent.location.href
         var setUrl = null
-        var getServiceCode = this.$store.state.mingleCode
-        if (location.search !== '' && !url.match('mingleCode')) {
-          setUrl = url + '&mingleCode=' + getServiceCode
-        } else if (location.search === '' && !url.match('mingleCode')) {
-          setUrl = url + '?mingleCode=' + getServiceCode
+        // var getServiceCode = this.$store.state.mingleCode
+        // if (location.search !== '' && !url.match('mingleCode')) {
+        //   setUrl = url + '&mingleCode=' + getServiceCode
+        // } else if (location.search === '' && !url.match('mingleCode')) {
+        //   setUrl = url + '?mingleCode=' + getServiceCode
+        // } else {
+        //   setUrl = url
+        // }
+        // this.$store.state.tourShareUrl = setUrl
+        var varUA = navigator.userAgent.toLowerCase()
+        if (varUA.indexOf('android') > -1) {
+          setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+          setUrl = 'https://apps.apple.com/us/app/id1501448481'
         } else {
-          setUrl = url
+          setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
         }
-        this.$store.state.tourShareUrl = setUrl
         return setUrl
       }
     }
@@ -79,29 +87,41 @@ export default {
       return os
     },
     smsShare () {
-      var btmUrl = parent.location.href
-      var getServiceCode = this.$store.state.mingleCode
-      if (btmUrl.match('mingleCode') == null) {
-        btmUrl = btmUrl + '?mingleCode=' + getServiceCode
+      var setUrl = null
+      var varUA = navigator.userAgent.toLowerCase()
+      if (varUA.indexOf('android') > -1) {
+        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        setUrl = 'https://apps.apple.com/us/app/id1501448481'
+      } else {
+        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       var devider = '?'
       var os = this.phoneChk()
       if (os === 'ios') {
         devider = '&'
       }
-      location.href = 'sms:' + devider + 'body:' + btmUrl
+      location.href = 'sms:' + devider + 'body:' + setUrl
     },
     facebookShare () {
-      const url = parent.location.href
-      const getServiceCode = this.$store.state.mingleCode
-
+    //   const url = parent.location.href
+    //   const getServiceCode = this.$store.state.mingleCode
+    //   var setUrl = null
+    //   if (location.search !== '' && !url.match('mingleCode')) {
+    //     setUrl = url + '&mingleCode=' + getServiceCode
+    //   } else if (location.search === '' && !url.match('mingleCode')) {
+    //     setUrl = url + '?mingleCode=' + getServiceCode
+    //   } else {
+    //     setUrl = url
+    //   }
       var setUrl = null
-      if (location.search !== '' && !url.match('mingleCode')) {
-        setUrl = url + '&mingleCode=' + getServiceCode
-      } else if (location.search === '' && !url.match('mingleCode')) {
-        setUrl = url + '?mingleCode=' + getServiceCode
+      var varUA = navigator.userAgent.toLowerCase()
+      if (varUA.indexOf('android') > -1) {
+        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        setUrl = 'https://apps.apple.com/us/app/id1501448481'
       } else {
-        setUrl = url
+        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
 
       const shareUrl = encodeURIComponent(setUrl)
@@ -121,10 +141,10 @@ export default {
     kakaoShare () {
       var url = parent.location.href
       var getServiceCode = this.$store.state.mingleCode
-      var title = '전국 스탬프 투어'
+      var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share_2.png`
       var setUrl = null
-      var desc = '전국 스탬프 투어로 전국 명소를 다녀보세요'
+      var desc = '혜택받는 전국 스탬프 투어 ‘올댓스탬프’ 앱으로 투어도 즐기고 혜택도 받아보세요.'
       if (location.search !== '' && !url.match('mingleCode')) {
         setUrl = url + '&mingleCode=' + getServiceCode
       } else if (location.search === '' && !url.match('mingleCode')) {
@@ -166,21 +186,30 @@ export default {
       return url
     },
     kakaoStoryShare () {
-      var url = parent.location.href
-      var getServiceCode = this.$store.state.mingleCode
-      var title = '전국 스탬프 투어'
+    //   var url = parent.location.href
+    //   var getServiceCode = this.$store.state.mingleCode
+      var title = '올댓스탬프'
       var shareImage = `${location.origin}/sns_share_2.png`
-      var setUrl = null
-      if (location.search !== '' && !url.match('mingleCode')) {
-        setUrl = url + '&mingleCode=' + getServiceCode
-      } else if (location.search === '' && !url.match('mingleCode')) {
-        setUrl = url + '?mingleCode=' + getServiceCode
+      //   var setUrl = null
+      //   if (location.search !== '' && !url.match('mingleCode')) {
+      //     setUrl = url + '&mingleCode=' + getServiceCode
+      //   } else if (location.search === '' && !url.match('mingleCode')) {
+      //     setUrl = url + '?mingleCode=' + getServiceCode
+      //   } else {
+      //     setUrl = url
+      //   }
+      var shareUrl = null
+      var varUA = navigator.userAgent.toLowerCase()
+      if (varUA.indexOf('android') > -1) {
+        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        shareUrl = 'https://apps.apple.com/us/app/id1501448481'
       } else {
-        setUrl = url
+        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       // eslint-disable-next-line no-undef
       Kakao.Story.open({
-        url: setUrl,
+        url: shareUrl,
         text: title,
         urlInfo: {
           title: title,
@@ -190,17 +219,25 @@ export default {
     },
     bandShare () {
       var filter = 'win16|win32|win64|mac|macintel'
-      var url = parent.location.href
-      var title = '전국 스탬프 투어'
-      var getServiceCode = this.$store.state.mingleCode
+      //   var url = parent.location.href
+      var title = '올댓스탬프'
+      //   var getServiceCode = this.$store.state.mingleCode
       var shareUrl = null
-      if (location.search !== '' && !url.match('mingleCode')) {
-        shareUrl = url + '&mingleCode=' + getServiceCode
-      } else if (location.search === '' && !url.match('mingleCode')) {
-        shareUrl = url + '?mingleCode=' + getServiceCode
+      var varUA = navigator.userAgent.toLowerCase()
+      if (varUA.indexOf('android') > -1) {
+        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        shareUrl = 'https://apps.apple.com/us/app/id1501448481'
       } else {
-        shareUrl = url
+        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
+      //   if (location.search !== '' && !url.match('mingleCode')) {
+      //     shareUrl = url + '&mingleCode=' + getServiceCode
+      //   } else if (location.search === '' && !url.match('mingleCode')) {
+      //     shareUrl = url + '?mingleCode=' + getServiceCode
+      //   } else {
+      //     shareUrl = url
+      //   }
 
       if (navigator.platform) {
         if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
