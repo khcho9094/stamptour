@@ -647,17 +647,17 @@ header .head_back span {
 }
 .gift_box .gift_price {
     display: inline-block;
-    font-size: 10px;
+    font-size: 12px;
     color:#000;
-    background:#98bfff;
-    height: 7px;
-    line-height: 0px;
+    /* background:#98bfff; */
+    /* height: 7px;
+    line-height: 0px; */
     padding:0 5px;
 }
 .gift_box button.view {
     display: inline-block;
     color:#3bb9fa;
-    font-size: 10px;
+    font-size: 12px;
     text-decoration: underline;
 }
 .recom_stamp {
