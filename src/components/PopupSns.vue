@@ -58,7 +58,7 @@ export default {
         if (varUA.indexOf('android') > -1) {
           setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
         } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-          setUrl = 'https://apps.apple.com/us/app/id1501448481'
+          setUrl = 'https://itunes.apple.com/app/id1501448481'
         } else {
           setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
         }
@@ -92,7 +92,7 @@ export default {
       if (varUA.indexOf('android') > -1) {
         setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        setUrl = 'https://apps.apple.com/us/app/id1501448481'
+        setUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
         setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
@@ -119,7 +119,7 @@ export default {
       if (varUA.indexOf('android') > -1) {
         setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        setUrl = 'https://apps.apple.com/us/app/id1501448481'
+        setUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
         setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
@@ -161,7 +161,7 @@ export default {
           imageUrl: shareImage,
           link: {
             androidExecParams: 'market://details?id=com.beaglemap.unitedstampapp',
-            iosExecParams: 'https://apps.apple.com/us/app/id1501448481',
+            iosExecParams: 'https://itunes.apple.com/app/id1501448481',
             mobileWebUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp',
             webUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
           }
@@ -171,7 +171,7 @@ export default {
             title: '앱 설치 또는 열기',
             link: {
               androidExecParams: 'market://details?id=com.beaglemap.unitedstampapp',
-              iosExecParams: 'https://apps.apple.com/us/app/id1501448481',
+              iosExecParams: 'https://itunes.apple.com/app/id1501448481',
               mobileWebUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp',
               webUrl: 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
             }
@@ -197,7 +197,7 @@ export default {
       if (varUA.indexOf('android') > -1) {
         shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        shareUrl = 'https://apps.apple.com/us/app/id1501448481'
+        shareUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
         shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
@@ -221,7 +221,7 @@ export default {
       if (varUA.indexOf('android') > -1) {
         shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
-        shareUrl = 'https://apps.apple.com/us/app/id1501448481'
+        shareUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
         shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
