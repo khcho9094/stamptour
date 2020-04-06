@@ -108,8 +108,6 @@ export default {
     // 로그인페이지에서 total_stamp_yn 쿠키값 세팅
     if (this.$cookie.get('total_stamp_yn') === 'Y') {
       appEvent.chkCoordinate()
-      this.$store.state.lon = localStorage.getItem('setLon')
-      this.$store.state.lat = localStorage.getItem('setLat')
     }
   },
   beforeMount () {
@@ -126,6 +124,8 @@ export default {
     }
   },
   mounted () {
+    this.$store.state.lon = localStorage.getItem('setLon')
+    this.$store.state.lat = localStorage.getItem('setLat')
     this.$store.dispatch('loadMainData', this.params)
   }
 }
