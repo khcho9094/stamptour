@@ -1192,23 +1192,23 @@ header .head_back span {
     padding-right: 5px;
     vertical-align: top;
 }
-.tour_sub_wrap .service_info.type1 .info p {
+.tour_sub_wrap .service_info.type1 .info .ptxt {
     margin-bottom: 1px;
     color:#000;
 }
-.tour_sub_wrap .service_info.type2 .info p {
+.tour_sub_wrap .service_info.type2 .info .ptxt {
     margin-bottom: 1px;
     color:#000;
 }
-.tour_sub_wrap .service_info.type3 .info p {
+.tour_sub_wrap .service_info.type3 .info .ptxt {
     color:#000;
     padding-left: 0;
 }
-.tour_sub_wrap .service_info.type2 .info p strong {
+.tour_sub_wrap .service_info.type2 .info .ptxt strong {
     color:#c86550;
     font-weight: normal;
 }
-.tour_sub_wrap .service_info.type3 .info p span {
+.tour_sub_wrap .service_info.type3 .info .ptxt span {
     color:rgba(0, 0, 0, 0.5);
 }
 

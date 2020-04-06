@@ -15,9 +15,7 @@
               v-bind:key="idx">
             </swiper-slide>
         </swiper>
-        <div class="content">
-            {{introData.mingle_desc}}
-        </div>
+        <div class="content" v-html="introData.mingle_desc"></div>
         <div class="tour_start_box">
             <div class="chkbox">
                 <input type="checkbox" id="tour_off"  name="tour_off" checked="checked"> <label for="tour_off">일주일동안 보지않기</label>

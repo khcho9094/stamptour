@@ -4,13 +4,13 @@
             <!-- <div class="title">행사</div> -->
             <div class="title">{{cTitle()}}</div>
             <div class="info">
-                <p v-html="data" v-for="(data, idx) in commonData()" v-bind:key="idx"></p>
+                <p class="ptxt" v-html="data" v-for="(data, idx) in commonData()" v-bind:key="idx"></p>
             </div>
         </div>
         <div class="service_info type3">
             <div class="title">개요</div>
             <div class="info">
-                <p v-html="introDesc()"></p>
+                <p class="ptxt" v-html="introDesc()"></p>
             </div>
         </div>
     </div>
