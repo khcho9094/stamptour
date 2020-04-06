@@ -1,5 +1,5 @@
 <template>
-    <div v-if="sumPrice > 0" class="gift_box" @click="goGift">
+    <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
         <div class="gift_price">
             {{sumPrice}}원 상당의 선물이 가득!!
         </div><br/>
