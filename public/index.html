@@ -29,12 +29,12 @@
         var chkLat = 0
         chkLon = Math.floor(parseInt(lon))
         chkLat = Math.floor(parseInt(lat))
-        if (lon !== -1 && chkLon !== -1) {
+        if (lon !== '-1' && chkLon !== 0) {
           localStorage.setItem('setLon',lon)
         } else {
           localStorage.setItem('setLon','0')
         }
-        if (lat !== -1 && chkLat !== -1) {
+        if (lat !== '-1' && chkLat !== 0) {
           localStorage.setItem('setLat',lat)
         } else {
           localStorage.setItem('setLat','0')
