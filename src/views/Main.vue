@@ -126,7 +126,9 @@ export default {
   mounted () {
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
-    this.$store.dispatch('loadMainData', this.params)
+    setTimeout(() => {
+      this.$store.dispatch('loadMainData', this.params)
+    }, 100)
   }
 }
 </script>

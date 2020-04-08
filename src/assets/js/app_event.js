@@ -63,12 +63,14 @@ export function externalLinks (url) {
 // eslint-disable-next-line no-unused-vars
 export function chkCoordinate () {
   var totalStampYn = getCookie('total_stamp_yn')
+  var os = chkUserAgent()
   if (totalStampYn === 'Y') {
     if (/Android/i.test(navigator.userAgent)) {
       // eslint-disable-next-line no-undef
       tranggle3.tranggle_callback('chk_coordinate', '{}')
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      window.location = 'tranggle_callback://chk_coordinate'
+    // } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    } else if (os === 'ios') {
+      window.location = 'tranggle://chk_coordinate'
     } else {
       return false
     }
