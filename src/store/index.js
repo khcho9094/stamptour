@@ -338,6 +338,8 @@ export default new Vuex.Store({
       status / 완료여부확인 / 옵션
     */
     loadMainData ({ state, commit }, params) {
+      state.lon = localStorage.getItem('setLon') || 0
+      state.lat = localStorage.getItem('setLat') || 0
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
@@ -363,6 +365,8 @@ export default new Vuex.Store({
       if (state.token === null) {
         state.token = ''
       }
+      state.lon = localStorage.getItem('setLon') || 0
+      state.lat = localStorage.getItem('setLat') || 0
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH&lon=${state.lon}&lat=${state.lat}`
       Vue
         .jsonp(url)
