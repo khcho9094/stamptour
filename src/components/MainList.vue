@@ -96,7 +96,12 @@ export default {
       this.listCall()
     },
     listCall () {
-      this.$store.dispatch('loadMainData', this.params)
+      // this.$store.dispatch('loadMainData', this.params)
+      this.$store.state.lon = localStorage.getItem('setLon')
+      this.$store.state.lat = localStorage.getItem('setLat')
+      setTimeout(() => {
+        this.$store.dispatch('loadMainData', this.params)
+      }, 100)
     },
     stampDetail (sid) {
       localStorage.stampDetail = JSON.stringify(sid)
