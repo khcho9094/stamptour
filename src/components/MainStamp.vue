@@ -46,14 +46,14 @@
           class="slide"
           v-for="index in swiperPaging()"
           v-bind:key="index">
-            <ul class="stamp_list">
+            <ul class="stamp_list" id="stampId">
                 <li v-for="(data, idx) in stampList(index)" v-bind:key="idx" class="dot_box">
                     <div class="box">
                         <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
                         <img class="gift" v-if="giftChk(data.num)" :src="giftIcon(data.num)" @click="giftClick(data.num)">
                         <span v-else>{{data.num}}</span>
                     </div>
-                    <div class="line">line</div>
+                    <div class="line" :class="lineChk(data.num)" :style="{ width : `${dotW}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -201,11 +201,9 @@ export default {
     this.$store.dispatch('loadMainAll')
   },
   mounted () {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
-      }, 400)
-    })
+    window.onload = () => {
+      this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+    }
   }
 }
 </script>
