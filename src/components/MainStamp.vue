@@ -16,13 +16,14 @@
           class="slide"
           v-for="index in swiperPaging()"
           v-bind:key="index">
-            <ul class="stamp_list">
+            <ul class="stamp_list" id="stampId">
                 <li v-for="(data, idx) in stampList(index)" v-bind:key="idx">
                     <div class="box">
                         <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
                         <img class="gift" v-if="giftChkPoint(data.num)" :src="giftIconPoint(data.num)" @click="giftClickPoint(data.num)">
                         <span v-else>{{data.num}}</span>
                     </div>
+                    <div class="line" :class="lineChk(data.num)" :style="{ width : `${dotW}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -46,12 +47,13 @@
           v-for="index in swiperPaging()"
           v-bind:key="index">
             <ul class="stamp_list">
-                <li v-for="(data, idx) in stampList(index)" v-bind:key="idx">
+                <li v-for="(data, idx) in stampList(index)" v-bind:key="idx" class="dot_box">
                     <div class="box">
                         <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
                         <img class="gift" v-if="giftChk(data.num)" :src="giftIcon(data.num)" @click="giftClick(data.num)">
                         <span v-else>{{data.num}}</span>
                     </div>
+                    <div class="line">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -73,7 +75,8 @@ export default {
           el: '.swiper-pagination',
           type: 'fraction'
         }
-      }
+      },
+      dotW: 0
     }
   },
   computed: {
@@ -127,6 +130,14 @@ export default {
         complete = require('@/assets/images/complete.png')
       }
       return complete
+    },
+    lineChk (num) {
+      console.log(num, ':::', this.getStampCount)
+      let check = ''
+      if (num <= this.getStampCount) {
+        check = 'completeLine'
+      }
+      return check
     },
     zIn (num) {
       let zindex = 0
@@ -189,6 +200,13 @@ export default {
       this.$store.dispatch('loadGiftNoToken')
     }
     this.$store.dispatch('loadMainAll')
+  },
+  mounted () {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+      }, 400)
+    })
   }
 }
 </script>
