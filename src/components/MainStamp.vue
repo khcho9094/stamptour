@@ -132,7 +132,6 @@ export default {
       return complete
     },
     lineChk (num) {
-      console.log(num, ':::', this.getStampCount)
       let check = ''
       if (num <= this.getStampCount) {
         check = 'completeLine'
