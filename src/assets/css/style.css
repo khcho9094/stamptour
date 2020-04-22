@@ -801,6 +801,7 @@ header .head_back span {
 .course_box .sort .complete_hide {
     position: relative;
     background-color: #faf7f1;
+    margin-top: 1px;
 }
 .course_box .sort .complete_hide input[type="checkbox"] {
      position: absolute;
@@ -824,7 +825,7 @@ header .head_back span {
      content: '';
      position: absolute;
      left: 0;
-     top: 0;
+     top: 1px;
      width: 10px;
      height: 10px;
      text-align: center;
