@@ -211,7 +211,7 @@ header .head_back span {
     color:#010101;
     line-height:21px;
     background:#fff;
-    padding:66px 0 30px;
+    padding:66px 0 40px;
     font-family:inaviL;
 }
 .pop_overay .pop_cont .text_2 .check {
@@ -247,7 +247,7 @@ header .head_back span {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    top: 1px;
     width: 10px;
     height: 10px;
     text-align: center;
@@ -375,7 +375,7 @@ header .head_back span {
     width:50%;
 }
 .pop_overay .pop_cont button.type1 {
-    border-right: 1px solid #fff;
+    border-right: 1px solid #d29284;
 }
 
 .pop_overay_2 {
@@ -572,20 +572,28 @@ header .head_back span {
 }
 .stamp_box ul.stamp_list li {
     float: left;
-    width: 44px;
-    margin-left: calc(25% - 55px);
+    width: 47px;
+    margin-left: calc(25% - 59px);
     margin-bottom: 15px;
     position: relative;
 }
 .stamp_box ul.stamp_list li .line {
-    display: none;
     text-indent: -9999px;
-    background-color: #c86550;
+    background-image: url('../images/dotdot.png');
+    background-repeat: repeat-x;
+    background-size: 5px;
     width:20px;
-    height:2px;
+    height:3px;
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: 22px;
+    right: 43px;
+}
+.stamp_box ul.stamp_list li .line.completeLine {
+    background: #c86550;
+    padding-left: 2px;
+    box-sizing: content-box;
+    top: 23px;
+    height:2px;
 }
 
 .stamp_box ul.stamp_list li .box {
@@ -793,6 +801,7 @@ header .head_back span {
 .course_box .sort .complete_hide {
     position: relative;
     background-color: #faf7f1;
+    margin-top: 1px;
 }
 .course_box .sort .complete_hide input[type="checkbox"] {
      position: absolute;
@@ -816,11 +825,11 @@ header .head_back span {
      content: '';
      position: absolute;
      left: 0;
-     top: 0;
+     top: 1px;
      width: 10px;
      height: 10px;
      text-align: center;
-     background: #fff;
+     background: #faf7f1;
      border: 1px solid #d0a287;
      border-radius: 100%;
 }
@@ -844,7 +853,7 @@ header .head_back span {
 
 .course_box ul.list {
     background-color: #f6f1e7;
-    padding:17px 25px;
+    padding:17px 25px 55px;
 }
 .course_box ul.list li {
     overflow: hidden;
@@ -1172,6 +1181,7 @@ header .head_back span {
 }
 .tour_sub_wrap .service_info .info {
     padding-right: 25px;
+    padding-bottom: 35px;
 }
 .tour_sub_wrap .service_info .info h3 {
     font-weight: normal;
@@ -1325,6 +1335,7 @@ header .head_back span {
 
 .tour_sub_wrap .service_info ul.servie_list {
     padding-right: 25px;
+    padding-bottom: 30px;
 }
 .tour_sub_wrap .service_info ul.servie_list li {
     font-size: 14px;
@@ -1347,7 +1358,7 @@ header .head_back span {
 
 .tour_sub_wrap ul.view_list {
     overflow: hidden;
-    padding:25px;
+    padding: 25px 25px 50px;
 }
 .tour_sub_wrap ul.view_list li {
     float: left;
@@ -1402,6 +1413,7 @@ header .head_back span {
 .tour_sub_wrap ul.user_list {
     padding-left: 25px;
     background-color: #f7f8f9;
+    padding-bottom: 65px;
 }
 .tour_sub_wrap ul.user_list li {
     cursor: pointer;
@@ -1492,12 +1504,12 @@ header .head_back span {
 /* 개인정보 */
 .person_pop {
     width: 260px;
-    height:190px;
+    height:205px;
     background: #eee;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -100px 0 0 -130px;
+    margin: -110px 0 0 -130px;
     padding: 10px;
     text-align: left;
 }
