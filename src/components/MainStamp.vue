@@ -204,6 +204,7 @@ export default {
     window.onload = () => {
       this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
     }
+    this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
   }
 }
 </script>
