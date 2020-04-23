@@ -102,14 +102,15 @@ export default {
     },
     durunubiCheck (ev) {
       this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
-
-      if (this.$store.state.durunubiCheck === 0) {
-        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-          appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
-        } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {
-          appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=ios')
+      setTimeout(() => {
+        if (this.$store.state.durunubiCheck === '0') {
+          if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+            appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
+          } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {
+            appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=ios')
+          }
         }
-      }
+      }, 500)
     },
     agreeBtn () {
       if (this.memberInfo.address && this.memberInfo.mobile) {
