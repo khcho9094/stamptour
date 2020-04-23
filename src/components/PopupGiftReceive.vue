@@ -22,7 +22,7 @@
                   <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
                 <div class="check">
-                  <input type="checkbox" id="personal"  name="personal" v-model="personal" @click="popup = true"> <label for="personal">개인정보 제3자 제공동의</label>
+                  <input type="checkbox" id="personal"  name="personal" v-model="personal" @click="agreePopup"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>
@@ -32,8 +32,8 @@
             <div class="person_pop" v-show="popup">
               <div class="title">개인정보 제3자 제공동의가 필요합니다.</div>
               <div class="ptxt">
-                <b>· 수집/이용 목적 : </b>쿠폰 발급 통계 정보 작성<br/>
-                <b>· 개인정보 항목 : </b>연락처, 주소(시도), 이름<br/>
+                <b>· 수집/이용 목적 : </b>선물 발급 통계 정보 작성<br/>
+                <b>· 개인정보 항목 : </b>연락처, 주소, 이름, 성별, 생년월일<br/>
                 <b>· 보유 기간 : </b>1년<br/>
                 <div class="cont">
                   <b><font-awesome-icon icon="home" /> 주소 : </b><span class="nodata" v-if="!memberInfo.address" @click="goInsert">터치시 계정정보로 이동</span><span class="data" v-else>{{memberInfo.address}}</span><br/>
@@ -89,6 +89,7 @@ export default {
           } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
             // url = 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M'
             url = `https://m.tranggle.com/mingle/coursebook/auth/1?token=${this.$cookie.get('login_token')}`
+            this.$store.dispatch('openPopupGift', {})
           }
           if (url) {
             appEvent.externalLinks(url)
@@ -115,6 +116,7 @@ export default {
     agreeBtn () {
       if (this.memberInfo.address && this.memberInfo.mobile) {
         alert('개인정보 제3자 제공에 동의하셨습니다.')
+        this.$cookie.set('agree_security', 'Y', 9999)
         this.popup = false
       } else {
         alert('개인정보를 모두 입력해주세요.')
@@ -150,11 +152,19 @@ export default {
         val = '모바일 상품권 받기'
       }
       return val
+    },
+    agreePopup () {
+      if (!this.personal) {
+        this.popup = !this.popup
+      }
     }
   },
   mounted () {
     this.$store.dispatch('loadGiftDataNew')
     this.setStamp()
+    if (this.$cookie.get('agree_security') === 'Y') {
+      this.personal = true
+    }
   },
   destroyed () {
     // this.$router.go()

@@ -211,7 +211,7 @@ header .head_back span {
     color:#010101;
     line-height:21px;
     background:#fff;
-    padding:66px 0 30px;
+    padding:66px 0 40px;
     font-family:inaviL;
 }
 .pop_overay .pop_cont .text_2 .check {
@@ -247,7 +247,7 @@ header .head_back span {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    top: 1px;
     width: 10px;
     height: 10px;
     text-align: center;
@@ -1504,12 +1504,12 @@ header .head_back span {
 /* 개인정보 */
 .person_pop {
     width: 260px;
-    height:190px;
+    height:205px;
     background: #eee;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -100px 0 0 -130px;
+    margin: -110px 0 0 -130px;
     padding: 10px;
     text-align: left;
 }
