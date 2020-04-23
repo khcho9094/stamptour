@@ -106,6 +106,7 @@ export default {
       this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
       setTimeout(() => {
         if (this.$store.state.durunubiCheck === '0') {
+          document.getElementById('durunubi').checked = false
           if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
             appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
           } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {
