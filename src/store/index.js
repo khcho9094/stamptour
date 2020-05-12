@@ -55,10 +55,13 @@ export default new Vuex.Store({
     memberList: [], // 참가자 명단
     memberCount: '0', // 참가자 수
     TourData: [], // 축제공연행사
+    TourInfoData: [], // 관광지
     FoodData: [], // 음식점
     LodgMentData: [], // 숙박업소
     LeportsData: [], // 체험관광
     ShoppingData: [], // 쇼핑
+    CultureData: [], // 문화시설
+    CourseData: [], // 여행코스
     tourListData: [], // 투어 리스트
     serviceLinkData: [],
     apiDetailData: [],
@@ -144,16 +147,33 @@ export default new Vuex.Store({
       state.memberCount = data.total.CHALLENGE
     },
     setTourTotalData (state, data) {
+      // if (data.name === 'party') {
+      //   state.TourData = data.list
+      // } else if (data.name === 'food') {
+      //   state.FoodData = data.list
+      // } else if (data.name === 'hotel') {
+      //   state.LodgMentData = data.list
+      // } else if (data.name === 'exp') {
+      //   state.LeportsData = data.list
+      // } else {
+      //   state.ShoppingData = data.list
+      // }
       if (data.name === 'party') {
         state.TourData = data.list
+      } else if (data.name === 'tour') {
+        state.TourInfoData = data.list
       } else if (data.name === 'food') {
         state.FoodData = data.list
       } else if (data.name === 'hotel') {
         state.LodgMentData = data.list
-      } else if (data.name === 'exp') {
-        state.LeportsData = data.list
-      } else {
+      } else if (data.name === 'shopping') {
         state.ShoppingData = data.list
+      } else if (data.name === 'culture') {
+        state.CultureData = data.list
+      } else if (data.name === 'course') {
+        state.CourseData = data.list
+      } else {
+        state.LeportsData = data.list
       }
     },
     setTourListData (state, data) {
