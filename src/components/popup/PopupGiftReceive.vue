@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     closeBtn () {
+      window.history.back()
       this.$store.dispatch('openPopupGift', {})
     },
     receiveGift () {
@@ -166,6 +167,11 @@ export default {
     this.setStamp()
     if (this.$cookie.get('agree_security') === 'Y') {
       this.personal = true
+    }
+    window.onpopstate = history.onpushstate = (e) => {
+      if (window.location.href.split('/').pop().indexOf('modal') === -1) {
+        this.$store.dispatch('openPopupGift', {})
+      }
     }
   },
   destroyed () {

@@ -538,11 +538,18 @@ header .head_back span {
     color:#010101;
     margin-bottom: 20px;
 }
+.stamp_box .title .myStamp {
+    width:6px;
+    height:11px;
+    position: relative;
+    top: -1px;
+    left: 6px;
+}
 .stamp_box .title .count {
     border:1px solid #dadcde;
     border-radius: 20px;
-    padding: 0px 12px 0px 9px;
-    margin-left: 10px;
+    padding: 2px 12px 1px 9px;
+    float: right;
 }
 .stamp_box .title .count em {
     font-family: arialRound;
@@ -613,7 +620,7 @@ header .head_back span {
 .stamp_box ul.stamp_list li .box img.gift {
     width: 25px;
     position: absolute;
-    top: 50%;
+    top: 49%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -853,7 +860,7 @@ header .head_back span {
 
 .course_box ul.list {
     background-color: #f6f1e7;
-    padding:17px 25px 55px;
+    padding:17px 15px 55px 25px;
 }
 .course_box ul.list li {
     overflow: hidden;
@@ -864,8 +871,8 @@ header .head_back span {
 }
 .course_box ul.list li .box_lt {
     float: left;
-    width: 65px;
-    height:65px;
+    width: 66px;
+    height:66px;
     border-radius: 3px;
     margin-right: 15px;
     /* background-image:url('../images/dummy_img/img_3.jpg'); */
@@ -873,28 +880,49 @@ header .head_back span {
     background-size: cover;
     background-position: center;
     text-align: center;
+    position: relative;
+}
+.course_box ul.list li .box_lt .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: 1;
 }
 .course_box ul.list li .box_lt img.p_icon {
     width: 27px;
-    margin-top: 10px;
+    z-index: 2;
+    position: absolute;
+    top: 11px;
+    left: 19px;
 }
 .course_box ul.list li .box_lt img.c_icon {
     width: 47px;
-    margin-top: 10px;
+    z-index: 2;
+    position: absolute;
+    top: 9px;
+    left: 9px;
 }
 .course_box ul.list li .box_lt span {
-    color:#3bb9fa;
+    color:#fff;
     font-size: 12px;
     font-family: arialRound;
     display: inline-block;
-    background:#fff;
+    background:rgba(0, 0, 0, 0.5);
     padding: 2px;
-    border-radius: 2px;
-    line-height: 10px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    border-radius: 0 0 3px 3px;
 }
 .course_box ul.list li .box_rt {
     float: left;
-    width: calc(100% - 80px);
+    width: calc(100% - 81px);
     height: 76px;
     position: relative;
 }
@@ -904,6 +932,10 @@ header .head_back span {
     color:#010101;
     line-height: 15px;
     font-weight: normal;
+    width: calc(100% - 60px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .course_box ul.list li .box_rt p {
     font-family:inaviL;
@@ -936,6 +968,21 @@ header .head_back span {
     color:#c86550;
     font-family: arialRound;
 }
+.course_box ul.list li .box_rt .cycle {
+    display: inline-block;
+    width:44px;
+    height:15px;
+    line-height: 14px;
+    border: 1px solid #c86550;
+    border-radius: 15px;
+    text-align: center;
+    color:#c86550;
+    font-size: 9px;
+    box-sizing: content-box;
+    margin-left: 12px;
+    position: relative;
+    bottom: 1px;
+}
 
 .course_box ul.list li .box_rt .position {
     text-indent: -9999px;
@@ -947,8 +994,24 @@ header .head_back span {
     background-position: center;
     position: absolute;
     top: 10px;
-    right: 0;
+    right: 10px;
     cursor: pointer;
+}
+
+.course_box ul.list li .box_rt .stamp_badge {
+    width:56px;
+    height:56px;
+    background:#fff;
+    border-radius: 5px;
+    position: absolute;
+    right:0;
+    top: 0;
+}
+.course_box ul.list li .box_rt .stamp_badge img {
+    width:50px;
+    position: relative;
+    top: 3px;
+    left: 3px;
 }
 
 .course_box ul.list li .box_rt .progress_box {
@@ -1503,13 +1566,12 @@ header .head_back span {
 
 /* 개인정보 */
 .person_pop {
-    width: 260px;
-    height:205px;
+    width: 274px;
     background: #eee;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -110px 0 0 -130px;
+    margin: -130px 0 0 -137px;
     padding: 10px;
     text-align: left;
 }
@@ -1573,4 +1635,235 @@ header .head_back span {
     color: #c86550;
     font-family:inaviL;
     line-height: 1;
+}
+
+/*============================================
+
+                내가 찍은 스탬프
+
+=============================================*/
+
+.mystamp_wrap {
+    background:#f7f8f9;
+    padding:15px 25px 0;
+    height:calc(100vh - 50px);
+}
+.mystamp_wrap ul {
+    overflow: hidden;
+}
+.mystamp_wrap ul li {
+    float: left;
+    width: calc(33.3% - 10px);
+    margin-right: 15px;
+    margin-bottom:18px;
+}
+.mystamp_wrap ul li:nth-child(3n) {
+    margin-right: 0px;
+}
+.mystamp_wrap ul li .mystamp {
+    width:100%;
+    background:#fff;
+    padding:6px;
+    margin-bottom: 11px;
+}
+.mystamp_wrap ul li .mystamp img {
+    width:100%;
+}
+.mystamp_wrap ul li span {
+    width:100%;
+    display: inline-block;
+    font-size: 14px;
+    color:#000;
+    font-family:inaviL;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mystamp_wrap .box {
+    overflow: hidden;
+    margin-bottom:15px;
+}
+.mystamp_wrap .box .mySelect {
+    width:200px;
+    height:30px;
+    border:1px solid #698093;
+    border-radius: 3px;
+    font-size: 12px;
+    color:#698093;
+    font-family:inaviM;
+    position: relative;
+    background-image: url('../images/sd_arrow2.png');
+    background-size: 11px 6px;
+    background-repeat: no-repeat;
+    background-position: top 10px right 10px;
+    padding-right: 30px;
+    padding-left: 11px;
+}
+.mystamp_wrap .box .mySelect option {
+    
+}
+.mystamp_wrap .box .count {
+    border:1px solid #dadcde;
+    border-radius: 20px;
+    padding: 2px 12px 1px 9px;
+    float: right;
+    margin-top: 3px;
+}
+.mystamp_wrap .box .count em {
+    font-family: arialRound;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 15px;
+}
+.mystamp_wrap .box .count em:first-child {
+    color:#c86550;
+}
+.mystamp_wrap .box .count em:last-child {
+    color:#a6b4c0;
+}
+.mystamp_wrap .box .count img {
+    position: relative;
+    top: -5px;
+    left: 2px;
+    width:3px;
+    margin:0 4px;
+}
+.pop_stamp {
+    padding:35px 10px;
+    background:#fff;
+}
+.pop_stamp .sbox {
+    width:155px;
+    height:155px;
+    border-radius: 5px;
+    background:#f7f8f9;
+    padding:14px;
+    margin:0 auto 25px;
+}
+.pop_stamp .sbox img {
+    width:100%;
+}
+.pop_stamp .stxt {
+    font-size: 17px;
+    color:#010101;
+    font-family:inaviL;
+    margin-bottom:15px;
+}
+.pop_stamp .sdate {
+    font-size: 14px;
+    color:#3bb9fa;
+    font-family:inaviL;
+}
+
+/*============================================
+
+                전체 선물보기
+
+=============================================*/
+
+.all_gift {
+    height:calc(100vh - 50px);
+    background:#f7f8f9;
+    padding: 0 0 0 25px;
+}
+.all_gift ul.tour_list {
+    
+}
+.all_gift ul.tour_list > li {
+    line-height: 45px;
+    padding-top: 15px;
+    box-sizing: content-box;
+}
+.all_gift ul.tour_list > li .tit {
+    font-size: 14px;
+    color:#000;
+    font-family:inaviM;
+    position: relative;
+    background-image: url('../images/gift_arrow_d.png');
+    background-size: 11px 6px;
+    background-repeat: no-repeat;
+    background-position: top 20px right 30px;
+    border-bottom: 1px solid #edeeef;
+}
+
+
+.all_gift ul.tour_list > li > ul.all_list {
+    padding-top: 20px;
+}
+.all_gift ul.tour_list > li > ul.all_list li {
+    height:60px;
+    line-height: 60px;
+    position: relative;
+}
+.all_gift ul.tour_list > li > ul.all_list li .point {
+    display: inline-block;
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #e2f5fe;
+    font-size: 13px;
+    color:#3bb9fa;
+    text-align: center;
+    font-family: inaviB;
+}
+.all_gift ul.tour_list > li > ul.all_list li .point .stxt {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 1.2;
+    vertical-align: middle;
+    word-break: keep-all
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_img {
+    display: inline-block;
+    width:28px;
+    margin:0 6px;
+    position: relative;
+    /* top: 3px; */
+    vertical-align: middle;
+}
+.all_gift ul.tour_list > li > ul.all_list li > span {
+    display: inline-block;
+    font-family: inaviL;
+    font-size: 12px;
+    color: #010101;
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_icon {
+    padding:0 15px;
+    position: absolute;
+    top: 0;
+    right: -15px;
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_icon.on {
+    cursor: pointer;
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_icon img {
+    width:18px;
+    position: relative;
+    top: 3px;
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_icon .dot {
+    display: none;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #ff3232;
+    position: absolute;
+    top: 17px;
+    right: 11px;
+}
+.all_gift ul.tour_list > li > ul.all_list li .gift_icon.on .dot {
+    display: block;
+}
+.all_gift ul.tour_list > li > ul.all_list li .line {
+    width:2px;
+    height:22px;
+    background:#e2f5fe;
+    position: absolute;
+    left: 19px;
+    bottom: -13px;
+}
+.all_gift ul.tour_list > li > ul.all_list li:last-child .line {
+    display: none;
 }

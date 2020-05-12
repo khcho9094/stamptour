@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     // 메인
-    path: '/',
+    path: '*',
     name: 'Main',
     component: Main
   },
@@ -58,6 +58,18 @@ const routes = [
     path: '/member',
     name: 'Member',
     component: () => import('../views/Member.vue')
+  },
+  {
+    // 내가 찍은 스탬프
+    path: '/mystamp',
+    name: 'MyStamp',
+    component: () => import('../views/MyStamp.vue')
+  },
+  {
+    // 전체 스탬프 리스트
+    path: '/allgift',
+    name: 'AllGift',
+    component: () => import('../views/AllGift.vue')
   }
 ]
 

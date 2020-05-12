@@ -49,6 +49,7 @@ export default {
     },
     giftReceive (data) {
       if (data.mingle_gift_receive === 'Y') {
+        window.history.pushState({}, 'modal', '/modal')
         this.$store.dispatch('openPopupGift', data)
       }
     },

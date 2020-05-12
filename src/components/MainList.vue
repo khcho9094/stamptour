@@ -19,18 +19,23 @@
                 <div
                   class="box_lt"
                   :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
-                    <img :class="(data.user_mingle_badge_get_stamp_yn === 'N')?'p_icon':'c_icon'" :src="iconImg(data.mingle_badge_type, data.user_mingle_badge_get_stamp_yn)" alt="course_icon"><br/>
+                    <img :class="(data.user_mingle_badge_get_stamp_yn === 'N')?'p_icon':'c_icon'" :src="iconImg(data.mingle_badge_type, data.user_mingle_badge_get_stamp_yn)" alt="course_icon">
                     <span v-show="data.user_mingle_badge_get_stamp_yn === 'N' && setStamp()">{{data.user_mingle_badge_point}}P</span>
+                    <div class="layer"></div>
                 </div>
                 <div class="box_rt">
                     <h2>{{data.info_badge_name}}</h2>
                     <p class="txt">여기에서 {{parseInt(data.distance)}}km</p>
                     <div class="stamp_count">
                         <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
-                        <span class="stxt">스탬프</span>
+                        <span class="stxt">{{stampKind(data)}}</span>
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
+                        <span class="cycle">자전거</span>
                     </div>
                     <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
+                    <div class="stamp_badge" v-else-if="true" @click="stampClick">
+                      <img src="@/assets/images/dummy_img/stamp.png" alt="">
+                    </div>
                     <div class="progress_box" v-if="progressOn(data)">
                         <div class="p_back">
                             <div class="progress" :style="{'width':progressWidth(data)}"></div>
@@ -65,6 +70,22 @@ export default {
     ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo'])
   },
   methods: {
+    stampClick (e) {
+      e.stopPropagation()
+      const openChk = this.$store.state.stampOpen
+      this.$store.dispatch('loadStampPopup', openChk)
+    },
+    stampKind (data) {
+      let stamp = ''
+      if (data.mingle_badge_type === 'BADGE') {
+        stamp = '방문 스탬프'
+      } else if (data.mingle_badge_type === 'TRACK') {
+        stamp = '코스 스탬프'
+      } else {
+        stamp = '전자 스탬프'
+      }
+      return stamp
+    },
     iconImg (type, stamp) {
       let iType = `couse_icon_${type.toLowerCase()}`
       if (stamp === 'Y') {
@@ -158,6 +179,7 @@ export default {
     },
     stampAuth (e, data) {
       e.stopPropagation()
+      window.history.pushState({}, 'modal', '/modal')
       // this.$store.dispatch('loadBadgeRegister', data)
       // eslint-disable-next-line no-undef
       esp.setBackgroundColor('#000000')
@@ -208,6 +230,11 @@ export default {
           alert('merchant 코드가 없습니다.')
         }
       }
+      // eslint-disable-next-line no-undef
+      esp.certError = (errorCode, errorMessage) => {
+        console.log(errorCode)
+        console.log(errorMessage)
+      }
     },
     getTime () {
       const today = new Date()
@@ -223,6 +250,11 @@ export default {
   mounted () {
     this.$store.dispatch('loadAreaList')
     this.$store.dispatch('loadMingleVersionChk')
+    window.onpopstate = history.onpushstate = (e) => {
+      if (window.location.href.split('/').pop().indexOf('modal') === -1) {
+        // this.$store.dispatch('openPopupGift', {})
+      }
+    }
   }
 }
 </script>

@@ -11,6 +11,7 @@
       <PopupGift />
       <PopupSns />
       <PopupStampSuccess v-if="popupStampSuccess" />
+      <PopupMyStamp />
     </div>
     <Intro v-else/>
   </div>
@@ -24,11 +25,12 @@ import MainStamp from '@/components/MainStamp.vue'
 import MainGiftView from '@/components/MainGiftView.vue'
 import MainRecommend from '@/components/MainRecommend.vue'
 import MainList from '@/components/MainList.vue'
-import Popup from '@/components/PopupMenu.vue'
-import PopupGift from '@/components/PopupGift.vue'
-import PopupSns from '@/components/PopupSns.vue'
-import PopupStampSuccess from '@/components/PopupStampSuccess.vue'
+import Popup from '@/components/popup/PopupMenu.vue'
+import PopupGift from '@/components/popup/PopupGift.vue'
+import PopupSns from '@/components/popup/PopupSns.vue'
+import PopupStampSuccess from '@/components/popup/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
+import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 export default {
   name: 'Main',
   components: {
@@ -41,7 +43,8 @@ export default {
     PopupGift,
     PopupSns,
     PopupStampSuccess,
-    Intro
+    Intro,
+    PopupMyStamp
   },
   data () {
     return {

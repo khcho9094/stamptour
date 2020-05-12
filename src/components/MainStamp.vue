@@ -3,7 +3,7 @@
     <!-- 포인트일 경우 -->
     <div class="stamp_box" v-if="setStamp()">
       <div class="title" v-if="this.token">
-          내가 찍은 스탬프
+          내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count">
               <em>{{this.myPoint}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
@@ -32,8 +32,8 @@
     </div>
     <!-- 갯수일 경우 -->
     <div class="stamp_box" v-else>
-      <div class="title" v-if="this.token">
-          내가 찍은 스탬프
+      <div class="title" v-if="this.token" @click="goMyStamp">
+          내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count">
               <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
@@ -64,6 +64,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import router from '@/router'
 export default {
   name: 'MainStamp',
   data () {
@@ -148,6 +149,7 @@ export default {
       return zindex
     },
     giftClick (num) {
+      window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (parseInt(data.mingle_count) === num) {
           this.$store.dispatch('openPopupGift', data)
@@ -155,6 +157,7 @@ export default {
       })
     },
     giftClickPoint (num) {
+      window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (data.mingle_count - this.myPoint < 6 && data.mingle_count - this.myPoint > 0 && this.getStampCount + 1 === num) {
           this.$store.dispatch('openPopupGift', data)
@@ -190,6 +193,12 @@ export default {
       } else {
         return false
       }
+    },
+    getResize () {
+      this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+    },
+    goMyStamp () {
+      router.push('/mystamp')
     }
   },
   created () {
@@ -201,10 +210,13 @@ export default {
     this.$store.dispatch('loadMainAll')
   },
   mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.getResize)
+    })
     window.onload = () => {
-      this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+      this.getResize()
     }
-    this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+    this.getResize()
   }
 }
 </script>

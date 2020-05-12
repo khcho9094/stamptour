@@ -17,8 +17,8 @@ import Head from '@/components/Head.vue'
 import GiftPoint from '@/components/GiftPoint.vue'
 import GiftList from '@/components/GiftList.vue'
 import GiftGuide from '@/components/GiftGuide.vue'
-import PopupGiftReceive from '@/components/PopupGiftReceive.vue'
-import PopupSns from '@/components/PopupSns.vue'
+import PopupGiftReceive from '@/components/popup/PopupGiftReceive.vue'
+import PopupSns from '@/components/popup/PopupSns.vue'
 export default {
   name: 'Gift',
   components: {
