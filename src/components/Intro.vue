@@ -28,7 +28,7 @@
 <script>
 import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
-import PopupIntro from '@/components/PopupIntro.vue'
+import PopupIntro from '@/components/popup/PopupIntro.vue'
 export default {
   name: 'Intro',
   components: {

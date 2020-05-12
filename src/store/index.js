@@ -63,6 +63,7 @@ export default new Vuex.Store({
     serviceLinkData: [],
     apiDetailData: [],
     snsOpen: false,
+    stampOpen: false,
     popupGift: { open: false },
     popupStampSuccess: false,
     lon: 0, // 경도
@@ -215,6 +216,9 @@ export default new Vuex.Store({
     },
     setSnsOpen (state, data) {
       state.snsOpen = data
+    },
+    setStampOpen (state, data) {
+      state.stampOpen = data
     },
     setBadgeRegister (state, data) {
       state.badgeRegister = data
@@ -462,6 +466,13 @@ export default new Vuex.Store({
     loadSnsPopup ({ state, commit }, data) {
       const openYn = !data
       commit('setSnsOpen', openYn)
+    },
+    /*
+    스탬프 보기 팝업
+    */
+    loadStampPopup ({ state, commit }, data) {
+      const openYn = !data
+      commit('setStampOpen', openYn)
     },
     /*
     선물팝업 view
