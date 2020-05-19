@@ -89,7 +89,7 @@ export default {
             }
           } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
             // url = 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M'
-            url = `https://m.tranggle.com/mingle/coursebook/auth/1?token=${this.$cookie.get('login_token')}`
+            url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$cookie.get('login_token')}`
             this.$store.dispatch('openPopupGift', {})
           }
           if (url) {
