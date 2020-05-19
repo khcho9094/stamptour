@@ -3,11 +3,13 @@
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
-                <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='">
+                <!-- <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='"> -->
+                <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '1'">
                   <b>잼버리 코스</b> 완성!!<br/>
                   <span>축하합니다!!</span>
                 </div>
-                <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='">
+                <!-- <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"> -->
+                  <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '14'">
                   <b>봉사점수 신청하기</b><br/>
                 </div>
                 <div class="gift_receive" v-else>
@@ -18,7 +20,8 @@
                     <img :src="imgIcon()" alt="gs25">
                     {{popupGift.mingle_gift_title}}
                 </span>
-                <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='">
+                <!-- <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='"> -->
+                <div class="check durunubi" v-if="popupGift.mingle_no === '16'">
                   <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
                 <div class="check">
@@ -70,24 +73,30 @@ export default {
       this.$store.dispatch('openPopupGift', {})
     },
     receiveGift () {
-      if (!this.durunubi && this.mingleCode === 'SzActcWN5QXozxDixoG4zQ==') {
+      // if (!this.durunubi && this.mingleCode === 'SzActcWN5QXozxDixoG4zQ==') {
+      if (!this.durunubi && this.mingle_no === '16') {
         alert('두루누비 계정 확인이 필요합니다.')
       } else if (!this.personal) {
         alert('개인정보 제3자 제공동의가 필요합니다.')
       } else {
         if (this.popupGift.mingle_gift_add_point === 'AUTH') {
           let url = ''
-          if (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==') {
+          // if (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==') {
+          if (this.popupGift.mingle_no === '1') {
             url = 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3'
-          } else if (this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==') {
+          // } else if (this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==') {
+          } else if (this.popupGift.mingle_no === '11') {
             url = 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA'
-          } else if (this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
-            if (this.popupGift.mingle_user_gift_no === '433145') {
+          // } else if (this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
+          } else if (this.popupGift.mingle_no === '14') {
+            // if (this.popupGift.mingle_user_gift_no === '433145') {
+            if (this.popupGift.mingle_gift_order === '1') {
               url = 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc'
             } else {
               url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
             }
-          } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
+          // } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
+          } else if (this.popupGift.mingle_no === '18') {
             // url = 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M'
             url = `https://m.tranggle.com/mingle/coursebook/auth/1?token=${this.$cookie.get('login_token')}`
             this.$store.dispatch('openPopupGift', {})
@@ -147,9 +156,11 @@ export default {
     },
     receiveBtn (data) {
       let val = ''
-      if (data.mingle_gift_add_point === 'AUTH' && (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==' || this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==')) {
+      // if (data.mingle_gift_add_point === 'AUTH' && (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==' || this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==')) {
+      if (data.mingle_gift_add_point === 'AUTH' && (data.mingle_no === '1' || data.mingle_no === '11' || data.mingle_no === '18')) {
         val = '인증서 신청하기'
-      } else if (data.mingle_gift_add_point === 'AUTH' && this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
+      // } else if (data.mingle_gift_add_point === 'AUTH' && this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
+      } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '14') {
         val = '봉사점수 신청하기'
       } else {
         val = '모바일 상품권 받기'
@@ -176,7 +187,11 @@ export default {
   },
   destroyed () {
     // this.$router.go()
-    this.$store.dispatch('loadGiftData')
+    if (this.$route.fullPath === '/allgift') {
+      this.$store.dispatch('loadAllGiftData')
+    } else {
+      this.$store.dispatch('loadGiftData')
+    }
   }
 }
 </script>

@@ -127,6 +127,11 @@ export default {
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {
+      const mingleCodeArr = this.$cookie.get('service_code')
+      this.$store.state.mingleCodeArr = mingleCodeArr
+      if (this.$cookie.get('login_token') !== '') {
+        this.$store.dispatch('loadPointSumApi')
+      }
       this.$store.dispatch('loadMainData', this.params)
     }, 100)
   }

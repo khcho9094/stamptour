@@ -30,11 +30,12 @@
                         <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                         <span class="stxt">{{stampKind(data)}}</span>
                         <span class="snum">{{data.mingle_stat_badge_count}}</span>
-                        <span class="cycle">자전거</span>
+                        <span v-if="data.mingle_badge_category === 'BICYCLE'" class="cycle">자전거</span>
                     </div>
                     <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
-                    <div class="stamp_badge" v-else-if="true" @click="stampClick">
-                      <img src="@/assets/images/dummy_img/stamp.png" alt="">
+                    <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick(data)">
+                      <!-- <img src="@/assets/images/dummy_img/stamp.png" alt=""> -->
+                      <img :src="data.mingle_stamp_image" alt="">
                     </div>
                     <div class="progress_box" v-if="progressOn(data)">
                         <div class="p_back">
@@ -70,8 +71,11 @@ export default {
     ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo'])
   },
   methods: {
-    stampClick (e) {
-      e.stopPropagation()
+    stampClick (data) {
+      // e.stopPropagation()
+      this.$store.state.getStampImage = data.mingle_stamp_image
+      this.$store.state.getStampName = data.info_badge_name
+      this.$store.state.getStampDate = data.user_mingle_badge_stamp_date
       const openChk = this.$store.state.stampOpen
       this.$store.dispatch('loadStampPopup', openChk)
     },

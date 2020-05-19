@@ -1830,7 +1830,7 @@ header .head_back span {
     color: #010101;
 }
 .all_gift ul.tour_list > li > ul.all_list li .gift_icon {
-    padding:0 15px;
+    padding:0 30px;
     position: absolute;
     top: 0;
     right: -15px;
@@ -1851,7 +1851,7 @@ header .head_back span {
     background-color: #ff3232;
     position: absolute;
     top: 17px;
-    right: 11px;
+    /* right: 11px; */
 }
 .all_gift ul.tour_list > li > ul.all_list li .gift_icon.on .dot {
     display: block;
