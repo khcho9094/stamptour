@@ -20,19 +20,39 @@
                     <img :src="imgIcon()" alt="gs25">
                     {{popupGift.mingle_gift_title}}
                 </span>
+                <div class="agree_pop">
+                  <div class="notice">Notice</div>
+                  <div class="agree_title">
+                    개인정보 제3자 제공 동의가 필요합니다.
+                  </div>
+                  <div class="agree_desc">
+                    • 수집/이용 목적<br>
+                    <span>선물 발급 통계정보 작성</span><br/>
+                    • 개인 정보 항목<br>
+                    <span>연락처, 주소, 이름, 성별, 생년월일</span><br/>
+                    • 보유기간 : <span>1년</span>
+                  </div>
+                  <div class="agree_info">
+                    <div class="tit">주소</div>
+                    <span>{{memberInfo.address || '정보 없음'}}</span>
+                    <div class="tit">휴대폰</div>
+                    <span>{{memberInfo.mobile || '정보 없음'}}</span>
+                  </div>
+                </div>
                 <!-- <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='"> -->
                 <div class="check durunubi" v-if="popupGift.mingle_no === '16'">
                   <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
                 <div class="check">
-                  <input type="checkbox" id="personal"  name="personal" v-model="personal" @click="agreePopup"> <label for="personal">개인정보 제3자 제공동의</label>
+                  <input type="checkbox" id="personal"  name="personal" v-model="personal"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>
             <!-- <button class="type2" @click="receiveGift">모바일 상품권 받기</button> -->
             <button class="type2" @click="receiveGift">{{receiveBtn(popupGift)}}</button>
             <!-- 개인정보 확인 -->
-            <div class="person_pop" v-show="popup">
+            <!-- 삭제 -->
+            <div class="person_pop">
               <div class="title">개인정보 제3자 제공동의가 필요합니다.</div>
               <div class="ptxt">
                 <b>· 수집/이용 목적 : </b>선물 발급 통계 정보 작성<br/>
@@ -48,24 +68,29 @@
                 </div>
               </div>
             </div>
+            <!-- 삭제// -->
         </div>
+        <PopupGiftPop v-if="popupNoti.open" />
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
+import PopupGiftPop from '@/components/popup/PopupGiftPop.vue'
 export default {
   name: 'PopupGiftReceive',
+  components: {
+    PopupGiftPop
+  },
   data () {
     return {
       durunubi: false,
       personal: false,
-      popup: false,
       unit: ''
     }
   },
   computed: {
-    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo'])
+    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo', 'popupNoti'])
   },
   methods: {
     closeBtn () {
@@ -73,39 +98,49 @@ export default {
       this.$store.dispatch('openPopupGift', {})
     },
     receiveGift () {
-      // if (!this.durunubi && this.mingleCode === 'SzActcWN5QXozxDixoG4zQ==') {
-      if (!this.durunubi && this.mingle_no === '16') {
-        alert('두루누비 계정 확인이 필요합니다.')
-      } else if (!this.personal) {
-        alert('개인정보 제3자 제공동의가 필요합니다.')
+      if (!this.memberInfo.address || !this.memberInfo.mobile) {
+        this.$store.dispatch('openNotiPopup', {
+          tit1: '선물을 받기 위해<br/>아래의 정보가 필요합니다.',
+          tit2: '주소, 휴대폰 번호'
+        })
       } else {
-        if (this.popupGift.mingle_gift_add_point === 'AUTH') {
-          let url = ''
-          // if (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==') {
-          if (this.popupGift.mingle_no === '1') {
-            url = 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3'
-          // } else if (this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==') {
-          } else if (this.popupGift.mingle_no === '11') {
-            url = 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA'
-          // } else if (this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
-          } else if (this.popupGift.mingle_no === '14') {
-            // if (this.popupGift.mingle_user_gift_no === '433145') {
-            if (this.popupGift.mingle_gift_order === '1') {
-              url = 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc'
-            } else {
-              url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
-            }
-          // } else if (this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') {
-          } else if (this.popupGift.mingle_no === '18') {
-            // url = 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M'
-            url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$cookie.get('login_token')}`
-            this.$store.dispatch('openPopupGift', {})
-          }
-          if (url) {
-            appEvent.externalLinks(url)
-          }
+        if (!this.durunubi && this.mingle_no === '16') {
+          this.$store.dispatch('openNotiPopup', {
+            tit1: '두루누비 계정 확인이 필요합니다.',
+            tit2: ''
+          })
+        } else if (!this.personal) {
+          this.$store.dispatch('openNotiPopup', {
+            tit1: '선물을 받기 위해<br/>개인정보 제3자 제공 동의가<br/>필요합니다.',
+            tit2: ''
+          })
         } else {
-          this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
+          if (this.popupGift.mingle_gift_add_point === 'AUTH') {
+            let url = ''
+            if (this.popupGift.mingle_no === '1') {
+              url = 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3'
+            } else if (this.popupGift.mingle_no === '11') {
+              url = 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA'
+            } else if (this.popupGift.mingle_no === '14') {
+              if (this.popupGift.mingle_gift_order === '1') {
+                url = 'https://drive.google.com/open?id=1JElD4SuEekkIk66yMdhFZaH6JLuxxoROikfR2bwlbTc'
+              } else {
+                url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
+              }
+            } else if (this.popupGift.mingle_no === '18') {
+              url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$cookie.get('login_token')}`
+              this.$store.dispatch('openPopupGift', {})
+            }
+            if (url) {
+              appEvent.externalLinks(url)
+            }
+          } else {
+            this.$store.dispatch('openNotiPopup', {
+              tit1: '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.',
+              tit2: ''
+            })
+            this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
+          }
         }
       }
     },
@@ -166,11 +201,6 @@ export default {
         val = '모바일 상품권 받기'
       }
       return val
-    },
-    agreePopup () {
-      if (!this.personal) {
-        this.popup = !this.popup
-      }
     }
   },
   mounted () {
