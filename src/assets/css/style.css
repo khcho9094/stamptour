@@ -221,7 +221,8 @@ header .head_back span {
     border-top:1px solid #fff;
 }
 .pop_overay .pop_cont .text_2 .check.durunubi {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }
 .pop_overay .pop_cont .text_2 .check label {
     font-size: 12px;
@@ -1950,4 +1951,17 @@ header .head_back span {
     font-size: 14px;
     color: #c86550;
     margin-top: 20px;
+}
+.gift_complete {
+    position: absolute;
+    top: 25px;
+    right: -10px;
+    color:#3bb9fa;
+    font-size: 9px;
+    border: 1px solid #3bb9fa;
+    border-radius: 10px;
+    width:35px;
+    line-height: 1;
+    text-align: center;
+    padding:2px 0;
 }

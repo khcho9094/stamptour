@@ -84,7 +84,7 @@ export default {
   },
   data () {
     return {
-      durunubi: false,
+      durunubi: true,
       personal: false,
       unit: ''
     }
@@ -104,7 +104,7 @@ export default {
           tit2: '주소, 휴대폰 번호'
         })
       } else {
-        if (!this.durunubi && this.mingle_no === '16') {
+        if (!this.durunubi && this.popupGift.mingle_no === '16') {
           this.$store.dispatch('openNotiPopup', {
             tit1: '두루누비 계정 확인이 필요합니다.',
             tit2: ''
@@ -151,7 +151,7 @@ export default {
       this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
       setTimeout(() => {
         if (this.$store.state.durunubiCheck === '0') {
-          document.getElementById('durunubi').checked = false
+          this.durunubi = false
           if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
             appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
           } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {

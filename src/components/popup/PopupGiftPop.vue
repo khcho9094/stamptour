@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     closeBtn () {
-      window.history.back()
       this.$store.dispatch('openNotiPopup', {})
     },
     receiveInfo () {

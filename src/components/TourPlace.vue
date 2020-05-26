@@ -27,85 +27,53 @@ export default {
       tourTotal: [
         {
           num: 1,
+          name: '주변 관광지',
+          ename: 'tour',
+          typeId: 12
+        },
+        {
+          num: 2,
           name: '주변 축제 공연행사',
           ename: 'party',
           typeId: 15
         },
         {
-          num: 2,
+          num: 3,
           name: '주변 음식점',
           ename: 'food',
           typeId: 39
         },
         {
-          num: 3,
+          num: 4,
           name: '주변 숙박업소',
           ename: 'hotel',
           typeId: 32
-        },
-        {
-          num: 4,
-          name: '주변 체험관광',
-          ename: 'exp',
-          typeId: 28
         },
         {
           num: 5,
           name: '주변 쇼핑',
           ename: 'shopping',
           typeId: 38
+        },
+        {
+          num: 6,
+          name: '주변 체험관광/레포츠',
+          ename: 'exp',
+          typeId: 28
+        },
+        {
+          num: 7,
+          name: '주변 문화시설',
+          ename: 'culture',
+          typeId: 14
+        },
+        {
+          num: 8,
+          name: '주변 여행코스',
+          ename: 'course',
+          typeId: 25
         }
       ]
-      // tourTotal: [
-      //   {
-      //     num: 1,
-      //     name: '주변 축제 공연행사',
-      //     ename: 'party',
-      //     typeId: 15
-      //   },
-      //   {
-      //     num: 2,
-      //     name: '주변 관광지',
-      //     ename: 'tour',
-      //     typeId: 12
-      //   },
-      //   {
-      //     num: 3,
-      //     name: '주변 음식점',
-      //     ename: 'food',
-      //     typeId: 39
-      //   },
-      //   {
-      //     num: 4,
-      //     name: '주변 숙박업소',
-      //     ename: 'hotel',
-      //     typeId: 32
-      //   },
-      //   {
-      //     num: 5,
-      //     name: '주변 쇼핑',
-      //     ename: 'shopping',
-      //     typeId: 38
-      //   },
-      //   {
-      //     num: 6,
-      //     name: '주변 문화시설',
-      //     ename: 'culture',
-      //     typeId: 14
-      //   },
-      //   {
-      //     num: 7,
-      //     name: '주변 여행코스',
-      //     ename: 'course',
-      //     typeId: 25
-      //   },
-      //   {
-      //     num: 8,
-      //     name: '주변 체험관광',
-      //     ename: 'exp',
-      //     typeId: 28
-      //   }
-      // ]
     }
   },
   methods: {
@@ -128,32 +96,21 @@ export default {
       let arr = []
       if (data === 'party') {
         arr = this.TourData
+      } else if (data === 'tour') {
+        arr = this.TourInfoData
       } else if (data === 'food') {
         arr = this.FoodData
       } else if (data === 'hotel') {
         arr = this.LodgMentData
-      } else if (data === 'exp') {
-        arr = this.LeportsData
-      } else {
+      } else if (data === 'shopping') {
         arr = this.ShoppingData
+      } else if (data === 'culture') {
+        arr = this.CultureData
+      } else if (data === 'course') {
+        arr = this.CourseData
+      } else {
+        arr = this.LeportsData
       }
-      // if (data === 'party') {
-      //   arr = this.TourData
-      // } else if (data === 'tour') {
-      //   arr = this.TourInfoData
-      // } else if (data === 'food') {
-      //   arr = this.FoodData
-      // } else if (data === 'hotel') {
-      //   arr = this.LodgMentData
-      // } else if (data === 'shopping') {
-      //   arr = this.ShoppingData
-      // } else if (data === 'culture') {
-      //   arr = this.CultureData
-      // } else if (data === 'course') {
-      //   arr = this.CourseData
-      // } else {
-      //   arr = this.LeportsData
-      // }
       return arr
     },
     chkDist (dist) {
