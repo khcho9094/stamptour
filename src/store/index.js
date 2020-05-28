@@ -90,7 +90,11 @@ export default new Vuex.Store({
     },
     getStampImage: '',
     getStampName: '',
-    getStampDate: ''
+    getStampDate: '',
+    restartOpen: false,
+    getGiftChk: false,
+    getGiftCnt: 0,
+    restart_resultCode: ''
   },
   mutations: {
     setIntroData (state, data) {
@@ -260,6 +264,16 @@ export default new Vuex.Store({
     setCompleteSum (state, data) {
       // state.sumApiChkCode = data.code
       VueCookie.delete(state.enc_member)
+    },
+    setRestartData (state, data) {
+      // state.restart_resultCode = data
+      if (data === '00') {
+        alert('정상 처리 되었습니다.')
+        state.restartOpen = !state.restartOpen
+        location.reload()
+      } else {
+        alert('오류가 발생 하였습니다.')
+      }
     },
     setAllGiftData (state, data) {
       state.allGiftData = data
@@ -812,6 +826,17 @@ export default new Vuex.Store({
           if (response.response.code === '00') {
             commit('setAllGiftData', response.response.content)
           }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadRestartTour ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/courses/resetPoint.jsonp?mingleCode=${state.mingleCode}&&gift=c9ba7GGcjyPvII+pbiuGiQ==&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setRestartData', response.response.code)
         })
         .catch(err => {
           console.log(err)

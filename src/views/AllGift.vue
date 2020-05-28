@@ -1,7 +1,7 @@
 <template>
   <div class="tour">
     <!-- 헤더 -->
-    <Head type='back' name='tour' title='전체 선물보기' />
+    <Head type='back' name='tour' title='전체 선물보기' @click="goBack()"/>
     <div class="all_gift">
       <ul class="tour_list">
         <li v-for="(data, idx) in changeTourTitle()" v-bind:key="idx">
@@ -177,6 +177,16 @@ export default {
         }
       }
       return `신청 유효 기간 만료 ${text}`
+    },
+    goBack () {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('back_btn_event', '{}')
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = 'tranggle_callback://back_btn_event'
+      } else {
+        this.$router.push('/')
+      }
     }
   },
   mounted () {

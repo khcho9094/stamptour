@@ -12,6 +12,7 @@
       <PopupSns />
       <PopupStampSuccess v-if="popupStampSuccess" />
       <PopupMyStamp />
+      <PopupRestart />
     </div>
     <Intro v-else/>
   </div>
@@ -31,6 +32,7 @@ import PopupSns from '@/components/popup/PopupSns.vue'
 import PopupStampSuccess from '@/components/popup/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
+import PopupRestart from '@/components/popup/PopupRestart.vue'
 export default {
   name: 'Main',
   components: {
@@ -44,7 +46,8 @@ export default {
     PopupSns,
     PopupStampSuccess,
     Intro,
-    PopupMyStamp
+    PopupMyStamp,
+    PopupRestart
   },
   data () {
     return {
