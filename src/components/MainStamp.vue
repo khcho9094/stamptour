@@ -2,13 +2,16 @@
   <div>
     <!-- 포인트일 경우 -->
     <div class="stamp_box" v-if="setStamp()">
-      <div class="title" v-if="this.token">
+      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count">
               <em>{{this.myPoint}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
               <em>{{this.allStampPoint}}</em>
           </span>
+      </div>
+      <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
+        <button>다시시작</button>
       </div>
       <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
@@ -32,13 +35,16 @@
     </div>
     <!-- 갯수일 경우 -->
     <div class="stamp_box" v-else>
-      <div class="title" v-if="this.token" @click="goMyStamp">
+      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count">
               <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
               <em>{{this.allStampCount}}</em>
           </span>
+      </div>
+      <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
+        <button @click="restartPopup()">다시시작</button>
       </div>
       <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
@@ -199,6 +205,22 @@ export default {
     },
     goMyStamp () {
       router.push('/mystamp')
+    },
+    restartPopup () {
+      // this.$store.dispatch('chkRestartTour')
+      let giftCnt = 0
+      let i = 0
+      for (i; i < this.giftData.length; i++) {
+        if (this.giftData[i].mingle_gift_receive === 'Y') {
+          giftCnt++
+        }
+      }
+
+      if (giftCnt > 0 && this.$store.state.getGiftChk === false) {
+        this.$store.state.getGiftChk = !this.$store.state.getGiftChk
+      }
+      this.$store.state.getGiftCnt = giftCnt
+      this.$store.state.restartOpen = !this.$store.state.restartOpen
     }
   },
   created () {
