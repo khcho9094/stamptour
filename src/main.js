@@ -10,9 +10,12 @@ import VueCookie from 'vue-cookie'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMobileAlt, faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { Tabs, Tab } from 'vue-tabs-component'
 
 library.add(faMobileAlt, faHome)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('tabs', Tabs)
+Vue.component('tab', Tab)
 Vue.use(VueAwesomeSwiper /* { default global options } */)
 Vue.use(VueJsonp)
 Vue.use(VueCookie)

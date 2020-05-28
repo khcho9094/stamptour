@@ -19,7 +19,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'PopupStamp',
+  name: 'PopupMyStamp',
   data () {
     return {
       stamp_image: '',

@@ -6,8 +6,10 @@
             <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
             <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
             <span>{{data.mingle_gift_title}}</span>
-            <div class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
-                <!-- <img src="@/assets/images/icon_gift.png" alt="gift"> -->
+            <div v-if="data.user_gift_request_date !== null && data.mingle_gift_request_date !== ''" class="gift_complete">
+              완료
+            </div>
+            <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
                 <img :src="giftOn(data)" alt="gift">
                 <div class="dot"></div>
             </div>

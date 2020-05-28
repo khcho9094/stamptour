@@ -94,7 +94,9 @@ export default new Vuex.Store({
     restartOpen: false,
     getGiftChk: false,
     getGiftCnt: 0,
-    restart_resultCode: ''
+    restart_resultCode: '',
+    myStampData: [], // 내가 찍은 스탬프
+    popupNoti: { open: false }
   },
   mutations: {
     setIntroData (state, data) {
@@ -140,6 +142,7 @@ export default new Vuex.Store({
       state.mainStampList = data.stamplist_info
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
+      localStorage.stampCount = data.stampget_info.mingle_badge_count
     },
     setMainAll (state, data) {
       state.stampAll = data.stamplist_info
@@ -439,6 +442,10 @@ export default new Vuex.Store({
           )
         }
       })
+      console.log(state.stampGiftData)
+    },
+    setMyStamp (state, data) {
+      state.myStampData = data
     }
   },
   actions: {
@@ -693,6 +700,17 @@ export default new Vuex.Store({
       }
     },
     /*
+    선물 팝업의 알림 팝업
+    */
+    openNotiPopup ({ state }, data) {
+      state.popupNoti = data
+      if (Object.keys(data).length > 0) {
+        state.popupNoti.open = true
+      } else {
+        state.popupNoti.open = false
+      }
+    },
+    /*
     mingleCode 세팅
     */
     setMingleCode ({ state }, data) {
@@ -819,7 +837,7 @@ export default new Vuex.Store({
         })
     },
     loadAllGiftData ({ state, commit }) {
-      const url = `http://khy-api.tranggle.com/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}`
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -840,6 +858,34 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+        })
+    },
+    loadMyStamp ({ state, commit }, data) {
+      const orderArr = [
+        {
+          order: 'DATE',
+          ordersort: 'DESC'
+        },
+        {
+          order: 'DATE',
+          ordersort: 'ASC'
+        },
+        {
+          order: 'NAME',
+          ordersort: 'DESC'
+        },
+        {
+          order: 'NAME',
+          ordersort: 'ASC'
+        }
+      ]
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/get_user_badge_item.jsonp?mingleCode=${state.mingleCode}&comple_check=true&order=${orderArr[data].order}&ordersort=${orderArr[data].ordersort}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            commit('setMyStamp', response.response.content)
+          }
         })
     }
   },

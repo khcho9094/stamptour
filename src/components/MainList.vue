@@ -129,6 +129,9 @@ export default {
       }, 100)
     },
     stampDetail (sid) {
+      if (sid.mingle_badge_id === '21524279') {
+        alert('코로나19 확산 예방을 위해, 고성 통일전망대가 잠정 폐쇄(2020년 2월 25일 ~ 무기한) 되었으므로 50코스 이용시 참고하여 주시기 바랍니다.')
+      }
       localStorage.stampDetail = JSON.stringify(sid)
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
