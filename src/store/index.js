@@ -823,7 +823,7 @@ export default new Vuex.Store({
         })
     },
     loadAllGiftData ({ state, commit }) {
-      const url = `http://khy-api.tranggle.com/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}`
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {

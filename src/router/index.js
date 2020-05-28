@@ -70,6 +70,12 @@ const routes = [
     path: '/allgift',
     name: 'AllGift',
     component: () => import('../views/AllGift.vue')
+  },
+  {
+    // 테마10선 숙박인증 이벤트
+    path: '/event/thema10',
+    name: 'EventThema10',
+    component: () => import('../views/event/Thema10.vue')
   }
 ]
 
