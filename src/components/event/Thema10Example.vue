@@ -1,5 +1,5 @@
 <template>
-  <div class="example_pop" v-show="visible">
+  <div class="example_pop" v-if="showExample">
     <div class="photo_box">
       <div class="title" v-html="dataObj[type].title"></div>
       <div class="photo">
@@ -10,16 +10,16 @@
     <div class="chkbox">
         <input type="checkbox" id="tour_off"  name="tour_off" checked="checked" v-model="check"><label for="tour_off">다시 보지 않기</label>
     </div>
-    <button>확인</button>
+    <button @click="goCameraPop">확인</button>
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'Thema10Example',
   props: {
-    visible: Boolean,
-    type: Number
+    type: Number,
+    edit: String
   },
   components: {
   },
@@ -41,36 +41,26 @@ export default {
     }
   },
   computed: {
+    ...mapState(['showExample'])
   },
   methods: {
-    // tourStartButton () {
-    //   const check = document.getElementById('tour_off')
-    //   if (check.checked) {
-    //     this.visible = !this.visible
-    //     this.$cookie.set('setIntro', 'Y', 7)
-    //     this.closeCount()
-    //   } else {
-    //     // 메인 이동
-    //     this.$store.dispatch('setIntroPopup', false)
-    //     localStorage.removeItem('setIntroPopup')
-    //   }
-    // },
-    // closeCount () {
-    //   const interval = setInterval(() => {
-    //     this.count--
-    //     if (this.count === 0) {
-    //       clearInterval(interval)
-    //       this.$store.dispatch('setIntroPopup', false)
-    //       localStorage.removeItem('setIntroPopup')
-    //     } else if (this.pageOut) {
-    //       clearInterval(interval)
-    //     }
-    //   }, 1000)
-    // }
+    goCameraPop () {
+      if (this.check) {
+        if (this.type === 0) {
+          this.$cookie.set('thema10Auth_0', 'Y', 9999)
+        } else if (this.type === 1) {
+          this.$cookie.set('thema10Auth_1', 'Y', 9999)
+        }
+      }
+      this.$store.dispatch('openExamplePop', false)
+      this.$store.dispatch('openPhotoPop', {
+        open: true,
+        type: this.type,
+        edit: this.edit
+      })
+    }
   },
   mounted () {
-    console.log(':::', this.type)
-    // this.$store.dispatch('loadIntroImage')
   }
 }
 </script>
