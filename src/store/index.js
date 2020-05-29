@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueCookie from 'vue-cookie'
 import router from '@/router'
+import axios from 'axios'
 
 Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -96,7 +97,12 @@ export default new Vuex.Store({
     getGiftCnt: 0,
     restart_resultCode: '',
     myStampData: [], // 내가 찍은 스탬프
-    popupNoti: { open: false }
+    popupNoti: { open: false },
+    showExample: false,
+    showPhoto: { open: false },
+    thema10Status: {}, // 테마 10 조회
+    uploadSuccess: false,
+    themaPop: { open: false }
   },
   mutations: {
     setIntroData (state, data) {
@@ -446,6 +452,9 @@ export default new Vuex.Store({
     },
     setMyStamp (state, data) {
       state.myStampData = data
+    },
+    setThema10Status (state, data) {
+      state.thema10Status = data
     }
   },
   actions: {
@@ -886,6 +895,94 @@ export default new Vuex.Store({
           if (response.response.code === '00') {
             commit('setMyStamp', response.response.content)
           }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 예시 팝업
+    */
+    openExamplePop ({ state }, data) {
+      state.showExample = data
+    },
+    /*
+    테마10 포토 팝업
+    */
+    openPhotoPop ({ state }, data) {
+      state.showPhoto = data
+    },
+    /*
+    테마10 인증 현황 조회
+    */
+    loadThema10Status ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/getEventThema10.jsonp?token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            console.log(response.response.content)
+            commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 이미지 업로드
+    */
+    uploadThema10Photo ({ state, commit }, data) {
+      console.log(data)
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('ext', 'json')
+      fd.append('upload_type', data.upload_type)
+      fd.append('action_type', data.action_type)
+      fd.append('event_no', data.event_no)
+      fd.append('log_no', data.log_no)
+      fd.append('imageFile', data.imageFile)
+      const url = 'https://storage.tranggle.com/mingle/authImageUpload'
+      axios
+        .post(url, fd)
+        .then(response => {
+          console.log(response.data.response)
+          if (response.data.response.code === '00') {
+            state.showPhoto.open = false
+            state.uploadSuccess = !state.uploadSuccess
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 알림 팝업
+    */
+    openThemaNoti ({ state }, data) {
+      state.themaPop = data
+      if (Object.keys(data).length > 0) {
+        state.themaPop.open = true
+      } else {
+        state.themaPop.open = false
+      }
+    },
+    /*
+    테마10 이벤트 참여 신청
+    */
+    ApplyThema10Event ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/setEventThema10.jsonp?badge_id=${data.badge_id}&gps_authno=${data.gps_authno}&photo_authno=${data.photo_authno}&receipt_authno=${data.receipt_authno}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            console.log(response.response)
+            state.uploadSuccess = !state.uploadSuccess
+            // commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
   },
