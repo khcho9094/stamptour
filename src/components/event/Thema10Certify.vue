@@ -32,7 +32,7 @@
                 :class="thema10Status.gps_log_auth_type === 'GPS' ? 'img1' : 'img2'"
                 :style="{ 'backgroundImage': `url(${thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.gps_log_auth_type === 'PHOTO'">
+              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.gps_log_auth_type === 'PHOTO' && thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -70,7 +70,7 @@
           <div class="auth_check">
             <div class="left">
               <div class="img_box img2" :style="{ 'backgroundImage': `url(${thema10Status.receipt_log_filename})` }"></div>
-              <div class="edit_btn" @click="photoUpload(1, 'reEdit')">
+              <div class="edit_btn" @click="photoUpload(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -141,8 +141,13 @@ export default {
         tit1 = '이벤트 참여가<br>완료 되었습니다.'
         tit2 = '당첨은 매월 17일 발표되며,<br>인증 현황 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
       } else {
-        tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
-        tit2 = ''
+        if (this.thema10Status.event_finish_chk === 'Y') {
+          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+        } else {
+          tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+          tit2 = ''
+        }
       }
       this.$store.dispatch('openThemaNoti', {
         open: true,
@@ -153,7 +158,7 @@ export default {
     confirm () {
       let tit1 = ''
       let tit2 = ''
-      if (this.thema10Status.event_apply_chk === 'N') {
+      if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
         tit1 = '인증을 모두 완료하고<br>이벤트에 참여해주세요.'
         tit2 = ''
       } else {

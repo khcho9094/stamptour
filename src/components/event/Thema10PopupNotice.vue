@@ -9,12 +9,14 @@
                   <div class="txt" v-html="themaPop.tit2"></div>
                 </div>
             </div>
-            <button @click="closeBtn">확인</button>
+            <button :class="(themaPop.gps) ? 'type1' : ''" @click="closeBtn">{{themaPop.gps ? '닫기' : '확인'}}</button>
+            <button class="type2" v-if="themaPop.gps" @click="settingGps">계정정보 입력</button>
         </div>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Thema10PopupNotice',
   data () {
@@ -27,6 +29,10 @@ export default {
   methods: {
     closeBtn () {
       this.$store.dispatch('openThemaNoti', {})
+    },
+    settingGps () {
+      console.log('gpssetting')
+      appEvent.thema10GpsSetting()
     }
   },
   mounted () {

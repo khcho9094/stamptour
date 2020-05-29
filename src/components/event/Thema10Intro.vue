@@ -76,7 +76,7 @@ export default {
   name: 'Thema10Intro',
   methods: {
     themaBanner () {
-      const url = require('@/assets/images/dummy_img/img_2.jpg')
+      const url = require('@/assets/images/event/allthat_event_title.png')
       return `url(${url})`
     }
   }

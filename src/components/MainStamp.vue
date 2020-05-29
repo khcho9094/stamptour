@@ -43,9 +43,9 @@
               <em>{{this.allStampCount}}</em>
           </span>
       </div>
-      <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
+      <!-- <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
         <button @click="restartPopup()">다시시작</button>
-      </div>
+      </div> -->
       <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
