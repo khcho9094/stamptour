@@ -102,7 +102,9 @@ export default new Vuex.Store({
     showPhoto: { open: false },
     thema10Status: {}, // 테마 10 조회
     uploadSuccess: false,
-    themaPop: { open: false }
+    themaPop: { open: false },
+    thema10Agree: 'N',
+    themaPopAgree: { open: false }
   },
   mutations: {
     setIntroData (state, data) {
@@ -968,6 +970,17 @@ export default new Vuex.Store({
       }
     },
     /*
+    테마10 개인정보 팝업
+    */
+    openThemaAgree ({ state }, data) {
+      state.themaPopAgree = data
+      if (Object.keys(data).length > 0) {
+        state.themaPopAgree.open = true
+      } else {
+        state.themaPopAgree.open = false
+      }
+    },
+    /*
     테마10 이벤트 참여 신청
     */
     ApplyThema10Event ({ state, commit }, data) {
@@ -979,6 +992,27 @@ export default new Vuex.Store({
             console.log(response.response)
             state.uploadSuccess = !state.uploadSuccess
             // commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 개인정보동의 신청 조회
+    */
+    Thema10PsInfo ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/setThema10UserInfo.jsonp?phone=${data.phone}&action=${data.action}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (data.phone === '') {
+            if (response.response.code === '03') {
+              state.thema10Agree = 'Y'
+            }
+            if (response.response.code === '04') {
+              state.thema10Agree = 'N'
+            }
           }
         })
         .catch(err => {

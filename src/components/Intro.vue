@@ -18,7 +18,7 @@
         <div class="content" v-html="introData.mingle_desc"></div>
         <div class="tour_start_box">
             <div class="chkbox">
-                <input type="checkbox" id="tour_off"  name="tour_off" checked="checked"> <label for="tour_off">일주일동안 보지않기</label>
+                <input type="checkbox" id="tour_off"  name="tour_off"> <label for="tour_off">일주일동안 보지않기</label>
             </div>
             <button @click="tourStartButton">투어 시작하기</button>
         </div>
@@ -47,14 +47,18 @@ export default {
     }
   },
   computed: {
-    ...mapState(['introData', 'introImage'])
+    ...mapState(['introData', 'introImage', 'mingleCode', 'stampCodeInfo'])
   },
   methods: {
     tourStartButton () {
       const check = document.getElementById('tour_off')
       if (check.checked) {
+        this.stampCodeInfo.map((data, idx) => {
+          if (this.mingleCode === data.code) {
+            this.$cookie.set(`setIntro${idx}`, 'Y', 7)
+          }
+        })
         this.visible = !this.visible
-        this.$cookie.set('setIntro', 'Y', 7)
         this.closeCount()
       } else {
         // 메인 이동

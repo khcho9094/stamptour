@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut">
-        <swiper-slide>
+        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': themaBanner() }"
@@ -22,7 +22,7 @@
                 <button class="view">신청 바로가기</button>
             </div>
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination" v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='"></div>
+        <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
 </template>
@@ -35,7 +35,6 @@ export default {
   data () {
     return {
       swiperOption: {
-        loop: true,
         slidesPerView: 1,
         spaceBetween: 0,
         pagination: {

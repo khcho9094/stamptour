@@ -66,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo'])
   },
   methods: {
     handleMoreButton () {
@@ -118,7 +118,13 @@ export default {
       this.$store.dispatch('setIntroPopup', true)
     }
     // 인트로 페이지로
-    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
+    let mingleN = ''
+    this.stampCodeInfo.map((data, idx) => {
+      if (this.$route.query.mingleCode === data.code) {
+        mingleN = idx
+      }
+    })
+    if (!this.$cookie.get(`setIntro${mingleN}`) && this.$route.query.mingleCode) {
       const query = Object.assign({}, this.$route.query)
       delete query.mingleCode
       this.$router.replace({ query })
