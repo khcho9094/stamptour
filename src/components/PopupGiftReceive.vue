@@ -133,7 +133,7 @@ export default {
     },
     goInsert () {
       localStorage.giftopen = JSON.stringify(this.popupGift)
-      location.href = 'https://stage.m.tranggle.com:4081/mingle/intro/total_account_setting'
+      location.href = 'https://m.tranggle.com/mingle/intro/total_account_setting'
     },
     setStamp () {
       this.stampCodeInfo.map((data) => {
