@@ -24,14 +24,14 @@
                 4차 . 2020.09.13 ~ 2020.10.12<br/>
                 5차 . 2020.10.13 ~ 2020.11.12<br/>
                 6차 . 2020.11.13 ~ 2020.12.12<br/>
+                * 소진시, 이벤트 조기 종료<br/>
               </span>
             </p>
             <p class="ptxt">
               <strong>• 참여방법</strong><br/>
               <span class="event_insert">
-                1. 테마여행 10선 여행지에서 올댓스탬프<br/>
-                모바일 어플리케이션 다운로드 및 실행.<br/><br/>
-                2. 이벤트 페이지의 <a href="javascript:;">인증현황</a> 클릭!<br/>
+                1. 테마여행 10선 여행지에서 올댓스탬프 앱 실행<br/><br/>
+                2. 이벤트 페이지의 <a href="#second-tab">인증현황</a> 클릭!<br/>
                   <img src="@/assets/images/arrow_right.png"> GPS 켜기실행<br/>
                   <img src="@/assets/images/arrow_right.png"> 테마여행 10선 스탬프 획득 or 주요 관광지 인증사진 첨부<br/>
                   <img src="@/assets/images/arrow_right.png"> 숙박 영수증 첨부<br/>
@@ -67,6 +67,32 @@
                 Phone  : 02-589-9933
               </span>
             </p>
+            <p class="ptxt">
+              <strong>• 유의사항</strong><br/>
+              <span class="event_insert">
+                <span class="insert">
+                  1. 테마여행 10선 주요 관광지 방문 인증 스탬프는 스마트폰의 GPS가 ‘항상’ 켜 있어야만 받을 수 있습니다.
+                </span>
+                <span class="insert">
+                  2. GPS가 꺼져 있어서 방문 인증 스탬프를 받지 못한 경우, 사진 첨부로 대체할 수 있습니다.  단, 사진은 테마여행 10선 주요 관광지에서 촬영한 사진만 인정합니다. (테마여행10선 홈페이지 참조)
+                </span>
+                <span class="insert">
+                  3. 이벤트 참여는 ①테마 여행 10선 관광지 방문 인증 스탬프(또는 테마 여행 10선  주요 관광지에서 촬영한 사진)와 ②숙박영수증 2가지가 모두 채워져야 합니다.
+                </span>
+                <span class="insert">
+                  4. 이벤트 재 참여는 매일 자정(밤12시) 부터 가능합니다.(1일 1회 참여가능)
+                </span>
+                <span class="insert">
+                  5. 월 1회 추첨이 진행되며, 당첨자는 익월 다른 권역  여행 시, 재 참여 가능합니다. 단, 같은 여행 인증자료로 재 당첨 불가. (영수증, 사진 중 하나라도 중복일 경우 당첨 무효)
+                </span>
+                <span class="insert">
+                  6. 모바일로 지급받은 상품권 교환권은 하나은행 에서 국민관광 상품권으로 교환 후 사용할 수 있습니다.
+                </span>
+                <span class="insert">
+                  7. 불법으로 취득하거나, 거짓으로 등록할 경우 법적 처벌을 받을 수 있습니다.
+                </span>
+              </span>
+            </p>
         </div>
     </div>
   </div>
@@ -97,5 +123,11 @@ export default {
     position: relative;
     top: -1px;
     margin-right: 1px;
+  }
+  .event_insert .insert {
+    display: inline-block;
+    text-indent: -12px;
+    margin-left: 12px;
+    margin-bottom: 2px;
   }
 </style>

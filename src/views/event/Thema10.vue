@@ -7,7 +7,7 @@
         <tab name="이벤트 소개">
           <Thema10Intro />
         </tab>
-        <tab name="인증 현황">
+        <tab name="인증 현황" id="second-tab">
           <Thema10Certify />
         </tab>
       </tabs>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import Thema10Intro from '@/components/event/Thema10Intro.vue'
@@ -35,29 +35,27 @@ export default {
     }
   },
   computed: {
+    ...mapState(['token'])
   },
   methods: {
     tabChanged (selectedTab) {
-      if (selectedTab.tab.name === '인증 현황') {
-        console.log('gps 여부')
-        appEvent.thema10GpsStatus()
-        // localStorage.setItem('getGps', 'N')
-        setTimeout(() => {
-          this.gpsPop()
-        }, 100)
+      if (window.location.hash) {
+        window.location.hash = ''
       }
-    },
-    gpsPop () {
-      console.log(localStorage.getGps)
-      if (localStorage.getGps === 'N') {
-        this.$store.dispatch('openThemaNoti', {
-          open: true,
-          tit1: '이벤트에 참여 하시려면<br>GPS를 실행해주세요.',
-          tit2: 'GPS 실행 불가 시, 관광지 방문<br>인증 사진을 첨부해주세요.',
-          gps: true
-        })
+      if (selectedTab.tab.name === '인증 현황') {
+        if (!this.token) {
+          appEvent.thema10Login()
+          return false
+        }
+        appEvent.thema10GpsStatus()
       }
     }
+    // gpsPop () {
+    //   console.log(localStorage.getGps)
+    //   if (localStorage.getGps === 'N') {
+    //     appEvent.thema10GpsSetting()
+    //   }
+    // }
   },
   mounted () {
   }

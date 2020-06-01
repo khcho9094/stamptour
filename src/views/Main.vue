@@ -4,7 +4,7 @@
       <!-- 헤더 -->
       <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
       <MainStamp />
-      <MainGiftView v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='" />
+      <MainGiftView />
       <MainRecommend />
       <MainList />
       <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />

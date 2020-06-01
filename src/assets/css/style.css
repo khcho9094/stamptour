@@ -1989,6 +1989,7 @@ header .head_back span {
     background: url('../images/event/bg.png') no-repeat #f6f1e7 top -10px left 0px;
     background-size: 120px;
     padding:18px 20px 40px;
+    min-height: calc(100vh - 100px);
 }
 
 .thema10_wrap .title_box {

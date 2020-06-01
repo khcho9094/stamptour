@@ -8,7 +8,7 @@
               @click="goThema10Event">
             </div>
         </swiper-slide>
-        <swiper-slide>
+        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -22,7 +22,7 @@
                 <button class="view">신청 바로가기</button>
             </div>
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-pagination" slot="pagination" v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='"></div>
     </swiper>
   </div>
 </template>
@@ -41,9 +41,6 @@ export default {
         pagination: {
           el: '.swiper-pagination',
           type: 'bullets'
-        },
-        autoplay: {
-          delay: 3000
         }
       }
     }
