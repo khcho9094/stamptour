@@ -186,7 +186,7 @@ export default {
     },
     stampAuth (e, data) {
       e.stopPropagation()
-      window.history.pushState({}, 'modal', '/modal')
+      // window.history.pushState({}, 'modal', '/modal')
       // this.$store.dispatch('loadBadgeRegister', data)
       // eslint-disable-next-line no-undef
       esp.setBackgroundColor('#000000')
@@ -257,11 +257,11 @@ export default {
   mounted () {
     this.$store.dispatch('loadAreaList')
     this.$store.dispatch('loadMingleVersionChk')
-    window.onpopstate = history.onpushstate = (e) => {
-      if (window.location.href.split('/').pop().indexOf('modal') === -1) {
-        // this.$store.dispatch('openPopupGift', {})
-      }
-    }
+    // window.onpopstate = history.onpushstate = (e) => {
+    //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {
+    //     // this.$store.dispatch('openPopupGift', {})
+    //   }
+    // }
   }
 }
 </script>

@@ -155,7 +155,7 @@ export default {
       return zindex
     },
     giftClick (num) {
-      window.history.pushState({}, 'modal', '/modal')
+      // window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (parseInt(data.mingle_count) === num) {
           this.$store.dispatch('openPopupGift', data)
@@ -163,7 +163,7 @@ export default {
       })
     },
     giftClickPoint (num) {
-      window.history.pushState({}, 'modal', '/modal')
+      // window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (data.mingle_count - this.myPoint < 6 && data.mingle_count - this.myPoint > 0 && this.getStampCount + 1 === num) {
           this.$store.dispatch('openPopupGift', data)

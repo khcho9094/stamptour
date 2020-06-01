@@ -52,7 +52,7 @@
             <button class="type2" @click="receiveGift">{{receiveBtn(popupGift)}}</button>
             <!-- 개인정보 확인 -->
             <!-- 삭제 -->
-            <div class="person_pop">
+            <!-- <div class="person_pop">
               <div class="title">개인정보 제3자 제공동의가 필요합니다.</div>
               <div class="ptxt">
                 <b>· 수집/이용 목적 : </b>선물 발급 통계 정보 작성<br/>
@@ -67,7 +67,7 @@
                   <span @click="popup = false, personal = false">닫기</span>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- 삭제// -->
         </div>
         <PopupGiftPop v-if="popupNoti.open" />
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     closeBtn () {
-      window.history.back()
+      // window.history.back()
       this.$store.dispatch('openPopupGift', {})
     },
     receiveGift () {
@@ -176,10 +176,10 @@ export default {
       }
       return className
     },
-    goInsert () {
-      localStorage.giftopen = JSON.stringify(this.popupGift)
-      location.href = 'https://m.tranggle.com/mingle/intro/total_account_setting'
-    },
+    // goInsert () {
+    //   localStorage.giftopen = JSON.stringify(this.popupGift)
+    //   location.href = 'https://m.tranggle.com/mingle/intro/total_account_setting'
+    // },
     setStamp () {
       this.stampCodeInfo.map((data) => {
         if (data.code === this.mingleCode && data.info === 'point') {
@@ -209,11 +209,11 @@ export default {
     if (this.$cookie.get('agree_security') === 'Y') {
       this.personal = true
     }
-    window.onpopstate = history.onpushstate = (e) => {
-      if (window.location.href.split('/').pop().indexOf('modal') === -1) {
-        this.$store.dispatch('openPopupGift', {})
-      }
-    }
+    // window.onpopstate = history.onpushstate = (e) => {
+    //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {
+    //     this.$store.dispatch('openPopupGift', {})
+    //   }
+    // }
   },
   destroyed () {
     // this.$router.go()

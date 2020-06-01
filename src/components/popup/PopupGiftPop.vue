@@ -33,11 +33,6 @@ export default {
     }
   },
   mounted () {
-    // window.onpopstate = history.onpushstate = (e) => {
-    //   if (window.location.href.split('/').pop().indexOf('modal2') === -1) {
-    //     this.$store.dispatch('openPopupGift', {})
-    //   }
-    // }
   }
 }
 </script>
