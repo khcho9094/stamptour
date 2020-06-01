@@ -11,6 +11,7 @@
       <PopupGift />
       <PopupSns />
       <PopupStampSuccess v-if="popupStampSuccess" />
+      <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
     </div>
     <Intro v-else/>
   </div>
@@ -29,6 +30,7 @@ import PopupGift from '@/components/PopupGift.vue'
 import PopupSns from '@/components/PopupSns.vue'
 import PopupStampSuccess from '@/components/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
+import WonjuPopup from '@/components/WonjuPopup.vue'
 export default {
   name: 'Main',
   components: {
@@ -41,7 +43,8 @@ export default {
     PopupGift,
     PopupSns,
     PopupStampSuccess,
-    Intro
+    Intro,
+    WonjuPopup
   },
   data () {
     return {
@@ -60,7 +63,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'wonjuPopup'])
   },
   methods: {
     handleMoreButton () {

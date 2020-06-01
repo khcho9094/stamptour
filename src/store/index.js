@@ -78,7 +78,8 @@ export default new Vuex.Store({
     enc_member: '', // 암호화 된 회원 아이디
     mingleCodeArr: '', // 포인트 합산에 보낼 스탬프 투어 코드 리스트
     sumApiChkCode: '', // 포인트 합산 후 결과 값 저장
-    introPopup: false
+    introPopup: false,
+    wonjuPopup: true
   },
   mutations: {
     setIntroData (state, data) {
