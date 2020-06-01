@@ -104,7 +104,8 @@ export default new Vuex.Store({
     uploadSuccess: false,
     themaPop: { open: false },
     thema10Agree: 'N',
-    themaPopAgree: { open: false }
+    themaPopAgree: { open: false },
+    wonjuPopup: true
   },
   mutations: {
     setIntroData (state, data) {
