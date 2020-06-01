@@ -84,7 +84,7 @@ export default {
   },
   data () {
     return {
-      durunubi: true,
+      durunubi: false,
       personal: false,
       unit: ''
     }
