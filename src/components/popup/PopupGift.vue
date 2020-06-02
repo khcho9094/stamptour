@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     closeBtn () {
-      window.history.back()
+      // window.history.back()
       this.$store.dispatch('openPopupGift', {})
     },
     imgIcon () {
@@ -46,11 +46,11 @@ export default {
     }
   },
   mounted () {
-    window.onpopstate = history.onpushstate = (e) => {
-      if (window.location.href.split('/').pop().indexOf('modal') === -1) {
-        this.$store.dispatch('openPopupGift', {})
-      }
-    }
+    // window.onpopstate = history.onpushstate = (e) => {
+    //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {
+    //     this.$store.dispatch('openPopupGift', {})
+    //   }
+    // }
   }
 }
 </script>

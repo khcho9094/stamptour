@@ -24,6 +24,19 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script>
+      function event_gps_receive (gps) {
+        console.log('gps'+gps)
+        if (gps == 'N') {
+          if (/Android/i.test(navigator.userAgent)) {
+            // eslint-disable-next-line no-undef
+            tranggle3.tranggle_callback('event_gps_setting', '{}')
+          } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            window.location = 'tranggle://event_gps_setting'
+          }
+        }
+        // localStorage.setItem('getGps', gps)
+      }
+
       function set_coordinate (lon, lat) {
         var chkLon = 0
         var chkLat = 0

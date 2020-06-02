@@ -105,7 +105,12 @@ export default new Vuex.Store({
     uploadSuccess: false,
     themaPop: { open: false },
     zoomPop: false,
-    zoomPopImg: ''
+    zoomPopImg: '',
+    thema10Agree: 'N',
+    themaPopAgree: { open: false },
+    wonjuPopup: true,
+    wonjuPopup2: { open: false },
+    themaUserInfo: {}
   },
   mutations: {
     setIntroData (state, data) {
@@ -171,18 +176,10 @@ export default new Vuex.Store({
       state.memberList = state.memberList.concat(data.list)
       state.memberCount = data.total.CHALLENGE
     },
+    setUserInfo (state, data) {
+      state.themaUserInfo.mobile = data.mobile
+    },
     setTourTotalData (state, data) {
-      // if (data.name === 'party') {
-      //   state.TourData = data.list
-      // } else if (data.name === 'food') {
-      //   state.FoodData = data.list
-      // } else if (data.name === 'hotel') {
-      //   state.LodgMentData = data.list
-      // } else if (data.name === 'exp') {
-      //   state.LeportsData = data.list
-      // } else {
-      //   state.ShoppingData = data.list
-      // }
       if (data.name === 'party') {
         state.TourData = data.list
       } else if (data.name === 'tour') {
@@ -936,7 +933,6 @@ export default new Vuex.Store({
     테마10 이미지 업로드
     */
     uploadThema10Photo ({ state, commit }, data) {
-      console.log(data)
       const fd = new FormData()
       fd.append('token', state.token)
       fd.append('ext', 'json')
@@ -949,7 +945,9 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
-          console.log(response.data.response)
+          if (data.action_type !== 'DEL') {
+            alert(response.data.response.message)
+          }
           if (response.data.response.code === '00') {
             state.showPhoto.open = false
             state.uploadSuccess = !state.uploadSuccess
@@ -971,6 +969,17 @@ export default new Vuex.Store({
       }
     },
     /*
+    테마10 개인정보 팝업
+    */
+    openThemaAgree ({ state }, data) {
+      state.themaPopAgree = data
+      if (Object.keys(data).length > 0) {
+        state.themaPopAgree.open = true
+      } else {
+        state.themaPopAgree.open = false
+      }
+    },
+    /*
     테마10 이벤트 참여 신청
     */
     ApplyThema10Event ({ state, commit }, data) {
@@ -982,6 +991,43 @@ export default new Vuex.Store({
             console.log(response.response)
             state.uploadSuccess = !state.uploadSuccess
             // commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 개인정보동의 신청 조회
+    */
+    Thema10PsInfo ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/setThema10UserInfo.jsonp?phone=${data.phone}&action=${data.action}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (data.phone === '') {
+            if (response.response.code === '03') {
+              state.thema10Agree = 'Y'
+            }
+            if (response.response.code === '04') {
+              state.thema10Agree = 'N'
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 유저 정보 조회
+    */
+    GetUserInfo ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/member/info.jsonp?member_id=${data.member_id}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            commit('setUserInfo', response.response.content)
           }
         })
         .catch(err => {

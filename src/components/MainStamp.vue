@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- 포인트일 경우 -->
+    <!---------------------------------------------------------------- 포인트일 경우 -------------------------------------------------------------------->
     <div class="stamp_box" v-if="setStamp()">
-      <div class="title" v-if="this.token">
+      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count" v-if="this.getStampCount !== this.allStampCount">
               <em>{{this.myPoint}}</em>
@@ -33,7 +33,7 @@
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
-    <!-- 갯수일 경우 -->
+    <!----------------------------------------------------------------- 갯수일 경우 -------------------------------------------------------------->
     <div class="stamp_box" v-else>
       <div class="title" v-if="this.token" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
@@ -71,6 +71,7 @@
 <script>
 import { mapState } from 'vuex'
 import router from '@/router'
+// import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'MainStamp',
   data () {
@@ -155,7 +156,7 @@ export default {
       return zindex
     },
     giftClick (num) {
-      window.history.pushState({}, 'modal', '/modal')
+      // window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (parseInt(data.mingle_count) === num) {
           this.$store.dispatch('openPopupGift', data)
@@ -163,7 +164,7 @@ export default {
       })
     },
     giftClickPoint (num) {
-      window.history.pushState({}, 'modal', '/modal')
+      // window.history.pushState({}, 'modal', '/modal')
       this.giftData.map((data) => {
         if (data.mingle_count - this.myPoint < 6 && data.mingle_count - this.myPoint > 0 && this.getStampCount + 1 === num) {
           this.$store.dispatch('openPopupGift', data)
@@ -191,6 +192,7 @@ export default {
       return chk
     },
     loginOpen () {
+      // appEvent.thema10Login()
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
         tranggle3.tranggle_callback('go_home_event', '{}')

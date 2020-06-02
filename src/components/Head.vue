@@ -68,7 +68,7 @@ export default {
       }
     },
     goBack () {
-      if ((this.$route.name === 'Gift' && !this.giftSolo) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift') {
+      if ((this.$route.name === 'Gift' && !this.giftSolo) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift' || this.$route.name === 'EventThema10') {
         if (/Android/i.test(navigator.userAgent)) {
           // eslint-disable-next-line no-undef
           tranggle3.tranggle_callback('back_btn_event', '{}')

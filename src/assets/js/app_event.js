@@ -105,3 +105,59 @@ function getDurunubi (id, eid) {
     // setDurunubi(id, eid)
   }
 }
+
+/**
+ * 테마10선 이벤트 소개페이지 이동
+ */
+// eslint-disable-next-line no-unused-vars
+export function thema10Page () {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_thema10', '{ "url": "/event/thema10" }')
+  } else if (os === 'ios') {
+    window.location = 'tranggle://event_thema10?url=/event/thema10'
+  }
+}
+
+/**
+ * 테마10선 미로그인 로그인페이지로 이동
+ */
+// eslint-disable-next-line no-unused-vars
+export function thema10Login () {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_thema10_login', '{}')
+  } else if (os === 'ios') {
+    window.location = 'tranggle://event_thema10_login'
+  }
+}
+
+/**
+ * 테마10선 GPS 설정 이동
+ */
+// eslint-disable-next-line no-unused-vars
+export function thema10GpsSetting () {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_gps_setting', '{}')
+  } else if (os === 'ios') {
+    window.location = 'tranggle://event_gps_setting'
+  }
+}
+
+/**
+ * 테마10선 GPS 온오프 여부
+ */
+// eslint-disable-next-line no-unused-vars
+export function thema10GpsStatus () {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_gps_status', '{}')
+  } else if (os === 'ios') {
+    window.location = 'tranggle://event_gps_status'
+  }
+}

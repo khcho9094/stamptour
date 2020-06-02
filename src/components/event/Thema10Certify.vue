@@ -22,7 +22,7 @@
           <div class="btn" @click="photoUpload(0, 'Edit')">
             + 인증사진 첨부
           </div>
-          <div class="menu_btn"></div>
+          <div class="menu_btn" @click="thema10Main"></div>
         </div>
         <div class="box" v-else>
           <div class="auth_check">
@@ -32,7 +32,7 @@
                 :class="thema10Status.gps_log_auth_type === 'GPS' ? 'img1' : 'img2'"
                 :style="{ 'backgroundImage': `url(${thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.gps_log_auth_type === 'PHOTO'">
+              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.gps_log_auth_type === 'PHOTO' && thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -43,7 +43,7 @@
               <div class="txt3" v-if="thema10Status.gps_log_auth_type === 'GPS'">
                 <img src="@/assets/images/event/icon_person.png" alt="">
                 <span class="ptc">참여자</span>
-                <span class="count">{{thema10Status.gps_log_badge_getcount}}</span>
+                <span class="count">{{thema10Status.gps_log_badge_getcount || 0}}</span>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div class="auth_check">
             <div class="left">
               <div class="img_box img2" :style="{ 'backgroundImage': `url(${thema10Status.receipt_log_filename})` }"></div>
-              <div class="edit_btn" @click="photoUpload(1, 'reEdit')">
+              <div class="edit_btn" @click="photoUpload(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -91,6 +91,7 @@
     <Thema10Example :type="type" :edit="edit" />
     <Thema10PopupPhoto />
     <Thema10PopupNotice />
+    <Thema10PopupPI />
   </div>
 </template>
 <script>
@@ -98,6 +99,7 @@ import { mapState } from 'vuex'
 import Thema10Example from '@/components/event/Thema10Example.vue'
 import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
 import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
+import Thema10PopupPI from '@/components/event/Thema10PopupPI.vue'
 export default {
   name: 'Thema10Certify',
   data () {
@@ -109,10 +111,11 @@ export default {
   components: {
     Thema10Example,
     Thema10PopupPhoto,
-    Thema10PopupNotice
+    Thema10PopupNotice,
+    Thema10PopupPI
   },
   computed: {
-    ...mapState(['thema10Status', 'uploadSuccess'])
+    ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree'])
   },
   methods: {
     photoUpload (type, photo) {
@@ -132,17 +135,29 @@ export default {
       let tit1 = ''
       let tit2 = ''
       if (this.thema10Status.event_apply_chk === 'Y') {
-        this.$store.dispatch('ApplyThema10Event', {
-          gps_authno: this.thema10Status.gps_authno,
-          photo_authno: this.thema10Status.photo_authno,
-          receipt_authno: this.thema10Status.receipt_authno,
-          badge_id: this.thema10Status.gps_log_badge_id
-        })
-        tit1 = '이벤트 참여가<br>완료 되었습니다.'
-        tit2 = '당첨은 매월 17일 발표되며,<br>인증 현황 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+        if (this.thema10Agree === 'N') {
+          this.$store.dispatch('openThemaAgree', {
+            open: true
+          })
+          return false
+        } else {
+          this.$store.dispatch('ApplyThema10Event', {
+            gps_authno: this.thema10Status.gps_authno,
+            photo_authno: this.thema10Status.photo_authno,
+            receipt_authno: this.thema10Status.receipt_authno,
+            badge_id: this.thema10Status.gps_log_badge_id
+          })
+          tit1 = '이벤트 참여가<br>완료 되었습니다.'
+          tit2 = '당첨은 매월 17일 발표되며,<br>인증 현황 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+        }
       } else {
-        tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
-        tit2 = ''
+        if (this.thema10Status.event_finish_chk === 'Y') {
+          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+        } else {
+          tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+          tit2 = ''
+        }
       }
       this.$store.dispatch('openThemaNoti', {
         open: true,
@@ -153,7 +168,7 @@ export default {
     confirm () {
       let tit1 = ''
       let tit2 = ''
-      if (this.thema10Status.event_apply_chk === 'N') {
+      if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
         tit1 = '인증을 모두 완료하고<br>이벤트에 참여해주세요.'
         tit2 = ''
       } else {
@@ -165,6 +180,8 @@ export default {
         tit1: tit1,
         tit2: tit2
       })
+    },
+    thema10Main () {
     }
   },
   watch: {
@@ -175,6 +192,10 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadThema10Status')
+    this.$store.dispatch('Thema10PsInfo', {
+      phone: '',
+      action: 'GET'
+    })
   }
 }
 </script>

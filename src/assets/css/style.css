@@ -210,7 +210,7 @@ header .head_back span {
     color:#010101;
     line-height:21px;
     background:#fff;
-    padding:50px 0 0;
+    padding:50px 0 20px;
     font-family:inaviL;
 }
 .pop_overay .pop_cont .text_2 .check {
@@ -677,11 +677,12 @@ header .head_back span {
     text-decoration: underline;
 }
 .recom_stamp {
-    padding:20px 25px;
+    padding: 10px 25px;
 }
 .recom_stamp .title {
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding-top: 6px;
 }
 .recom_stamp .title h1 {
     float: left;
@@ -697,10 +698,13 @@ header .head_back span {
 }
 .recom_stamp .title span {
     font-size: 11px;
-    color:rgba(0, 0, 0, 0.5);
+    color:#3bb9fa;
+    border: 1px solid #3bb9fa;
     float: right;
-    margin-top: 3px;
-    font-family:inaviM;
+    font-family:inaviB;
+    padding: 5px 10px;
+    position: relative;
+    top: -5px;
 }
 .recom_stamp .title span img {
     width: 5px;
@@ -1480,7 +1484,6 @@ header .head_back span {
     padding-bottom: 65px;
 }
 .tour_sub_wrap ul.user_list li {
-    cursor: pointer;
     border-bottom: 1px solid #edeeef;
     overflow: hidden;
     padding:15px 20px 15px 0;
@@ -1978,17 +1981,20 @@ header .head_back span {
     background-position: center;
     z-index: 100;
 }
+.thema10 {
+    background-color: #f6f1e7;
+}
 .thema10_wrap {
-    height: calc(100vh - 100px);
     background: url('../images/event/bg.png') no-repeat #f6f1e7 top -10px left 0px;
     background-size: 120px;
-    padding:18px 20px 0;
+    padding:18px 20px 40px;
+    min-height: calc(100vh - 100px);
 }
 
 .thema10_wrap .title_box {
     font-size: 17px;
     color:#000;
-    margin-bottom: 23px;
+    margin-bottom: 20px;
 }
 .thema10_wrap .title_box img {
     width: 35px;
@@ -2004,6 +2010,8 @@ header .head_back span {
     display: inline-block;
     vertical-align: middle;
     margin-left: 7px;
+    position: relative;
+    top: -2px;
 }
 
 .thema10_wrap .auth_box {
@@ -2015,6 +2023,8 @@ header .head_back span {
     box-shadow: 0px 8px 15px rgba(0,0,0,0.1);
     height: calc(50vh - 135px);
     overflow: scroll;
+    max-height: 200px;
+    min-height: 170px;
 }
 .thema10_wrap .auth_box .box {
     height: calc(100% - 16px);
@@ -2362,4 +2372,11 @@ ul.photo_select li input[type="file"] {
 }
 .thema_noti .txt .span {
     color:#1876a7;
+}
+.themaBanner {
+    width:100%;
+    height:57px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

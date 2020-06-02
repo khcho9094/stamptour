@@ -4,7 +4,7 @@
       <!-- 헤더 -->
       <Head type='logo' name='main' v-on:moreBtn='handleMoreButton' />
       <MainStamp />
-      <MainGiftView v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='" />
+      <MainGiftView />
       <MainRecommend />
       <MainList />
       <Popup :visible='visible' v-on:moreBtn='handleMoreButton' />
@@ -13,6 +13,8 @@
       <PopupStampSuccess v-if="popupStampSuccess" />
       <PopupMyStamp />
       <PopupRestart />
+      <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
+      <WonjuPopup2 v-if="wonjuPopup2.open" />
     </div>
     <Intro v-else/>
   </div>
@@ -33,6 +35,8 @@ import PopupStampSuccess from '@/components/popup/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 import PopupRestart from '@/components/popup/PopupRestart.vue'
+import WonjuPopup from '@/components/WonjuPopup.vue'
+import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 export default {
   name: 'Main',
   components: {
@@ -47,7 +51,9 @@ export default {
     PopupStampSuccess,
     Intro,
     PopupMyStamp,
-    PopupRestart
+    PopupRestart,
+    WonjuPopup,
+    WonjuPopup2
   },
   data () {
     return {
@@ -66,7 +72,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup2'])
   },
   methods: {
     handleMoreButton () {
@@ -118,7 +124,13 @@ export default {
       this.$store.dispatch('setIntroPopup', true)
     }
     // 인트로 페이지로
-    if (!this.$cookie.get('setIntro') && this.$route.query.mingleCode) {
+    let mingleN = ''
+    this.stampCodeInfo.map((data, idx) => {
+      if (this.$route.query.mingleCode === data.code) {
+        mingleN = idx
+      }
+    })
+    if (!this.$cookie.get(`setIntro${mingleN}`) && this.$route.query.mingleCode) {
       const query = Object.assign({}, this.$route.query)
       delete query.mingleCode
       this.$router.replace({ query })
