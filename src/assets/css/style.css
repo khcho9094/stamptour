@@ -1484,7 +1484,6 @@ header .head_back span {
     padding-bottom: 65px;
 }
 .tour_sub_wrap ul.user_list li {
-    cursor: pointer;
     border-bottom: 1px solid #edeeef;
     overflow: hidden;
     padding:15px 20px 15px 0;

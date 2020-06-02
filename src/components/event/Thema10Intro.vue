@@ -43,7 +43,7 @@
               <strong>• 당첨자 발표</strong><br/>
               <span class="event_insert">
                 매월 17일, 테마여행 10선 홈페이지 게시.<br/>
-                명단 확인 : <a href="https://m.naver.com/">www.text.co.kr</a>
+                명단 확인 : <a href="javascript:;" @click="exLink('https://korean.visitkorea.or.kr/main/event_main.do')">www.text.co.kr</a>
               </span>
             </p>
             <p class="ptxt">
@@ -56,7 +56,7 @@
             <p class="ptxt">
               <strong>• 상세 안내</strong><br/>
               <span class="event_insert">
-                보다 자세한 사항은 <a href="http://www.ktourbest10.kr/kr/intro.php">www.ktourbest10.kr</a><br/>
+                보다 자세한 사항은 <a href="javascript:;" @click="exLink('http://www.ktourbest10.kr/kr/intro.php')">www.ktourbest10.kr</a><br/>
                 테마여핸 10선 홈페이지를 참고해주세요.
               </span>
             </p>
@@ -98,12 +98,16 @@
   </div>
 </template>
 <script>
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Thema10Intro',
   methods: {
     themaBanner () {
       const url = require('@/assets/images/event/allthat_event_title.png')
       return `url(${url})`
+    },
+    exLink (url) {
+      appEvent.externalLinks(url)
     }
   }
 }

@@ -14,6 +14,7 @@
       <PopupMyStamp />
       <PopupRestart />
       <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
+      <WonjuPopup2 v-if="wonjuPopup2.open" />
     </div>
     <Intro v-else/>
   </div>
@@ -35,6 +36,7 @@ import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 import PopupRestart from '@/components/popup/PopupRestart.vue'
 import WonjuPopup from '@/components/WonjuPopup.vue'
+import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 export default {
   name: 'Main',
   components: {
@@ -50,7 +52,8 @@ export default {
     Intro,
     PopupMyStamp,
     PopupRestart,
-    WonjuPopup
+    WonjuPopup,
+    WonjuPopup2
   },
   data () {
     return {
@@ -69,7 +72,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup2'])
   },
   methods: {
     handleMoreButton () {
