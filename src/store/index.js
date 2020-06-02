@@ -1019,7 +1019,7 @@ export default new Vuex.Store({
     테마10 유저 정보 조회
     */
     GetUserInfo ({ state, commit }, data) {
-      const url = `http://api.tranggle.com/v2/member/info.jsonp?member_id=${data.member_id}&token=${state.token}`
+      const url = `https://api.tranggle.com/v2/member/info.jsonp?member_id=${data.member_id}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
