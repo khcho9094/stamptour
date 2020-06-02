@@ -106,7 +106,8 @@ export default new Vuex.Store({
     thema10Agree: 'N',
     themaPopAgree: { open: false },
     wonjuPopup: true,
-    wonjuPopup2: { open: false }
+    wonjuPopup2: { open: false },
+    themaUserInfo: {}
   },
   mutations: {
     setIntroData (state, data) {
@@ -172,18 +173,10 @@ export default new Vuex.Store({
       state.memberList = state.memberList.concat(data.list)
       state.memberCount = data.total.CHALLENGE
     },
+    setUserInfo (state, data) {
+      state.themaUserInfo.mobile = data.mobile
+    },
     setTourTotalData (state, data) {
-      // if (data.name === 'party') {
-      //   state.TourData = data.list
-      // } else if (data.name === 'food') {
-      //   state.FoodData = data.list
-      // } else if (data.name === 'hotel') {
-      //   state.LodgMentData = data.list
-      // } else if (data.name === 'exp') {
-      //   state.LeportsData = data.list
-      // } else {
-      //   state.ShoppingData = data.list
-      // }
       if (data.name === 'party') {
         state.TourData = data.list
       } else if (data.name === 'tour') {
@@ -937,7 +930,6 @@ export default new Vuex.Store({
     테마10 이미지 업로드
     */
     uploadThema10Photo ({ state, commit }, data) {
-      console.log(data)
       const fd = new FormData()
       fd.append('token', state.token)
       fd.append('ext', 'json')
@@ -950,7 +942,9 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
-          console.log(response.data.response)
+          if (data.action_type !== 'DEL') {
+            alert(response.data.response.message)
+          }
           if (response.data.response.code === '00') {
             state.showPhoto.open = false
             state.uploadSuccess = !state.uploadSuccess
@@ -1015,6 +1009,22 @@ export default new Vuex.Store({
             if (response.response.code === '04') {
               state.thema10Agree = 'N'
             }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    테마10 유저 정보 조회
+    */
+    GetUserInfo ({ state, commit }, data) {
+      const url = `http://api.tranggle.com/v2/member/info.jsonp?member_id=${data.member_id}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            commit('setUserInfo', response.response.content)
           }
         })
         .catch(err => {

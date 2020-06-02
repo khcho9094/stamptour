@@ -9,6 +9,7 @@
               <li>
                 <label for="gallery_file">앨범에서 사진 선택</label>
                 <input type="file" id="gallery_file" name="gallery" accept="image/*" @change="previewFiles($event, '')">
+                <!-- <input type="file" id="gallery_file" name="gallery" accept="image/*;capture=camera" @change="previewFiles($event, '')"> -->
               </li>
               <li v-if="this.showPhoto.edit === 'reEdit'" @click="previewFiles($event, 'remove')">삭제</li>
             </ul>
@@ -40,6 +41,9 @@ export default {
         action_type: this.actionType(rm),
         event_no: this.thema10Status.log_event_no,
         log_no: (this.showPhoto.type === 0 ? this.thema10Status.photo_authno : this.thema10Status.receipt_authno)
+      })
+      this.$store.dispatch('GetUserInfo', {
+        member_id: this.thema10Status.gps_log_member_id || ''
       })
     },
     actionType (rm) {

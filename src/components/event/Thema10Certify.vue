@@ -22,7 +22,7 @@
           <div class="btn" @click="photoUpload(0, 'Edit')">
             + 인증사진 첨부
           </div>
-          <div class="menu_btn"></div>
+          <div class="menu_btn" @click="thema10Main"></div>
         </div>
         <div class="box" v-else>
           <div class="auth_check">
@@ -134,7 +134,6 @@ export default {
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
-      console.log(this.thema10Agree)
       if (this.thema10Status.event_apply_chk === 'Y') {
         if (this.thema10Agree === 'N') {
           this.$store.dispatch('openThemaAgree', {
@@ -181,6 +180,8 @@ export default {
         tit1: tit1,
         tit2: tit2
       })
+    },
+    thema10Main () {
     }
   },
   watch: {
@@ -191,7 +192,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadThema10Status')
-    this.$store.dispatch('loadGiftDataNew')
     this.$store.dispatch('Thema10PsInfo', {
       phone: '',
       action: 'GET'

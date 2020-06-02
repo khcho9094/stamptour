@@ -19,7 +19,7 @@
                   </div>
                   <div class="agree_info">
                     <div class="tit">휴대폰</div>
-                    <span>{{memberInfo.mobile || '정보 없음'}}</span>
+                    <span>{{themaUserInfo.mobile || '정보 없음'}}</span>
                   </div>
                 </div>
                 <div class="check">
@@ -50,14 +50,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['memberInfo', 'popupNoti', 'themaPopAgree', 'thema10Status'])
+    ...mapState(['popupNoti', 'themaPopAgree', 'thema10Status', 'themaUserInfo'])
   },
   methods: {
     closeBtn () {
       this.$store.dispatch('openThemaAgree', {})
     },
     receiveGift () {
-      if (!this.memberInfo.mobile) {
+      if (!this.themaUserInfo.mobile) {
         this.$store.dispatch('openNotiPopup', {
           tit1: '이벤트 참여를 위해<br/>아래의 정보가 필요합니다.',
           tit2: '휴대폰 번호'
@@ -77,7 +77,7 @@ export default {
           let tit1 = ''
           let tit2 = ''
           this.$store.dispatch('Thema10PsInfo', {
-            phone: this.memberInfo.mobile,
+            phone: this.themaUserInfo.mobile,
             action: 'SET'
           })
           this.$store.dispatch('ApplyThema10Event', {
@@ -99,6 +99,11 @@ export default {
     }
   },
   mounted () {
+    setTimeout(() => {
+      this.$store.dispatch('GetUserInfo', {
+        member_id: this.thema10Status.gps_log_member_id || ''
+      })
+    }, 100)
   },
   destroyed () {
   }
