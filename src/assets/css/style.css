@@ -2380,3 +2380,20 @@ ul.photo_select li input[type="file"] {
     background-size: cover;
     background-position: center;
 }
+.stamp_box .title .restart {
+    border:1px solid #cb6e5b;
+    border-radius: 20px;
+    padding: 0px 8px 3px 8px;
+    float: right;
+}
+.stamp_box .title .restart img {
+    width: 13px;
+    position: relative;
+    top: 2px;
+}
+.stamp_box .title .restart button {
+    font-size: 12px;
+    color:#c86550;
+    font-family: inaviB;
+    line-height: 1;
+}
