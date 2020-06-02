@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- 포인트일 경우 -->
+    <!---------------------------------------------------------------- 포인트일 경우 -------------------------------------------------------------------->
     <div class="stamp_box" v-if="setStamp()">
-      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)">
+      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
           <span class="count">
               <em>{{this.myPoint}}</em>
@@ -33,7 +33,7 @@
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
-    <!-- 갯수일 경우 -->
+    <!----------------------------------------------------------------- 갯수일 경우 -------------------------------------------------------------->
     <div class="stamp_box" v-else>
       <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
