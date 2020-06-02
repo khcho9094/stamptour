@@ -3,12 +3,14 @@
     <!-- 헤더 -->
     <Head type='logo' name='intro' />
     <PopupIntro :visible='visible' :count='count'  />
+    <Popupimage />
     <div class="tour_start_wrap">
         <div class="title">
             {{introData.mingle_title}}
         </div>
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
+              onClick="_this.onSelected(this)"
               class="slide"
               :style="{ 'backgroundImage': `url(${img})` }"
               v-for="(img, idx) in introImage"
@@ -29,11 +31,13 @@
 import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 import PopupIntro from '@/components/popup/PopupIntro.vue'
+import Popupimage from '@/components/popup/Popupimage.vue'
 export default {
   name: 'Intro',
   components: {
     Head,
-    PopupIntro
+    PopupIntro,
+    Popupimage
   },
   data () {
     return {
@@ -73,7 +77,19 @@ export default {
           clearInterval(interval)
         }
       }, 1000)
+    },
+    onSelected (obj) {
+      let split_ = obj.style.backgroundImage.split('(')
+      split_ = split_[1].split(')')
+      let image = split_[0].replace(/"/g, '')
+      image = image.replace('thumb', 'origin')
+      this.$store.state.zoomPopImg = image
+      this.$store.state.zoomPop = !this.$store.state.zoomPop
+      console.log(image)
     }
+  },
+  created () {
+    window._this = this
   },
   mounted () {
     // this.$store.dispatch('loadIntroImage')

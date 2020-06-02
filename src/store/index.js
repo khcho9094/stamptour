@@ -92,6 +92,7 @@ export default new Vuex.Store({
     getStampImage: '',
     getStampName: '',
     getStampDate: '',
+    getStampWhence: '',
     restartOpen: false,
     getGiftChk: false,
     getGiftCnt: 0,
@@ -102,7 +103,9 @@ export default new Vuex.Store({
     showPhoto: { open: false },
     thema10Status: {}, // 테마 10 조회
     uploadSuccess: false,
-    themaPop: { open: false }
+    themaPop: { open: false },
+    zoomPop: false,
+    zoomPopImg: ''
   },
   mutations: {
     setIntroData (state, data) {

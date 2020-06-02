@@ -11,6 +11,7 @@
               <div class="sdate">2020/04/27 PM 03:45</div> -->
               <div class="stxt">{{getStampName}}</div>
               <div class="sdate">{{getStampDate}}</div>
+              <div v-if="getStampWhence !== '' && getStampWhence !== null">출처 : {{getStampWhence}}</div>
             </div>
             <button v-on:click="closeBtn()">닫기</button>
         </div>
@@ -28,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stampOpen', 'getStampName', 'getStampDate'])
+    ...mapState(['stampOpen', 'getStampName', 'getStampDate', 'getStampWhence'])
   },
   methods: {
     closeBtn () {

@@ -2,16 +2,16 @@
   <div>
     <!-- 포인트일 경우 -->
     <div class="stamp_box" v-if="setStamp()">
-      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)">
+      <div class="title" v-if="this.token">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
-          <span class="count">
+          <span class="count" v-if="this.getStampCount !== this.allStampCount">
               <em>{{this.myPoint}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
               <em>{{this.allStampPoint}}</em>
           </span>
-      </div>
-      <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
-        <button>다시시작</button>
+          <span class="count" v-else>
+            <button @click="restartPopup()">다시시작</button>
+          </span>
       </div>
       <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
@@ -35,16 +35,16 @@
     </div>
     <!-- 갯수일 경우 -->
     <div class="stamp_box" v-else>
-      <div class="title" v-if="this.token && (this.getStampCount !== this.allStampCount)" @click="goMyStamp">
+      <div class="title" v-if="this.token" @click="goMyStamp">
           내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp">
-          <span class="count">
+          <span class="count" v-if="(this.getStampCount !== this.allStampCount)">
               <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
               <em>{{this.allStampCount}}</em>
           </span>
-      </div>
-      <div class="title" v-if="this.token && (this.getStampCount === this.allStampCount)">
-        <button @click="restartPopup()">다시시작</button>
+           <span class="count" v-else>
+            <button @click="restartPopup()">다시시작</button>
+          </span>
       </div>
       <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
       <swiper :options="swiperOption" class="swiper">
