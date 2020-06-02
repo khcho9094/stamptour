@@ -89,6 +89,7 @@ export default {
       image = image.replace('thumb', 'origin')
       this.$store.state.zoomPopImg = image
       this.$store.state.zoomPop = !this.$store.state.zoomPop
+      document.body.style.overscrollBehaviorY = 'contain'
       console.log(image)
     }
   },

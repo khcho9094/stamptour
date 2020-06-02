@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     closeBtn () {
+      document.body.style.overscrollBehaviorY = ''
       this.$store.state.zoomPop = !this.$store.state.zoomPop
     },
     test () {
