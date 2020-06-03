@@ -77,7 +77,7 @@
 <script>
 import { mapState } from 'vuex'
 import router from '@/router'
-// import * as appEvent from '@/assets/js/app_event.js'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'MainStamp',
   data () {
@@ -198,15 +198,15 @@ export default {
       return chk
     },
     loginOpen () {
-      // appEvent.thema10Login()
-      if (/Android/i.test(navigator.userAgent)) {
-        // eslint-disable-next-line no-undef
-        tranggle3.tranggle_callback('go_home_event', '{}')
-      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = 'tranggle_callback://go_home_event'
-      } else {
-        return false
-      }
+      appEvent.thema10Login()
+      // if (/Android/i.test(navigator.userAgent)) {
+      //   // eslint-disable-next-line no-undef
+      //   tranggle3.tranggle_callback('go_home_event', '{}')
+      // } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      //   window.location = 'tranggle_callback://go_home_event'
+      // } else {
+      //   return false
+      // }
     },
     getResize () {
       this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53

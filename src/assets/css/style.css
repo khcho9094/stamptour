@@ -1177,6 +1177,9 @@ header .head_back span {
 .tour_sub_wrap ul.gift_list li:last-child .line {
     display: none;
 }
+.tour_sub_wrap ul.gift_list li .gift_icon.end img {
+    display: none;
+}
 
 
 

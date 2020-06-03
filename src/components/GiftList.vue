@@ -14,7 +14,7 @@
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
-            <div class="giftDday" v-if="dotOn(data) === 'on'">{{dDay(data)}}</div>
+            <div class="giftDday" v-if="dotOn(data) === 'on' || dotOn(data) === 'end'">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>
@@ -36,6 +36,8 @@ export default {
       let dot = ''
       if (data.mingle_gift_receive === 'Y') {
         dot = 'on'
+      } else if (data.mingle_gift_receive === 'N' && data.mingle_gift_end_date !== '0000-00-00 00:00:00') {
+        dot = 'end'
       }
       return dot
     },

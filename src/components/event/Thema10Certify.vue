@@ -115,7 +115,7 @@ export default {
     Thema10PopupPI
   },
   computed: {
-    ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree'])
+    ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree', 'mingleCode'])
   },
   methods: {
     photoUpload (type, photo) {
@@ -182,6 +182,14 @@ export default {
       })
     },
     thema10Main () {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('go_stamp_main', `{ "mingle_code": ${this.mingleCode} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://go_stamp_main?mingle_code=${this.mingleCode}`
+      } else {
+        return false
+      }
     }
   },
   watch: {

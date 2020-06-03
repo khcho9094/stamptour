@@ -132,6 +132,7 @@ export default {
               this.$store.dispatch('openPopupGift', {})
             }
             if (url) {
+              this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
               appEvent.externalLinks(url)
             }
           } else {
