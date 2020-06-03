@@ -40,6 +40,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('loadGiftDataNew')
     if (this.token) {
       this.$store.dispatch('loadGiftData')
     } else {

@@ -205,7 +205,6 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadGiftDataNew')
     this.setStamp()
     if (this.$cookie.get('agree_security') === 'Y') {
       this.personal = true

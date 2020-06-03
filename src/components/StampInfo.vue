@@ -50,6 +50,12 @@ export default {
         val = '레포츠'
       } else if (this.common.contenttypeid === '38') {
         val = '쇼핑'
+      } else if (this.common.contenttypeid === '25') {
+        val = '여행코스'
+      } else if (this.common.contenttypeid === '14') {
+        val = '문화시설'
+      } else if (this.common.contenttypeid === '12') {
+        val = '관광'
       } else {
         val = '행사'
       }

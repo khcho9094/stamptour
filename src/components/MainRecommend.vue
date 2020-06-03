@@ -23,7 +23,7 @@
                         <div class="stamp_count">
                             <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                             <span class="stxt">스탬프</span>
-                            <span class="snum">{{val.mingle_stat_badge_count}}</span>
+                            <span class="snum">{{val.mingle_stat_badge_count || '0'}}</span>
                         </div>
                         <div class="ns_mark">다음 스탬프</div>
                     </li>

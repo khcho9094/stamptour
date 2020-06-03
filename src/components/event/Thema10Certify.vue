@@ -184,9 +184,9 @@ export default {
     thema10Main () {
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
-        tranggle3.tranggle_callback('go_stamp_main', `{ "mingle_code": ${this.mingleCode} }`)
+        tranggle3.tranggle_callback('go_stamp_main', '{ "mingle_code": "iQxiUpF8ZfaGodRQJ6s0mg==" }')
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = `tranggle_callback://go_stamp_main?mingle_code=${this.mingleCode}`
+        window.location = 'tranggle_callback://go_stamp_main?mingle_code=iQxiUpF8ZfaGodRQJ6s0mg=='
       } else {
         return false
       }
