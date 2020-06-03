@@ -56,11 +56,11 @@ export default {
         // this.$store.state.tourShareUrl = setUrl
         var varUA = navigator.userAgent.toLowerCase()
         if (varUA.indexOf('android') > -1) {
-          setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+          setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
         } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
           setUrl = 'https://itunes.apple.com/app/id1501448481'
         } else {
-          setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+          setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
         }
         return setUrl
       }
@@ -90,11 +90,11 @@ export default {
       var setUrl = null
       var varUA = navigator.userAgent.toLowerCase()
       if (varUA.indexOf('android') > -1) {
-        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
         setUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
-        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       var devider = '?'
       var os = this.phoneChk()
@@ -117,11 +117,11 @@ export default {
       var setUrl = null
       var varUA = navigator.userAgent.toLowerCase()
       if (varUA.indexOf('android') > -1) {
-        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
         setUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
-        setUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        setUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
 
       const shareUrl = encodeURIComponent(setUrl)
@@ -195,11 +195,11 @@ export default {
       var shareUrl = null
       var varUA = navigator.userAgent.toLowerCase()
       if (varUA.indexOf('android') > -1) {
-        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        shareUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
         shareUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
-        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        shareUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       // eslint-disable-next-line no-undef
       Kakao.Story.open({
@@ -219,11 +219,11 @@ export default {
       var shareUrl = null
       var varUA = navigator.userAgent.toLowerCase()
       if (varUA.indexOf('android') > -1) {
-        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        shareUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
         shareUrl = 'https://itunes.apple.com/app/id1501448481'
       } else {
-        shareUrl = 'http://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
+        shareUrl = 'https://play.google.com/store/apps/details?id=com.beaglemap.unitedstampapp'
       }
       //   if (location.search !== '' && !url.match('mingleCode')) {
       //     shareUrl = url + '&mingleCode=' + getServiceCode
@@ -240,7 +240,7 @@ export default {
           location.href = settingUrl
         } else {
           // pc
-          const settingUrl = 'http://www.band.us/plugin/share?body=' + encodeURIComponent(title + '\n') + encodeURIComponent(shareUrl)
+          const settingUrl = 'https://www.band.us/plugin/share?body=' + encodeURIComponent(title + '\n') + encodeURIComponent(shareUrl)
           location.href = settingUrl
         }
       }

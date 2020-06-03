@@ -73,7 +73,7 @@
         var token = getCookie('login_token')
         $.ajax({
           type:"post",
-          url:"http://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?status=INSERT&token=" + token + "&site_id=DURUNUBIAPP&d_id=" + id +"&de_id=" + eid,
+          url:"https://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?status=INSERT&token=" + token + "&site_id=DURUNUBIAPP&d_id=" + id +"&de_id=" + eid,
           dataType:"jsonp",
           jsonpCallback : "callback",
           success:function(data){

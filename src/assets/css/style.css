@@ -2400,3 +2400,21 @@ ul.photo_select li input[type="file"] {
     font-family: inaviB;
     line-height: 1;
 }
+.view_agree {
+    font-size: 11px;
+    color: #3bb9fa;
+    border: 1px solid #3bb9fa;
+    float: right;
+    font-family: inaviM;
+    padding: 5px 10px;
+    line-height: 1;
+    position: relative;
+    top: 19px;
+    left: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #f7f8f9;
+}
+.view_agree img {
+    width: 5px;
+}

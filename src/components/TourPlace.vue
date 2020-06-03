@@ -3,7 +3,7 @@
       <div class="sur_place" v-for="(data, idx) in this.tourTotal" v-bind:key="idx">
           <div class="title">
               <h1> <img :src="iconImg(data)" alt="icon"> {{data.name}}</h1>
-              <span v-on:click="apiListOn(data)">모두보기 <img src="@/assets/images/arrow_1.png" alt="arr"></span>
+              <span v-on:click="apiListOn(data)">모두보기 <img src="@/assets/images/arrow_4.png" alt="arr"></span>
           </div>
           <ul class="list">
               <li v-for="(val, idx2) in tourChange(data.ename)" v-bind:key="idx2" @click="apiDetailOn(val)">

@@ -55,7 +55,7 @@ export default {
       } else if (this.common.contenttypeid === '14') {
         val = '문화시설'
       } else if (this.common.contenttypeid === '12') {
-        val = '관광'
+        val = '관광지'
       } else {
         val = '행사'
       }

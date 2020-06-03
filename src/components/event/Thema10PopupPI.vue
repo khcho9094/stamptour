@@ -12,7 +12,7 @@
                   <div class="notice">Notice</div>
                   <div class="agree_desc">
                     • 수집/이용 목적<br>
-                    <span>선물 발급 통계정보 작성</span><br/>
+                    <span>당첨자 선정, 선물 발급, 통계 정보 작성</span><br/>
                     • 개인 정보 항목<br>
                     <span>연락처</span><br/>
                     • 보유기간 : <span>1년</span>
@@ -24,6 +24,7 @@
                 </div>
                 <div class="check">
                   <input type="checkbox" id="personal1"  name="personal1" v-model="personal1"> <label for="personal1">개인정보 수집 및 이용 동의</label>
+                  <span @click="view_agree" class="view_agree">약관보기 <img src="@/assets/images/arrow_1.png" alt="arr"></span>
                 </div>
                 <div class="check">
                   <input type="checkbox" id="personal2"  name="personal2" v-model="personal2"> <label for="personal2">개인정보 제3자 제공 동의</label>
@@ -38,6 +39,7 @@
 <script>
 import { mapState } from 'vuex'
 import PopupGiftPop from '@/components/popup/PopupGiftPop.vue'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'Thema10PopupPI',
   components: {
@@ -96,6 +98,10 @@ export default {
           })
         }
       }
+    },
+    view_agree () {
+      const url = 'https://m.tranggle.com/mingle/login/join_01_privacy_process?notitle=Y'
+      appEvent.externalLinks(url)
     }
   },
   mounted () {
