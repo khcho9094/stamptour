@@ -385,7 +385,7 @@ header .head_back span {
     justify-content: center;
     align-items: center;
     position: fixed;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     top: 0;
     left: 0;
     width: 100%;
@@ -2417,4 +2417,13 @@ ul.photo_select li input[type="file"] {
 }
 .view_agree img {
     width: 5px;
+}
+.close_pop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+}
+.close_pop img {
+    width:30px;
 }

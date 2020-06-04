@@ -105,7 +105,7 @@ export default new Vuex.Store({
     uploadSuccess: false,
     themaPop: { open: false },
     zoomPop: false,
-    zoomPopImg: '',
+    zoomPopImg: 0,
     thema10Agree: 'N',
     themaPopAgree: { open: false },
     wonjuPopup: true,

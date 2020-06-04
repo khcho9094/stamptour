@@ -3,18 +3,17 @@
     <!-- 헤더 -->
     <Head type='logo' name='intro' />
     <PopupIntro :visible='visible' :count='count'  />
-    <Popupimage />
+    <Popupimage v-if="this.zoomPop === true" :initNo="ino" />
     <div class="tour_start_wrap">
         <div class="title">
             {{introData.mingle_title}}
         </div>
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
-              onClick="_this.onSelected(this)"
               class="slide"
-              :style="{ 'backgroundImage': `url(${img})` }"
               v-for="(img, idx) in introImage"
               v-bind:key="idx">
+                <img :src="img" @click="onSelected(img)">
             </swiper-slide>
         </swiper>
         <div class="content" v-html="introData.mingle_desc"></div>
@@ -47,11 +46,12 @@ export default {
       },
       visible: false,
       count: 5,
-      pageOut: false
+      pageOut: false,
+      ino: 0
     }
   },
   computed: {
-    ...mapState(['introData', 'introImage', 'mingleCode', 'stampCodeInfo'])
+    ...mapState(['introData', 'introImage', 'mingleCode', 'stampCodeInfo', 'zoomPop'])
   },
   methods: {
     tourStartButton () {
@@ -83,18 +83,19 @@ export default {
       }, 1000)
     },
     onSelected (obj) {
-      let split_ = obj.style.backgroundImage.split('(')
-      split_ = split_[1].split(')')
-      let image = split_[0].replace(/"/g, '')
-      image = image.replace('thumb', 'origin')
-      this.$store.state.zoomPopImg = image
+      // let split_ = obj.style.backgroundImage.split('(')
+      // split_ = split_[1].split(')')
+      // let image = split_[0].replace(/"/g, '')
+      const image = obj.replace('thumb', 'origin')
       this.$store.state.zoomPop = !this.$store.state.zoomPop
       document.body.style.overscrollBehaviorY = 'contain'
-      console.log(image)
+      this.introImage.map((data, idx) => {
+        if (data.replace('thumb', 'origin') === image) {
+          this.ino = idx
+          console.log(this.ino)
+        }
+      })
     }
-  },
-  created () {
-    window._this = this
   },
   mounted () {
     // this.$store.dispatch('loadIntroImage')
@@ -110,10 +111,10 @@ export default {
     width: 100%;
   }
   .swiper .slide {
-      width: 240px;
-      height:140px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+    width: auto;
+    height:140px;
+  }
+  .swiper .slide img {
+      height:100%;
   }
 </style>

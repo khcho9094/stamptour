@@ -14,7 +14,7 @@
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
-            <div class="giftDday" v-if="dotOn(data) === 'on' || dotOn(data) === 'end'">{{dDay(data)}}</div>
+            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>
@@ -76,6 +76,7 @@ export default {
       return `${val}개 획득시`
     },
     dDay (data) {
+      console.log(data)
       const text1 = data.mingle_gift_end_date.split(' ')[0].split('-')
       const text2 = data.mingle_gift_end_date.split(' ')[1].split(':')
       const Dday = new Date(

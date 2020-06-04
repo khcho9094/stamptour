@@ -71,7 +71,7 @@ export default {
   },
   mounted () {
     if (this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==') {
-      // this.$store.dispatch('loadGiftDataNew')
+      this.$store.dispatch('loadGiftDataNew')
     }
   }
 }
