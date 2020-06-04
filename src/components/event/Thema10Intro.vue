@@ -18,12 +18,12 @@
             <p class="ptxt">
               <strong>• 이벤트 기간</strong><br/>
               <span class="event_insert">
-                1차 . 2020.06.13 ~ 2020.07.12<br/>
-                2차 . 2020.07.13 ~ 2020.08.12<br/>
-                3차 . 2020.08.13 ~ 2020.09.12<br/>
-                4차 . 2020.09.13 ~ 2020.10.12<br/>
-                5차 . 2020.10.13 ~ 2020.11.12<br/>
-                6차 . 2020.11.13 ~ 2020.12.12<br/>
+                1차 . 2020.06.20 ~ 2020.07.19<br/>
+                2차 . 2020.07.20 ~ 2020.08.19<br/>
+                3차 . 2020.08.20 ~ 2020.09.19<br/>
+                4차 . 2020.09.20 ~ 2020.10.19<br/>
+                5차 . 2020.10.20 ~ 2020.11.19<br/>
+                6차 . 2020.11.20 ~ 2020.12.19<br/>
                 * 소진시, 이벤트 조기 종료<br/>
               </span>
             </p>
@@ -42,7 +42,7 @@
             <p class="ptxt">
               <strong>• 당첨자 발표</strong><br/>
               <span class="event_insert">
-                매월 17일, 테마여행 10선 홈페이지 게시.<br/>
+                매월 25일, 테마여행 10선 홈페이지 게시.<br/>
                 명단 확인 : <a href="javascript:;" @click="exLink('https://korean.visitkorea.or.kr/main/event_main.do')">www.text.co.kr</a>
               </span>
             </p>
@@ -56,15 +56,15 @@
             <p class="ptxt">
               <strong>• 상세 안내</strong><br/>
               <span class="event_insert">
-                보다 자세한 사항은 <a href="javascript:;" @click="exLink('http://www.ktourbest10.kr/kr/intro.php')">www.ktourbest10.kr</a><br/>
-                테마여핸 10선 홈페이지를 참고해주세요.
+                보다 자세한 사항은 <a href="javascript:;" @click="exLink('http://www.ktourtop10.kr/kr/intro.php')">www.ktourtop10.kr</a><br/>
+                테마여행 10선 홈페이지를 참고해주세요.
               </span>
             </p>
             <p class="ptxt">
-              <strong>• 오류 발생 시</strong><br/>
+              <strong>• 올댓스탬프 앱 오류 발생 시</strong><br/>
               <span class="event_insert">
                 E-mail : <a href="mailto:trangglecs@tranggle.com">trangglecs@tranggle.com</a><br/>
-                Phone  : 02-589-9933
+                Phone  : 1877-1022
               </span>
             </p>
             <p class="ptxt">
