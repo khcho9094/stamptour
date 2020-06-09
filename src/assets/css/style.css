@@ -2427,3 +2427,10 @@ ul.photo_select li input[type="file"] {
 .close_pop img {
     width:30px;
 }
+.loading_box {
+    height:60px;
+    text-align: center;
+}
+.loading_box img {
+    
+}

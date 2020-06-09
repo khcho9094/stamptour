@@ -67,7 +67,9 @@ export default {
       params: {
         order: 'pop',
         status: 'ALL',
-        areaCode: '0'
+        areaCode: '0',
+        page: 1,
+        view_count: 10
       }
     }
   },

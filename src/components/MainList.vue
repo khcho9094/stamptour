@@ -29,7 +29,7 @@
                     <div class="stamp_count">
                         <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                         <span class="stxt">{{stampKind(data)}}</span>
-                        <span class="snum">{{data.mingle_stat_badge_count}}</span>
+                        <span class="snum">{{data.mingle_stat_badge_count || 0}}</span>
                         <span v-if="data.mingle_badge_category === 'BICYCLE'" class="cycle">자전거</span>
                     </div>
                     <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
@@ -45,6 +45,9 @@
                     </div>
                 </div>
             </li>
+            <div class="loading_box" v-if="this.allStampCount > this.params.view_count">
+              <img src="@/assets/images/ajax-loader.gif" alt="loader">
+            </div>
         </ul>
     </div>
 </template>
@@ -62,13 +65,15 @@ export default {
       params: {
         order: 'pop',
         status: 'ALL',
-        areaCode: '0'
+        areaCode: '0',
+        page: 1,
+        view_count: 10
       },
       progressData: this.localData()
     }
   },
   computed: {
-    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo'])
+    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo', 'allStampCount'])
   },
   methods: {
     stampClick (e, data) {
@@ -253,10 +258,19 @@ export default {
       const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
       const dateTime = date + ' ' + time
       return dateTime
+    },
+    scrollBottom () {
+      if (window.scrollY + window.innerHeight === document.body.scrollHeight && this.allStampCount > this.params.view_count) {
+        this.params.view_count += 10
+        this.$store.dispatch('loadMainData', this.params)
+      }
     }
   },
   beforeCreate () {
     appEvent.trackProgress()
+  },
+  created () {
+    window.addEventListener('scroll', this.scrollBottom)
   },
   mounted () {
     this.$store.dispatch('loadAreaList')
@@ -266,6 +280,9 @@ export default {
     //     // this.$store.dispatch('openPopupGift', {})
     //   }
     // }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.scrollBottom)
   }
 }
 </script>

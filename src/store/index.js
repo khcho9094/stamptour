@@ -568,7 +568,7 @@ export default new Vuex.Store({
     loadMainData ({ state, commit }, params) {
       state.lon = localStorage.getItem('setLon') || 0
       state.lat = localStorage.getItem('setLat') || 0
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}&lon=${state.lon}&lat=${state.lat}`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}&lon=${state.lon}&lat=${state.lat}&page=${params.page}&view_count=${params.view_count}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -578,8 +578,9 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 추후 삭제
     loadMainAll ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=pop&status=ALL&group=`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=pop&status=ALL&group=&page=1&view_count=300`
       Vue
         .jsonp(url)
         .then(response => {
@@ -595,7 +596,7 @@ export default new Vuex.Store({
       }
       state.lon = localStorage.getItem('setLon') || 0
       state.lat = localStorage.getItem('setLat') || 0
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH&lon=${state.lon}&lat=${state.lat}`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=distance&status=FINISH&lon=${state.lon}&lat=${state.lat}&page=1&view_count=10`
       Vue
         .jsonp(url)
         .then(response => {
