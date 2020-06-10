@@ -14,7 +14,7 @@
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
-            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null">{{dDay(data)}}</div>
+            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_request_date === null">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>

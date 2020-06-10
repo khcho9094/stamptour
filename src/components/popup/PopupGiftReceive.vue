@@ -164,11 +164,9 @@ export default {
     },
     agreeBtn () {
       if (this.memberInfo.address && this.memberInfo.mobile) {
-        alert('개인정보 제3자 제공에 동의하셨습니다.')
+        // alert('개인정보 제3자 제공에 동의하셨습니다.')
         this.$cookie.set('agree_security', 'Y', 9999)
-        this.popup = false
-      } else {
-        alert('개인정보를 모두 입력해주세요.')
+        // this.popup = false
       }
     },
     agreeOn () {
@@ -203,6 +201,15 @@ export default {
         val = '모바일 상품권 받기'
       }
       return val
+    }
+  },
+  watch: {
+    personal () {
+      if (this.personal) {
+        this.agreeBtn()
+      } else {
+        this.$cookie.set('agree_security', 'N', 9999)
+      }
     }
   },
   mounted () {
