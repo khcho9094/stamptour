@@ -110,7 +110,8 @@ export default new Vuex.Store({
     themaPopAgree: { open: false },
     wonjuPopup: true,
     wonjuPopup2: { open: false },
-    themaUserInfo: {}
+    themaUserInfo: {},
+    guestChk: ''
   },
   mutations: {
     setIntroData (state, data) {
