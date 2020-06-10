@@ -19,7 +19,8 @@
                   </div>
                   <div class="agree_info">
                     <div class="tit">휴대폰</div>
-                    <span>{{themaUserInfo.mobile || '정보 없음'}}</span>
+                    <span v-if="themaUserMobile">{{themaUserMobile}}</span>
+                    <input v-else type="number" class="thema_phone" v-model="phone" maxlength="11">
                   </div>
                 </div>
                 <div class="check">
@@ -48,21 +49,22 @@ export default {
   data () {
     return {
       personal1: false,
-      personal2: false
+      personal2: false,
+      phone: ''
     }
   },
   computed: {
-    ...mapState(['popupNoti', 'themaPopAgree', 'thema10Status', 'themaUserInfo'])
+    ...mapState(['popupNoti', 'themaPopAgree', 'thema10Status', 'themaUserMobile'])
   },
   methods: {
     closeBtn () {
       this.$store.dispatch('openThemaAgree', {})
     },
     receiveGift () {
-      if (!this.themaUserInfo.mobile) {
+      if (!this.phone && !this.themaUserMobile) {
         this.$store.dispatch('openNotiPopup', {
-          tit1: '이벤트 참여를 위해<br/>아래의 정보가 필요합니다.',
-          tit2: '휴대폰 번호'
+          tit1: '이벤트 참여를 위해<br/>휴대폰 번호가 필요합니다.',
+          tit2: ''
         })
       } else {
         if (!this.personal1) {
@@ -79,7 +81,7 @@ export default {
           let tit1 = ''
           let tit2 = ''
           this.$store.dispatch('Thema10PsInfo', {
-            phone: this.themaUserInfo.mobile,
+            phone: this.themaUserMobile || this.phoneChange(this.phone),
             action: 'SET'
           })
           this.$store.dispatch('ApplyThema10Event', {
@@ -89,7 +91,7 @@ export default {
             badge_id: this.thema10Status.gps_log_badge_id
           })
           tit1 = '이벤트 참여가<br>완료 되었습니다.'
-          tit2 = '당첨은 매월 25일 발표되며,<br>인증 현황 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
           this.$store.dispatch('openThemaAgree', {})
           this.$store.dispatch('openThemaNoti', {
             open: true,
@@ -102,14 +104,27 @@ export default {
     view_agree () {
       const url = 'https://m.tranggle.com/mingle/login/join_01_privacy_process?notitle=Y'
       appEvent.externalLinks(url)
+    },
+    phoneChange (phone) {
+      const mobile = phone.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, '$1-$2-$3')
+      return mobile
+    }
+  },
+  watch: {
+    phone () {
+      this.phone = this.phone.replace(/[^0-9]/g, '')
+      return this.phone
     }
   },
   mounted () {
     setTimeout(() => {
       this.$store.dispatch('GetUserInfo', {
-        member_id: this.thema10Status.gps_log_member_id || ''
+        member_id: this.thema10Status.receipt_log_member_id || this.thema10Status.gps_log_member_id || ''
       })
     }, 100)
+    this.$store.dispatch('GetUserInfo', {
+      member_id: this.thema10Status.receipt_log_member_id || this.thema10Status.gps_log_member_id || ''
+    })
   },
   destroyed () {
   }

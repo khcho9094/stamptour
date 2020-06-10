@@ -15,12 +15,12 @@
           <div class="desc">
             <div class="p_center">
               <span class="underline">테마 10선 관광지 방문 시</span>
-              <span class="color">자동인증!</span><br>
-              인증이 안될시, 사진을 첨부해주세요.
+              <span class="color">자동인증!</span>
+              <!-- 인증이 안될시, 사진을 첨부해주세요. -->
             </div>
           </div>
           <div class="btn" @click="photoUpload(0, 'Edit')">
-            + 인증사진 첨부
+            + 테스트용 임시 버튼
           </div>
           <div class="menu_btn" @click="thema10Main"></div>
         </div>
@@ -148,7 +148,7 @@ export default {
             badge_id: this.thema10Status.gps_log_badge_id
           })
           tit1 = '이벤트 참여가<br>완료 되었습니다.'
-          tit2 = '당첨은 매월 25일 발표되며,<br>인증 현황 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
         }
       } else {
         if (this.thema10Status.event_finish_chk === 'Y') {

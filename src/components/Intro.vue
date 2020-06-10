@@ -19,7 +19,7 @@
         <div class="content" v-html="introData.mingle_desc"></div>
         <div class="tour_start_box">
             <div class="chkbox">
-                <input type="checkbox" id="tour_off"  name="tour_off" checked="checked"> <label for="tour_off">다시 열지 않기</label>
+                <input type="checkbox" id="tour_off"  name="tour_off" checked="checked"> <label for="tour_off">다시 보지 않기</label>
             </div>
             <button @click="tourStartButton">투어 시작하기</button>
         </div>

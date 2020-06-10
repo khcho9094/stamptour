@@ -110,7 +110,7 @@ export default new Vuex.Store({
     themaPopAgree: { open: false },
     wonjuPopup: true,
     wonjuPopup2: { open: false },
-    themaUserInfo: {}
+    themaUserMobile: ''
   },
   mutations: {
     setIntroData (state, data) {
@@ -124,7 +124,7 @@ export default new Vuex.Store({
     setGiftData (state, data) {
       let total = 0
       state.giftData = data
-      if (data[0].user_mingle_gift_point) {
+      if (data.length && data[0].user_mingle_gift_point) {
         state.myPoint = data[0].user_mingle_gift_point
       }
       data.map((val) => {
@@ -177,7 +177,7 @@ export default new Vuex.Store({
       state.memberCount = data.total.CHALLENGE
     },
     setUserInfo (state, data) {
-      state.themaUserInfo.mobile = data.mobile
+      state.themaUserMobile = data.mobile
     },
     setTourTotalData (state, data) {
       if (data.name === 'party') {
@@ -914,7 +914,7 @@ export default new Vuex.Store({
       state.showPhoto = data
     },
     /*
-    테마10 인증 현황 조회
+    테마10 이벤트 참여 조회
     */
     loadThema10Status ({ state, commit }) {
       const url = `https://api.tranggle.com/v2/mingle/stamptour/getEventThema10.jsonp?token=${state.token}`
