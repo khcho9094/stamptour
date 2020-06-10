@@ -7,7 +7,7 @@
         <tab name="이벤트 소개">
           <Thema10Intro />
         </tab>
-        <tab name="인증 현황" id="second-tab">
+        <tab name="이벤트 참여" id="second-tab">
           <Thema10Certify />
         </tab>
       </tabs>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import Thema10Intro from '@/components/event/Thema10Intro.vue'
@@ -35,18 +35,18 @@ export default {
     }
   },
   computed: {
-    ...mapState(['token'])
+    // ...mapState(['token'])
   },
   methods: {
     tabChanged (selectedTab) {
       if (window.location.hash) {
         window.location.hash = ''
       }
-      if (selectedTab.tab.name === '인증 현황') {
-        if (!this.token) {
-          appEvent.thema10Login()
-          return false
-        }
+      if (selectedTab.tab.name === '이벤트 참여') {
+        // if (!this.token) {
+        //   appEvent.thema10Login()
+        //   return false
+        // }
         appEvent.thema10GpsStatus()
       }
     }
@@ -80,6 +80,7 @@ export default {
     color:#d0a287;
     width: 100%;
     padding: 17px 0;
+    font-weight: bold;
   }
   .tabs-component ul.tabs-component-tabs .tabs-component-tab.is-active {
     border-bottom: 3px solid #c86550;

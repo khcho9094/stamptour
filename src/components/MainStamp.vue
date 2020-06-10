@@ -23,13 +23,13 @@
           v-for="index in swiperPaging()"
           v-bind:key="index">
             <ul class="stamp_list" id="stampId">
-                <li v-for="(data, idx) in stampList(index)" v-bind:key="idx">
+                <li v-for="index_in in stampCount(index)" v-bind:key="index_in">
                     <div class="box">
-                        <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
-                        <img class="gift" v-if="giftChkPoint(data.num)" :src="giftIconPoint(data.num)" @click="giftClickPoint(data.num)">
-                        <span v-else>{{data.num}}</span>
+                        <img class="round" :style="{ zIndex : zIn(index_in+(index*10-10)) }" :src="completeChk(index_in+(index*10-10))">
+                        <img class="gift" v-if="giftChkPoint(index_in+(index*10-10))" :src="giftIconPoint(index_in+(index*10-10))" @click="giftClickPoint(index_in+(index*10-10))">
+                        <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(data.num)" :style="{ width : `${dotW}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${dotW}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -59,13 +59,13 @@
           v-for="index in swiperPaging()"
           v-bind:key="index">
             <ul class="stamp_list" id="stampId">
-                <li v-for="(data, idx) in stampList(index)" v-bind:key="idx" class="dot_box">
+                <li v-for="index_in in stampCount(index)" v-bind:key="index_in" class="dot_box">
                     <div class="box">
-                        <img class="round" :style="{ zIndex : zIn(data.num) }" :src="completeChk(data.num)">
-                        <img class="gift" v-if="giftChk(data.num)" :src="giftIcon(data.num)" @click="giftClick(data.num)">
-                        <span v-else>{{data.num}}</span>
+                        <img class="round" :style="{ zIndex : zIn(index_in+(index*10-10)) }" :src="completeChk(index_in+(index*10-10))">
+                        <img class="gift" v-if="giftChk(index_in+(index*10-10))" :src="giftIcon(index_in+(index*10-10))" @click="giftClick(index_in+(index*10-10))">
+                        <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(data.num)" :style="{ width : `${dotW}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${dotW}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -108,6 +108,13 @@ export default {
       const end = idx * 10
       const start = end - 10
       return this.stampAll.slice(start, end)
+    },
+    stampCount (idx) {
+      let count = 10
+      if (Math.ceil(this.allStampCount / 10) === idx) {
+        count = this.allStampCount % 10
+      }
+      return count
     },
     giftChk (num) {
       let chk = false
@@ -237,7 +244,7 @@ export default {
     } else {
       this.$store.dispatch('loadGiftNoToken')
     }
-    this.$store.dispatch('loadMainAll')
+    // this.$store.dispatch('loadMainAll')
   },
   mounted () {
     this.$nextTick(() => {

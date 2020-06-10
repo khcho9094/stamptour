@@ -31,7 +31,7 @@
               <strong>• 참여방법</strong><br/>
               <span class="event_insert">
                 1. 테마여행 10선 여행지에서 올댓스탬프 앱 실행<br/><br/>
-                2. 이벤트 페이지의 <a href="#second-tab">인증현황</a> 클릭!<br/>
+                2. 이벤트 페이지의 <a href="#second-tab">이벤트 참여</a> 클릭!<br/>
                   <img src="@/assets/images/arrow_right.png"> GPS 켜기실행<br/>
                   <img src="@/assets/images/arrow_right.png"> 테마여행 10선 스탬프 획득 or 주요 관광지 인증사진 첨부<br/>
                   <img src="@/assets/images/arrow_right.png"> 숙박 영수증 첨부<br/>
@@ -64,7 +64,7 @@
               <strong>• 올댓스탬프 앱 오류 발생 시</strong><br/>
               <span class="event_insert">
                 E-mail : <a href="mailto:trangglecs@tranggle.com">trangglecs@tranggle.com</a><br/>
-                Phone  : 1877-1022
+                Phone  : <a target="_parent" href="tel:1877-1022">1877-1022</a>
               </span>
             </p>
             <p class="ptxt">
