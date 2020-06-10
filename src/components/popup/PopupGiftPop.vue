@@ -26,6 +26,9 @@ export default {
   },
   methods: {
     closeBtn () {
+      if (this.popupNoti.close === 'Y') {
+        this.$store.dispatch('openPopupGift', {})
+      }
       this.$store.dispatch('openNotiPopup', {})
     },
     receiveInfo () {

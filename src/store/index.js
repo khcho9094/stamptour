@@ -809,7 +809,7 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           // alert(response.response.message)
-          this.dispatch('openPopupGift', {})
+          // this.dispatch('openPopupGift', {})
         })
         .catch(err => {
           console.log(err)
