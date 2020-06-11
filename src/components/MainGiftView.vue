@@ -8,6 +8,12 @@
               @click="goThema10Event">
             </div>
         </swiper-slide>
+        <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
+            <div
+              class="themaBanner"
+              :style="{ 'background-image': WonjuBanner() }">
+            </div>
+        </swiper-slide>
         <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
@@ -66,6 +72,10 @@ export default {
     },
     themaBanner () {
       const url = require('@/assets/images/event/allthat_main_banner.png')
+      return `url(${url})`
+    },
+    WonjuBanner () {
+      const url = require('@/assets/images/allthat_home_banner_wonju.png')
       return `url(${url})`
     }
   },
