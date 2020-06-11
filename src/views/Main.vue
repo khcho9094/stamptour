@@ -146,7 +146,7 @@ export default {
     setTimeout(() => {
       const mingleCodeArr = this.$cookie.get('service_code')
       this.$store.state.mingleCodeArr = mingleCodeArr
-      if (this.$cookie.get('login_token') !== '') {
+      if (this.$store.state.token !== '') {
         this.$store.dispatch('loadPointSumApi')
       }
       this.$store.dispatch('loadMainData', this.params)

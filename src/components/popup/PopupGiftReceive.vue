@@ -128,7 +128,9 @@ export default {
                 url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
               }
             } else if (this.popupGift.mingle_no === '18') {
-              url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$cookie.get('login_token')}`
+              if (this.$store.state.token !== '' && this.$store.state.token !== null) {
+                url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}`
+              }
               this.$store.dispatch('openPopupGift', {})
             }
             if (url) {
@@ -150,7 +152,9 @@ export default {
       return `https://m.tranggle.com/html/images/mingle/${this.popupGift.mingle_gift_image}`
     },
     durunubiCheck (ev) {
-      this.$store.dispatch('loadDurunubiCheck', this.$cookie.get('login_token'))
+      if (this.$store.state.token !== '' && this.$store.state.token !== null) {
+        this.$store.dispatch('loadDurunubiCheck', this.$store.state.token)
+      }
       setTimeout(() => {
         if (this.$store.state.durunubiCheck === '0') {
           this.durunubi = false
