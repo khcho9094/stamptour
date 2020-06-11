@@ -70,7 +70,11 @@
       }
 
       function setDurunubi(id, eid){
-        var token = getCookie('login_token')
+        var token = null
+        token = getCookie('login_token')
+        if (token === '' || token === null) {
+          token = getCookie('guest_token')
+        }
         $.ajax({
           type:"post",
           url:"https://api.tranggle.com/v2/mingle/stamptour/stampTourDurunubi.jsonp?status=INSERT&token=" + token + "&site_id=DURUNUBIAPP&d_id=" + id +"&de_id=" + eid,
