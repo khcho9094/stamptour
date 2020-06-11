@@ -46,7 +46,11 @@ export default {
         pagination: {
           el: '.swiper-pagination',
           type: 'bullets'
-        }
+        },
+        autoplay: {
+          delay: 99999
+        },
+        loop: false
       }
     }
   },
@@ -77,6 +81,16 @@ export default {
     WonjuBanner () {
       const url = require('@/assets/images/allthat_home_banner_wonju.png')
       return `url(${url})`
+    }
+  },
+  created () {
+    console.log(this.mingleCode)
+    if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
+      this.swiperOption.autoplay.delay = 3000
+      this.swiperOption.loop = true
+    } else {
+      this.swiperOption.autoplay.delay = 99999
+      this.swiperOption.loop = false
     }
   },
   mounted () {
