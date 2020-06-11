@@ -1574,3 +1574,10 @@ header .head_back span {
     font-family:inaviL;
     line-height: 1;
 }
+.themaBanner {
+    width:100%;
+    height:57px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
