@@ -15,12 +15,12 @@
           <div class="desc">
             <div class="p_center">
               <span class="underline">테마 10선 관광지 방문 시</span>
-              <span class="color">자동인증!</span>
-              <!-- 인증이 안될시, 사진을 첨부해주세요. -->
+              <span class="color">자동인증!</span><br>
+              인증이 안될시, 사진을 첨부해주세요.
             </div>
           </div>
           <div class="btn" @click="photoUpload(0, 'Edit')">
-            + 테스트용 임시 버튼
+            + 인증사진 첨부
           </div>
           <div class="menu_btn" @click="thema10Main"></div>
         </div>
@@ -59,7 +59,7 @@
           <div class="desc">
             <div class="p_center">
               <span class="underline">숙박 영수증 사진을 </span>
-              첨부 해부세요.
+              첨부 해주세요.
             </div>
           </div>
           <div class="btn" @click="photoUpload(1, 'Edit')">
