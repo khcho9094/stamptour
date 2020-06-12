@@ -71,7 +71,6 @@ export default {
       return cMsg
     },
     goThema10Event () {
-      console.log('thema10event')
       appEvent.thema10Page()
     },
     themaBanner () {
@@ -84,7 +83,6 @@ export default {
     }
   },
   created () {
-    console.log(this.mingleCode)
     if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
       this.swiperOption.autoplay.delay = 3000
       this.swiperOption.loop = true

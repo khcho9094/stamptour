@@ -31,7 +31,8 @@ export default new Vuex.Store({
       { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15' },
       { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
-      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' }
+      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
+      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
