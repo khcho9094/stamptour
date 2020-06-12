@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import Thema10Intro from '@/components/event/Thema10Intro.vue'
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['token'])
+    ...mapState(['token'])
   },
   methods: {
     tabChanged (selectedTab) {

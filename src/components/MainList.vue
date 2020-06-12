@@ -260,7 +260,7 @@ export default {
       return dateTime
     },
     scrollBottom () {
-      if (Math.round(window.scrollY + window.innerHeight) === document.body.scrollHeight && this.allStampCount > this.params.view_count) {
+      if ((Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight || Math.floor(window.scrollY + window.innerHeight) === document.body.scrollHeight) && this.allStampCount > this.params.view_count) {
         this.params.view_count += 10
         this.$store.dispatch('loadMainData', this.params)
       }
