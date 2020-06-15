@@ -3,7 +3,7 @@
     <!---------------------------------------------------------------- 포인트일 경우 -------------------------------------------------------------------->
     <div class="stamp_box" v-if="setStamp()">
       <div class="title" v-if="(this.token || this.$cookie.get('login_token')) && (this.getStampCount !== this.allStampCount)">
-          <span @click="goMyStamp">내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
+          <span @click="goMyStamp">{{guestCheck()}}<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
           <span class="count" v-if="this.getStampCount !== this.allStampCount">
               <em>{{this.myPoint}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
@@ -39,7 +39,7 @@
     <!----------------------------------------------------------------- 갯수일 경우 -------------------------------------------------------------->
     <div class="stamp_box" v-else>
       <div class="title" v-if="this.token || this.$cookie.get('login_token')">
-          <span @click="goMyStamp">내가 찍은 스탬프<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
+          <span @click="goMyStamp">{{guestCheck()}}<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
           <span class="count" v-if="(this.getStampCount !== this.allStampCount)">
               <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
@@ -94,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'token', 'stampAll', 'stampCodeInfo', 'mingleCode', 'myPoint', 'allStampPoint'])
+    ...mapState(['allStampCount', 'getStampCount', 'giftData', 'token', 'stampAll', 'stampCodeInfo', 'mingleCode', 'myPoint', 'allStampPoint', 'guestChk'])
   },
   methods: {
     swiperPaging () {
@@ -236,6 +236,15 @@ export default {
       }
       this.$store.state.getGiftCnt = giftCnt
       this.$store.state.restartOpen = !this.$store.state.restartOpen
+    },
+    guestCheck () {
+      let text = ''
+      if (this.guestChk === 'Y') {
+        text = '손님으로 찍은 스탬프'
+      } else {
+        text = '내가 찍은 스탬프'
+      }
+      return text
     }
   },
   created () {
