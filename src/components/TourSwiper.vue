@@ -9,8 +9,8 @@
         </swiper-slide>
     </swiper>
     <div class="desc_box">
-        <p id="elli">
-          {{introData.mingle_desc_basic}}
+        <p id="elli" v-html="introData.mingle_desc_basic">
+          <!-- {{introData.mingle_desc_basic}} -->
         </p>
         <span v-on:click="moreContent()" v-text="allView"></span>
     </div>
