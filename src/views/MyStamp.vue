@@ -1,7 +1,7 @@
 <template>
   <div class="tour">
     <!-- 헤더 -->
-    <Head type='back' name='tour' title='내가 찍은 스탬프' />
+    <Head type='back' name='tour' :title='myTitle()' />
     <div class="mystamp_wrap">
       <div class="box">
         <select class="mySelect" v-model="selectValue" @change="setOrder">
@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['myStampData'])
+    ...mapState(['myStampData', 'guestChk'])
   },
   methods: {
     stampClick (data) {
@@ -60,6 +60,15 @@ export default {
     },
     setOrder () {
       this.$store.dispatch('loadMyStamp', this.selectValue)
+    },
+    myTitle () {
+      let tit = ''
+      if (this.guestChk === 'Y') {
+        tit = '손님으로 찍은 스탬프'
+      } else {
+        tit = '내가 찍은 스탬프'
+      }
+      return tit
     }
   },
   mounted () {
