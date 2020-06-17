@@ -47,6 +47,7 @@ export default {
       this.$store.dispatch('loadGiftNoToken')
     }
     this.$store.dispatch('loadTotalData')
+    this.$store.dispatch('loadDurunubiCheck', this.token)
   }
 }
 </script>

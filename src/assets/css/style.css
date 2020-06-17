@@ -221,7 +221,7 @@ header .head_back span {
 }
 .pop_overay .pop_cont .text_2 .check.durunubi {
     margin-bottom: 0px;
-    padding-bottom: 0px;
+    /* padding-bottom: 0px; */
 }
 .pop_overay .pop_cont .text_2 .check label {
     font-size: 12px;
