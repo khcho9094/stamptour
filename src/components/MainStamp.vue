@@ -2,7 +2,7 @@
   <div>
     <!---------------------------------------------------------------- 포인트일 경우 -------------------------------------------------------------------->
     <div class="stamp_box" v-if="setStamp()">
-      <div class="title" v-if="(this.token || this.$cookie.get('login_token')) && (this.getStampCount !== this.allStampCount)">
+      <div class="title" v-if="(this.token || this.$cookie.get('login_token') || this.$cookie.get('guest_token')) && (this.getStampCount !== this.allStampCount)">
           <span @click="goMyStamp">{{guestCheck()}}<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
           <span class="count" v-if="this.getStampCount !== this.allStampCount">
               <em>{{this.myPoint}}</em>
@@ -16,7 +16,7 @@
             </button>
           </span>
       </div>
-      <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
+      <!-- <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div> -->
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"
@@ -38,7 +38,7 @@
     </div>
     <!----------------------------------------------------------------- 갯수일 경우 -------------------------------------------------------------->
     <div class="stamp_box" v-else>
-      <div class="title" v-if="this.token || this.$cookie.get('login_token')">
+      <div class="title" v-if="this.token || this.$cookie.get('login_token') || this.$cookie.get('guest_token')">
           <span @click="goMyStamp">{{guestCheck()}}<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
           <span class="count" v-if="(this.getStampCount !== this.allStampCount)">
               <em>{{this.getStampCount}}</em>
@@ -52,7 +52,7 @@
             </button>
           </span>
       </div>
-      <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div>
+      <!-- <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div> -->
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide
           class="slide"

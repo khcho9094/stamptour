@@ -132,11 +132,15 @@ export default {
               if (this.$store.state.token !== '' && this.$store.state.token !== null) {
                 url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}`
               }
-              this.$store.dispatch('openPopupGift', {})
+              // this.$store.dispatch('openPopupGift', {})
             }
             if (url) {
               this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
-              appEvent.externalLinks(url)
+              setTimeout(() => {
+                appEvent.externalLinks(url)
+              }, 10)
+              // appEvent.externalLinks(url)
+              // this.$store.dispatch('openPopupGift', {})
             }
           } else {
             this.$store.dispatch('openNotiPopup', {
