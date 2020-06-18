@@ -45,7 +45,7 @@ export default {
     return {
       // isShow: false,
       gift_1_show: false,
-      gift_11_show: false,
+      // gift_11_show: false,
       gift_14_show: false,
       gift_15_show: false,
       gift_16_show: false,
@@ -62,8 +62,6 @@ export default {
       // this.isShow = !this.isShow
       if (data === '1') {
         this.gift_1_show = !this.gift_1_show
-      } else if (data === '11') {
-        this.gift_11_show = !this.gift_11_show
       } else if (data === '14') {
         this.gift_14_show = !this.gift_14_show
       } else if (data === '15') {
@@ -75,12 +73,14 @@ export default {
       } else if (data === '20') {
         this.gift_20_show = !this.gift_20_show
       }
+
+      //  else if (data === '11') {
+      //   this.gift_11_show = !this.gift_11_show
+      // }
     },
     isShow (data) {
       if (data === '1') {
         return this.gift_1_show
-      } else if (data === '11') {
-        return this.gift_11_show
       } else if (data === '14') {
         return this.gift_14_show
       } else if (data === '15') {
@@ -92,6 +92,10 @@ export default {
       } else if (data === '20') {
         return this.gift_20_show
       }
+
+      //  else if (data === '11') {
+      //   return this.gift_11_show
+      // }
     },
     changeTourTitle () {
       return this.stampGiftData.title
@@ -99,19 +103,21 @@ export default {
     changeGiftData (no) {
       if (no === '1') {
         return this.stampGiftData.content[0][0]
-      } else if (no === '11') {
-        return this.stampGiftData.content[1][1]
       } else if (no === '14') {
-        return this.stampGiftData.content[2][2]
+        return this.stampGiftData.content[1][1]
       } else if (no === '15') {
-        return this.stampGiftData.content[3][3]
+        return this.stampGiftData.content[2][2]
       } else if (no === '16') {
-        return this.stampGiftData.content[4][4]
+        return this.stampGiftData.content[3][3]
       } else if (no === '18') {
-        return this.stampGiftData.content[5][5]
+        return this.stampGiftData.content[4][4]
       } else if (no === '20') {
-        return this.stampGiftData.content[6][6]
+        return this.stampGiftData.content[5][5]
       }
+
+      //  else if (no === '11') {
+      //   return this.stampGiftData.content[1][1]
+      // }
     },
     dotOn (data) {
       let dot = ''

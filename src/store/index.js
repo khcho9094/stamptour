@@ -296,29 +296,25 @@ export default new Vuex.Store({
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 0: [] })
           cnt++
-        } else if (val.mingle_no === '11' && cnt === 1) {
+        } else if (val.mingle_no === '14' && cnt === 1) {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 1: [] })
           cnt++
-        } else if (val.mingle_no === '14' && cnt === 2) {
+        } else if (val.mingle_no === '15' && cnt === 2) {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 2: [] })
           cnt++
-        } else if (val.mingle_no === '15' && cnt === 3) {
+        } else if (val.mingle_no === '16' && cnt === 3) {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 3: [] })
           cnt++
-        } else if (val.mingle_no === '16' && cnt === 4) {
+        } else if (val.mingle_no === '18' && cnt === 4) {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 4: [] })
           cnt++
-        } else if (val.mingle_no === '18' && cnt === 5) {
+        } else if (val.mingle_no === '20' && cnt === 5) {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 5: [] })
-          cnt++
-        } else if (val.mingle_no === '20' && cnt === 6) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 6: [] })
           cnt++
         }
 
@@ -340,7 +336,7 @@ export default new Vuex.Store({
               mingle_user_gift_no: val.mingle_user_gift_no
             }
           )
-        } else if (val.mingle_no === '11') {
+        } else if (val.mingle_no === '14') {
           state.stampGiftData.content[1][1].push(
             {
               member_address: val.member_address,
@@ -358,7 +354,7 @@ export default new Vuex.Store({
               mingle_user_gift_no: val.mingle_user_gift_no
             }
           )
-        } else if (val.mingle_no === '14') {
+        } else if (val.mingle_no === '15') {
           state.stampGiftData.content[2][2].push(
             {
               member_address: val.member_address,
@@ -376,7 +372,7 @@ export default new Vuex.Store({
               mingle_user_gift_no: val.mingle_user_gift_no
             }
           )
-        } else if (val.mingle_no === '15') {
+        } else if (val.mingle_no === '16') {
           state.stampGiftData.content[3][3].push(
             {
               member_address: val.member_address,
@@ -394,7 +390,7 @@ export default new Vuex.Store({
               mingle_user_gift_no: val.mingle_user_gift_no
             }
           )
-        } else if (val.mingle_no === '16') {
+        } else if (val.mingle_no === '18') {
           state.stampGiftData.content[4][4].push(
             {
               member_address: val.member_address,
@@ -412,26 +408,8 @@ export default new Vuex.Store({
               mingle_user_gift_no: val.mingle_user_gift_no
             }
           )
-        } else if (val.mingle_no === '18') {
-          state.stampGiftData.content[5][5].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
         } else if (val.mingle_no === '20') {
-          state.stampGiftData.content[6][6].push(
+          state.stampGiftData.content[5][5].push(
             {
               member_address: val.member_address,
               member_mobile: val.member_mobile,
