@@ -619,7 +619,7 @@ export default new Vuex.Store({
       page / 페이지 / 옵션
     */
     loadMemberData ({ state, commit }, pageCount) {
-      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=10&page=${pageCount}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=20&page=${pageCount}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
