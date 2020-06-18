@@ -20,7 +20,7 @@
                     <img :src="imgIcon()" alt="gs25">
                     {{popupGift.mingle_gift_title}}
                 </span>
-                <div class="agree_pop">
+                <div class="agree_pop" v-if="agreeCheck">
                   <div class="notice">Notice</div>
                   <div class="agree_title">
                     개인정보 제3자 제공 동의가 필요합니다.
@@ -40,10 +40,10 @@
                   </div>
                 </div>
                 <!-- <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='"> -->
-                <div class="check durunubi" v-if="popupGift.mingle_no === '16'">
-                  <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
+                <div class="check durunubi" v-if="popupGift.mingle_no === '16' && durunubiCheck === '0'">
+                  <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiAgreeCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
-                <div class="check">
+                <div class="check" v-if="agreeCheck">
                   <input type="checkbox" id="personal"  name="personal" v-model="personal"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
@@ -86,11 +86,12 @@ export default {
     return {
       durunubi: false,
       personal: false,
+      agreeCheck: true,
       unit: ''
     }
   },
   computed: {
-    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo', 'popupNoti'])
+    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo', 'popupNoti', 'durunubiCheck'])
   },
   methods: {
     closeBtn () {
@@ -104,7 +105,7 @@ export default {
           tit2: '주소, 휴대폰 번호'
         })
       } else {
-        if (!this.durunubi && this.popupGift.mingle_no === '16') {
+        if (this.durunubiCheck === '0' && this.popupGift.mingle_no === '16') {
           this.$store.dispatch('openNotiPopup', {
             tit1: '두루누비 계정 확인이 필요합니다.',
             tit2: ''
@@ -131,11 +132,15 @@ export default {
               if (this.$store.state.token !== '' && this.$store.state.token !== null) {
                 url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}`
               }
-              this.$store.dispatch('openPopupGift', {})
+              // this.$store.dispatch('openPopupGift', {})
             }
             if (url) {
               this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
-              appEvent.externalLinks(url)
+              setTimeout(() => {
+                appEvent.externalLinks(url)
+              }, 10)
+              // appEvent.externalLinks(url)
+              // this.$store.dispatch('openPopupGift', {})
             }
           } else {
             this.$store.dispatch('openNotiPopup', {
@@ -151,12 +156,12 @@ export default {
     imgIcon () {
       return `https://m.tranggle.com/html/images/mingle/${this.popupGift.mingle_gift_image}`
     },
-    durunubiCheck (ev) {
+    durunubiAgreeCheck (ev) {
       if (this.$store.state.token !== '' && this.$store.state.token !== null) {
         this.$store.dispatch('loadDurunubiCheck', this.$store.state.token)
       }
       setTimeout(() => {
-        if (this.$store.state.durunubiCheck === '0') {
+        if (this.durunubiCheck === '0') {
           this.durunubi = false
           if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
             appEvent.externalLinks('https://www.durunubi.kr/12-2-0-login.do?os=android')
@@ -220,6 +225,7 @@ export default {
     this.setStamp()
     if (this.$cookie.get('agree_security') === 'Y') {
       this.personal = true
+      this.agreeCheck = false
     }
     // window.onpopstate = history.onpushstate = (e) => {
     //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {

@@ -96,6 +96,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 import Thema10Example from '@/components/event/Thema10Example.vue'
 import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
 import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
@@ -166,20 +167,22 @@ export default {
       })
     },
     confirm () {
-      let tit1 = ''
-      let tit2 = ''
-      if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
-        tit1 = '인증을 모두 완료하고<br>이벤트에 참여해주세요.'
-        tit2 = ''
-      } else {
-        tit1 = '당첨자 발표 기간이 아닙니다.'
-        tit2 = '당첨은 매월 25일에 발표됩니다.'
-      }
-      this.$store.dispatch('openThemaNoti', {
-        open: true,
-        tit1: tit1,
-        tit2: tit2
-      })
+      const url = 'http://www.ktourtop10.kr/kr/index.php'
+      appEvent.externalLinks(url)
+      // let tit1 = ''
+      // let tit2 = ''
+      // if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
+      //   tit1 = '인증을 모두 완료하고<br>이벤트에 참여해주세요.'
+      //   tit2 = ''
+      // } else {
+      //   tit1 = '당첨자 발표 기간이 아닙니다.'
+      //   tit2 = '당첨은 매월 25일에 발표됩니다.'
+      // }
+      // this.$store.dispatch('openThemaNoti', {
+      //   open: true,
+      //   tit1: tit1,
+      //   tit2: tit2
+      // })
     },
     thema10Main () {
       if (/Android/i.test(navigator.userAgent)) {

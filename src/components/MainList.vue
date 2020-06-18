@@ -6,7 +6,7 @@
                 <input type="checkbox" id="complete_off"  name="complete_off" @change="checkStatus($event)"> <label for="complete_off">완료 코스 숨기기</label>
             </div>
         </div>
-        <div class="area_box" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <div class="area_box" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' || mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
             <select name="areaInfo" id="areaInfo" v-model="params.areaCode" @change="setArea">
               <option v-bind:value="'0'">전체</option>
               <option v-for="(data, idx) in areaList" v-bind:key="idx" v-bind:value="data.mingle_area_code">
@@ -260,7 +260,7 @@ export default {
       return dateTime
     },
     scrollBottom () {
-      if (Math.round(window.scrollY + window.innerHeight) === document.body.scrollHeight && this.allStampCount > this.params.view_count) {
+      if ((Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight || Math.floor(window.scrollY + window.innerHeight) === document.body.scrollHeight) && this.allStampCount > this.params.view_count) {
         this.params.view_count += 10
         this.$store.dispatch('loadMainData', this.params)
       }

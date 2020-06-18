@@ -1,14 +1,20 @@
 <template>
   <div>
-    <swiper :options="swiperOption" class="swiper swiperbut">
-        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+    <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <!-- <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': themaBanner() }"
               @click="goThema10Event">
             </div>
+        </swiper-slide> -->
+        <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
+            <div
+              class="themaBanner"
+              :style="{ 'background-image': WonjuBanner() }">
+            </div>
         </swiper-slide>
-        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <swiper-slide>
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -40,7 +46,11 @@ export default {
         pagination: {
           el: '.swiper-pagination',
           type: 'bullets'
-        }
+        },
+        autoplay: {
+          delay: 99999
+        },
+        loop: false
       }
     }
   },
@@ -61,12 +71,24 @@ export default {
       return cMsg
     },
     goThema10Event () {
-      console.log('thema10event')
       appEvent.thema10Page()
     },
     themaBanner () {
       const url = require('@/assets/images/event/allthat_main_banner.png')
       return `url(${url})`
+    },
+    WonjuBanner () {
+      const url = require('@/assets/images/allthat_home_banner_wonju.png')
+      return `url(${url})`
+    }
+  },
+  created () {
+    if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
+      this.swiperOption.autoplay.delay = 3000
+      this.swiperOption.loop = true
+    } else {
+      this.swiperOption.autoplay.delay = 99999
+      this.swiperOption.loop = false
     }
   },
   mounted () {

@@ -221,7 +221,7 @@ header .head_back span {
 }
 .pop_overay .pop_cont .text_2 .check.durunubi {
     margin-bottom: 0px;
-    padding-bottom: 0px;
+    /* padding-bottom: 0px; */
 }
 .pop_overay .pop_cont .text_2 .check label {
     font-size: 12px;
@@ -739,7 +739,7 @@ header .head_back span {
     color:#010101;
     line-height: 16px;
     font-weight: normal;
-    word-break: keep-all;
+    /* word-break: keep-all; */
 }
 .recom_stamp ul.next_stamp li p {
     font-family:inaviL;

@@ -55,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['allGiftData', 'stampGiftData', 'popupGift'])
+    ...mapState(['allGiftData', 'stampGiftData', 'popupGift', 'token'])
   },
   methods: {
     giftList (data) {
@@ -187,6 +187,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadAllGiftData')
+    this.$store.dispatch('loadDurunubiCheck', this.token)
   }
 }
 </script>

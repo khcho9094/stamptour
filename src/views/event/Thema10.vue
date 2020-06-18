@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
 import Thema10Intro from '@/components/event/Thema10Intro.vue'
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['token'])
+    ...mapState(['token'])
   },
   methods: {
     tabChanged (selectedTab) {
@@ -43,10 +43,10 @@ export default {
         window.location.hash = ''
       }
       if (selectedTab.tab.name === '이벤트 참여') {
-        // if (!this.token) {
-        //   appEvent.thema10Login()
-        //   return false
-        // }
+        if (!this.token) {
+          appEvent.thema10Login()
+          return false
+        }
         appEvent.thema10GpsStatus()
       }
     }

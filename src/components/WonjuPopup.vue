@@ -7,7 +7,7 @@
                   코로나19로 스탬프투어<br>
                   스탬프 더블 적립 이벤트 기간이<br>
                   변경되었습니다.<br><br>
-                  <b>5. 30. ~ 6. 14. <img class="arrows" src="@/assets/images/arrow_2.png" alt="icon"> 6. 20. ~ 7. 19.</b>
+                  <b>5. 30. ~ 6. 14. <img class="arrows" src="@/assets/images/arrow_2.png" alt="icon"> 7. 1. ~ 7. 19.</b>
                 </div>
             </div>
             <button @click="closeBtn">확인</button>

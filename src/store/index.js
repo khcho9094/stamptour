@@ -26,12 +26,13 @@ export default new Vuex.Store({
     stampCodeInfo: [
       { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number', no: '16' },
       { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point', no: '1' },
-      { name: '구로', code: 'QAAPpA7foDPqF3zEzdvHrw==', info: 'point', msg: '스탬프도 찍고 인증서도 받고!!', no: '11' },
+      // { name: '구로', code: 'QAAPpA7foDPqF3zEzdvHrw==', info: 'point', msg: '스탬프도 찍고 인증서도 받고!!', no: '11' },
       { name: '양천', code: 'M0ZRcktVl8H3kJaRKq3Irg==', info: 'number', msg: '스탬프도 찍고 봉사 시간도 채우고!!', no: '14' },
       { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15' },
       { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
-      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' }
+      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
+      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -596,7 +597,7 @@ export default new Vuex.Store({
       page / 페이지 / 옵션
     */
     loadMemberData ({ state, commit }, pageCount) {
-      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=10&page=${pageCount}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=20&page=${pageCount}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
