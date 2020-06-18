@@ -26,7 +26,7 @@ export default {
     const mArr = [
       'SzActcWN5QXozxDixoG4zQ==',
       '/GN62eV1c4Q78ghWNMWRsQ==',
-      'QAAPpA7foDPqF3zEzdvHrw==',
+      // 'QAAPpA7foDPqF3zEzdvHrw==', 구로 서비스 종료
       'M0ZRcktVl8H3kJaRKq3Irg==',
       'HvbQjGJR2yF9vTu8m2TUZQ==',
       'iQxiUpF8ZfaGodRQJ6s0mg==',
