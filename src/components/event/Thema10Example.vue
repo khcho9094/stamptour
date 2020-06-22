@@ -29,7 +29,7 @@ export default {
       dataObj: [
         {
           title: '관광지 방문 인증은<br><span>테마여행 10선 주요 관광지에서</span><br><span>촬영한 사진</span>만 인정됩니다.',
-          image: require('@/assets/images/event/example1.png'),
+          image: require('@/assets/images/event/example1_1.png'),
           warning: ''
         },
         {

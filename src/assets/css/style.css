@@ -2068,6 +2068,9 @@ header .head_back span {
     display: inline-block;
     margin-left: 3px;
 }
+.thema10_wrap .auth_box .desc .mask {
+    color:#c86550;
+}
 
 .thema10_wrap .auth_box .btn {
     width:100%;
