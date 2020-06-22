@@ -1,20 +1,20 @@
 <template>
   <div>
-    <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
-        <!-- <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+    <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
+        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && fullPathChk(this)">
             <div
               class="themaBanner"
               :style="{ 'background-image': themaBanner() }"
               @click="goThema10Event">
             </div>
-        </swiper-slide> -->
+        </swiper-slide>
         <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': WonjuBanner() }">
             </div>
         </swiper-slide>
-        <swiper-slide>
+        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -80,6 +80,15 @@ export default {
     WonjuBanner () {
       const url = require('@/assets/images/allthat_home_banner_wonju.png')
       return `url(${url})`
+    },
+    fullPathChk (data) {
+      let chk = false
+      if (location.href.indexOf('stagestamp') > -1) {
+        chk = true
+      } else {
+        chk = false
+      }
+      return chk
     }
   },
   created () {
