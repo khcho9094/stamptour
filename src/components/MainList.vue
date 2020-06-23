@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </li>
-            <div class="loading_box" v-if="this.allStampCount > this.params.view_count">
+            <div class="loading_box" v-if="loadingMainList">
               <img src="@/assets/images/ajax-loader.gif" alt="loader">
             </div>
         </ul>
@@ -73,7 +73,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo', 'allStampCount'])
+    ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo', 'allStampCount', 'loadingMainList'])
   },
   methods: {
     stampClick (e, data) {
@@ -131,7 +131,8 @@ export default {
       this.$store.state.lon = localStorage.getItem('setLon')
       this.$store.state.lat = localStorage.getItem('setLat')
       setTimeout(() => {
-        this.$store.dispatch('loadMainData', this.params)
+        this.params.page = 1
+        this.$store.dispatch('loadMainDataChange', this.params)
       }, 100)
     },
     stampDetail (sid) {
@@ -261,8 +262,10 @@ export default {
     },
     scrollBottom () {
       if ((Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight || Math.floor(window.scrollY + window.innerHeight) === document.body.scrollHeight) && this.allStampCount > this.params.view_count) {
-        this.params.view_count += 10
-        this.$store.dispatch('loadMainData', this.params)
+        if (this.mainStampList.length / this.params.page === 10) {
+          this.params.page += 1
+          this.$store.dispatch('loadMainData', this.params)
+        }
       }
     }
   },

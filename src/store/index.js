@@ -109,11 +109,13 @@ export default new Vuex.Store({
     zoomPopImg: 0,
     thema10Agree: 'N',
     themaPopAgree: { open: false },
-    wonjuPopup: true,
-    wonjuPopup2: { open: false },
+    wonjuPopup: true, // 원주
+    wonjuPopup2: { open: false }, // 50코스
+    wonjuPopup3: true, // 코리아둘레길
     themaUserInfo: {},
     themaUserMobile: '',
-    guestChk: ''
+    guestChk: '',
+    loadingMainList: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -156,6 +158,13 @@ export default new Vuex.Store({
       state.stampMethod = data.METHOD
     },
     setMainData (state, data) {
+      // state.memberList = state.memberList.concat(data.list)
+      state.mainStampList = state.mainStampList.concat(data.stamplist_info)
+      state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
+      state.getStampCount = parseInt(data.stampget_info.badge_get_count)
+      localStorage.stampCount = data.stampget_info.mingle_badge_count
+    },
+    setMainDataChange (state, data) {
       state.mainStampList = data.stamplist_info
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
@@ -547,6 +556,7 @@ export default new Vuex.Store({
       status / 완료여부확인 / 옵션
     */
     loadMainData ({ state, commit }, params) {
+      state.loadingMainList = true
       state.lon = localStorage.getItem('setLon') || 0
       state.lat = localStorage.getItem('setLat') || 0
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}&lon=${state.lon}&lat=${state.lat}&page=${params.page}&view_count=${params.view_count}`
@@ -554,6 +564,20 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           commit('setMainData', response.response.content)
+          state.loadingMainList = false
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMainDataChange ({ state, commit }, params) {
+      state.lon = localStorage.getItem('setLon') || 0
+      state.lat = localStorage.getItem('setLat') || 0
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&order=${params.order}&status=${params.status}&group=${params.areaCode}&lon=${state.lon}&lat=${state.lat}&page=${params.page}&view_count=${params.view_count}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          commit('setMainDataChange', response.response.content)
         })
         .catch(err => {
           console.log(err)
