@@ -1,7 +1,7 @@
 <template>
   <div class="view_stamp">
     <!-- 헤더 -->
-    <Head type='back' name='view_stamp' title='테마여행 10선' />
+    <Head type='back' name='view_stamp' title='대한민국 안전여행 참여 이벤트' />
     <div>
       <tabs :options="{ useUrlFragment: false }" @changed="tabChanged">
         <tab name="이벤트 소개">

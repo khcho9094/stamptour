@@ -33,8 +33,8 @@ export default {
           warning: '* 인증샷은 마스크 착용 필수!'
         },
         {
-          title: '숙박 영수증 인증은<br>이벤트 대상 숙소에서 발급받은<br><span>실물 종이 영수증</span>만 인정됩니다.',
-          image: require('@/assets/images/event/example2.png'),
+          title: '<span>숙박 결제 영수증</span>(종이/모바일)과<br/>이용이 완료된 <span>숙박 예약확인서</span>를<br/>첨부해주세요',
+          image: require('@/assets/images/event/example2_2.jpg'),
           warning: '(간이 영수증은 인정 안됨)'
         }
       ]

@@ -935,12 +935,13 @@ header .head_back span {
     font-family:inaviL;
     font-size: 14px;
     color:#010101;
-    line-height: 15px;
+    line-height: 16px;
     font-weight: normal;
     width: calc(100% - 60px);
-    overflow: hidden;
+    word-break: keep-all;
+    /* overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; */
 }
 .course_box ul.list li .box_rt p {
     font-family:inaviL;
