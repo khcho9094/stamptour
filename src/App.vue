@@ -32,7 +32,8 @@ export default {
       'iQxiUpF8ZfaGodRQJ6s0mg==',
       'vSi8Z9QlNS5wushabGnrhA==',
       '4k68KEPNtv/xCP0/x2Hirw==',
-      'YQTt4DYGRx7iBHRXs2IlPA=='
+      'YQTt4DYGRx7iBHRXs2IlPA==',
+      'xYwbII8pDWTT1VzPbK3E1g=='
     ]
     if (this.$route.query.minglecode) {
       mArr.map((data) => {
@@ -41,6 +42,7 @@ export default {
         }
       })
     }
+    // this.$store.dispatch('GetStampTourList')
     if (this.$route.query.mingleCode) {
       this.$cookie.set('service_code', this.$route.query.mingleCode, 9999)
     }
