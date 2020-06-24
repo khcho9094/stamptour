@@ -30,7 +30,7 @@ export default {
         {
           title: '관광지 방문 인증은<br><span>테마여행 10선 주요 관광지에서</span><br><span>촬영한 사진</span>만 인정됩니다.',
           image: require('@/assets/images/event/example1_1.png'),
-          warning: ''
+          warning: '* 인증샷은 마스크 착용 필수!'
         },
         {
           title: '숙박 영수증 인증은<br>이벤트 대상 숙소에서 발급받은<br><span>실물 종이 영수증</span>만 인정됩니다.',
