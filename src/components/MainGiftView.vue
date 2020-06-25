@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
-        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && fullPathChk(this)">
+        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && fullPathChk()">
             <div
               class="themaBanner"
               :style="{ 'background-image': themaBanner() }"
@@ -81,7 +81,7 @@ export default {
       const url = require('@/assets/images/allthat_home_banner_wonju.png')
       return `url(${url})`
     },
-    fullPathChk (data) {
+    fullPathChk () {
       let chk = false
       if (location.href.indexOf('stagestamp') > -1) {
         chk = true
