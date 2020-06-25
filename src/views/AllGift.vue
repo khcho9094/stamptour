@@ -51,11 +51,12 @@ export default {
       gift_16_show: false,
       gift_18_show: false,
       gift_20_show: false,
-      unit: ''
+      unit: '',
+      cnt: 0
     }
   },
   computed: {
-    ...mapState(['allGiftData', 'stampGiftData', 'popupGift', 'token'])
+    ...mapState(['allGiftData', 'stampGiftData', 'popupGift'])
   },
   methods: {
     giftList (data) {
@@ -73,10 +74,6 @@ export default {
       } else if (data === '20') {
         this.gift_20_show = !this.gift_20_show
       }
-
-      //  else if (data === '11') {
-      //   this.gift_11_show = !this.gift_11_show
-      // }
     },
     isShow (data) {
       if (data === '1') {
@@ -92,32 +89,46 @@ export default {
       } else if (data === '20') {
         return this.gift_20_show
       }
-
-      //  else if (data === '11') {
-      //   return this.gift_11_show
-      // }
     },
     changeTourTitle () {
       return this.stampGiftData.title
     },
+    // changeGiftData (no) {
+    //   if (no === '1') {
+    //     return this.stampGiftData.content[0][0]
+    //   } else if (no === '14') {
+    //     return this.stampGiftData.content[1][0]
+    //   } else if (no === '15') {
+    //     return this.stampGiftData.content[2][0]
+    //   } else if (no === '16') {
+    //     return this.stampGiftData.content[3][0]
+    //   } else if (no === '18') {
+    //     return this.stampGiftData.content[4][0]
+    //   } else if (no === '20') {
+    //     return this.stampGiftData.content[5][0]
+    //   }
+    // },
     changeGiftData (no) {
-      if (no === '1') {
-        return this.stampGiftData.content[0][0]
-      } else if (no === '14') {
-        return this.stampGiftData.content[1][1]
-      } else if (no === '15') {
-        return this.stampGiftData.content[2][2]
-      } else if (no === '16') {
-        return this.stampGiftData.content[3][3]
-      } else if (no === '18') {
-        return this.stampGiftData.content[4][4]
-      } else if (no === '20') {
-        return this.stampGiftData.content[5][5]
+      var cnt = this.cnt
+      // eslint-disable-next-line camelcase
+      const gift_length = this.$store.state.stampGiftData.content.length
+      // eslint-disable-next-line camelcase
+      if (cnt === gift_length - 1) {
+        cnt = 0
       }
-
-      //  else if (no === '11') {
-      //   return this.stampGiftData.content[1][1]
-      // }
+      // eslint-disable-next-line camelcase
+      var set_no = '0'
+      // eslint-disable-next-line camelcase
+      if (set_no !== no) {
+        // eslint-disable-next-line camelcase
+        set_no = no
+        // eslint-disable-next-line camelcase
+        if (set_no !== '1' && cnt < gift_length - 1) {
+          cnt++
+          this.cnt = cnt
+        }
+      }
+      return this.stampGiftData.content[cnt][0]
     },
     dotOn (data) {
       let dot = ''
@@ -187,7 +198,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadAllGiftData')
-    this.$store.dispatch('loadDurunubiCheck', this.token)
   }
 }
 </script>
