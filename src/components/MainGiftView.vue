@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
-        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && fullPathChk()">
+        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': themaBanner() }"
