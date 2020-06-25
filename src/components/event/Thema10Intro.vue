@@ -7,9 +7,11 @@
     <div class="notice_box">
         <div class="notice">Notice</div>
         <div class="txt">
-            테마여행 10선 주요 관광지를방문하고<br/>
+            <!-- 테마여행 10선 주요 관광지를방문하고<br/>
             숙박 영수증을 첨부하면 추첨을 통해 5만원<br/>
-            국민관광 상품권을 6만 명에게 드립니다!
+            국민관광 상품권을 6만 명에게 드립니다! -->
+            대한민국 테마 10선이 자랑하는 주요관광지를<br/>여행하고 안전여행 참여 이벤트를 신청하세요.<br/>
+            월 만오천명을 추첨하여 <span class="highlight">5만원 국민관광상품권</span>을 드립니다.
         </div>
     </div>
     <div class="service_info type2">
@@ -127,5 +129,11 @@ export default {
     text-indent: -12px;
     margin-left: 12px;
     margin-bottom: 2px;
+  }
+  .highlight {
+    display: inline-block;
+    padding:0 3px;
+    background: #ffed00;
+    line-height: 16px;
   }
 </style>

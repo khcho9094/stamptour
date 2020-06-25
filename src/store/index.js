@@ -982,6 +982,7 @@ export default new Vuex.Store({
       fd.append('event_no', data.event_no)
       fd.append('log_no', data.log_no)
       fd.append('imageFile', data.imageFile)
+      // fd.append('receipt_no', '12341234')
       const url = 'https://storage.tranggle.com/mingle/authImageUpload'
       axios
         .post(url, fd)
