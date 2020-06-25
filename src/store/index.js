@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueCookie from 'vue-cookie'
@@ -32,8 +33,7 @@ export default new Vuex.Store({
       { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
       { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
-      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
-      { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' }
+      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -299,145 +299,179 @@ export default new Vuex.Store({
     },
     setAllGiftData (state, data) {
       state.allGiftData = data
+      // eslint-disable-next-line no-unused-vars
       var cnt = 0
+      var content_cnt = 0
+      var mingleNo = null
       state.stampGiftData.title = []
       state.stampGiftData.content = []
       data.map((val, index) => {
-        if (val.mingle_no === '1' && cnt === 0) {
+        if ((mingleNo === null || mingleNo !== val.mingle_no) && val.mingle_no !== '17') {
+          mingleNo = val.mingle_no
+          if (state.stampGiftData.content.length > 0 && mingleNo !== '17') {
+            content_cnt++
+          }
+        }
+
+        if (mingleNo === val.mingle_no && content_cnt === state.stampGiftData.content.length && val.mingle_no !== '17') {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 0: [] })
           cnt++
-        } else if (val.mingle_no === '14' && cnt === 1) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 1: [] })
-          cnt++
-        } else if (val.mingle_no === '15' && cnt === 2) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 2: [] })
-          cnt++
-        } else if (val.mingle_no === '16' && cnt === 3) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 3: [] })
-          cnt++
-        } else if (val.mingle_no === '18' && cnt === 4) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 4: [] })
-          cnt++
-        } else if (val.mingle_no === '20' && cnt === 5) {
-          state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-          state.stampGiftData.content.push({ 5: [] })
-          cnt++
         }
 
-        if (val.mingle_no === '1') {
-          state.stampGiftData.content[0][0].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
-        } else if (val.mingle_no === '14') {
-          state.stampGiftData.content[1][1].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
-        } else if (val.mingle_no === '15') {
-          state.stampGiftData.content[2][2].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
-        } else if (val.mingle_no === '16') {
-          state.stampGiftData.content[3][3].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
-        } else if (val.mingle_no === '18') {
-          state.stampGiftData.content[4][4].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
-        } else if (val.mingle_no === '20') {
-          state.stampGiftData.content[5][5].push(
-            {
-              member_address: val.member_address,
-              member_mobile: val.member_mobile,
-              mingle_count: val.mingle_count,
-              mingle_no: val.mingle_no,
-              mingle_gift_add_point: val.mingle_gift_add_point,
-              mingle_gift_end_date: val.mingle_gift_end_date,
-              mingle_gift_image: val.mingle_gift_image,
-              mingle_gift_order: val.mingle_gift_order,
-              mingle_gift_price: val.mingle_gift_price,
-              mingle_gift_receive: val.mingle_gift_receive,
-              mingle_gift_seq: val.mingle_gift_seq,
-              mingle_gift_title: val.mingle_gift_title,
-              mingle_user_gift_no: val.mingle_user_gift_no
-            }
-          )
+        if (mingleNo === val.mingle_no && val.mingle_no !== '17') {
+          state.stampGiftData.content[content_cnt][0].push({
+            member_address: val.member_address,
+            member_mobile: val.member_mobile,
+            mingle_count: val.mingle_count,
+            mingle_no: val.mingle_no,
+            mingle_gift_add_point: val.mingle_gift_add_point,
+            mingle_gift_end_date: val.mingle_gift_end_date,
+            mingle_gift_image: val.mingle_gift_image,
+            mingle_gift_order: val.mingle_gift_order,
+            mingle_gift_price: val.mingle_gift_price,
+            mingle_gift_receive: val.mingle_gift_receive,
+            mingle_gift_seq: val.mingle_gift_seq,
+            mingle_gift_title: val.mingle_gift_title,
+            mingle_user_gift_no: val.mingle_user_gift_no
+          })
         }
+
+        // if (val.mingle_no === '1' && cnt === 0) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 0: [] })
+        //   cnt++
+        // } else if (val.mingle_no === '14' && cnt === 1) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 1: [] })
+        //   cnt++
+        // } else if (val.mingle_no === '15' && cnt === 2) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 2: [] })
+        //   cnt++
+        // } else if (val.mingle_no === '16' && cnt === 3) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 3: [] })
+        //   cnt++
+        // } else if (val.mingle_no === '18' && cnt === 4) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 4: [] })
+        //   cnt++
+        // } else if (val.mingle_no === '20' && cnt === 5) {
+        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
+        //   state.stampGiftData.content.push({ 5: [] })
+        //   cnt++
+        // }
+
+        // if (val.mingle_no === '1') {
+        //   state.stampGiftData.content[0][0].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // } else if (val.mingle_no === '14') {
+        //   state.stampGiftData.content[1][1].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // } else if (val.mingle_no === '15') {
+        //   state.stampGiftData.content[2][2].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // } else if (val.mingle_no === '16') {
+        //   state.stampGiftData.content[3][3].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // } else if (val.mingle_no === '18') {
+        //   state.stampGiftData.content[4][4].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // } else if (val.mingle_no === '20') {
+        //   state.stampGiftData.content[5][5].push(
+        //     {
+        //       member_address: val.member_address,
+        //       member_mobile: val.member_mobile,
+        //       mingle_count: val.mingle_count,
+        //       mingle_no: val.mingle_no,
+        //       mingle_gift_add_point: val.mingle_gift_add_point,
+        //       mingle_gift_end_date: val.mingle_gift_end_date,
+        //       mingle_gift_image: val.mingle_gift_image,
+        //       mingle_gift_order: val.mingle_gift_order,
+        //       mingle_gift_price: val.mingle_gift_price,
+        //       mingle_gift_receive: val.mingle_gift_receive,
+        //       mingle_gift_seq: val.mingle_gift_seq,
+        //       mingle_gift_title: val.mingle_gift_title,
+        //       mingle_user_gift_no: val.mingle_user_gift_no
+        //     }
+        //   )
+        // }
       })
       console.log(state.stampGiftData)
     },
@@ -446,24 +480,6 @@ export default new Vuex.Store({
     },
     setThema10Status (state, data) {
       state.thema10Status = data
-    },
-    setStampList (state, data) {
-      data.map((val, idx) => {
-        const obj = {
-          name: val.mingle_title,
-          code: val.mingle_service_code,
-          info: (val.mingle_point_yn === 'Y') ? 'point' : 'number',
-          no: parseInt(val.mingle_seq),
-          msg: ''
-        }
-        if (val.mingle_seq === '18' || val.mingle_seq === '22') {
-          obj.msg = '스탬프도 찍고 인증서도 받고!!'
-        } else if (val.mingle_seq === '14') {
-          obj.msg = '스탬프도 찍고 봉사 시간도 채우고!!'
-        }
-        state.stampCodeInfo[idx] = obj
-      })
-      console.log(state.stampCodeInfo)
     }
   },
   actions: {
@@ -490,13 +506,7 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadGiftData ({ state, commit }) {
-      let appvertest = ''
-      if (location.href.indexOf('mstamp') > -1) {
-        appvertest = ''
-      } else {
-        appvertest = 'Y'
-      }
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -525,13 +535,7 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadGiftDataNew ({ state, commit }) {
-      let appvertest = ''
-      if (location.href.indexOf('mstamp') > -1) {
-        appvertest = ''
-      } else {
-        appvertest = 'Y'
-      }
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -1065,22 +1069,6 @@ export default new Vuex.Store({
         .then(response => {
           if (response.response.code === '00') {
             commit('setUserInfo', response.response.content)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    /*
-    초기 스탬프 정보 저장
-    */
-    GetStampTourList ({ state, commit }, data) {
-      const url = 'https://api.tranggle.com/v2/mingle/courses/get_stamptour_code.jsonp'
-      Vue
-        .jsonp(url)
-        .then(response => {
-          if (response.response.code === '00') {
-            commit('setStampList', response.response.content.code_list)
           }
         })
         .catch(err => {
