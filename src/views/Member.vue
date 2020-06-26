@@ -4,6 +4,14 @@
     <Head type='back' name='member' :title='titleCount()' />
     <div class="tour_sub_wrap back_gray">
       <ul class="user_list">
+        <li class="first">
+            <div
+              class="user_img"
+              :style="{ 'background-image': memberProfile(memberMyList) }">
+            </div>
+            <p>{{(memberMyList.member_nickname)?memberMyList.member_nickname:memberMyList.user_mingle_member_id}}</p>
+            <span>{{memberMyList.user_mingle_gift_point}}</span>
+        </li>
         <li v-for="(data, idx) in memberList" v-bind:key="idx">
             <div
               class="user_img"
@@ -31,8 +39,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['memberList']),
-    ...mapState(['memberCount'])
+    ...mapState(['memberList', 'memberCount', 'memberMyList'])
   },
   methods: {
     memberProfile (data) {
@@ -59,6 +66,7 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
   mounted () {
+    this.$store.state.memberList = []
     this.$store.dispatch('loadMemberData', this.memberPage)
   },
   updated () {

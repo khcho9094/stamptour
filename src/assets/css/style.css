@@ -100,10 +100,11 @@ header {
     height: 50px;
     line-height: 50px;
     background-color: #ffffff;
-    padding:0 25px;
+    padding:0 25px 0 0;
 }
 
 header .logo img {
+    margin-left: 25px;
     width: 192px;
     vertical-align: middle;
 }
@@ -151,6 +152,7 @@ header button.share {
 header .head_back .back_box {
     display: inline-block;
     cursor: pointer;
+    padding-left: 25px;
 }
 header .head_back .back_box img {
     width: 17px;
@@ -1483,14 +1485,14 @@ header .head_back span {
 
 =============================================*/
 .tour_sub_wrap ul.user_list {
-    padding-left: 25px;
+    /* padding-left: 25px; */
     background-color: #f7f8f9;
     padding-bottom: 65px;
 }
 .tour_sub_wrap ul.user_list li {
     border-bottom: 1px solid #edeeef;
     overflow: hidden;
-    padding:15px 20px 15px 0;
+    padding:15px 20px 15px 25px;
 }
 .tour_sub_wrap ul.user_list li .user_img {
     float: left;
@@ -1523,6 +1525,9 @@ header .head_back span {
     background-size: 17px;
     background-position: top 3px left 4px;
     margin-top: 7px;
+}
+.tour_sub_wrap ul.user_list li.first {
+    background-color: #e6e9ed;
 }
 .swiper-pagination {
     font-size: 11px;

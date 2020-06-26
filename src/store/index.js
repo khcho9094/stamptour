@@ -56,6 +56,7 @@ export default new Vuex.Store({
     mainRecommendList: [], // 메인 추천 스탬프 리스트
     sumPrice: 0, // 전체 선물 가격,
     memberList: [], // 참가자 명단
+    memberMyList: {}, // 내 명단
     memberCount: '0', // 참가자 수
     TourData: [], // 축제공연행사
     TourInfoData: [], // 관광지
@@ -159,7 +160,6 @@ export default new Vuex.Store({
       state.stampMethod = data.METHOD
     },
     setMainData (state, data) {
-      // state.memberList = state.memberList.concat(data.list)
       state.mainStampList = state.mainStampList.concat(data.stamplist_info)
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
@@ -185,9 +185,13 @@ export default new Vuex.Store({
       state.mainRecommendList = array
     },
     setMemberData (state, data) {
+      console.log(data)
       // 배열 합치기
       state.memberList = state.memberList.concat(data.list)
       state.memberCount = data.total.CHALLENGE
+      if (data.me.length > 0) {
+        state.memberMyList = data.me[0]
+      }
     },
     setUserInfo (state, data) {
       state.themaUserMobile = data.mobile
