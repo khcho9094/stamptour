@@ -299,12 +299,19 @@ export default new Vuex.Store({
     },
     setAllGiftData (state, data) {
       state.allGiftData = data
-      // eslint-disable-next-line no-unused-vars
-      var cnt = 0
-      var content_cnt = 0
-      var mingleNo = null
+      let count = 0
+      let content_cnt = 0
+      let mingleNo = null
+      const mObj = {}
       state.stampGiftData.title = []
       state.stampGiftData.content = []
+      data.map((val, index) => {
+        if ((mingleNo === null || mingleNo !== val.mingle_no) && val.mingle_no !== '17') {
+          mingleNo = val.mingle_no
+          mObj[mingleNo] = count
+          count++
+        }
+      })
       data.map((val, index) => {
         if ((mingleNo === null || mingleNo !== val.mingle_no) && val.mingle_no !== '17') {
           mingleNo = val.mingle_no
@@ -312,168 +319,15 @@ export default new Vuex.Store({
             content_cnt++
           }
         }
-
         if (mingleNo === val.mingle_no && content_cnt === state.stampGiftData.content.length && val.mingle_no !== '17') {
           state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
           state.stampGiftData.content.push({ 0: [] })
-          cnt++
         }
 
         if (mingleNo === val.mingle_no && val.mingle_no !== '17') {
-          state.stampGiftData.content[content_cnt][0].push({
-            member_address: val.member_address,
-            member_mobile: val.member_mobile,
-            mingle_count: val.mingle_count,
-            mingle_no: val.mingle_no,
-            mingle_gift_add_point: val.mingle_gift_add_point,
-            mingle_gift_end_date: val.mingle_gift_end_date,
-            mingle_gift_image: val.mingle_gift_image,
-            mingle_gift_order: val.mingle_gift_order,
-            mingle_gift_price: val.mingle_gift_price,
-            mingle_gift_receive: val.mingle_gift_receive,
-            mingle_gift_seq: val.mingle_gift_seq,
-            mingle_gift_title: val.mingle_gift_title,
-            mingle_user_gift_no: val.mingle_user_gift_no
-          })
+          state.stampGiftData.content[content_cnt][0].push(val)
         }
-
-        // if (val.mingle_no === '1' && cnt === 0) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 0: [] })
-        //   cnt++
-        // } else if (val.mingle_no === '14' && cnt === 1) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 1: [] })
-        //   cnt++
-        // } else if (val.mingle_no === '15' && cnt === 2) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 2: [] })
-        //   cnt++
-        // } else if (val.mingle_no === '16' && cnt === 3) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 3: [] })
-        //   cnt++
-        // } else if (val.mingle_no === '18' && cnt === 4) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 4: [] })
-        //   cnt++
-        // } else if (val.mingle_no === '20' && cnt === 5) {
-        //   state.stampGiftData.title.push({ mingle_title: val.mingle_title, mingle_no: val.mingle_no })
-        //   state.stampGiftData.content.push({ 5: [] })
-        //   cnt++
-        // }
-
-        // if (val.mingle_no === '1') {
-        //   state.stampGiftData.content[0][0].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // } else if (val.mingle_no === '14') {
-        //   state.stampGiftData.content[1][1].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // } else if (val.mingle_no === '15') {
-        //   state.stampGiftData.content[2][2].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // } else if (val.mingle_no === '16') {
-        //   state.stampGiftData.content[3][3].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // } else if (val.mingle_no === '18') {
-        //   state.stampGiftData.content[4][4].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // } else if (val.mingle_no === '20') {
-        //   state.stampGiftData.content[5][5].push(
-        //     {
-        //       member_address: val.member_address,
-        //       member_mobile: val.member_mobile,
-        //       mingle_count: val.mingle_count,
-        //       mingle_no: val.mingle_no,
-        //       mingle_gift_add_point: val.mingle_gift_add_point,
-        //       mingle_gift_end_date: val.mingle_gift_end_date,
-        //       mingle_gift_image: val.mingle_gift_image,
-        //       mingle_gift_order: val.mingle_gift_order,
-        //       mingle_gift_price: val.mingle_gift_price,
-        //       mingle_gift_receive: val.mingle_gift_receive,
-        //       mingle_gift_seq: val.mingle_gift_seq,
-        //       mingle_gift_title: val.mingle_gift_title,
-        //       mingle_user_gift_no: val.mingle_user_gift_no
-        //     }
-        //   )
-        // }
       })
-      console.log(state.stampGiftData)
     },
     setMyStamp (state, data) {
       state.myStampData = data

@@ -4,10 +4,10 @@
     <Head type='back' name='tour' title='전체 선물보기'/>
     <div class="all_gift">
       <ul class="tour_list">
-        <li v-for="(data, idx) in changeTourTitle()" v-bind:key="idx">
+        <li v-for="(data, idx) in this.stampGiftData.title" v-bind:key="idx">
           <div class="tit" @click="giftList(data.mingle_no)">{{ data.mingle_title }}</div>
-          <ul class="all_list" v-show="isShow(data.mingle_no)" v-for="(gdata, gidx) in changeGiftData(data.mingle_no)" v-bind:key="gidx">
-            <li>
+          <ul class="all_list" v-show="isShow(data.mingle_no)">
+            <li v-for="(gdata, gidx) in changeGiftData(data.mingle_no, idx)" v-bind:key="gidx">
                 <div class="point" v-if="gdata.mingle_gift_add_point === 'AUTH' && gdata.mingle_no ==='1'"><span class="stxt">잼버리<br/>코스</span></div>
                 <div class="point" v-else-if="gdata.mingle_gift_add_point === 'AUTH' && gdata.mingle_no ==='14'"><span class="stxt">{{auth(gdata)}}</span></div>
                 <div class="point" v-else-if="gdata.mingle_no ==='16' || gdata.mingle_no ==='18'"><span class="stxt">{{gdata.mingle_count}}개</span></div>
@@ -43,16 +43,10 @@ export default {
   },
   data () {
     return {
-      // isShow: false,
-      gift_1_show: false,
-      // gift_11_show: false,
-      gift_14_show: false,
-      gift_15_show: false,
-      gift_16_show: false,
-      gift_18_show: false,
-      gift_20_show: false,
       unit: '',
-      cnt: 0
+      cnt: 0,
+      clickNo: '',
+      clickTg: false
     }
   },
   computed: {
@@ -60,75 +54,28 @@ export default {
   },
   methods: {
     giftList (data) {
-      // this.isShow = !this.isShow
-      if (data === '1') {
-        this.gift_1_show = !this.gift_1_show
-      } else if (data === '14') {
-        this.gift_14_show = !this.gift_14_show
-      } else if (data === '15') {
-        this.gift_15_show = !this.gift_15_show
-      } else if (data === '16') {
-        this.gift_16_show = !this.gift_16_show
-      } else if (data === '18') {
-        this.gift_18_show = !this.gift_18_show
-      } else if (data === '20') {
-        this.gift_20_show = !this.gift_20_show
+      if (this.clickNo === data) {
+        this.clickTg = true
+        this.clickNo = ''
+      } else {
+        this.clickTg = false
+        this.clickNo = data
       }
     },
     isShow (data) {
-      if (data === '1') {
-        return this.gift_1_show
-      } else if (data === '14') {
-        return this.gift_14_show
-      } else if (data === '15') {
-        return this.gift_15_show
-      } else if (data === '16') {
-        return this.gift_16_show
-      } else if (data === '18') {
-        return this.gift_18_show
-      } else if (data === '20') {
-        return this.gift_20_show
+      let tg = false
+      if (this.clickNo === data) {
+        tg = true
+      } else {
+        tg = false
       }
+      if (this.clickTg === true) {
+        tg = false
+      }
+      return tg
     },
-    changeTourTitle () {
-      return this.stampGiftData.title
-    },
-    // changeGiftData (no) {
-    //   if (no === '1') {
-    //     return this.stampGiftData.content[0][0]
-    //   } else if (no === '14') {
-    //     return this.stampGiftData.content[1][0]
-    //   } else if (no === '15') {
-    //     return this.stampGiftData.content[2][0]
-    //   } else if (no === '16') {
-    //     return this.stampGiftData.content[3][0]
-    //   } else if (no === '18') {
-    //     return this.stampGiftData.content[4][0]
-    //   } else if (no === '20') {
-    //     return this.stampGiftData.content[5][0]
-    //   }
-    // },
-    changeGiftData (no) {
-      var cnt = this.cnt
-      // eslint-disable-next-line camelcase
-      const gift_length = this.$store.state.stampGiftData.content.length
-      // eslint-disable-next-line camelcase
-      if (cnt === gift_length - 1) {
-        cnt = 0
-      }
-      // eslint-disable-next-line camelcase
-      var set_no = '0'
-      // eslint-disable-next-line camelcase
-      if (set_no !== no) {
-        // eslint-disable-next-line camelcase
-        set_no = no
-        // eslint-disable-next-line camelcase
-        if (set_no !== '1' && cnt < gift_length - 1) {
-          cnt++
-          this.cnt = cnt
-        }
-      }
-      return this.stampGiftData.content[cnt][0]
+    changeGiftData (no, idx) {
+      return this.stampGiftData.content[idx][0]
     },
     dotOn (data) {
       let dot = ''
