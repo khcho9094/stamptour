@@ -88,6 +88,10 @@ export default {
     }
   },
   beforeCreate () {
+    if (this.$cookie.get('login_token') !== '') {
+      this.$store.dispatch('loadStampTourJoin')
+    }
+
     // 합산 해야 하는 스탬프투어 코드 쿠키 존재 여부 체크
     if (this.$cookie.get(this.$store.state.enc_member)) {
       if (/Android/i.test(navigator.userAgent)) {

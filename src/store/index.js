@@ -929,6 +929,13 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    loadStampTourJoin ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/courses/challengeToCouse.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+        })
     }
   },
   modules: {
