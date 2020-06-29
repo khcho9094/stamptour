@@ -33,7 +33,8 @@ export default new Vuex.Store({
       { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
       { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
-      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' }
+      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
+      { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -117,7 +118,9 @@ export default new Vuex.Store({
     themaUserInfo: {},
     themaUserMobile: '',
     guestChk: '',
-    loadingMainList: false
+    loadingMainList: false,
+    themaPopReceipt: { open: false },
+    receiptNumber: ''
   },
   mutations: {
     setIntroData (state, data) {
@@ -337,6 +340,7 @@ export default new Vuex.Store({
       state.myStampData = data
     },
     setThema10Status (state, data) {
+      state.receiptNumber = data.receipt_no
       state.thema10Status = data
     }
   },
@@ -812,6 +816,17 @@ export default new Vuex.Store({
       state.showPhoto = data
     },
     /*
+    테마10 영수증 팝업
+    */
+    openReceiptPop ({ state }, data) {
+      state.themaPopReceipt = data
+      if (Object.keys(data).length > 0) {
+        state.themaPopReceipt.open = true
+      } else {
+        state.themaPopReceipt.open = false
+      }
+    },
+    /*
     테마10 이벤트 참여 조회
     */
     loadThema10Status ({ state, commit }) {
@@ -840,7 +855,7 @@ export default new Vuex.Store({
       fd.append('event_no', data.event_no)
       fd.append('log_no', data.log_no)
       fd.append('imageFile', data.imageFile)
-      // fd.append('receipt_no', '12341234')
+      fd.append('receipt_no', data.receipt_no)
       const url = 'https://storage.tranggle.com/mingle/authImageUpload'
       axios
         .post(url, fd)
@@ -849,6 +864,9 @@ export default new Vuex.Store({
             alert(response.data.response.message)
           }
           if (response.data.response.code === '00') {
+            if (data.action_type === 'RECEIPT_CHANGE') {
+              state.themaPopReceipt.open = false
+            }
             state.showPhoto.open = false
             state.uploadSuccess = !state.uploadSuccess
           }

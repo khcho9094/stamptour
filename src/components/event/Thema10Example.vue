@@ -53,11 +53,17 @@ export default {
         }
       }
       this.$store.dispatch('openExamplePop', false)
-      this.$store.dispatch('openPhotoPop', {
-        open: true,
-        type: this.type,
-        edit: this.edit
-      })
+      if (this.type === 0) {
+        this.$store.dispatch('openPhotoPop', {
+          open: true,
+          type: this.type,
+          edit: this.edit
+        })
+      } else {
+        this.$store.dispatch('openReceiptPop', {
+          open: true
+        })
+      }
     }
   },
   mounted () {

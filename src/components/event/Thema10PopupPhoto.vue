@@ -1,5 +1,5 @@
 <template>
-    <div class="pop_overay" v-if="showPhoto.open">
+    <div class="pop_overay zix" v-if="showPhoto.open">
         <div class="pop_cont">
             <ul class="photo_select">
               <li>
@@ -40,7 +40,8 @@ export default {
         upload_type: (this.showPhoto.type === 0 ? 'PHOTO' : 'RECEIPT'),
         action_type: this.actionType(rm),
         event_no: this.thema10Status.log_event_no,
-        log_no: (this.showPhoto.type === 0 ? this.thema10Status.photo_authno : this.thema10Status.receipt_authno)
+        log_no: (this.showPhoto.type === 0 ? this.thema10Status.photo_authno : this.thema10Status.receipt_authno),
+        receipt_no: ''
       })
       this.$store.dispatch('GetUserInfo', {
         member_id: this.thema10Status.gps_log_member_id || ''

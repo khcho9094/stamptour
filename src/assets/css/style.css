@@ -183,6 +183,9 @@ header .head_back span {
     height:100%;
     z-index: 9999;
 }
+.pop_overay.zix {
+    z-index: 99999;
+}
 .pop_overay .pop_cont {
     width:280px;
     text-align: center;
@@ -199,6 +202,88 @@ header .head_back span {
     margin-left: -42px;
     top: -43px;
 }
+.pop_overay .pop_cont .receipt {
+    background:#fff;
+    font-family:inaviL;
+    font-size: 14px;
+    color:#000;
+}
+.pop_overay .pop_cont .receipt .step {
+    text-align: center;
+}
+.pop_overay .pop_cont .receipt .step.step1 {
+    padding: 25px 0 15px;
+}
+.pop_overay .pop_cont .receipt .step.step1 input {
+    width: 220px;
+    height: 35px;
+    border: 1px solid #698093;
+    border-radius: 3px;
+    color:#698093;
+    font-size: 12px;
+    text-indent: 10px;
+    margin-top: 25px;
+}
+.pop_overay .pop_cont .receipt .step.step2 {
+    background-color: #f7f8f9;
+    padding: 10px 0 25px;
+}
+.pop_overay .pop_cont .receipt .step .tit {
+    font-size: 17px;
+    color: #48befa;
+    line-height: 25px;
+}
+.pop_overay .pop_cont .receipt .step .txt {
+    font-size: 14px;
+    color: #000;
+    line-height: 21px;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box {
+    width: 150px;
+    height: 150px;
+    background-color: #eff0f0;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box .img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box .img.bt1 {
+    background-size: 35px;
+    cursor: pointer;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box .img.bt2 {
+    background-size: cover;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box .edit_receipt {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 140px;
+    height: 28px;
+    line-height: 28px;
+    color: #fff;
+    text-align: center;
+    font-size: 11px;
+    font-family: inaviB;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border-radius: 3px;
+}
+.pop_overay .pop_cont .receipt .step.step2 .rcp_box .edit_receipt img {
+    width: 11px;
+    position: relative;
+    top: 1px;
+    right: 1px;
+}
+
+
 .pop_overay .pop_cont .text {
     font-size: 17px;
     color:#010101;
@@ -2180,6 +2265,7 @@ header .head_back span {
 .thema10_wrap .auth_box .auth_check .right .txt2 {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.5);
+    line-height: 15px;
 }
 .thema10_wrap .auth_box .auth_check .right .txt3 {
     margin-top: 17px;

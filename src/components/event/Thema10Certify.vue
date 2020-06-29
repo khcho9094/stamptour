@@ -56,11 +56,10 @@
           <img src="@/assets/images/event/icon_auth2.png" alt="">
           숙박 영수증 인증
         </div>
-        <div class="box" v-if="thema10Status.receipt_log_auth_type === null">
+        <div class="box" v-if="thema10Status.receipt_log_auth_type === null || thema10Status.receipt_no === ''">
           <div class="desc">
             <div class="p_center">
-              <span class="underline">숙박 영수증 사진을 </span>
-              첨부 해주세요.
+              숙박 영수증의 <span class="underline">승인번호 or</span><br/><span class="underline">예약번호와 사진</span>을 등록해주세요.
             </div>
           </div>
           <div class="btn" @click="photoUpload(1, 'Edit')">
@@ -78,7 +77,10 @@
             </div>
             <div class="right">
               <div class="txt1 type2">영수증 첨부 완료</div>
-              <div class="txt2">첨부일자  {{(thema10Status.receipt_log_datetime) ? thema10Status.receipt_log_datetime.substring(0,10) : ''}}</div>
+              <div class="txt2">
+                첨부일자  {{(thema10Status.receipt_log_datetime) ? thema10Status.receipt_log_datetime.substring(0,10) : ''}}<br/>
+                승인번호 {{thema10Status.receipt_no || '정보 없음'}}
+              </div>
             </div>
           </div>
           <img class="auth_complete" src="@/assets/images/event/complete.png" alt="">
@@ -93,6 +95,7 @@
     <Thema10PopupPhoto />
     <Thema10PopupNotice />
     <Thema10PopupPI />
+    <Thema10PopupReceipt />
   </div>
 </template>
 <script>
@@ -102,6 +105,7 @@ import Thema10Example from '@/components/event/Thema10Example.vue'
 import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
 import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
 import Thema10PopupPI from '@/components/event/Thema10PopupPI.vue'
+import Thema10PopupReceipt from '@/components/event/Thema10PopupReceipt.vue'
 export default {
   name: 'Thema10Certify',
   data () {
@@ -114,60 +118,67 @@ export default {
     Thema10Example,
     Thema10PopupPhoto,
     Thema10PopupNotice,
-    Thema10PopupPI
+    Thema10PopupPI,
+    Thema10PopupReceipt
   },
   computed: {
     ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree', 'mingleCode'])
   },
   methods: {
     photoUpload (type, photo) {
-      alert('이벤트는 7월 1일부터 시작됩니다.')
-      // if (this.$cookie.get(`thema10Auth_${type}`) === 'Y') {
-      //   this.$store.dispatch('openPhotoPop', {
-      //     open: true,
-      //     type: type,
-      //     edit: photo
-      //   })
-      // } else {
-      //   this.type = type
-      //   this.edit = photo
-      //   this.$store.dispatch('openExamplePop', true)
-      // }
+      // alert('이벤트는 7월 1일부터 시작됩니다.')
+      if (this.$cookie.get(`thema10Auth_${type}`) === 'Y') {
+        if (type === 0) {
+          this.$store.dispatch('openPhotoPop', {
+            open: true,
+            type: type,
+            edit: photo
+          })
+        } else {
+          this.$store.dispatch('openReceiptPop', {
+            open: true
+          })
+        }
+      } else {
+        this.type = type
+        this.edit = photo
+        this.$store.dispatch('openExamplePop', true)
+      }
     },
     enterEvent () {
-      alert('이벤트는 7월 1일부터 시작됩니다.')
-      // let tit1 = ''
-      // let tit2 = ''
-      // if (this.thema10Status.event_apply_chk === 'Y') {
-      //   if (this.thema10Agree === 'N') {
-      //     this.$store.dispatch('openThemaAgree', {
-      //       open: true
-      //     })
-      //     return false
-      //   } else {
-      //     this.$store.dispatch('ApplyThema10Event', {
-      //       gps_authno: this.thema10Status.gps_authno,
-      //       photo_authno: this.thema10Status.photo_authno,
-      //       receipt_authno: this.thema10Status.receipt_authno,
-      //       badge_id: this.thema10Status.gps_log_badge_id
-      //     })
-      //     tit1 = '이벤트 참여가<br>완료 되었습니다.'
-      //     tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
-      //   }
-      // } else {
-      //   if (this.thema10Status.event_finish_chk === 'Y') {
-      //     tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
-      //     tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
-      //   } else {
-      //     tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
-      //     tit2 = ''
-      //   }
-      // }
-      // this.$store.dispatch('openThemaNoti', {
-      //   open: true,
-      //   tit1: tit1,
-      //   tit2: tit2
-      // })
+      // alert('이벤트는 7월 1일부터 시작됩니다.')
+      let tit1 = ''
+      let tit2 = ''
+      if (this.thema10Status.event_apply_chk === 'Y') {
+        if (this.thema10Agree === 'N') {
+          this.$store.dispatch('openThemaAgree', {
+            open: true
+          })
+          return false
+        } else {
+          this.$store.dispatch('ApplyThema10Event', {
+            gps_authno: this.thema10Status.gps_authno,
+            photo_authno: this.thema10Status.photo_authno,
+            receipt_authno: this.thema10Status.receipt_authno,
+            badge_id: this.thema10Status.gps_log_badge_id
+          })
+          tit1 = '이벤트 참여가<br>완료 되었습니다.'
+          tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+        }
+      } else {
+        if (this.thema10Status.event_finish_chk === 'Y') {
+          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+        } else {
+          tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+          tit2 = ''
+        }
+      }
+      this.$store.dispatch('openThemaNoti', {
+        open: true,
+        tit1: tit1,
+        tit2: tit2
+      })
     },
     confirm () {
       const url = 'http://www.ktourtop10.kr/kr/index.php'
