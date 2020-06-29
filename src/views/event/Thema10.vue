@@ -43,10 +43,10 @@ export default {
         window.location.hash = ''
       }
       if (selectedTab.tab.name === '이벤트 참여') {
-        if (!this.token) {
-          appEvent.thema10Login()
-          return false
-        }
+        // if (!this.token) {
+        //   appEvent.thema10Login()
+        //   return false
+        // }
         appEvent.thema10GpsStatus()
       }
     }
