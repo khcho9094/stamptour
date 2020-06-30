@@ -836,7 +836,7 @@ export default new Vuex.Store({
         .jsonp(url)
         .then(response => {
           if (response.response.code === '00') {
-            console.log(response.response.content)
+            // console.log(response.response.content)
             commit('setThema10Status', response.response.content)
           }
         })

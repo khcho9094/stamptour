@@ -130,61 +130,66 @@ export default {
   },
   methods: {
     photoUpload (type, photo) {
-      // alert('이벤트는 7월 1일부터 시작됩니다.')
-      if (this.$cookie.get(`thema10Auth_${type}`) === 'Y') {
-        if (type === 0) {
-          this.$store.dispatch('openPhotoPop', {
-            open: true,
-            type: type,
-            edit: photo,
-            msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
-          })
+      if (new Date() >= new Date('07/01/2020 00:00:00')) {
+        if (this.$cookie.get(`thema10Auth_${type}`) === 'Y') {
+          if (type === 0) {
+            this.$store.dispatch('openPhotoPop', {
+              open: true,
+              type: type,
+              edit: photo,
+              msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
+            })
+          } else {
+            this.$store.dispatch('openReceiptPop', {
+              open: true
+            })
+          }
         } else {
-          this.$store.dispatch('openReceiptPop', {
-            open: true
-          })
+          this.type = type
+          this.edit = photo
+          this.$store.dispatch('openExamplePop', true)
         }
       } else {
-        this.type = type
-        this.edit = photo
-        this.$store.dispatch('openExamplePop', true)
+        alert('이벤트는 7월 1일부터 시작됩니다.')
       }
     },
     enterEvent () {
-      // console.log(new Date() >= new Date('06/30/2020 23:59:59'))
-      // alert('이벤트는 7월 1일부터 시작됩니다.')
-      let tit1 = ''
-      let tit2 = ''
-      if (this.thema10Status.event_apply_chk === 'Y') {
-        if (this.thema10Agree === 'N') {
-          this.$store.dispatch('openThemaAgree', {
-            open: true
-          })
-          return false
+      if (new Date() >= new Date('07/01/2020 00:00:00')) {
+        let tit1 = ''
+        let tit2 = ''
+        if (this.thema10Status.event_apply_chk === 'Y') {
+          if (this.thema10Agree === 'N') {
+            this.$store.dispatch('openThemaAgree', {
+              open: true
+            })
+            return false
+          } else {
+            this.$store.dispatch('ApplyThema10Event', {
+              gps_authno: this.thema10Status.gps_authno,
+              photo_authno: this.thema10Status.photo_authno,
+              receipt_authno: this.thema10Status.receipt_authno,
+              badge_id: this.thema10Status.gps_log_badge_id
+            })
+            tit1 = '이벤트 참여가<br>완료 되었습니다.'
+            tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          }
         } else {
-          this.$store.dispatch('ApplyThema10Event', {
-            gps_authno: this.thema10Status.gps_authno,
-            photo_authno: this.thema10Status.photo_authno,
-            receipt_authno: this.thema10Status.receipt_authno,
-            badge_id: this.thema10Status.gps_log_badge_id
-          })
-          tit1 = '이벤트 참여가<br>완료 되었습니다.'
-          tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          if (this.thema10Status.event_finish_chk === 'Y') {
+            tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+            tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+          } else {
+            tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+            tit2 = ''
+          }
         }
+        this.$store.dispatch('openThemaNoti', {
+          open: true,
+          tit1: tit1,
+          tit2: tit2
+        })
       } else {
-        if (this.thema10Status.event_finish_chk === 'Y') {
-          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
-          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
-        } else {
-          tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
-          tit2 = ''
-        }
+        alert('이벤트는 7월 1일부터 시작됩니다.')
       }
-      this.$store.dispatch('openThemaNoti', {
-        open: true,
-        tit1: tit1,
-        tit2: tit2
-      })
     },
     confirm () {
       const url = 'http://www.ktourtop10.kr/kr/index.php'
