@@ -2300,18 +2300,19 @@ header .head_back span {
     position: fixed;
     top: 0;
     left: 0;
-    background: #fff;
+    background: #f6f1e7;
     width: 100%;
+    overflow: auto;
     height:100%;
-    z-index: 9999;
+    /* z-index: 9999; */
 }
 .example_pop .photo_box {
     background-color: #f6f1e7;
     width: 100%;
     padding-top: 40px;
-    padding-bottom: 35px;
-    height:calc(100% - 100px);
-    overflow: auto;
+    padding-bottom: 130px;
+    /* height:calc(100% - 100px); */
+   
 }
 .example_pop .photo_box .title {
     font-family: inaviL;
@@ -2344,9 +2345,10 @@ header .head_back span {
 .example_pop .chkbox {
     padding:16px 25px;
     width:100%;
-    position: absolute;
+    position: fixed;
     bottom: 50px;
     left: 0;
+    background-color: #fff;
 }
 .example_pop .chkbox label {
     font-size: 12px;
@@ -2362,7 +2364,7 @@ header .head_back span {
     color:#fff;
     font-size: 14px;
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
 }

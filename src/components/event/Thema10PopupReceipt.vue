@@ -73,7 +73,7 @@ export default {
       })
     },
     receiptNoBtn () {
-      if (this.receiptNo === '') {
+      if (this.receiptNo === '' || this.receiptNo === null) {
         alert('숙박 승인번호 or 예약번호를 입력해주세요.')
       } else if (this.thema10Status.receipt_log_filename === '' || this.thema10Status.receipt_log_filename === null) {
         alert('숙박 영수증 사진을 첨부해 주세요.')

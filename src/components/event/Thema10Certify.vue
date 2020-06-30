@@ -171,7 +171,7 @@ export default {
               badge_id: this.thema10Status.gps_log_badge_id
             })
             tit1 = '이벤트 참여가<br>완료 되었습니다.'
-            tit2 = '당첨은 매월 25일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+            tit2 = '당첨은 매월 7일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
           }
         } else {
           if (this.thema10Status.event_finish_chk === 'Y') {
@@ -201,7 +201,7 @@ export default {
       //   tit2 = ''
       // } else {
       //   tit1 = '당첨자 발표 기간이 아닙니다.'
-      //   tit2 = '당첨은 매월 25일에 발표됩니다.'
+      //   tit2 = '당첨은 매월 7일에 발표됩니다.'
       // }
       // this.$store.dispatch('openThemaNoti', {
       //   open: true,
