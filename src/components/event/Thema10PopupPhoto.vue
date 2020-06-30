@@ -14,6 +14,9 @@
               <li v-if="this.showPhoto.edit === 'reEdit'" @click="previewFiles($event, 'remove')">삭제</li>
             </ul>
             <button @click="closeBtn">취소</button>
+            <div class="loading_upload" v-if="uploadLoading">
+              <img src="@/assets/images/intro_loading.gif" alt="loader">
+            </div>
         </div>
     </div>
 </template>
@@ -26,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['showPhoto', 'thema10Status'])
+    ...mapState(['showPhoto', 'thema10Status', 'uploadLoading'])
   },
   methods: {
     closeBtn () {
@@ -51,6 +54,9 @@ export default {
       let type = ''
       if (this.showPhoto.edit === 'reEdit' && rm === '') {
         type = 'CHANGE'
+        if (this.thema10Status.gps_authno && this.showPhoto.msg !== 'receiptUpload') {
+          type = ''
+        }
       } else if (rm === 'remove') {
         type = 'DEL'
       } else {

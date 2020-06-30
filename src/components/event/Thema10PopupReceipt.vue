@@ -59,7 +59,8 @@ export default {
         this.$store.dispatch('openPhotoPop', {
           open: true,
           type: 1,
-          edit: 'Edit'
+          edit: 'Edit',
+          msg: ''
         })
       }
     },
@@ -67,7 +68,8 @@ export default {
       this.$store.dispatch('openPhotoPop', {
         open: true,
         type: 1,
-        edit: 'reEdit'
+        edit: 'reEdit',
+        msg: 'receiptUpload'
       })
     },
     receiptNoBtn () {

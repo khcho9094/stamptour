@@ -3,7 +3,7 @@
     <div class="photo_box">
       <div class="title" v-html="dataObj[type].title"></div>
       <div class="photo">
-        <img :src="dataObj[type].image" alt="">
+        <img :src="dataObj[type].image" alt="" :class="(type === 1) ? 'type1' : ''">
       </div>
       <div class="warning">{{dataObj[type].warning}}</div>
     </div>
@@ -34,7 +34,7 @@ export default {
         },
         {
           title: '<span>숙박 결제 영수증</span>(종이/모바일)과<br/>이용이 완료된 <span>숙박 예약확인서</span>를<br/>첨부해주세요',
-          image: require('@/assets/images/event/example2_2.jpg'),
+          image: require('@/assets/images/event/example2_3.png'),
           warning: '(간이 영수증은 인정 안됨)'
         }
       ]
@@ -57,7 +57,8 @@ export default {
         this.$store.dispatch('openPhotoPop', {
           open: true,
           type: this.type,
-          edit: this.edit
+          edit: this.edit,
+          msg: ''
         })
       } else {
         this.$store.dispatch('openReceiptPop', {

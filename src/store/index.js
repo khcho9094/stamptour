@@ -120,7 +120,8 @@ export default new Vuex.Store({
     guestChk: '',
     loadingMainList: false,
     themaPopReceipt: { open: false },
-    receiptNumber: ''
+    receiptNumber: '',
+    uploadLoading: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -847,6 +848,7 @@ export default new Vuex.Store({
     테마10 이미지 업로드
     */
     uploadThema10Photo ({ state, commit }, data) {
+      state.uploadLoading = true
       const fd = new FormData()
       fd.append('token', state.token)
       fd.append('ext', 'json')
@@ -860,6 +862,7 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
+          state.uploadLoading = false
           if (data.action_type !== 'DEL') {
             alert(response.data.response.message)
           }

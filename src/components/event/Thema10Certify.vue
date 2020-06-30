@@ -11,7 +11,7 @@
           <img src="@/assets/images/event/icon_auth1.png" alt="">
           관광지 방문 인증
         </div>
-        <div class="box" v-if="thema10Status.gps_log_auth_type === null">
+        <div class="box" v-if="thema10Status.gps_log_auth_type === null && thema10Status.photo_log_auth_type === null">
           <div class="desc">
             <div class="p_center">
               <span class="underline">테마 10선 관광지 방문 시</span>
@@ -30,18 +30,18 @@
             <div class="left">
               <div
                 class="img_box"
-                :class="thema10Status.gps_log_auth_type === 'GPS' ? 'img1' : 'img2'"
-                :style="{ 'backgroundImage': `url(${thema10Status.gps_log_filename})` }">
+                :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'img2' : 'img1'"
+                :style="{ 'backgroundImage': `url(${thema10Status.photo_log_filename ? thema10Status.photo_log_filename : thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.gps_log_auth_type === 'PHOTO' && thema10Status.event_finish_chk !== 'Y'">
+              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
             </div>
             <div class="right">
-              <div class="txt1" :class="thema10Status.gps_log_auth_type === 'GPS' ? 'type1' : 'type2'" v-text="thema10Status.gps_log_badgename ? thema10Status.gps_log_badgename : '인증사진 첨부 완료'"></div>
-              <div class="txt2">{{thema10Status.gps_log_badgename ? '인증' : '첨부'}}일자  {{(thema10Status.gps_log_datetime) ? thema10Status.gps_log_datetime.substring(0,10) : ''}}</div>
-              <div class="txt3" v-if="thema10Status.gps_log_auth_type === 'GPS'">
+              <div class="txt1" :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'type2' : 'type1'" v-text="thema10Status.photo_log_filename ? '인증사진 첨부 완료' : thema10Status.gps_log_badgename || '스탬프 이름 없음'"></div>
+              <div class="txt2">{{thema10Status.photo_log_auth_type === 'PHOTO' ? '첨부' : '인증'}}일자  {{(thema10Status.photo_log_auth_type === 'PHOTO') ? thema10Status.photo_log_datetime.substring(0,10) : thema10Status.gps_log_datetime.substring(0,10)}}</div>
+              <div class="txt3" v-if="thema10Status.photo_log_auth_type !== 'PHOTO' && thema10Status.gps_log_auth_type === 'GPS'">
                 <img src="@/assets/images/event/icon_person.png" alt="">
                 <span class="ptc">참여자</span>
                 <span class="count">{{thema10Status.gps_log_badge_getcount || 0}}</span>
@@ -132,7 +132,8 @@ export default {
           this.$store.dispatch('openPhotoPop', {
             open: true,
             type: type,
-            edit: photo
+            edit: photo,
+            msg: ''
           })
         } else {
           this.$store.dispatch('openReceiptPop', {
@@ -146,6 +147,7 @@ export default {
       }
     },
     enterEvent () {
+      // console.log(new Date() >= new Date('06/30/2020 23:59:59'))
       // alert('이벤트는 7월 1일부터 시작됩니다.')
       let tit1 = ''
       let tit2 = ''

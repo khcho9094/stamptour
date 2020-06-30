@@ -2311,6 +2311,7 @@ header .head_back span {
     padding-top: 40px;
     padding-bottom: 35px;
     height:calc(100% - 100px);
+    overflow: auto;
 }
 .example_pop .photo_box .title {
     font-family: inaviL;
@@ -2328,6 +2329,9 @@ header .head_back span {
 }
 .example_pop .photo_box img {
     width: 200px;
+}
+.example_pop .photo_box img.type1 {
+    width: 250px;
 }
 .example_pop .photo_box .warning {
     font-family: inaviM;
@@ -2536,4 +2540,30 @@ ul.photo_select li input[type="file"] {
     padding:4px 8px;
     border: 1px solid #835fa1;
     background-color: #f7f8f9;
+}
+
+.loading_upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    text-align: center;
+    z-index: 9999;
+    /* background: rgba(0, 0, 0, 0.8); */
+    color:#fff;
+    font-size: 18px;
+}
+.loading_upload img {
+    width:50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+}
+.thema_subject {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 12px!important;
+    word-break: keep-all;
 }
