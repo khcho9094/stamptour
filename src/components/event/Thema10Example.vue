@@ -58,7 +58,7 @@ export default {
           open: true,
           type: this.type,
           edit: this.edit,
-          msg: ''
+          msg: (this.edit === 'reEdit') ? 'receiptUpload' : ''
         })
       } else {
         this.$store.dispatch('openReceiptPop', {

@@ -33,7 +33,11 @@
                 :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'img2' : 'img1'"
                 :style="{ 'backgroundImage': `url(${thema10Status.photo_log_filename ? thema10Status.photo_log_filename : thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
+              <div class="edit_btn" @click="photoUpload(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
+                <img src="@/assets/images/event/icon_edit.png" alt="">
+                사진추가
+              </div>
+              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -44,7 +48,7 @@
               <div class="txt3" v-if="thema10Status.photo_log_auth_type !== 'PHOTO' && thema10Status.gps_log_auth_type === 'GPS'">
                 <img src="@/assets/images/event/icon_person.png" alt="">
                 <span class="ptc">참여자</span>
-                <span class="count">{{thema10Status.gps_log_badge_getcount || 0}}</span>
+                <span class="count">{{thema10Status.gps_log_badge_getcount}}</span>
               </div>
             </div>
           </div>
@@ -133,7 +137,7 @@ export default {
             open: true,
             type: type,
             edit: photo,
-            msg: ''
+            msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
           })
         } else {
           this.$store.dispatch('openReceiptPop', {
