@@ -1015,7 +1015,7 @@ header .head_back span {
 .course_box ul.list li .box_rt {
     float: left;
     width: calc(100% - 81px);
-    height: 76px;
+    /* height: 76px; */
     position: relative;
 }
 .course_box ul.list li .box_rt h2 {
