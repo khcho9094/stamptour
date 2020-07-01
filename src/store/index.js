@@ -780,7 +780,13 @@ export default new Vuex.Store({
         })
     },
     loadAllGiftData ({ state, commit }) {
-      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}`
+      let appvertest = ''
+      if (location.href.indexOf('mstamp') > -1) {
+        appvertest = ''
+      } else {
+        appvertest = 'Y'
+      }
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
