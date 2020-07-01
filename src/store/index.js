@@ -343,6 +343,24 @@ export default new Vuex.Store({
     setThema10Status (state, data) {
       state.receiptNumber = data.receipt_no
       state.thema10Status = data
+    },
+    setStampList (state, data) {
+      data.map((val, idx) => {
+        const obj = {
+          name: val.mingle_title,
+          code: val.mingle_service_code,
+          info: (val.mingle_point_yn === 'Y') ? 'point' : 'number',
+          no: parseInt(val.mingle_seq),
+          msg: ''
+        }
+        if (val.mingle_seq === '18' || val.mingle_seq === '22') {
+          obj.msg = '스탬프도 찍고 인증서도 받고!!'
+        } else if (val.mingle_seq === '14') {
+          obj.msg = '스탬프도 찍고 봉사 시간도 채우고!!'
+        }
+        state.stampCodeInfo[idx] = obj
+      })
+      console.log(state.stampCodeInfo)
     }
   },
   actions: {
@@ -369,7 +387,13 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadGiftData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      let appvertest = ''
+      if (location.href.indexOf('mstamp') > -1) {
+        appvertest = ''
+      } else {
+        appvertest = 'Y'
+      }
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -398,7 +422,13 @@ export default new Vuex.Store({
       token / 토큰정보 / 필수
     */
     loadGiftDataNew ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}`
+      let appvertest = ''
+      if (location.href.indexOf('mstamp') > -1) {
+        appvertest = ''
+      } else {
+        appvertest = 'Y'
+      }
+      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -960,6 +990,22 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
+        })
+    },
+    /*
+    초기 스탬프 정보 저장
+    */
+    GetStampTourList ({ state, commit }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/courses/get_stamptour_code.jsonp'
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            commit('setStampList', response.response.content.code_list)
+          }
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
   },
