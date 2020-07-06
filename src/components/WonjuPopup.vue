@@ -2,7 +2,7 @@
     <div class="pop_overay">
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
-            <div class="text_2">
+            <div class="text_2 noviewpop">
                 <div class="stamp_success wonju">
                   <b class="wonju3tit">[이벤트 안내]</b><br>
                   스탬프 인증 시 포인트 2배 적립과
@@ -10,6 +10,9 @@
                   증정장소 : 박경리문학공원/한지문화원
                   /역사박물관/간현관광지 4개소<br><br>
                   이벤트기간 : 7월1일 ~ 19일
+                </div>
+                <div class="chkbox">
+                  <input type="checkbox" id="noviewpop"  name="noviewpop" checked="checked" v-model="check"><label for="noviewpop">다시 보지 않기</label>
                 </div>
             </div>
             <button @click="closeBtn">확인</button>
@@ -21,12 +24,16 @@ export default {
   name: 'WonjuPopup',
   data () {
     return {
+      check: false
     }
   },
   computed: {
   },
   methods: {
     closeBtn () {
+      if (this.check) {
+        this.$cookie.set('wonju_pop', 'Y', 9999)
+      }
       this.$store.state.wonjuPopup = false
     }
   },

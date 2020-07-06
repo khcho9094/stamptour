@@ -18,7 +18,7 @@
         <swiper-slide v-if="this.mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
             <div
               class="themaBanner"
-              :style="{ 'background-image': BannerImage('allthat_main_banner_kor100.png') }"
+              :style="{ 'background-image': BannerImage('allthat_main_banner_kor100_2.png') }"
               @click="goExternalEvent('https://korean.visitkorea.or.kr/other/stamptour.do')">
             </div>
         </swiper-slide>

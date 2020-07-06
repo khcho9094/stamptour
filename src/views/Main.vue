@@ -154,6 +154,9 @@ export default {
     if (this.$cookie.get('tour_100') === 'Y') {
       this.$store.state.wonjuPopup4 = false
     }
+    if (this.$cookie.get('wonju_pop') === 'Y') {
+      this.$store.state.wonjuPopup = false
+    }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {

@@ -104,7 +104,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import * as appEvent from '@/assets/js/app_event.js'
+// import * as appEvent from '@/assets/js/app_event.js'
 import Thema10Example from '@/components/event/Thema10Example.vue'
 import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
 import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
@@ -152,6 +152,7 @@ export default {
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
+      console.log(this.thema10Status)
       if (this.thema10Status.event_apply_chk === 'Y') {
         if (this.thema10Agree === 'N') {
           this.$store.dispatch('openThemaAgree', {
@@ -173,8 +174,13 @@ export default {
           tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
           tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
         } else {
-          tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
-          tit2 = ''
+          if (this.thema10Status.photo_authno === null) {
+            tit1 = '이벤트에 참여하려면<br>관광지 방문 인증 사진을<br/>추가 해주세요.'
+            tit2 = ''
+          } else {
+            tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+            tit2 = ''
+          }
         }
       }
       this.$store.dispatch('openThemaNoti', {
@@ -185,7 +191,8 @@ export default {
     },
     confirm () {
       const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'
-      appEvent.externalLinks(url)
+      location.href = url
+      // appEvent.externalLinks(url)
       // let tit1 = ''
       // let tit2 = ''
       // if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
