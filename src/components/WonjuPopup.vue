@@ -53,6 +53,7 @@ export default {
     font-size: 17px;
     font-family:inaviL;
     line-height:1.5;
-    padding:0 15px;
+    padding:0 5px;
+    word-break: keep-all;
   }
 </style>

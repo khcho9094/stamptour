@@ -4,7 +4,7 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju3">
-                  <b class="wonju3tit">[보Go, 찍Go, 받Go]</b><br>
+                  <b class="wonju3tit">[보Go x 찍Go x 받Go]</b><br>
                   한국관광100선 스탬프투어 이벤트<br><br>
                   이벤트 기간 : 2020.07.01~8.31<br>
                   당첨자 발표 : 2020. 09.04.<br>
