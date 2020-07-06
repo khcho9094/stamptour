@@ -4,10 +4,12 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2">
                 <div class="stamp_success wonju">
-                  코로나19로 스탬프투어<br>
-                  스탬프 더블 적립 이벤트 기간이<br>
-                  변경되었습니다.<br><br>
-                  <b>5. 30. ~ 6. 14. <img class="arrows" src="@/assets/images/arrow_2.png" alt="icon"> 7. 1. ~ 7. 19.</b>
+                  <b class="wonju3tit">[이벤트 안내]</b><br>
+                  스탬프 인증 시 포인트 2배 적립과
+                  원주시 입체 마그넷 증정!!<br>
+                  증정장소 : 박경리문학공원/한지문화원
+                  /역사박물관/간현관광지 4개소<br><br>
+                  이벤트기간 : 7월1일 ~ 19일
                 </div>
             </div>
             <button @click="closeBtn">확인</button>
@@ -35,6 +37,11 @@ export default {
 }
 </script>
 <style>
+  .wonju3tit {
+    display: inline-block;
+    margin-bottom:5px;
+    font-size: 1.1em;
+  }
   .arrows {
     width:10px;
     position: relative;
@@ -46,5 +53,6 @@ export default {
     font-size: 17px;
     font-family:inaviL;
     line-height:1.5;
+    padding:0 15px;
   }
 </style>

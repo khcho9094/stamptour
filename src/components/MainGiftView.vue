@@ -1,20 +1,28 @@
 <template>
   <div>
-    <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
+    <swiper :options="swiperOption" class="swiper swiperbut">
         <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
-              :style="{ 'background-image': themaBanner() }"
+              :style="{ 'background-image': BannerImage('event/allthat_main_banner.png') }"
               @click="goThema10Event">
             </div>
         </swiper-slide>
         <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
             <div
               class="themaBanner"
-              :style="{ 'background-image': WonjuBanner() }">
+              :style="{ 'background-image': BannerImage('allthat_main_banner_wonju2.png') }"
+              @click="goExternalEvent('https://drive.google.com/file/d/1zOTtpdUUuKXGQMTfhCeuyVomc8zr-gGY/view?usp=sharing')">
             </div>
         </swiper-slide>
-        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <swiper-slide v-if="this.mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
+            <div
+              class="themaBanner"
+              :style="{ 'background-image': BannerImage('allthat_main_banner_kor100.png') }"
+              @click="goExternalEvent('https://korean.visitkorea.or.kr/other/stamptour.do')">
+            </div>
+        </swiper-slide>
+        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -48,7 +56,7 @@ export default {
           type: 'bullets'
         },
         autoplay: {
-          delay: 99999
+          delay: 3000
         },
         loop: false
       }
@@ -73,12 +81,11 @@ export default {
     goThema10Event () {
       appEvent.thema10Page()
     },
-    themaBanner () {
-      const url = require('@/assets/images/event/allthat_main_banner.png')
-      return `url(${url})`
+    goExternalEvent (url) {
+      appEvent.externalLinks(url)
     },
-    WonjuBanner () {
-      const url = require('@/assets/images/allthat_home_banner_wonju.png')
+    BannerImage (name) {
+      const url = require(`@/assets/images/${name}`)
       return `url(${url})`
     },
     fullPathChk () {
@@ -92,13 +99,13 @@ export default {
     }
   },
   created () {
-    if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
-      this.swiperOption.autoplay.delay = 3000
-      this.swiperOption.loop = true
-    } else {
-      this.swiperOption.autoplay.delay = 99999
-      this.swiperOption.loop = false
-    }
+    // if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
+    //   this.swiperOption.autoplay.delay = 3000
+    //   this.swiperOption.loop = true
+    // } else {
+    //   this.swiperOption.autoplay.delay = 99999
+    //   this.swiperOption.loop = false
+    // }
   },
   mounted () {
     if (this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==') {

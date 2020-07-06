@@ -115,6 +115,7 @@ export default new Vuex.Store({
     wonjuPopup: true, // 원주
     wonjuPopup2: { open: false }, // 50코스
     wonjuPopup3: true, // 코리아둘레길
+    wonjuPopup4: true, // 테마관광100
     themaUserInfo: {},
     themaUserMobile: '',
     guestChk: '',

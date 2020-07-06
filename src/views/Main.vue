@@ -16,6 +16,7 @@
       <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
+      <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
     </div>
     <Intro v-else/>
   </div>
@@ -39,6 +40,7 @@ import PopupRestart from '@/components/popup/PopupRestart.vue'
 import WonjuPopup from '@/components/WonjuPopup.vue'
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
+import WonjuPopup4 from '@/components/WonjuPopup4.vue'
 export default {
   name: 'Main',
   components: {
@@ -56,7 +58,8 @@ export default {
     PopupRestart,
     WonjuPopup,
     WonjuPopup2,
-    WonjuPopup3
+    WonjuPopup3,
+    WonjuPopup4
   },
   data () {
     return {
@@ -77,7 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup2', 'wonjuPopup3'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4'])
   },
   methods: {
     handleMoreButton () {
@@ -148,6 +151,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$cookie.get('tour_100') === 'Y') {
+      this.$store.state.wonjuPopup4 = false
+    }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {
