@@ -138,7 +138,7 @@ export default {
     // 인트로 페이지로
     let mingleN = ''
     this.stampCodeInfo.map((data, idx) => {
-      if (this.$route.query.mingleCode === data.code) {
+      if (this.mingleCode === data.code) {
         mingleN = idx
       }
     })
