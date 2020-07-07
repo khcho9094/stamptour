@@ -113,6 +113,9 @@ export default {
       let count = 10
       if (Math.ceil(this.allStampCount / 10) === idx) {
         count = this.allStampCount % 10
+        if (count === 0) {
+          count = 10
+        }
       }
       return count
     },

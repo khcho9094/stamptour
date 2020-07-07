@@ -34,7 +34,8 @@ export default new Vuex.Store({
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
       { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
       { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
-      { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' }
+      { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
+      { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -658,7 +659,7 @@ export default new Vuex.Store({
     mingleCode 세팅
     */
     setMingleCode ({ state }, data) {
-      state.mingleCode = data
+      state.mingleCode = data.replace(' ', '+')
     },
     /*
     token 세팅
