@@ -104,7 +104,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-// import * as appEvent from '@/assets/js/app_event.js'
+import * as appEvent from '@/assets/js/app_event.js'
 import Thema10Example from '@/components/event/Thema10Example.vue'
 import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
 import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
