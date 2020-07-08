@@ -12,7 +12,8 @@
               <div class="step step2">
                 <div class="tit">Step. 02</div>
                 <div class="txt">
-                  숙박 영수증 사진을<br/>첨부해 주세요.
+                  숙박 영수증 사진을<br/>첨부해 주세요.<br>
+                  <span style="font-size:12px;">숙박결제영수증 1매당 1회 응모처리됩니다.</span>
                 </div>
                 <div class="rcp_box" @click="receiptUpload">
                   <div class="img"
