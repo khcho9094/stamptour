@@ -128,9 +128,9 @@ export default {
               } else {
                 url = 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8'
               }
-            } else if (this.popupGift.mingle_no === '18') {
+            } else if (this.popupGift.mingle_no === '18' || this.popupGift.mingle_no === '22') {
               if (this.$store.state.token !== '' && this.$store.state.token !== null) {
-                url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}`
+                url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}&mingleCode=${this.$store.state.mingleCode}`
               }
               // this.$store.dispatch('openPopupGift', {})
             }
@@ -201,7 +201,7 @@ export default {
     receiveBtn (data) {
       let val = ''
       // if (data.mingle_gift_add_point === 'AUTH' && (this.mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || this.mingleCode === 'QAAPpA7foDPqF3zEzdvHrw==' || this.mingleCode === 'vSi8Z9QlNS5wushabGnrhA==')) {
-      if (data.mingle_gift_add_point === 'AUTH' && (data.mingle_no === '1' || data.mingle_no === '11' || data.mingle_no === '18')) {
+      if (data.mingle_gift_add_point === 'AUTH' && (data.mingle_no === '1' || data.mingle_no === '11' || data.mingle_no === '18' || data.mingle_no === '22')) {
         val = '인증서 신청하기'
       // } else if (data.mingle_gift_add_point === 'AUTH' && this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
       } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '14') {
