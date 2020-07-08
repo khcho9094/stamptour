@@ -191,8 +191,7 @@ export default {
     },
     confirm () {
       const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'
-      location.href = url
-      // appEvent.externalLinks(url)
+      appEvent.externalLinks(url)
       // let tit1 = ''
       // let tit2 = ''
       // if (this.thema10Status.event_apply_chk === 'N' && this.thema10Status.event_finish_chk === 'N') {
