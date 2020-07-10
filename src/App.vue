@@ -49,7 +49,6 @@ export default {
     }
   },
   beforeMount () {
-    this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
     if (this.$cookie.get('login_token') !== null && this.$cookie.get('login_token') !== '') {
       this.$store.dispatch('setToken', this.$cookie.get('login_token'))
       this.$store.state.guestChk = 'N'
@@ -57,6 +56,7 @@ export default {
       this.$store.dispatch('setToken', this.$cookie.get('guest_token'))
       this.$store.state.guestChk = 'Y'
     }
+    this.$store.dispatch('setMingleCode', this.$cookie.get('service_code'))
     this.$store.state.enc_member = this.$cookie.get('set_enc')
   },
   created () {
