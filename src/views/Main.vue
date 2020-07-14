@@ -14,6 +14,7 @@
       <PopupMyStamp />
       <PopupRestart />
       <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
+      <WonjuPopup1 v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup1" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
       <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
@@ -38,6 +39,7 @@ import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 import PopupRestart from '@/components/popup/PopupRestart.vue'
 import WonjuPopup from '@/components/WonjuPopup.vue'
+import WonjuPopup1 from '@/components/WonjuPopup1.vue'
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
@@ -57,6 +59,7 @@ export default {
     PopupMyStamp,
     PopupRestart,
     WonjuPopup,
+    WonjuPopup1,
     WonjuPopup2,
     WonjuPopup3,
     WonjuPopup4
@@ -80,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup', 'wonjuPopup1', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4'])
   },
   methods: {
     handleMoreButton () {
@@ -156,6 +159,9 @@ export default {
     }
     if (this.$cookie.get('wonju_pop') === 'Y') {
       this.$store.state.wonjuPopup = false
+    }
+    if (this.$cookie.get('wonju_pop1') === 'Y') {
+      this.$store.state.wonjuPopup1 = false
     }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')

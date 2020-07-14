@@ -114,6 +114,7 @@ export default new Vuex.Store({
     thema10Agree: 'N',
     themaPopAgree: { open: false },
     wonjuPopup: true, // 원주
+    wonjuPopup1: true, // 원주 이벤트 발표
     wonjuPopup2: { open: false }, // 50코스
     wonjuPopup3: true, // 코리아둘레길
     wonjuPopup4: true, // 테마관광100
