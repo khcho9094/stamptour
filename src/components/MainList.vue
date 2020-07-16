@@ -32,7 +32,7 @@
                         <span class="snum">{{data.mingle_stat_badge_count || 0}}</span>
                         <span v-if="data.mingle_badge_category === 'BICYCLE'" class="cycle">자전거</span>
                     </div>
-                    <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
+                    <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==' || mingleCode === 'xYwbII8pDWTT1VzPbK3E1g==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
                     <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick($event ,data)">
                       <!-- <img src="@/assets/images/dummy_img/stamp.png" alt=""> -->
                       <img :src="data.mingle_stamp_image" alt="">
