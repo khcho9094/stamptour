@@ -8,13 +8,14 @@
               @click="goThema10Event">
             </div>
         </swiper-slide>
-        <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
+        <!-- 원주 배너 주석.. 추후 삭제 예정 -->
+        <!-- <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': BannerImage('allthat_main_banner_wonju2.png') }"
               @click="goExternalEvent('https://drive.google.com/file/d/1zOTtpdUUuKXGQMTfhCeuyVomc8zr-gGY/view?usp=sharing')">
             </div>
-        </swiper-slide>
+        </swiper-slide> -->
         <swiper-slide v-if="this.mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
             <div
               class="themaBanner"
