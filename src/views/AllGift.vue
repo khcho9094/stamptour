@@ -14,7 +14,7 @@
                 <div class="point" v-else>{{gdata.mingle_count}}{{unit}}P</div>
                 <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+gdata.mingle_gift_image" alt="gift">
                 <span>{{ gdata.mingle_gift_title }}</span>
-                <div class="gift_icon" :class="dotOn(gdata)" @click="giftReceive(gdata)">
+                <div class="gift_icon" :class="dotOn(gdata)" @click="giftReceive(gdata, gdata.mingle_no)">
                   <img :src="giftOn(gdata)" alt="gift">
                   <div class="dot"></div>
                 </div>
@@ -50,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['allGiftData', 'stampGiftData', 'popupGift'])
+    ...mapState(['allGiftData', 'stampGiftData', 'popupGift', 'stampCodeInfo', 'mingleCode'])
   },
   methods: {
     giftList (data) {
@@ -94,7 +94,12 @@ export default {
       }
       return require(`@/assets/images/${img}.png`)
     },
-    giftReceive (data) {
+    giftReceive (data, no) {
+      this.stampCodeInfo.map((val) => {
+        if (val.no === no) {
+          this.$store.state.mingleCode = val.code
+        }
+      })
       if (data.mingle_gift_receive === 'Y') {
         // window.history.pushState({}, 'modal', '/modal')
         this.$store.dispatch('openPopupGift', data)
@@ -144,6 +149,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('loadGiftDataNew')
     this.$store.dispatch('loadAllGiftData')
   }
 }
