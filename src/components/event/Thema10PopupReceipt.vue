@@ -7,7 +7,7 @@
                 <div class="txt">
                   숙박 영수증의 승인번호 or 예약번호를<br/>입력해주세요.
                 </div>
-                <input type="number" v-model="receiptNo" placeholder="영수증 번호를 입력해주세요." >
+                <input type="text" v-model="receiptNo" placeholder="영수증 번호를 입력해주세요." >
               </div>
               <div class="step step2">
                 <div class="tit">Step. 02</div>
