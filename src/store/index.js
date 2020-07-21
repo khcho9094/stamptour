@@ -193,7 +193,6 @@ export default new Vuex.Store({
       state.mainRecommendList = array
     },
     setMemberData (state, data) {
-      console.log(data)
       // 배열 합치기
       state.memberList = state.memberList.concat(data.list)
       state.memberCount = data.total.CHALLENGE
@@ -661,7 +660,8 @@ export default new Vuex.Store({
     mingleCode 세팅
     */
     setMingleCode ({ state }, data) {
-      state.mingleCode = data.replace(' ', '+')
+      // 모든 공백을 +로
+      state.mingleCode = data.replace(/ /gi, '+')
     },
     /*
     token 세팅

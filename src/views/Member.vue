@@ -44,7 +44,7 @@ export default {
   methods: {
     memberProfile (data) {
       let url = ''
-      if (data.profile.indexOf('jpg') > -1 || data.profile.indexOf('png') > -1) {
+      if (data.profile && (data.profile.indexOf('jpg') > -1 || data.profile.indexOf('png') > -1)) {
         url = `http://resource.tranggle.com/profile/${data.profile}`
       } else {
         url = require('@/assets/images/default.png')
@@ -52,7 +52,7 @@ export default {
       return `url(${url})`
     },
     handleScroll (ev) {
-      if (document.documentElement.scrollTop + 50 >= document.documentElement.scrollHeight - window.innerHeight && !this.lodding) {
+      if (window.scrollY + 50 >= document.documentElement.scrollHeight - window.innerHeight && !this.lodding) {
         this.memberPage += 1
         this.lodding = true
         this.$store.dispatch('loadMemberData', this.memberPage)
