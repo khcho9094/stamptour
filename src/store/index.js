@@ -35,7 +35,8 @@ export default new Vuex.Store({
       { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
       { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
       { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
-      { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23' }
+      { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23' },
+      { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -1012,6 +1013,20 @@ export default new Vuex.Store({
           if (response.response.code === '00') {
             commit('setStampList', response.response.content.code_list)
           }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    머니콘 선물 신청
+    */
+    ApplyMoneycon ({ state, commit }, data) {
+      const url = 'http://218.234.20.7/MCon-PostWeb/realtime/post?postCd=555428&cmd=100&prodCd1=12897&prodCnt1=1&senderMobileNo=01012341234&mobileNo=01093072238&name=조건희&title=머니콘 테스트 발급!&message=머니콘 테스트 발급됐습니다&couponNo=null&loopback=테스트!!'
+      Vue
+        .jsonp(url)
+        .then(response => {
+          console.log(response)
         })
         .catch(err => {
           console.log(err)
