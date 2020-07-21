@@ -43,7 +43,7 @@ export default {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 10,
-        loop: true
+        loop: false
       },
       visible: false,
       count: 5,
