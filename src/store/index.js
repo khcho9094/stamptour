@@ -739,7 +739,8 @@ export default new Vuex.Store({
     선물 신청
     */
     loadGiftReceive ({ state, commit }, data) {
-      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      // const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `http://sung-api.tranggle.com/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -1022,9 +1023,19 @@ export default new Vuex.Store({
     머니콘 선물 신청
     */
     ApplyMoneycon ({ state, commit }, data) {
-      const url = 'http://218.234.20.7/MCon-PostWeb/realtime/post?postCd=555428&cmd=100&prodCd1=12897&prodCnt1=1&senderMobileNo=01012341234&mobileNo=01093072238&name=조건희&title=머니콘 테스트 발급!&message=머니콘 테스트 발급됐습니다&couponNo=null&loopback=테스트!!'
+      const url = 'http://218.234.20.7/MCon-PostWeb/realtime/post'
       Vue
-        .jsonp(url)
+        .jsonp(url, {
+          postCd: 555428,
+          cmd: 100,
+          prodCd1: 12897,
+          prodCnt1: 1,
+          senderMobileNo: '01093072238',
+          mobileNo: '01093072238',
+          name: '조건희',
+          title: '머니콘테스트발급',
+          message: '머니콘테스트발급됐습니다'
+        })
         .then(response => {
           console.log(response)
         })
