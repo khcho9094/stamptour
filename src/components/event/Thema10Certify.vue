@@ -15,8 +15,8 @@
           <div class="desc">
             <div class="p_center">
               <span class="underline">테마 10선 관광지 방문 시</span>
-              <span class="color">자동인증!</span><br>
-              인증이 안될시, 사진을 첨부해주세요.<br>
+              <span class="color">자동인증</span>과<br>
+              함께, <span class="color">사진을 첨부</span>해주세요.<br>
               <span class="mask">* 인증샷은 마스크 착용 필수!</span>
             </div>
           </div>

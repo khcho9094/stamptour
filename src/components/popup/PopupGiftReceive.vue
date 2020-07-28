@@ -153,6 +153,8 @@ export default {
               tit2: '',
               close: 'Y'
             })
+            // 머니콘 신청
+            // this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
             this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
           }
         }

@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import VueCookie from 'vue-cookie'
 import router from '@/router'
 import axios from 'axios'
+// import jsonpAdapter from 'axios-jsonp'
 
 Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     // HvbQjGJR2yF9vTu8m2TUZQ== 태백 (포인트)
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행(권역, 참여신청, 갯수)
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길 (선물 1개, 갯수)
+    // 테스트 x2pb29pxoROYDl4jl1TOzQ==
     domain: 'https://api.tranggle.com', // 공통 URL
     domainTest: 'https://stage-api.tranggle.com:4081', // 공통 URL Test
     token: '', // 임시 토큰
@@ -25,18 +27,18 @@ export default new Vuex.Store({
     yanchanAuthUrl2: 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8', // 양천 봉사활동 인증서 신청 주소2 (3개스탬프획득시)
     peaceAuthUrl: 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M', // 평화누리길 인증서 신청 주소 (12개) 인증서 신청하기
     stampCodeInfo: [
-      { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number', no: '16' },
-      { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point', no: '1' },
-      // { name: '구로', code: 'QAAPpA7foDPqF3zEzdvHrw==', info: 'point', msg: '스탬프도 찍고 인증서도 받고!!', no: '11' },
+      { name: '비글테스트', code: 'x2pb29pxoROYDl4jl1TOzQ==', info: 'number', no: '10', giftMessage: '테스트테스트테스트테스트 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -부안 잼버리&부안관광 스탬프투어 드림-' },
+      { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number', no: '16', giftMessage: '코리아둘레길 선물 도착!! 이벤트에 참여해주셔서 감사합니다. -투어는 곧 혜택. 코리아둘레길 스탬프투어 드림-' },
+      { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point', no: '1', giftMessage: '부안군 잼버리&부안관광 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -부안 잼버리&부안관광 스탬프투어 드림-' },
       { name: '양천', code: 'M0ZRcktVl8H3kJaRKq3Irg==', info: 'number', msg: '스탬프도 찍고 봉사 시간도 채우고!!', no: '14' },
-      { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15' },
+      { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15', giftMessage: '태백에서 꼭 가봐야 할 명소 33선 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -태백 스탬프투어 드림-' },
       { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
       { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
-      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
+      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20', giftMessage: '[원주 구석구석 어디까지 가봤니?] 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -원주 스탬프투어 드림-' },
       { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
       { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
       { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23' },
-      { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24' }
+      { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24', giftMessage: '충북 나드리 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -충북 나드리 스탬프투어 드림-' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -396,7 +398,7 @@ export default new Vuex.Store({
       } else {
         appvertest = 'Y'
       }
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
+      const url = `http://sung-api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -740,11 +742,11 @@ export default new Vuex.Store({
     */
     loadGiftReceive ({ state, commit }, data) {
       // const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
-      const url = `http://sung-api.tranggle.com/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `http://sung-api.tranggle.com/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
       Vue
         .jsonp(url)
         .then(response => {
-          // alert(response.response.message)
+          console.log(response.response.message)
           // this.dispatch('openPopupGift', {})
         })
         .catch(err => {
@@ -1022,26 +1024,29 @@ export default new Vuex.Store({
     /*
     머니콘 선물 신청
     */
-    ApplyMoneycon ({ state, commit }, data) {
-      const url = 'http://218.234.20.7/MCon-PostWeb/realtime/post'
-      Vue
-        .jsonp(url, {
-          postCd: 555428,
-          cmd: 100,
-          prodCd1: 12897,
-          prodCnt1: 1,
-          senderMobileNo: '01093072238',
-          mobileNo: '01093072238',
-          name: '조건희',
-          title: '머니콘테스트발급',
-          message: '머니콘테스트발급됐습니다'
-        })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    ApplyMoneycon ({ state, commit, dispatch }, data) {
+      let giftMessage = ''
+      // 투어 선물 메세지
+      state.stampCodeInfo.map((val) => {
+        if (val.code === state.mingleCode) {
+          giftMessage = val.giftMessage
+        }
+      })
+      const cData = data
+      const tel = data.pGift.member_mobile.replace(/-/gi, '')
+      const giftTitle = '안녕하세요. 올댓스탬프입니다.'
+      const mUrl = `http://218.234.20.7/MCon-PostWeb/realtime/postJSON?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${data.pGift.gift_code}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}&title=${giftTitle}&message=${giftMessage}`
+      axios({
+        url: mUrl
+      }).then((res) => {
+        cData.mcResponse = {
+          resCd: res.data.resCd,
+          postCd: res.data.postCd,
+          pkgCd: res.data.pkgCd,
+          couponNo: res.data.couponNo
+        }
+        dispatch('loadGiftReceive', cData)
+      })
     }
   },
   modules: {
