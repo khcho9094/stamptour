@@ -399,7 +399,7 @@ export default new Vuex.Store({
         appvertest = 'Y'
       }
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
-      // const url = `http://sung-api.tranggle.com/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
+      // const url = `http://sung-api.tranggle.com/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {

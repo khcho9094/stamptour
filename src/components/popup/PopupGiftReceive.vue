@@ -133,7 +133,6 @@ export default {
                 if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
                   url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}&mingleCode=${this.$store.state.mingleCode}`
                 } else if (navigator.userAgent.toLowerCase().indexOf('iphone') > -1 || navigator.userAgent.toLowerCase().indexOf('iPad') > -1 || navigator.userAgent.toLowerCase().indexOf('iPod') > -1) {
-                  // url = `http://sung-m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}&mingleCode=${this.$store.state.mingleCode}`
                   url = `https://m.tranggle.com/mingle/coursebook/auth/2?token=${this.$store.state.token}_${this.$store.state.mingleCode}`
                 }
               }
