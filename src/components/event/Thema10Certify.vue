@@ -14,9 +14,10 @@
         <div class="box" v-if="thema10Status.gps_log_auth_type === null && thema10Status.photo_log_auth_type === null">
           <div class="desc">
             <div class="p_center">
-              <span class="underline">테마 10선 관광지 방문 시</span><br>
+              <!-- <span class="underline">테마 10선 관광지 방문 시</span><br>
               <span class="color">자동인증</span>과 함께
-              <span class="color">사진을 첨부</span>해주세요.<br>
+              <span class="color">사진을 첨부</span>해주세요.<br> -->
+              테마 10선을 여행하고<br><span class="color">인증사진을 첨부</span> 해주세요.<br>
               <span class="mask">* 인증샷은 마스크 착용 필수!</span>
             </div>
           </div>
@@ -52,7 +53,7 @@
               </div>
             </div>
           </div>
-          <img class="auth_complete" src="@/assets/images/event/complete.png" alt="">
+          <img v-show="thema10Status.photo_log_auth_type === 'PHOTO'" class="auth_complete" src="@/assets/images/event/complete.png" alt="">
         </div>
       </div>
       <div class="auth_box">
@@ -152,7 +153,6 @@ export default {
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
-      console.log(this.thema10Status)
       if (this.thema10Status.event_apply_chk === 'Y') {
         if (this.thema10Agree === 'N') {
           this.$store.dispatch('openThemaAgree', {
@@ -178,7 +178,7 @@ export default {
             tit1 = '이벤트에 참여하려면<br>관광지 방문 인증 사진을<br/>추가 해주세요.'
             tit2 = ''
           } else {
-            tit1 = '이벤트에 참여하려면<br>인증을 모두 완료해주세요.'
+            tit1 = '이벤트에 참여하려면<br>숙박 영수증 인증사진과<br>영수증 번호를 추가 해주세요.'
             tit2 = ''
           }
         }
