@@ -10,7 +10,9 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import router from '@/router'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'PopupMenu',
   props: {
@@ -29,6 +31,9 @@ export default {
         '공유하기'
       ]
     }
+  },
+  computed: {
+    ...mapState(['mingleCode'])
   },
   methods: {
     moreClick (e) {
@@ -54,7 +59,15 @@ export default {
         } else {
           return false
         }
+      } else if (data === 'e현충시설 국민제보') {
+        const url = 'http://mfis.mpva.go.kr/report_center.do'
+        appEvent.externalLinks(url)
       }
+    }
+  },
+  mounted () {
+    if (this.mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==') {
+      this.btnArr.push('e현충시설 국민제보')
     }
   }
 }

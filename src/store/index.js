@@ -742,6 +742,8 @@ export default new Vuex.Store({
     선물 신청
     */
     loadGiftReceive ({ state, commit }, data) {
+      // console.log(data)
+      // const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
       const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
       // const url = `http://sung-api.tranggle.com/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
       Vue
@@ -1026,27 +1028,29 @@ export default new Vuex.Store({
     머니콘 선물 신청
     */
     ApplyMoneycon ({ state, commit, dispatch }, data) {
-      let giftMessage = ''
-      // 투어 선물 메세지
-      state.stampCodeInfo.map((val) => {
-        if (val.code === state.mingleCode) {
-          giftMessage = val.giftMessage
-        }
-      })
+      const giftCode = data.pGift.gift_code.split(',')
       const cData = data
+      cData.mcResponse = {}
       const tel = data.pGift.member_mobile.replace(/-/gi, '')
-      const giftTitle = '안녕하세요. 올댓스탬프입니다.'
-      const mUrl = `http://218.234.20.7/MCon-PostWeb/realtime/postJSON?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${data.pGift.gift_code}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}&title=${giftTitle}&message=${giftMessage}`
-      axios({
-        url: mUrl
-      }).then((res) => {
-        cData.mcResponse = {
-          resCd: res.data.resCd,
-          postCd: res.data.postCd,
-          pkgCd: res.data.pkgCd,
-          couponNo: res.data.couponNo
-        }
-        dispatch('loadGiftReceive', cData)
+      let count = 0
+      // 상품 코드 2개 이상인 상품 처리
+      giftCode.map((val) => {
+        const mUrl = `https://post.moneycon.co.kr/MCon-PostWeb/realtime/postJSON?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}`
+        axios({
+          url: mUrl,
+          contentType: 'application/x-www-form-urlencoded;charset=utf-8'
+        }).then((res) => {
+          cData.mcResponse = {
+            resCd: res.data.resCd,
+            postCd: (!cData.mcResponse.postCd) ? res.data.postCd : cData.mcResponse.postCd.concat(',' + res.data.postCd),
+            pkgCd: (!cData.mcResponse.pkgCd) ? res.data.pkgCd : cData.mcResponse.pkgCd.concat(',' + res.data.pkgCd),
+            couponNo: (!cData.mcResponse.couponNo) ? res.data.couponNo : cData.mcResponse.couponNo.concat(',' + res.data.couponNo)
+          }
+          count++
+          if (giftCode.length === count) {
+            dispatch('loadGiftReceive', cData)
+          }
+        })
       })
     }
   },
