@@ -91,7 +91,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo', 'popupNoti', 'durunubiCheck'])
+    ...mapState(['popupGift', 'mingleCode', 'memberInfo', 'stampCodeInfo', 'popupNoti', 'durunubiCheck', 'submitCheck'])
   },
   methods: {
     closeBtn () {
@@ -147,14 +147,12 @@ export default {
               // this.$store.dispatch('openPopupGift', {})
             }
           } else {
-            this.$store.dispatch('openNotiPopup', {
-              tit1: '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.',
-              tit2: '',
-              close: 'Y'
-            })
-            // 머니콘 신청
-            // this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
             this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo, mcResponse: {} })
+            // if (!this.submitCheck) {
+            //   // 머니콘 신청
+            //   this.$store.state.submitCheck = true
+            //   this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
+            // }
           }
         }
       }

@@ -61,10 +61,11 @@
           <img src="@/assets/images/event/icon_auth2.png" alt="">
           숙박 영수증 인증
         </div>
-        <div class="box" v-if="thema10Status.receipt_log_auth_type === null || thema10Status.receipt_no === ''">
+        <div class="box" v-if="thema10Status.receipt_log_auth_type === null">
           <div class="desc">
             <div class="p_center">
-              숙박 영수증의 <span class="underline">승인번호 or</span><br/><span class="underline">예약번호와 사진</span>을 등록해주세요.
+              <span class="underline">숙박 영수증 or 숙박 이용내역서 </span><br>사진을 첨부해주세요.<br>
+              <span class="mask">* 간이영수증은 인정되지 않습니다.</span>
             </div>
           </div>
           <div class="btn" @click="photoUpload(1, 'Edit')">
@@ -83,8 +84,7 @@
             <div class="right">
               <div class="txt1 type2">영수증 첨부 완료</div>
               <div class="txt2">
-                첨부일자  {{(thema10Status.receipt_log_datetime) ? thema10Status.receipt_log_datetime.substring(0,10) : ''}}<br/>
-                승인번호 {{thema10Status.receipt_no || '정보 없음'}}
+                첨부일자  {{(thema10Status.receipt_log_datetime) ? thema10Status.receipt_log_datetime.substring(0,10) : ''}}
               </div>
             </div>
           </div>
@@ -132,18 +132,24 @@ export default {
   methods: {
     photoUpload (type, photo) {
       if (this.$cookie.get(`thema10Auth_${type}`) === 'Y') {
-        if (type === 0) {
-          this.$store.dispatch('openPhotoPop', {
-            open: true,
-            type: type,
-            edit: photo,
-            msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
-          })
-        } else {
-          this.$store.dispatch('openReceiptPop', {
-            open: true
-          })
-        }
+        this.$store.dispatch('openPhotoPop', {
+          open: true,
+          type: type,
+          edit: photo,
+          msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
+        })
+        // if (type === 0) {
+        //   this.$store.dispatch('openPhotoPop', {
+        //     open: true,
+        //     type: type,
+        //     edit: photo,
+        //     msg: (photo === 'reEdit' && type === 0) ? 'receiptUpload' : ''
+        //   })
+        // } else {
+        //   this.$store.dispatch('openReceiptPop', {
+        //     open: true
+        //   })
+        // }
       } else {
         this.type = type
         this.edit = photo
@@ -175,10 +181,10 @@ export default {
           tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
         } else {
           if (this.thema10Status.photo_authno === null) {
-            tit1 = '이벤트에 참여하려면<br>관광지 방문 인증 사진을<br/>추가 해주세요.'
+            tit1 = '이벤트에 참여하려면<br>관광지 방문 인증 사진을<br/>첨부해주세요.'
             tit2 = ''
           } else {
-            tit1 = '이벤트에 참여하려면<br>숙박 영수증 인증사진과<br>영수증 번호를 추가 해주세요.'
+            tit1 = '이벤트에 참여하려면<br>숙박 영수증 or 숙박 이용내역서<br> 사진을 첨부해주세요.'
             tit2 = ''
           }
         }

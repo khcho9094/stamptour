@@ -127,7 +127,8 @@ export default new Vuex.Store({
     loadingMainList: false,
     themaPopReceipt: { open: false },
     receiptNumber: '',
-    uploadLoading: false
+    uploadLoading: false,
+    submitCheck: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -1033,6 +1034,7 @@ export default new Vuex.Store({
       cData.mcResponse = {}
       const tel = data.pGift.member_mobile.replace(/-/gi, '')
       let count = 0
+      let msg = ''
       // 상품 코드 2개 이상인 상품 처리
       giftCode.map((val) => {
         const mUrl = `https://post.moneycon.co.kr/MCon-PostWeb/realtime/postJSON?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}`
@@ -1047,7 +1049,24 @@ export default new Vuex.Store({
             couponNo: (!cData.mcResponse.couponNo) ? res.data.couponNo : cData.mcResponse.couponNo.concat(',' + res.data.couponNo)
           }
           count++
+          console.log(res)
           if (giftCode.length === count) {
+            if (String(res.data.resCd) === '100') {
+              // msg = '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.'
+              msg = res.data.resMsg
+            } else if (String(res.data.resCd) === '102') {
+              // msg = '선물 신청에 실패했습니다.'
+              msg = res.data.resMsg
+            } else {
+              // msg = '서버 오류로 선물 신청에 실패했습니다.'
+              msg = res.data.resMsg
+            }
+            state.submitCheck = false
+            dispatch('openNotiPopup', {
+              tit1: msg,
+              tit2: '',
+              close: 'Y'
+            })
             dispatch('loadGiftReceive', cData)
           }
         })

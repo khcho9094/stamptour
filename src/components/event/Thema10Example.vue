@@ -33,8 +33,8 @@ export default {
           warning: '* 인증샷은 마스크 착용 필수!'
         },
         {
-          title: '<span>숙박 결제 영수증</span>(종이/모바일)과<br/>이용이 완료된 <span>숙박 예약확인서</span>를<br/>첨부해주세요',
-          image: require('@/assets/images/event/example2_3.png'),
+          title: '<span>숙박 결제 영수증</span>(종이/모바일)과<br/>이용이 완료된 <span>숙박 이용 내역서</span>를<br/>첨부해주세요',
+          image: require('@/assets/images/event/example2_3.png?20200807'),
           warning: '(간이 영수증은 인정 안됨)'
         }
       ]
@@ -53,18 +53,24 @@ export default {
         }
       }
       this.$store.dispatch('openExamplePop', false)
-      if (this.type === 0) {
-        this.$store.dispatch('openPhotoPop', {
-          open: true,
-          type: this.type,
-          edit: this.edit,
-          msg: (this.edit === 'reEdit') ? 'receiptUpload' : ''
-        })
-      } else {
-        this.$store.dispatch('openReceiptPop', {
-          open: true
-        })
-      }
+      this.$store.dispatch('openPhotoPop', {
+        open: true,
+        type: this.type,
+        edit: this.edit,
+        msg: (this.edit === 'reEdit') ? 'receiptUpload' : ''
+      })
+      // if (this.type === 0) {
+      //   this.$store.dispatch('openPhotoPop', {
+      //     open: true,
+      //     type: this.type,
+      //     edit: this.edit,
+      //     msg: (this.edit === 'reEdit') ? 'receiptUpload' : ''
+      //   })
+      // } else {
+      //   this.$store.dispatch('openReceiptPop', {
+      //     open: true
+      //   })
+      // }
     }
   },
   mounted () {
