@@ -137,6 +137,12 @@ export default {
                 }
               }
               // this.$store.dispatch('openPopupGift', {})
+            } else if (this.popupGift.mingle_no === '23') {
+              this.$store.dispatch('openNotiPopup', {
+                tit1: '<b>축하합니다!!</b><br>선착순 15분께 2020년<br>12월 16일 이후 [완주기념패]<br>전달을 위하여 개별적으로<br>연락을 드릴 예정입니다.<br>감사합니다.',
+                tit2: '',
+                close: 'Y'
+              })
             }
             if (url) {
               // this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
@@ -147,6 +153,12 @@ export default {
               // this.$store.dispatch('openPopupGift', {})
             }
           } else {
+            // 주석
+            this.$store.dispatch('openNotiPopup', {
+              tit1: '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.',
+              tit2: '',
+              close: 'Y'
+            })
             this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo, mcResponse: {} })
             // if (!this.submitCheck) {
             //   // 머니콘 신청
@@ -210,6 +222,8 @@ export default {
       // } else if (data.mingle_gift_add_point === 'AUTH' && this.mingleCode === 'M0ZRcktVl8H3kJaRKq3Irg==') {
       } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '14') {
         val = '봉사점수 신청하기'
+      } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '23') {
+        val = '기념패 수령하기'
       } else {
         val = '모바일 상품권 받기'
       }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper :options="swiperOption" class="swiper swiperbut" v-if="this.mingleCode !== 'Nvn2hlG+v6mVAUJsmrbJ8w=='">
+    <swiper :options="swiperOption" class="swiper swiperbut">
         <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
