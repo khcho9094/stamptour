@@ -744,8 +744,8 @@ export default new Vuex.Store({
     */
     loadGiftReceive ({ state, commit }, data) {
       // console.log(data)
-      // const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
-      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
+      // const url = `${state.domain}/v2/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}`
       // const url = `http://sung-api.tranggle.com/mingle/stamptour/requestPresent.jsonp?area=${data.mInfo.address}&agree=Y&gift=${data.pGift.mingle_gift_seq}&mingleCode=${state.mingleCode}&token=${state.token}&resCd=${data.mcResponse.resCd}&postCd=${data.mcResponse.postCd}&pkgCd=${data.mcResponse.pkgCd}&couponNo=${data.mcResponse.couponNo}`
       Vue
         .jsonp(url)
@@ -1037,29 +1037,29 @@ export default new Vuex.Store({
       let msg = ''
       // 상품 코드 2개 이상인 상품 처리
       giftCode.map((val) => {
-        const mUrl = `https://post.moneycon.co.kr/MCon-PostWeb/realtime/postJSON?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}`
+        const mUrl = `https://m.tranggle.com/mingle/login/stampTourMoneycon.json?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}`
+        // const mUrl = 'http://ckh-api.tranggle.com/mingle/stamptour/stampTourMoneycon.json'
         axios({
-          url: mUrl,
-          contentType: 'application/x-www-form-urlencoded;charset=utf-8'
+          url: mUrl
+          // contentType: 'application/x-www-form-urlencoded;charset=utf-8'
         }).then((res) => {
           cData.mcResponse = {
-            resCd: res.data.resCd,
+            resCd: (!cData.mcResponse.resCd) ? res.data.resCd : cData.mcResponse.resCd.concat(',' + res.data.resCd),
             postCd: (!cData.mcResponse.postCd) ? res.data.postCd : cData.mcResponse.postCd.concat(',' + res.data.postCd),
             pkgCd: (!cData.mcResponse.pkgCd) ? res.data.pkgCd : cData.mcResponse.pkgCd.concat(',' + res.data.pkgCd),
             couponNo: (!cData.mcResponse.couponNo) ? res.data.couponNo : cData.mcResponse.couponNo.concat(',' + res.data.couponNo)
           }
           count++
-          console.log(res)
           if (giftCode.length === count) {
             if (String(res.data.resCd) === '100') {
-              // msg = '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.'
-              msg = res.data.resMsg
+              msg = '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.'
+              // msg = res.data.resMsg
             } else if (String(res.data.resCd) === '102') {
-              // msg = '선물 신청에 실패했습니다.'
-              msg = res.data.resMsg
+              msg = '선물 신청에 실패했습니다.'
+              // msg = res.data.resMsg
             } else {
-              // msg = '서버 오류로 선물 신청에 실패했습니다.'
-              msg = res.data.resMsg
+              msg = '서버 오류로 선물 신청에 실패했습니다.'
+              // msg = res.data.resMsg
             }
             state.submitCheck = false
             dispatch('openNotiPopup', {
