@@ -159,7 +159,7 @@ export default {
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
-      if (this.thema10Status.event_apply_chk === 'Y') {
+      if (this.thema10Status.photo_authno && this.thema10Status.receipt_authno) {
         if (this.thema10Agree === 'N') {
           this.$store.dispatch('openThemaAgree', {
             open: true

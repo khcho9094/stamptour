@@ -1052,13 +1052,13 @@ export default new Vuex.Store({
           count++
           if (giftCode.length === count) {
             if (String(res.data.resCd) === '100') {
-              msg = '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.'
+              msg = '선물이 발송되었습니다.<br/>선물은 입력된 휴대폰번호로<br/>즉시 발송됩니다.<br/>문자를 확인해주세요.'
               // msg = res.data.resMsg
             } else if (String(res.data.resCd) === '102') {
-              msg = '선물 신청에 실패했습니다.'
+              msg = '선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
               // msg = res.data.resMsg
             } else {
-              msg = '서버 오류로 선물 신청에 실패했습니다.'
+              msg = '서버 오류로 선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
               // msg = res.data.resMsg
             }
             state.submitCheck = false
