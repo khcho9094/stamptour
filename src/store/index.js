@@ -1052,7 +1052,7 @@ export default new Vuex.Store({
           count++
           if (giftCode.length === count) {
             if (String(res.data.resCd) === '100') {
-              msg = '선물이 발송되었습니다.<br/>선물은 입력된 휴대폰번호로<br/>즉시 발송됩니다.<br/>문자를 확인해주세요.'
+              msg = '모바일 기프티콘이 휴대폰<br>문자메시지로 발송되었습니다.<br>60일 이내에 가까운 가맹점에서<br>사용하시기 바랍니다.<br>감사합니다.'
               // msg = res.data.resMsg
             } else if (String(res.data.resCd) === '102') {
               msg = '선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
