@@ -5,10 +5,9 @@
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju3">
                   <b class="wonju3tit">[긴급안내]</b><br>
-                  코로나19 감염병 확산방지를 위하여<br>
-                  '대한민국 안전여행 참여이벤트'는<br>
-                  8/24일부터 잠정중지 됩니다.<br>
-                  (단, 9/7일 당첨자 발표는 예정대로 진행)<br>
+                  대한민국 안전여행 참여 이벤트는<br>
+                  사회적 거리두기 강화에 따라<br>
+                  8월 24일부로 잠정 중단됨을 알립니다.<br>
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>

@@ -158,7 +158,7 @@ export default {
       }
     },
     photoUploadStop () {
-      alert('코로나19 감염병 확산방지를 위하여 ‘대한민국 안전여행 참여이벤트’는 8/24일부터 잠정 중지 됩니다')
+      alert('대한민국 안전여행 참여 이벤트는 사회적 거리두기 강화에 따라 8월 24일부로 잠정 중단됨을 알립니다.')
     },
     enterEvent () {
       let tit1 = ''
@@ -200,7 +200,7 @@ export default {
       })
     },
     enterEventStop () {
-      alert('코로나19 감염병 확산방지를 위하여 ‘대한민국 안전여행 참여이벤트’는 8/24일부터 잠정 중지 됩니다')
+      alert('대한민국 안전여행 참여 이벤트는 사회적 거리두기 강화에 따라 8월 24일부로 잠정 중단됨을 알립니다.')
     },
     confirm () {
       const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'
