@@ -21,7 +21,7 @@
               <span class="mask">* 인증샷은 마스크 착용 필수!</span>
             </div>
           </div>
-          <div class="btn" @click="photoUpload(0, 'Edit')">
+          <div class="btn" @click="photoUploadStop(0, 'Edit')">
             + 인증사진 첨부
           </div>
           <div class="menu_btn" @click="thema10Main"></div>
@@ -34,11 +34,11 @@
                 :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'img2' : 'img1'"
                 :style="{ 'backgroundImage': `url(${thema10Status.photo_log_filename ? thema10Status.photo_log_filename : thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUploadStop(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진추가
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUploadStop(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -68,7 +68,7 @@
               <span class="mask">* 간이영수증은 인정되지 않습니다.</span>
             </div>
           </div>
-          <div class="btn" @click="photoUpload(1, 'Edit')">
+          <div class="btn" @click="photoUploadStop(1, 'Edit')">
             + 영수증 첨부
           </div>
         </div>
@@ -76,7 +76,7 @@
           <div class="auth_check">
             <div class="left">
               <div class="img_box img2" :style="{ 'backgroundImage': `url(${thema10Status.receipt_log_filename})` }"></div>
-              <div class="edit_btn" @click="photoUpload(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
+              <div class="edit_btn" @click="photoUploadStop(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -93,7 +93,8 @@
       </div>
     </div>
     <ul class="btn_box">
-      <li @click="enterEvent">이벤트 참여</li>
+      <!-- <li @click="enterEvent">이벤트 참여</li> -->
+      <li @click="enterEventStop">이벤트 참여</li>
       <li @click="confirm">당첨 확인</li>
     </ul>
     <Thema10Example :type="type" :edit="edit" />
@@ -156,6 +157,9 @@ export default {
         this.$store.dispatch('openExamplePop', true)
       }
     },
+    photoUploadStop () {
+      alert('코로나19 감염병 확산방지를 위하여 ‘대한민국 안전여행 참여이벤트’는 8/24일부터 잠정 중지 됩니다')
+    },
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
@@ -194,6 +198,9 @@ export default {
         tit1: tit1,
         tit2: tit2
       })
+    },
+    enterEventStop () {
+      alert('코로나19 감염병 확산방지를 위하여 ‘대한민국 안전여행 참여이벤트’는 8/24일부터 잠정 중지 됩니다')
     },
     confirm () {
       const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'

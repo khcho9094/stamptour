@@ -128,7 +128,8 @@ export default new Vuex.Store({
     themaPopReceipt: { open: false },
     receiptNumber: '',
     uploadLoading: false,
-    submitCheck: false
+    submitCheck: false,
+    thema10Stop: true // 테마10 중단 팝업
   },
   mutations: {
     setIntroData (state, data) {
