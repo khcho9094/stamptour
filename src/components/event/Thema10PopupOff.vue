@@ -4,7 +4,7 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju3">
-                  <b class="wonju3tit">[긴급안내]</b><br>
+                  <b class="wonju3tit">[알림]</b><br>
                   대한민국 안전여행 참여 이벤트는<br>
                   사회적 거리두기 강화에 따라<br>
                   8월 24일부로 잠정 중단됨을 알립니다.<br>
