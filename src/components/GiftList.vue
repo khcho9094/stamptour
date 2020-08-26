@@ -9,12 +9,15 @@
             <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== ''" class="gift_complete">
               완료
             </div>
+            <div v-else-if="data.mingle_gift_receive === 'E'" class="gift_complete">
+              마감
+            </div>
             <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
                 <img :src="giftOn(data)" alt="gift">
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
-            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null">{{dDay(data)}}</div>
+            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null && data.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ=='">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>
