@@ -286,6 +286,7 @@ export default {
   },
   destroyed () {
     window.removeEventListener('scroll', this.scrollBottom)
+    this.$store.state.mainStampList = []
   }
 }
 </script>
