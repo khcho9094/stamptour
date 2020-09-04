@@ -17,7 +17,7 @@
                 <div class="dot"></div>
             </div>
             <div class="line"></div>
-            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null && data.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ=='">{{dDay(data)}}</div>
+            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null && data.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ==' && mingleCode !== 'UQ3+JiYENuJBR+gw6zSYPA=='">{{dDay(data)}}</div>
         </li>
     </ul>
 </template>

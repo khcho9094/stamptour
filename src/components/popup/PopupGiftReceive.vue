@@ -3,20 +3,27 @@
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
-                <!-- <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='"> -->
                 <div class="gift_receive" v-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '1'">
                   <b>잼버리 코스</b> 완성!!<br/>
                   <span>축하합니다!!</span>
                 </div>
-                <!-- <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"> -->
-                  <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '14'">
+                <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '14'">
                   <b>봉사점수 신청하기</b><br/>
+                </div>
+                <!-- 이응노 팝업 -->
+                <div class="gift_receive" v-else-if="popupGift.mingle_no === '25'">
+                  <b>완주를 축하합니다!</b><br><br>
+                  <span class="colorfont">미술관 벽면</span>에서 미디어 파사드를<br>
+                  통해 스탬프 <span class="colorfont">완주자 정보</span>를<br>
+                  <span class="colorfont">확인</span>할 수 있습니다.<br><br>
+                  선물보기 > <span class="colorfont">인증관련</span><br>
+                  <span class="colorfont">안내를 확인</span>하세요.
                 </div>
                 <div class="gift_receive" v-else>
                   <b>{{popupGift.mingle_count}}{{unit}}</b> 달성!!<br/>
                   <span>축하합니다!!</span>
                 </div>
-                <span>
+                <span v-if="popupGift.mingle_no !== '25'">
                     <img :src="imgIcon()" alt="gs25">
                     {{popupGift.mingle_gift_title}}
                 </span>
@@ -47,28 +54,9 @@
                   <input type="checkbox" id="personal"  name="personal" v-model="personal"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
-            <button class="type1" @click="closeBtn">닫기</button>
+            <button class="type1" :class="popupGift.mingle_no === '25' ? 'w100' : ''" @click="closeBtn">닫기</button>
             <!-- <button class="type2" @click="receiveGift">모바일 상품권 받기</button> -->
-            <button class="type2" @click="receiveGift">{{receiveBtn(popupGift)}}</button>
-            <!-- 개인정보 확인 -->
-            <!-- 삭제 -->
-            <!-- <div class="person_pop">
-              <div class="title">개인정보 제3자 제공동의가 필요합니다.</div>
-              <div class="ptxt">
-                <b>· 수집/이용 목적 : </b>선물 발급 통계 정보 작성<br/>
-                <b>· 개인정보 항목 : </b>연락처, 주소, 이름, 성별, 생년월일<br/>
-                <b>· 보유 기간 : </b>1년<br/>
-                <div class="cont">
-                  <b><font-awesome-icon icon="home" /> 주소 : </b><span class="nodata" v-if="!memberInfo.address" @click="goInsert">터치시 계정정보로 이동</span><span class="data" v-else>{{memberInfo.address}}</span><br/>
-                  <b><font-awesome-icon icon="mobile-alt" class="phone" /> 휴대폰 : </b><span class="nodata" v-if="!memberInfo.mobile" @click="goInsert">터치시 계정정보로 이동</span><span class="data" v-else>{{memberInfo.mobile}}</span>
-                </div>
-                <div class="agree">
-                  <span :class="agreeOn()" class="btn" @click="agreeBtn">동의</span>
-                  <span @click="popup = false, personal = false">닫기</span>
-                </div>
-              </div>
-            </div> -->
-            <!-- 삭제// -->
+            <button class="type2" @click="receiveGift" v-if="popupGift.mingle_no !== '25'">{{receiveBtn(popupGift)}}</button>
         </div>
         <PopupGiftPop v-if="popupNoti.open" />
     </div>
@@ -245,6 +233,9 @@ export default {
       this.personal = true
       this.agreeCheck = false
     }
+    if (this.mingleCode === 'UQ3+JiYENuJBR+gw6zSYPA==') {
+      this.agreeCheck = false
+    }
     // window.onpopstate = history.onpushstate = (e) => {
     //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {
     //     this.$store.dispatch('openPopupGift', {})
@@ -261,3 +252,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .colorfont {
+    color: #3bb9fa;
+  }
+  .w100 {
+    width: 100%!important;
+    border:0!important;
+  }
+</style>

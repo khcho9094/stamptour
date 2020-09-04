@@ -20,6 +20,7 @@ export default new Vuex.Store({
     // 테스트 x2pb29pxoROYDl4jl1TOzQ==
     domain: 'https://api.tranggle.com', // 공통 URL
     domainTest: 'https://stage-api.tranggle.com:4081', // 공통 URL Test
+    domainKhy: 'http://khy-api.tranggle.com', // 강수석님 URL Test
     token: '', // 임시 토큰
     buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소 (잼버리 코스) 인증서 신청하기
     guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소 (100P) 인증서 신청하기
