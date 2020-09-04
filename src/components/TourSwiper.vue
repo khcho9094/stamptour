@@ -25,7 +25,7 @@ export default {
         slidesPerView: 'auto',
         spaceBetween: 10
       },
-      allView: '지역 설명 전체 보기 +'
+      allView: '투어 소개 전체 보기 +'
     }
   },
   props: {
@@ -44,10 +44,10 @@ export default {
     moreContent () {
       if (document.getElementById('elli').style.display === 'block') {
         document.getElementById('elli').style.display = '-webkit-box'
-        this.allView = '지역 설명 전체 보기 +'
+        this.allView = '투어 소개 전체 보기 +'
       } else {
         document.getElementById('elli').style.display = 'block'
-        this.allView = '지역 설명 닫기 -'
+        this.allView = '투어 소개 닫기 -'
       }
     }
   }

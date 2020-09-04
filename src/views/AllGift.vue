@@ -14,12 +14,18 @@
                 <div class="point" v-else>{{gdata.mingle_count}}{{unit}}P</div>
                 <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+gdata.mingle_gift_image" alt="gift">
                 <span>{{ gdata.mingle_gift_title }}</span>
-                <div class="gift_icon" :class="dotOn(gdata)" @click="giftReceive(gdata, gdata.mingle_no)">
+                <div v-if="(gdata.user_gift_send_date !== null || gdata.user_gift_request_date !== null) && gdata.mingle_gift_request_date !== ''" class="gift_complete gift_complete_all">
+                  완료
+                </div>
+                <div v-else-if="gdata.mingle_gift_receive === 'E'" class="gift_complete gift_complete_all">
+                  마감
+                </div>
+                <div v-else class="gift_icon" :class="dotOn(gdata)" @click="giftReceive(gdata, gdata.mingle_no)">
                   <img :src="giftOn(gdata)" alt="gift">
                   <div class="dot"></div>
                 </div>
                 <div class="line"></div>
-                <div class="giftDday" v-if="dotOn(gdata) === 'on'">{{dDay(gdata)}}</div>
+                <div class="giftDday" v-if="(dotOn(gdata) === 'on' || dotOn(gdata) === 'end') && gdata.mingle_gift_end_date !== null && gdata.user_gift_send_date === null && gdata.user_gift_request_date === null && gdata.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ=='">{{dDay(gdata)}}</div>
             </li>
           </ul>
         </li>
@@ -154,3 +160,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .gift_complete_all {
+    right: 10px;
+  }
+</style>
