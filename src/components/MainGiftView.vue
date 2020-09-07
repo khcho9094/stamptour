@@ -20,7 +20,7 @@
             <div
               class="themaBanner"
               :style="{ 'background-image': BannerImage('allthat_main_banner_kor100_2.png') }"
-              @click="goExternalEvent('https://korean.visitkorea.or.kr/detail/event_detail.do?cotid=641e4780-112c-4da2-af27-87648c0be27b&temp')">
+              @click="goExternalEvent('https://korean.visitkorea.or.kr/detail/event_detail.do?cotid=641e4780-112c-4da2-af27-87648c0be27b')">
             </div>
         </swiper-slide>
         <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
