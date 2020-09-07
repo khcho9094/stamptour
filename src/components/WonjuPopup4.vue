@@ -40,7 +40,7 @@ export default {
       if (this.check) {
         this.$cookie.set('tour_100', 'Y', 9999)
       }
-      const url = 'https://korean.visitkorea.or.kr/other/stamptour.do'
+      const url = 'https://korean.visitkorea.or.kr/detail/event_detail.do?cotid=641e4780-112c-4da2-af27-87648c0be27b&temp'
       appEvent.externalLinks(url)
     }
   },
