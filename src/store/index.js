@@ -199,8 +199,10 @@ export default new Vuex.Store({
       state.mainRecommendList = array
     },
     setMemberData (state, data) {
+      // 테스트 아이디 제외
+      const filter = data.list.filter(list => (list.user_mingle_member_id !== 'trangglecs' && list.user_mingle_member_id !== 'tranggleqa' && list.user_mingle_member_id !== 'belldandy22' && list.user_mingle_member_id !== 'qqw112' && list.user_mingle_member_id !== 'whrjsgml222'))
       // 배열 합치기
-      state.memberList = state.memberList.concat(data.list)
+      state.memberList = state.memberList.concat(filter)
       state.memberCount = data.total.CHALLENGE
       if (data.me.length > 0) {
         state.memberMyList = data.me[0]
