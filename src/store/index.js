@@ -1042,7 +1042,7 @@ export default new Vuex.Store({
       let msg = ''
       // 상품 코드 2개 이상인 상품 처리
       giftCode.map((val) => {
-        const mUrl = `https://m.tranggle.com/mingle/login/stampTourMoneycon.json?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}`
+        const mUrl = `https:/m.tranggle.com/mingle/login/stampTourMoneycon.json?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}&mingleCode=${state.mingleCode}`
         // const mUrl = 'http://ckh-api.tranggle.com/mingle/stamptour/stampTourMoneycon.json'
         axios({
           url: mUrl
