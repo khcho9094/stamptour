@@ -57,7 +57,7 @@ export default {
       } else if (this.common.contenttypeid === '12') {
         val = '관광지'
       } else {
-        val = '행사'
+        val = '생태정보'
       }
       return val
     }
