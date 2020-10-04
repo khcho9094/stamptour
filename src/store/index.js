@@ -131,7 +131,9 @@ export default new Vuex.Store({
     receiptNumber: '',
     uploadLoading: false,
     submitCheck: false,
-    thema10Stop: true // 테마10 중단 팝업
+    thema10Stop: true, // 테마10 중단 팝업
+    stampPoi: [],
+    TourPoiData: []
   },
   mutations: {
     setIntroData (state, data) {
@@ -172,6 +174,7 @@ export default new Vuex.Store({
       state.stampIntro = data.INTRO
       state.stampImage = data.IMAGE
       state.stampMethod = data.METHOD
+      state.stampPoi = data.POI
     },
     setMainData (state, data) {
       state.mainStampList = state.mainStampList.concat(data.stamplist_info)
@@ -214,6 +217,7 @@ export default new Vuex.Store({
     setTourTotalData (state, data) {
       if (data.name === 'party') {
         state.TourData = data.list
+        state.TourPoiData = data.poi
       } else if (data.name === 'tour') {
         state.TourInfoData = data.list
       } else if (data.name === 'food') {
@@ -232,6 +236,7 @@ export default new Vuex.Store({
     },
     setTourListData (state, data) {
       state.tourListData = data.list
+      state.TourPoiData = data.poi
     },
     setTourInfoData (state, data) {
       state.TourInfoData = data.response.content
@@ -477,7 +482,10 @@ export default new Vuex.Store({
     */
 
     loadStampData ({ state, commit }, data) {
-      const url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.mingle_badge_content_type}&contentId=${data.mingle_badge_content_id}&badge_id=${data.mingle_badge_id}`
+      let url = `${state.domain}/v2/mingle/stamptour/stampTourMainStampInfo.jsonp?token=${state.token}&mingleCode=${state.mingleCode}&contentTypeId=${data.mingle_badge_content_type}&contentId=${data.mingle_badge_content_id}&badge_id=${data.mingle_badge_id}`
+      if (data.mingle_poi_no) {
+        url += `&mingle_poi_no=${data.mingle_poi_no}`
+      }
       Vue
         .jsonp(url)
         .then(response => {

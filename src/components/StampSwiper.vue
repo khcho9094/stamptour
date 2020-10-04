@@ -2,7 +2,7 @@
     <div>
         <swiper :options="swiperOption" class="swiper">
             <swiper-slide
-              class="slide"
+              :class="slide()"
               :style="{ 'backgroundImage': `url(${img})` }"
               v-for="(img) in imgArray()"
               v-bind:key="img">
@@ -18,6 +18,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'StampSwiper',
   props: {
@@ -36,12 +37,23 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState(['stampPoi'])
+  },
   methods: {
     imgArray () {
       const arr = []
-      for (const key in this.images) {
-        if (key !== 'total') {
-          arr.push(this.images[key].originimgurl)
+      if (this.stampPoi && this.stampPoi.length > 0) { // 생태정보
+        for (const key in this.stampPoi[0]) {
+          if (key.match('mingle_poi_img') && this.stampPoi[0][key]) {
+            arr.push(this.stampPoi[0][key])
+          }
+        }
+      } else { // 스탬프
+        for (const key in this.images) {
+          if (key !== 'total') {
+            arr.push(this.images[key].originimgurl)
+          }
         }
       }
       return arr
@@ -53,6 +65,9 @@ export default {
       } else {
         return false
       }
+    },
+    slide () {
+      return (this.stampPoi) ? 'slidePoi' : 'slide'
     }
   }
 }
@@ -68,6 +83,15 @@ export default {
         max-height: 320px;
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
+        z-index: 100;
+    }
+    .swiper .slidePoi {
+        width:100%;
+        height: 55vw;
+        max-height: 320px;
+        background-repeat: no-repeat;
+        background-size: contain;
         background-position: center;
         z-index: 100;
     }

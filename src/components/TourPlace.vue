@@ -16,6 +16,23 @@
               </li>
           </ul>
       </div>
+      <!-- 생태정보 -->
+      <div class="sur_place">
+          <div class="title">
+              <h1> <img :src="iconImgPoi()" alt="icon"> 주변 생태정보</h1>
+              <span v-on:click="apiListOn({num: 2, name: '주변 생태정보', ename: 'poi', typeId: 25}, 'poi')">모두보기 <img src="@/assets/images/arrow_4.png" alt="arr"></span>
+          </div>
+          <ul class="list">
+              <li v-for="(pval, pidx2) in TourPoiData" v-bind:key="pidx2" @click="poiDetailOn(pval)">
+                  <div
+                        class="backImg"
+                        :style="{ 'backgroundImage': `url(${pval.mingle_poi_img})` }"
+                        ></div>
+                  <h2>{{pval.mingle_poi_main_title}}</h2>
+                  <p>여기에서 {{parseInt(pval.distance)}}km</p>
+              </li>
+          </ul>
+      </div>
   </div>
 </template>
 <script>
@@ -77,17 +94,27 @@ export default {
     }
   },
   methods: {
-    apiListOn (type) {
+    apiListOn (type, poi) {
       localStorage.tourType = JSON.stringify(type)
-      this.$router.push('/tour/list')
+      if (poi) {
+        this.$router.push('/tour/list?type=poi')
+      } else {
+        this.$router.push('/tour/list')
+      }
     },
     apiDetailOn (data) {
       localStorage.tourDetail = JSON.stringify(data)
       this.$store.dispatch('loadTourDetail', JSON.parse(localStorage.tourDetail))
       // this.$router.push('/tour/detail')
     },
+    poiDetailOn (data) {
+      this.$router.push(`/stamp?badge_id=99&contentTypeId=99&contentId=99&mingle_poi_no=${data.mingle_poi_no}&back=y`)
+    },
     iconImg (data) {
       return require(`@/assets/images/icon_t_${data.num}.png`)
+    },
+    iconImgPoi () {
+      return require('@/assets/images/icon_t_2.png')
     },
     // 임시로 각각의 배열에 넣어놓음.
     // 미해결 문제점 : vuex state에서 객체 값으로 넘어오면 데이터가 바로 안보이고 배열로 넘어와야 바로 보임.
@@ -130,7 +157,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(['TourData', 'FoodData', 'LodgMentData', 'LeportsData', 'ShoppingData', 'TourInfoData', 'CultureData', 'CourseData'])
+    ...mapState(['TourData', 'FoodData', 'LodgMentData', 'LeportsData', 'ShoppingData', 'TourInfoData', 'CultureData', 'CourseData', 'TourPoiData'])
   }
 }
 </script>

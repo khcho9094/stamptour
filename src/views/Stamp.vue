@@ -1,10 +1,10 @@
 <template>
   <div class="view_stamp">
     <!-- 헤더 -->
-    <Head type='back' name='view_stamp' :title='stampCommon.title' />
+    <Head type='back' name='view_stamp' :title='title()' />
     <div class="tour_sub_wrap">
         <StampSwiper :method='stampMethod.mingle_badge_type_desc' :images='stampImage'  />
-        <StampInfo :intro='stampIntro' :common='stampCommon' />
+        <StampInfo :intro='stampIntro' :common='stampCommon' :poiInfo='stampPoi' />
     </div>
   </div>
 </template>
@@ -25,9 +25,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod'])
+    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod', 'stampPoi'])
   },
   methods: {
+    title () {
+      return (this.stampPoi && this.stampPoi[0]) ? this.stampPoi[0].mingle_poi_main_title : this.stampCommon.title
+    }
   },
   beforeCreate () {
     if (this.$route.query.mingleCode) {
@@ -39,7 +42,8 @@ export default {
     this.$store.dispatch('loadStampData', {
       mingle_badge_id: this.$route.query.badge_id,
       mingle_badge_content_type: this.$route.query.contentTypeId,
-      mingle_badge_content_id: this.$route.query.contentId
+      mingle_badge_content_id: this.$route.query.contentId,
+      mingle_poi_no: this.$route.query.mingle_poi_no
     })
     // this.$store.dispatch('loadStampData', JSON.parse(localStorage.stampDetail))
   },
@@ -48,6 +52,7 @@ export default {
     this.$store.state.stampIntro = {}
     this.$store.state.stampImage = {}
     this.$store.state.stampMethod = {}
+    this.$store.state.stampPoi = []
   }
 }
 </script>

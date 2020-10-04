@@ -3,14 +3,20 @@
         <div class="service_info type2">
             <!-- <div class="title">행사</div> -->
             <div class="title">{{cTitle()}}</div>
-            <div class="info">
-                <p class="ptxt" v-html="data" v-for="(data, idx) in commonData()" v-bind:key="idx"></p>
+            <div class="info" v-if="poiInfo && poiInfo.length > 0">
+              <p class="ptxt" v-html="pdata" v-for="(pdata, pidx) in poiData()" v-bind:key="pidx"></p>
+            </div>
+            <div class="info" v-else>
+              <p class="ptxt" v-html="data" v-for="(data, idx) in commonData()" v-bind:key="idx"></p>
             </div>
         </div>
         <div class="service_info type3">
             <div class="title">개요</div>
             <div class="info">
-                <p class="ptxt" v-html="introDesc()"></p>
+                <!-- 생태정보 -->
+                <p class="ptxt" v-if="poiInfo && poiInfo.length > 0" v-html="poiDesc()"></p>
+                <!-- 스탬프 -->
+                <p class="ptxt" v-else v-html="introDesc()"></p>
             </div>
         </div>
     </div>
@@ -20,7 +26,8 @@ export default {
   name: 'StampInfo',
   props: {
     intro: Object,
-    common: Object
+    common: Object,
+    poiInfo: Array
   },
   methods: {
     // 개요
@@ -28,6 +35,11 @@ export default {
       let string = this.common.intro || ''
       string = string.replace('<h3>개요 :</h3>', '')
       return string
+    },
+    // 생태정보 개요
+    poiDesc () {
+      const txt = this.poiInfo[0].mingle_poi_desc
+      return txt
     },
     // 행사
     commonData () {
@@ -37,6 +49,17 @@ export default {
         arr.push(element)
       }
       return arr
+    },
+    // 생태정보
+    poiData () {
+      const tArr = ['분 류', '발 견 지', '관찰시기']
+      const arr = ['mingle_poi_sub_title', 'mingle_poi_region', 'mingle_poi_season']
+      const poiArr = []
+      arr.map((val, idx) => {
+        const txt = `<strong class='poiTitle'>${tArr[idx]}</strong> ${this.poiInfo[0][val]}`
+        poiArr.push(txt)
+      })
+      return poiArr
     },
     cTitle () {
       let val = ''
@@ -64,3 +87,9 @@ export default {
   }
 }
 </script>
+<style>
+  .poiTitle {
+    width:50px;
+    display: inline-block;
+  }
+</style>
