@@ -18,6 +18,7 @@ export default new Vuex.Store({
     // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행(권역, 참여신청, 갯수)
     // vSi8Z9QlNS5wushabGnrhA== 평화누리길 (선물 1개, 갯수)
     // 테스트 x2pb29pxoROYDl4jl1TOzQ==
+    // 0lDg6JT7iYoHXLAPV4p8wA== 한국가스공사
     domain: 'https://api.tranggle.com', // 공통 URL
     domainTest: 'https://stage-api.tranggle.com:4081', // 공통 URL Test
     domainKhy: 'http://khy-api.tranggle.com', // 강수석님 URL Test
@@ -40,7 +41,8 @@ export default new Vuex.Store({
       { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
       { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23', msg: '스탬프도 찍고 국가보훈처 기념패도 받고!!' },
       { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24', giftMessage: '충북 나드리 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -충북 나드리 스탬프투어 드림-' },
-      { name: '이응노 미술관', code: 'UQ3+JiYENuJBR+gw6zSYPA==', info: 'number', no: '25', msg: '미디어 파사드에서 완주자 보기', giftMessage: '[원주 구석구석 어디까지 가봤니?]' }
+      { name: '이응노 미술관', code: 'UQ3+JiYENuJBR+gw6zSYPA==', info: 'number', no: '25', msg: '미디어 파사드에서 완주자 보기', giftMessage: '[원주 구석구석 어디까지 가봤니?]' },
+      { name: 'KOGAS와 즐기는 대구 스탬프투어', code: '0lDg6JT7iYoHXLAPV4p8wA==', info: 'number', no: '26', msg: '', giftMessage: '‘조심조심 착한소비 스탬프투어 with KOGAS 대구의 히어로가 되어도!’는 대구지역 경제 활성화를 위해 한국가스공사가 준비한 행사로, 지역 관광명소를 즐길 수 있는 스탬프투어와 구매 영수증 인증 이벤트를 진행하여 다양한 경품을 제공합니다. 여러분의 많은 관심과 참여 부탁드립니다.' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -1084,6 +1086,97 @@ export default new Vuex.Store({
           }
         })
       })
+    },
+    // Kogas 이벤트
+    /*
+    Kogas 이벤트 참여 신청
+    */
+    ApplyKogasEvent ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/setEventKogas.jsonp?badge_id=${data.badge_id}&gps_authno=${data.gps_authno}&photo_authno=${data.photo_authno}&receipt_authno=${data.receipt_authno}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            console.log(response.response)
+            state.uploadSuccess = !state.uploadSuccess
+            // commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    Kogas 이벤트 참여 조회
+    */
+    loadKogasStatus ({ state, commit }) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/getEventKogas.jsonp?token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (response.response.code === '00') {
+            console.log(response.response.content)
+            commit('setThema10Status', response.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    Kogas 이미지 업로드
+    */
+    uploadKogasPhoto ({ state, commit }, data) {
+      state.uploadLoading = true
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('ext', 'json')
+      fd.append('upload_type', data.upload_type)
+      fd.append('action_type', data.action_type)
+      fd.append('event_no', data.event_no)
+      fd.append('log_no', data.log_no)
+      fd.append('imageFile', data.imageFile)
+      fd.append('receipt_no', data.receipt_no)
+      const url = 'https://storage.tranggle.com/mingle/authImageUploadKogas'
+      axios
+        .post(url, fd)
+        .then(response => {
+          state.uploadLoading = false
+          if (data.action_type !== 'DEL') {
+            alert(response.data.response.message)
+          }
+          if (response.data.response.code === '00') {
+            if (data.action_type === 'RECEIPT_CHANGE') {
+              state.themaPopReceipt.open = false
+            }
+            state.showPhoto.open = false
+            state.uploadSuccess = !state.uploadSuccess
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    Kogas 개인정보동의 신청 조회
+    */
+    KogasPsInfo ({ state, commit }, data) {
+      const url = `https://api.tranggle.com/v2/mingle/stamptour/setKogasUserInfo.jsonp?phone=${data.phone}&action=${data.action}&token=${state.token}`
+      Vue
+        .jsonp(url)
+        .then(response => {
+          if (data.phone === '') {
+            if (response.response.code === '03') {
+              state.thema10Agree = 'Y'
+            }
+            if (response.response.code === '04') {
+              state.thema10Agree = 'N'
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

@@ -45,7 +45,7 @@
             </div>
             <div class="right">
               <div class="txt1" :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'type2' : 'type1'" v-text="thema10Status.photo_log_filename ? '인증사진 첨부 완료' : thema10Status.gps_log_badgename || '스탬프 이름 없음'"></div>
-              <div class="txt2">{{thema10Status.photo_log_auth_type === 'PHOTO' ? '첨부' : '인증'}}일자  {{(thema10Status.photo_log_auth_type === 'PHOTO') ? thema10Status.photo_log_datetime.substring(0,10) : thema10Status.gps_log_datetime.substring(0,10)}}</div>
+              <div class="txt2">{{thema10Status.photo_log_auth_type === 'PHOTO' ? '첨부' : '인증'}}일자  {{(thema10Status.photo_log_auth_type === 'PHOTO' && thema10Status.photo_log_datetime) ? thema10Status.photo_log_datetime.substring(0,10) : (thema10Status.gps_log_datetime) ? thema10Status.gps_log_datetime.substring(0,10) : ''}}</div>
               <div class="txt3" v-if="thema10Status.photo_log_auth_type !== 'PHOTO' && thema10Status.gps_log_auth_type === 'GPS'">
                 <img src="@/assets/images/event/icon_person.png" alt="">
                 <span class="ptc">참여자</span>
@@ -107,11 +107,11 @@
 <script>
 import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
-import Thema10Example from '@/components/event/Thema10Example.vue'
-import Thema10PopupPhoto from '@/components/event/Thema10PopupPhoto.vue'
-import Thema10PopupNotice from '@/components/event/Thema10PopupNotice.vue'
-import Thema10PopupPI from '@/components/event/Thema10PopupPI.vue'
-import Thema10PopupReceipt from '@/components/event/Thema10PopupReceipt.vue'
+import Thema10Example from '@/components/event/thema10/Thema10Example.vue'
+import Thema10PopupPhoto from '@/components/event/thema10/Thema10PopupPhoto.vue'
+import Thema10PopupNotice from '@/components/event/thema10/Thema10PopupNotice.vue'
+import Thema10PopupPI from '@/components/event/thema10/Thema10PopupPI.vue'
+import Thema10PopupReceipt from '@/components/event/thema10/Thema10PopupReceipt.vue'
 export default {
   name: 'Thema10Certify',
   data () {

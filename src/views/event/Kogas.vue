@@ -1,34 +1,34 @@
 <template>
   <div class="view_stamp">
     <!-- 헤더 -->
-    <Head type='back' name='view_stamp' title='대한민국 안전여행 참여 이벤트' />
+    <Head type='back' name='view_stamp' title='대구의 히어로가 되어도!' />
     <div>
       <tabs :options="{ useUrlFragment: false }" @changed="tabChanged">
         <tab name="이벤트 소개">
-          <Thema10Intro />
+          <KogasIntro />
         </tab>
         <tab name="이벤트 참여" id="second-tab">
-          <Thema10Certify />
+          <KogasCertify />
         </tab>
       </tabs>
     </div>
-    <Thema10PopupNotice />
+    <KogasPopupNotice />
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import * as appEvent from '@/assets/js/app_event.js'
 import Head from '@/components/Head.vue'
-import Thema10Intro from '@/components/event/thema10/Thema10Intro.vue'
-import Thema10Certify from '@/components/event/thema10/Thema10Certify.vue'
-import Thema10PopupNotice from '@/components/event/thema10/Thema10PopupNotice.vue'
+import KogasIntro from '@/components/event/kogas/KogasIntro.vue'
+import KogasCertify from '@/components/event/kogas/KogasCertify.vue'
+import KogasPopupNotice from '@/components/event/kogas/KogasPopupNotice.vue'
 export default {
-  name: 'EventThema10',
+  name: 'Kogas',
   components: {
     Head,
-    Thema10Intro,
-    Thema10Certify,
-    Thema10PopupNotice
+    KogasIntro,
+    KogasCertify,
+    KogasPopupNotice
   },
   data () {
     return {
@@ -43,19 +43,9 @@ export default {
         window.location.hash = ''
       }
       if (selectedTab.tab.name === '이벤트 참여') {
-        // if (!this.token) {
-        //   appEvent.thema10Login()
-        //   return false
-        // }
         appEvent.thema10GpsStatus()
       }
     }
-    // gpsPop () {
-    //   console.log(localStorage.getGps)
-    //   if (localStorage.getGps === 'N') {
-    //     appEvent.thema10GpsSetting()
-    //   }
-    // }
   },
   mounted () {
   }

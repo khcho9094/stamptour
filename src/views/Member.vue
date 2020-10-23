@@ -45,7 +45,7 @@ export default {
     memberProfile (data) {
       let url = ''
       if (data.profile && (data.profile.indexOf('jpg') > -1 || data.profile.indexOf('png') > -1)) {
-        url = `http://resource.tranggle.com/profile/${data.profile}`
+        url = `https://resource.tranggle.com/profile/${data.profile}`
       } else {
         url = require('@/assets/images/default.png')
       }

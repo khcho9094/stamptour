@@ -16,6 +16,20 @@
               @click="goExternalEvent('https://drive.google.com/file/d/1zOTtpdUUuKXGQMTfhCeuyVomc8zr-gGY/view?usp=sharing')">
             </div>
         </swiper-slide> -->
+        <!-- <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
+            <div
+              class="themaBanner"
+              :style="{ 'background-image': BannerImage('allthat_main_banner_kogas_1.png') }"
+              @click="goKogasEvent">
+            </div>
+        </swiper-slide> -->
+        <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
+            <div
+              class="themaBanner"
+              :style="{ 'background-image': BannerImage('allthat_main_banner_kogas_2.png') }"
+              @click="goKogasEvent">
+            </div>
+        </swiper-slide>
         <swiper-slide v-if="this.mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
             <div
               class="themaBanner"
@@ -23,7 +37,7 @@
               @click="goExternalEvent('https://korean.visitkorea.or.kr/detail/event_detail.do?cotid=641e4780-112c-4da2-af27-87648c0be27b')">
             </div>
         </swiper-slide>
-        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA=='">
+        <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== '0lDg6JT7iYoHXLAPV4p8wA=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -81,6 +95,9 @@ export default {
     },
     goThema10Event () {
       appEvent.thema10Page()
+    },
+    goKogasEvent () {
+      appEvent.kogasPage()
     },
     goExternalEvent (url) {
       appEvent.externalLinks(url)

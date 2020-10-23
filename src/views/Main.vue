@@ -42,7 +42,7 @@ import WonjuPopup1 from '@/components/WonjuPopup1.vue'
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
-import Thema10PopupOff from '@/components/event/Thema10PopupOff.vue'
+import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
 export default {
   name: 'Main',
   components: {

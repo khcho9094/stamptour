@@ -121,6 +121,20 @@ export function thema10Page () {
 }
 
 /**
+ * Kogas 이벤트 소개페이지 이동
+ */
+// eslint-disable-next-line no-unused-vars
+export function kogasPage () {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_thema10', '{ "url": "/event/kogas" }')
+  } else if (os === 'ios') {
+    window.location = 'tranggle://event_thema10?url=/event/kogas'
+  }
+}
+
+/**
  * 테마10선 미로그인 로그인페이지로 이동
  */
 // eslint-disable-next-line no-unused-vars

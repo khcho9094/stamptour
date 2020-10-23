@@ -76,6 +76,12 @@ const routes = [
     path: '/event/thema10',
     name: 'EventThema10',
     component: () => import('../views/event/Thema10.vue')
+  },
+  {
+    // 한국가스공사 이벤트
+    path: '/event/kogas',
+    name: 'Kogas',
+    component: () => import('../views/event/Kogas.vue')
   }
 ]
 
