@@ -90,7 +90,7 @@ export default {
             receipt_authno: this.thema10Status.receipt_authno,
             badge_id: this.thema10Status.gps_log_badge_id
           })
-          tit1 = '이벤트 참여가<br>완료 되었습니다.'
+          tit1 = '오늘의 이벤트 참여가<br>완료 되었습니다.'
           tit2 = '당첨은 매주 수요일 발표되며,<br>인증 현황 하단에 “당첨 확인” 버튼으로<br>확인 가능합니다.'
           this.$store.dispatch('openThemaAgree', {})
           this.$store.dispatch('openThemaNoti', {

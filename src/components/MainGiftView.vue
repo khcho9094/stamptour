@@ -1,21 +1,13 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut">
-        <!-- <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
-              :style="{ 'background-image': BannerImage('event/allthat_main_banner.png') }"
+              :style="{ 'background-image': BannerImage('event/allthat_main_banner_2.png') }"
               @click="goThema10Event">
             </div>
-        </swiper-slide> -->
-        <!-- 원주 배너 주석.. 추후 삭제 예정 -->
-        <!-- <swiper-slide v-if="this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw=='">
-            <div
-              class="themaBanner"
-              :style="{ 'background-image': BannerImage('allthat_main_banner_wonju2.png') }"
-              @click="goExternalEvent('https://drive.google.com/file/d/1zOTtpdUUuKXGQMTfhCeuyVomc8zr-gGY/view?usp=sharing')">
-            </div>
-        </swiper-slide> -->
+        </swiper-slide>
         <!-- <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
             <div
               class="themaBanner"

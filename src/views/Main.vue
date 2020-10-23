@@ -17,7 +17,7 @@
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
       <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
-      <Thema10PopupOff v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Stop" />
+      <!-- <Thema10PopupOff v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Stop" /> -->
     </div>
     <Intro v-else/>
   </div>
@@ -42,7 +42,7 @@ import WonjuPopup1 from '@/components/WonjuPopup1.vue'
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
-import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
+// import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
 export default {
   name: 'Main',
   components: {
@@ -61,8 +61,8 @@ export default {
     WonjuPopup1,
     WonjuPopup2,
     WonjuPopup3,
-    WonjuPopup4,
-    Thema10PopupOff
+    WonjuPopup4
+    // Thema10PopupOff
   },
   data () {
     return {

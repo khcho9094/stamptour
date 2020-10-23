@@ -34,7 +34,7 @@ export default {
         },
         {
           title: '영수증 인증은<br/>1일 1회만 가능합니다.',
-          image: require('@/assets/images/event/kogas/example_2.png'),
+          image: require('@/assets/images/event/kogas/example_3.png'),
           warning: ''
         }
       ]

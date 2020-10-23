@@ -5,7 +5,7 @@
       <div class="photo">
         <img :src="dataObj[type].image" alt="" :class="(type === 1) ? 'type1' : ''">
       </div>
-      <div class="warning">{{dataObj[type].warning}}</div>
+      <div class="warning" v-html="dataObj[type].warning"></div>
     </div>
     <div class="chkbox">
         <input type="checkbox" id="tour_off"  name="tour_off" checked="checked" v-model="check"><label for="tour_off">다시 보지 않기</label>
@@ -28,13 +28,13 @@ export default {
       check: false,
       dataObj: [
         {
-          title: '관광지 방문 인증은<br><span>테마여행 10선 주요 관광지에서</span><br><span>촬영한 사진</span>만 인정됩니다.',
+          title: '대한민국 테마여행10선 여행지에서<br>마스크를 올바르게 착용한<br>사진을 첨부해주세요.',
           image: require('@/assets/images/event/example1_1.png'),
-          warning: '* 인증샷은 마스크 착용 필수!'
+          warning: '* 마스크는 반드시 코와 입을 가려야 인정됩니다.<br>* 사진에 등장한 인물 모두가 마스크를 착용하고 있어야합니다.'
         },
         {
           title: '<span>숙박 결제 영수증</span>(종이/모바일)과<br/>이용이 완료된 <span>숙박 이용 내역서</span>를<br/>첨부해주세요',
-          image: require('@/assets/images/event/example2_3.png?20200807'),
+          image: require('@/assets/images/event/example2_1.png?20201026'),
           warning: '(간이 영수증은 인정 안됨)'
         }
       ]

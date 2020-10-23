@@ -3,7 +3,7 @@
     <div class="thema10_wrap">
       <div class="title_box">
         <img src="@/assets/images/event/icon_title.png" alt="">
-        {{thema10Status.log_event_name}}
+        {{eventCount}}
         <span>{{thema10Status.event_getcount}}회 참여</span>
       </div>
       <div class="auth_box">
@@ -17,11 +17,12 @@
               <!-- <span class="underline">테마 10선 관광지 방문 시</span><br>
               <span class="color">자동인증</span>과 함께
               <span class="color">사진을 첨부</span>해주세요.<br> -->
-              테마 10선을 여행하고<br><span class="color">인증사진을 첨부</span> 해주세요.<br>
-              <span class="mask">* 인증샷은 마스크 착용 필수!</span>
+              <!-- 테마 10선을 여행하고<br><span class="color">인증사진을 첨부</span> 해주세요.<br> -->
+              대한민국 테마여행10선 여행지에서<br>마스크를 올바르게 착용한 사진을 첨부해주세요.<br>
+              <span class="mask">* 마스크는 반드시 코와 입을 가려야 인정됩니다.</span>
             </div>
           </div>
-          <div class="btn" @click="photoUploadStop(0, 'Edit')">
+          <div class="btn" @click="photoUpload(0, 'Edit')">
             + 인증사진 첨부
           </div>
           <div class="menu_btn" @click="thema10Main"></div>
@@ -34,11 +35,11 @@
                 :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'img2' : 'img1'"
                 :style="{ 'backgroundImage': `url(${thema10Status.photo_log_filename ? thema10Status.photo_log_filename : thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUploadStop(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUpload(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진추가
               </div>
-              <div class="edit_btn" @click="photoUploadStop(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -64,11 +65,12 @@
         <div class="box" v-if="thema10Status.receipt_log_auth_type === null">
           <div class="desc">
             <div class="p_center">
-              <span class="underline">숙박 영수증 or 숙박 이용내역서 </span><br>사진을 첨부해주세요.<br>
-              <span class="mask">* 간이영수증은 인정되지 않습니다.</span>
+              <!-- <span class="underline">숙박 영수증 or 숙박 이용내역서 </span><br>사진을 첨부해주세요.<br>
+              <span class="mask">* 간이영수증은 인정되지 않습니다.</span> -->
+              2020년 7월1일 ~ 8월22일, 10월26일 ~ 12월31일<br>숙박 내역만 응모 가능합니다.
             </div>
           </div>
-          <div class="btn" @click="photoUploadStop(1, 'Edit')">
+          <div class="btn" @click="photoUpload(1, 'Edit')">
             + 영수증 첨부
           </div>
         </div>
@@ -76,7 +78,7 @@
           <div class="auth_check">
             <div class="left">
               <div class="img_box img2" :style="{ 'backgroundImage': `url(${thema10Status.receipt_log_filename})` }"></div>
-              <div class="edit_btn" @click="photoUploadStop(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
+              <div class="edit_btn" @click="photoUpload(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -91,10 +93,11 @@
           <img class="auth_complete" src="@/assets/images/event/complete.png" alt="">
         </div>
       </div>
+      <div class="add_text">사진 첨부 후 <b>“이벤트 참여”</b> 버튼을 눌러주세요.</div>
     </div>
     <ul class="btn_box">
-      <!-- <li @click="enterEvent">이벤트 참여</li> -->
-      <li @click="enterEventStop">이벤트 참여</li>
+      <li @click="enterEvent">이벤트 참여</li>
+      <!-- <li @click="enterEventStop">이벤트 참여</li> -->
       <li @click="confirm">당첨 확인</li>
     </ul>
     <Thema10Example :type="type" :edit="edit" />
@@ -128,7 +131,22 @@ export default {
     Thema10PopupReceipt
   },
   computed: {
-    ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree', 'mingleCode'])
+    ...mapState(['thema10Status', 'uploadSuccess', 'thema10Agree', 'mingleCode']),
+    eventCount () {
+      let msg = ''
+      if (new Date() >= new Date('10/26/2020 00:00:00') && new Date() < new Date('11/16/2020 00:00:00')) {
+        msg = '이벤트 1회차'
+      } else if (new Date() >= new Date('11/16/2020 00:00:00') && new Date() < new Date('12/01/2020 00:00:00')) {
+        msg = '이벤트 2회차'
+      } else if (new Date() >= new Date('12/01/2020 00:00:00') && new Date() < new Date('12/16/2020 00:00:00')) {
+        msg = '이벤트 3회차'
+      } else if (new Date() >= new Date('12/16/2020 00:00:00') && new Date() < new Date('12/31/2020 23:59:59')) {
+        msg = '이벤트 4회차'
+      } else {
+        msg = '이벤트 0회차'
+      }
+      return msg
+    }
   },
   methods: {
     photoUpload (type, photo) {
@@ -157,9 +175,9 @@ export default {
         this.$store.dispatch('openExamplePop', true)
       }
     },
-    photoUploadStop () {
-      alert('대한민국 안전여행 참여 이벤트는 사회적 거리두기 강화에 따라 8월 24일부로 잠정 중단됨을 알립니다.')
-    },
+    // photoUploadStop () {
+    //   alert('대한민국 안전여행 참여 이벤트는 사회적 거리두기 강화에 따라 8월 24일부로 잠정 중단됨을 알립니다.')
+    // },
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
@@ -169,6 +187,14 @@ export default {
             open: true
           })
           return false
+        } else if (this.thema10Status.event_finish_chk === 'Y') {
+          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+          this.$store.dispatch('openThemaNoti', {
+            open: true,
+            tit1: tit1,
+            tit2: tit2
+          })
         } else {
           this.$store.dispatch('ApplyThema10Event', {
             gps_authno: this.thema10Status.gps_authno,
@@ -177,7 +203,7 @@ export default {
             badge_id: this.thema10Status.gps_log_badge_id
           })
           tit1 = '이벤트 참여가<br>완료 되었습니다.'
-          tit2 = '당첨은 매월 7일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          tit2 = '당첨은 이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
         }
       } else {
         if (this.thema10Status.event_finish_chk === 'Y') {
@@ -246,3 +272,20 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .thema10_wrap {
+    padding: 18px 20px 60px;
+  }
+  .thema10_wrap .title_box {
+    margin-bottom: 13px;
+  }
+  .thema10_wrap .auth_box {
+    margin-bottom: 15px;
+  }
+  .add_text {
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 10px;
+  }
+</style>

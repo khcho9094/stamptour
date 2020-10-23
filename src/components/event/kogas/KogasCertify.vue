@@ -3,10 +3,10 @@
     <div class="thema10_wrap">
       <div class="title_box">
         <img src="@/assets/images/event/icon_title.png" alt="">
-        {{thema10Status.log_event_name}}
+        <!-- {{thema10Status.log_event_name}} -->
         <span>{{thema10Status.event_getcount}}회 참여</span>
       </div>
-      <div class="auth_box">
+      <!-- <div class="auth_box">
         <div class="tit">
           <img src="@/assets/images/event/icon_auth1.png" alt="">
           유튜브 구독 인증
@@ -51,7 +51,7 @@
           </div>
           <img v-show="thema10Status.photo_log_auth_type === 'PHOTO'" class="auth_complete" src="@/assets/images/event/complete.png" alt="">
         </div>
-      </div>
+      </div> -->
       <div class="auth_box">
         <div class="tit">
           <img src="@/assets/images/event/icon_auth2.png" alt="">
@@ -149,12 +149,20 @@ export default {
     enterEvent () {
       let tit1 = ''
       let tit2 = ''
-      if (this.thema10Status.photo_authno && this.thema10Status.receipt_authno) {
+      if (this.thema10Status.receipt_authno) {
         if (this.thema10Agree === 'N') {
           this.$store.dispatch('openThemaAgree', {
             open: true
           })
           return false
+        } else if (this.thema10Status.event_finish_chk === 'Y') {
+          tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
+          tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
+          this.$store.dispatch('openThemaNoti', {
+            open: true,
+            tit1: tit1,
+            tit2: tit2
+          })
         } else {
           this.$store.dispatch('ApplyKogasEvent', {
             gps_authno: this.thema10Status.gps_authno,
@@ -162,19 +170,16 @@ export default {
             receipt_authno: this.thema10Status.receipt_authno,
             badge_id: this.thema10Status.gps_log_badge_id
           })
-          tit1 = '이벤트 참여가<br>완료 되었습니다.'
-          tit2 = '당첨은 매월 7일 발표되며,<br>이벤트 참여 하단의 <span>"당첨 확인"</span><br>버튼으로 확인 가능합니다.'
+          tit1 = '오늘의 이벤트 참여가<br>완료 되었습니다.'
+          tit2 = '당첨은 매주 수요일 발표되며,<br>인증 현황 하단에 “당첨 확인” 버튼으로<br>확인 가능합니다.'
         }
       } else {
         if (this.thema10Status.event_finish_chk === 'Y') {
           tit1 = '오늘의 이벤트 참여가<br>이미 완료되었습니다.'
           tit2 = '자정 이후 새로<br>이벤트에 참여 가능합니다.'
         } else {
-          if (this.thema10Status.photo_authno === null) {
-            tit1 = '이벤트에 참여하려면<br>관광지 방문 인증 사진을<br/>첨부해주세요.'
-            tit2 = ''
-          } else {
-            tit1 = '이벤트에 참여하려면<br>숙박 영수증 or 숙박 이용내역서<br> 사진을 첨부해주세요.'
+          if (this.thema10Status.receipt_authno === null) {
+            tit1 = '이벤트에 참가하려면<br>영수증 사진을 첨부하세요.'
             tit2 = ''
           }
         }

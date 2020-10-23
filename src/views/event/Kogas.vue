@@ -1,7 +1,7 @@
 <template>
   <div class="view_stamp">
     <!-- 헤더 -->
-    <Head type='back' name='view_stamp' title='대구의 히어로가 되어도!' />
+    <Head type='back' name='view_stamp' title='KOGAS와 즐기는 대구 스탬프투어' />
     <div>
       <tabs :options="{ useUrlFragment: false }" @changed="tabChanged">
         <tab name="이벤트 소개">
