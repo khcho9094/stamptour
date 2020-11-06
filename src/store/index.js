@@ -995,6 +995,10 @@ export default new Vuex.Store({
             if (response.response.code === '04') {
               state.thema10Agree = 'N'
             }
+          } else {
+            if (response.response.code === '00') {
+              state.thema10Agree = 'Y'
+            }
           }
         })
         .catch(err => {
@@ -1171,6 +1175,10 @@ export default new Vuex.Store({
             }
             if (response.response.code === '04') {
               state.thema10Agree = 'N'
+            }
+          } else {
+            if (response.response.code === '00') {
+              state.thema10Agree = 'Y'
             }
           }
         })

@@ -114,6 +114,9 @@ export default {
     phone () {
       this.phone = this.phone.replace(/[^0-9]/g, '')
       return this.phone
+    },
+    uploadSuccess: function (newQuestion, oldQuestion) {
+      this.$store.dispatch('loadThema10Status')
     }
   },
   mounted () {
