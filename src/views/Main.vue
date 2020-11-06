@@ -17,6 +17,7 @@
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
       <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
+      <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
       <!-- <Thema10PopupOff v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Stop" /> -->
     </div>
     <Intro v-else/>
@@ -42,6 +43,7 @@ import WonjuPopup1 from '@/components/WonjuPopup1.vue'
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
+import KoGasPopup from '@/components/KoGasPopup.vue'
 // import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
 export default {
   name: 'Main',
@@ -61,7 +63,8 @@ export default {
     WonjuPopup1,
     WonjuPopup2,
     WonjuPopup3,
-    WonjuPopup4
+    WonjuPopup4,
+    KoGasPopup
     // Thema10PopupOff
   },
   data () {
@@ -83,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4', 'thema10Stop'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4', 'thema10Stop', 'KoGasPopup'])
   },
   methods: {
     handleMoreButton () {
@@ -162,6 +165,9 @@ export default {
     }
     if (this.$cookie.get('wonju_pop1') === 'Y') {
       this.$store.state.wonjuPopup1 = false
+    }
+    if (this.$cookie.get('kogas_pop') === 'Y') {
+      this.$store.state.KoGasPopup = false
     }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
