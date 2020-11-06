@@ -135,7 +135,8 @@ export default new Vuex.Store({
     submitCheck: false,
     thema10Stop: true, // 테마10 중단 팝업
     stampPoi: [],
-    TourPoiData: []
+    TourPoiData: [],
+    KoGasPopup: true
   },
   mutations: {
     setIntroData (state, data) {
