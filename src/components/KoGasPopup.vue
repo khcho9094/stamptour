@@ -8,7 +8,7 @@
                   스탬프 찍고 영수증 인증하면<br>
                   매주 수요일 선물 추첨!<br><br>
                   <span class="tal">
-                    <b>1.</b> 스탬 프 찍기<br>
+                    <b>1.</b> 스탬프 찍기<br>
                     <b>2.</b> 이벤트 참여하기 클릭<br>
                     <b>3.</b> 구매영수증 인증
                   </span>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <button class="type1" @click="closeBtn">닫기</button>
-            <button class="type2" @click="viewDetail">자세히 보기</button>
+            <button class="type2" @click="goKogasEvent">자세히 보기</button>
         </div>
     </div>
 </template>
@@ -40,12 +40,11 @@ export default {
       }
       this.$store.state.KoGasPopup = false
     },
-    viewDetail () {
+    goKogasEvent () {
       if (this.check) {
-        this.$cookie.set('tour_100', 'Y', 9999)
+        this.$cookie.set('kogas_pop', 'Y', 9999)
       }
-      const url = 'https://docs.google.com/document/d/1SC5NK_7I1HI-ZTxEn9e-VWzocGiLGbDK-kwJE--h7N4/edit'
-      appEvent.externalLinks(url)
+      appEvent.kogasPage()
     }
   },
   mounted () {
