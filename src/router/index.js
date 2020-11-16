@@ -82,6 +82,12 @@ const routes = [
     path: '/event/kogas',
     name: 'Kogas',
     component: () => import('../views/event/Kogas.vue')
+  },
+  {
+    // 랜딩페이지
+    path: '/landing',
+    name: 'Landing',
+    component: () => import('../components/Landing.vue')
   }
 ]
 
