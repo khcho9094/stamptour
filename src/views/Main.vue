@@ -169,6 +169,9 @@ export default {
     if (this.$cookie.get('kogas_pop') === 'Y') {
       this.$store.state.KoGasPopup = false
     }
+    if (this.$cookie.get('korea_pop1') === 'Y') {
+      this.$store.state.wonjuPopup3 = false
+    }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {

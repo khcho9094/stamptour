@@ -36,7 +36,7 @@ export default {
   methods: {
     closeBtn () {
       if (this.check) {
-        this.$cookie.set('wonju_pop1', 'Y', 9999)
+        this.$cookie.set('tour_100', 'Y', 9999)
       }
       this.$store.state.wonjuPopup1 = false
     },

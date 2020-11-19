@@ -2,41 +2,48 @@
     <div class="pop_overay">
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
-            <div class="text_2">
-                <div class="stamp_success wonju3">
-                  <b class="wonju3tit">[안전한 남파랑길 이용안내]</b><br>
-                  <span>
-                    남파랑길 전 코스는 정식 개통 전이므로 이용시 주의 부탁드립니다.
-                  </span>
-                  <span>
-                    특히 남파랑길 18, 19코스는 위험구간이 다소 분포되어 있는 <b>'미개통 구간'</b><br>
-                    이므로, 임시노선 (17-1코스)을 이용하시기 바랍니다.
-                  </span>
-                  <span>
-                    남파랑길 3코스 송도해안산책로 구간은 낙석으로 인해 2020.5.3부터 폐쇄되었습니다.<br>
-                    안전점검이 마무리될 때까지 우회로를 이용하시기 바랍니다.
-                  </span>
-                  <span class="lst">
-                    감사합니다.
+            <div class="text_2 noviewpop">
+                <div class="stamp_success wonju">
+                  <b class="wonju3tit">[남파랑길 개통 기념<br/>대국민 온라인 이벤트]</b><br>
+                  남파랑길 여행도 하고 '국민관광상품권'도 받으세요.<br><br>
+                  <span class="tal">
+                    2020.10.31~2020.11.30
                   </span>
                 </div>
+                <div class="chkbox">
+                  <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="check"><label for="noviewpop1">다시 보지 않기</label>
+                </div>
             </div>
-            <button @click="closeBtn">확인</button>
+            <button class="type1" @click="closeBtn">닫기</button>
+            <button class="type2" @click="viewDetail">자세히 보기</button>
         </div>
     </div>
 </template>
 <script>
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'WonjuPopup3',
   data () {
     return {
+      check: false
     }
   },
   computed: {
   },
   methods: {
     closeBtn () {
+      if (this.check) {
+        this.$cookie.set('korea_pop1', 'Y', 9999)
+      }
       this.$store.state.wonjuPopup3 = false
+    },
+    viewDetail () {
+      if (this.check) {
+        this.$cookie.set('korea_pop1', 'Y', 9999)
+      }
+      this.$store.state.wonjuPopup3 = false
+      const url = 'https://www.durunubi.kr/8-3-1-info-event-view.do?event_id=10016'
+      appEvent.externalLinks(url)
     }
   },
   mounted () {
@@ -51,21 +58,18 @@ export default {
     margin-bottom:5px;
     font-size: 1.1em;
   }
-  .wonju3 {
+  .arrows {
+    width:10px;
+    position: relative;
+    top: 2px;
+    margin:0 5px;
+  }
+  .wonju {
     color:#000;
-    font-size: 16px;
+    font-size: 17px;
     font-family:inaviL;
     line-height:1.5;
-    padding: 0px 10px;
+    padding:0 5px;
     word-break: keep-all;
-  }
-  .wonju3 span {
-    display: block;
-    text-align: left;
-    padding: 0 5px;
-    margin-bottom: 10px;
-  }
-  .wonju3 span.lst {
-    margin-bottom: 0;
   }
 </style>
