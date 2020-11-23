@@ -25,7 +25,7 @@
                 </div>
                 <div class="box_rt">
                     <h2>{{data.info_badge_name}}</h2>
-                    <p class="txt">여기에서 {{parseInt(data.distance)}}km</p>
+                    <p class="txt">여기에서 {{parseFloat(data.distance).toFixed(2)}}km</p>
                     <div class="stamp_count">
                         <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                         <span class="stxt">{{stampKind(data)}}</span>

@@ -14,7 +14,7 @@
              <li v-for="(data, idx) in TourPoiData" v-bind:key="idx" @click="poiDetailOn(data)">
                 <div class="back_img" :style="{ 'backgroundImage': `url(${data.mingle_poi_img})` }" ></div>
                 <h2>{{data.mingle_poi_main_title}}</h2>
-                <p>{{parseInt(data.distance)}}km</p>
+                <p>{{parseFloat(data.distance).toFixed(2)}}km</p>
              </li>
         </ul>
     </div>

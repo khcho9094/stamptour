@@ -29,7 +29,7 @@
                         :style="{ 'backgroundImage': `url(${pval.mingle_poi_img})` }"
                         ></div>
                   <h2>{{pval.mingle_poi_main_title}}</h2>
-                  <p>여기에서 {{parseInt(pval.distance)}}km</p>
+                  <p>여기에서 {{parseFloat(pval.distance).toFixed(2)}}km</p>
               </li>
           </ul>
       </div>

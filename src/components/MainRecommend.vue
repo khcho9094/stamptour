@@ -19,7 +19,7 @@
                           :style="{ 'backgroundImage': `url(${val.mingle_badge_image})` }">
                         </div>
                         <h2>{{val.info_badge_name}}</h2>
-                        <p>여기에서 {{parseInt(val.distance)}}km</p>
+                        <p>여기에서 {{parseFloat(val.distance).toFixed(2)}}km</p>
                         <div class="stamp_count">
                             <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                             <span class="stxt">스탬프</span>
