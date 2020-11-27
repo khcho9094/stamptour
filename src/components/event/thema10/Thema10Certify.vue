@@ -67,7 +67,7 @@
             <div class="p_center">
               <!-- <span class="underline">숙박 영수증 or 숙박 이용내역서 </span><br>사진을 첨부해주세요.<br>
               <span class="mask">* 간이영수증은 인정되지 않습니다.</span> -->
-              2020년 7월1일 ~ 8월22일, 10월26일 ~ 12월31일<br>숙박 내역만 응모 가능합니다.
+              2020년 7월1일 ~ 8월22일, 10월26일 ~ 11월23일<br>숙박 내역만 응모 가능합니다.
             </div>
           </div>
           <div class="btn" @click="photoUpload(1, 'Edit')">
