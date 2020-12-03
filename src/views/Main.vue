@@ -14,10 +14,12 @@
       <PopupMyStamp />
       <PopupRestart />
       <WonjuPopup1 v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup1" />
+      <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
       <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
       <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
+      <ChungbukPopup v-if="mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==' && chungbukPopup" />
       <!-- <Thema10PopupOff v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Stop" /> -->
     </div>
     <Intro v-else/>
@@ -39,11 +41,13 @@ import PopupStampSuccess from '@/components/popup/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 import PopupRestart from '@/components/popup/PopupRestart.vue'
-import WonjuPopup1 from '@/components/WonjuPopup1.vue'
+import WonjuPopup from '@/components/WonjuPopup.vue' // 원주1
+import WonjuPopup1 from '@/components/WonjuPopup1.vue' // 원주2
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
 import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
 import KoGasPopup from '@/components/KoGasPopup.vue'
+import ChungbukPopup from '@/components/ChungbukPopup.vue'
 // import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
 export default {
   name: 'Main',
@@ -60,11 +64,13 @@ export default {
     Intro,
     PopupMyStamp,
     PopupRestart,
+    WonjuPopup,
     WonjuPopup1,
     WonjuPopup2,
     WonjuPopup3,
     WonjuPopup4,
-    KoGasPopup
+    KoGasPopup,
+    ChungbukPopup
     // Thema10PopupOff
   },
   data () {
@@ -86,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4', 'thema10Stop', 'KoGasPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'wonjuPopup3', 'wonjuPopup4', 'thema10Stop', 'KoGasPopup', 'wonjuPopup', 'chungbukPopup'])
   },
   methods: {
     handleMoreButton () {
@@ -160,9 +166,6 @@ export default {
     if (this.$cookie.get('tour_100') === 'Y') {
       this.$store.state.wonjuPopup4 = false
     }
-    if (this.$cookie.get('wonju_pop') === 'Y') {
-      this.$store.state.wonjuPopup = false
-    }
     if (this.$cookie.get('wonju_pop1') === 'Y') {
       this.$store.state.wonjuPopup1 = false
     }
@@ -171,6 +174,12 @@ export default {
     }
     if (this.$cookie.get('korea_pop1') === 'Y') {
       this.$store.state.wonjuPopup3 = false
+    }
+    if (this.$cookie.get('wonju_pop') === 'Y') {
+      this.$store.state.wonjuPopup = false
+    }
+    if (this.$cookie.get('chungbuk_pop') === 'Y') {
+      this.$store.state.chungbukPopup = false
     }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')

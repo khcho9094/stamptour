@@ -4,13 +4,13 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju">
-                  <b class="wonju3tit">[이벤트 당첨자 발표]</b><br>
-                  2020 원주 Smart 스탬프 투어<br>
-                  하반기 스탬프왕 당첨자를 발표합니다.<br><br>
+                  <b class="wonju3tit">[신세계 상품권 증정 이벤트]</b><br>
+                  충북 나드리 스탬프투어 1개만<br>
+                  받아도 2만원 상당 신세계 상품권<br>
+                  증정!!<br><br>
                   <span class="tal">
-                    <b>1등 1명</b> 15만원상당 미니빔프로젝터<br>
-                    <b>2등 2명</b> 10만원 상당 스마트밴드<br>
-                    <b>3등 3명</b> 5만원 강원(원주)상품
+                    <b>이벤트 기간 :</b> 2020.12.01 ~ 12.10<br>
+                    <b>대 상 :</b> 800명
                   </span>
                 </div>
                 <div class="chkbox">
@@ -21,7 +21,7 @@
             <button class="type2" @click="viewDetail">자세히 보기</button>
         </div>
         <div class="popDetailImage" v-if="popImg">
-          <img class="vimg" src="@/assets/images/event/popup/wonju_pop1.jpg" alt="원주 이벤트">
+          <img class="vimg" src="@/assets/images/event/popup/nadri_pop1.jpg" alt="충북 이벤트">
           <div class="cbox" @click="popImg = false">
             <img class="close" src="@/assets/images/close.png" alt="close">
           </div>
@@ -30,7 +30,7 @@
 </template>
 <script>
 export default {
-  name: 'WonjuPopup',
+  name: 'ChungbukPopup',
   data () {
     return {
       check: false,
@@ -42,13 +42,13 @@ export default {
   methods: {
     closeBtn () {
       if (this.check) {
-        this.$cookie.set('wonju_pop', 'Y', 9999)
+        this.$cookie.set('chungbuk_pop', 'Y', 9999)
       }
-      this.$store.state.wonjuPopup = false
+      this.$store.state.chungbukPopup = false
     },
     viewDetail () {
       if (this.check) {
-        this.$cookie.set('wonju_pop', 'Y', 9999)
+        this.$cookie.set('chungbuk_pop', 'Y', 9999)
       }
       this.popImg = true
     }

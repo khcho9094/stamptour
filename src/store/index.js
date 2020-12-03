@@ -136,7 +136,8 @@ export default new Vuex.Store({
     thema10Stop: true, // 테마10 중단 팝업
     stampPoi: [],
     TourPoiData: [],
-    KoGasPopup: true
+    KoGasPopup: true, // 코리아 가스
+    chungbukPopup: true // 충북 나드리
   },
   mutations: {
     setIntroData (state, data) {
