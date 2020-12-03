@@ -229,11 +229,12 @@ export default {
       let giftCnt = 0
       let i = 0
       for (i; i < this.giftData.length; i++) {
-        if (this.giftData[i].mingle_gift_receive === 'Y') {
+        if (this.giftData[i].mingle_gift_add_point !== 'AUTH' && this.giftData[i].mingle_gift_receive === 'Y') {
+          giftCnt++
+        } else if (this.giftData[i].mingle_gift_add_point === 'AUTH' && !this.giftData[i].user_gift_request_date) {
           giftCnt++
         }
       }
-
       if (giftCnt > 0 && this.$store.state.getGiftChk === false) {
         this.$store.state.getGiftChk = !this.$store.state.getGiftChk
       }
