@@ -21,7 +21,7 @@
             <button class="type2" @click="viewDetail">자세히 보기</button>
         </div>
         <div class="popDetailImage" v-if="popImg">
-          <img class="vimg" src="@/assets/images/event/popup/wonju_pop1.jpg" alt="원주 이벤트">
+          <img class="vimg" src="@/assets/images/event/popup/wonju_pop2.jpg" alt="원주 이벤트">
           <div class="cbox" @click="popImg = false">
             <img class="close" src="@/assets/images/close.png" alt="close">
           </div>
