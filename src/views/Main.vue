@@ -16,7 +16,7 @@
       <WonjuPopup1 v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup1" />
       <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
-      <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" />
+      <!-- <WonjuPopup3 v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && wonjuPopup3" /> -->
       <WonjuPopup4 v-if="mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' && wonjuPopup4" />
       <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
       <ChungbukPopup v-if="mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==' && chungbukPopup" />
@@ -44,7 +44,7 @@ import PopupRestart from '@/components/popup/PopupRestart.vue'
 import WonjuPopup from '@/components/WonjuPopup.vue' // 원주1
 import WonjuPopup1 from '@/components/WonjuPopup1.vue' // 원주2
 import WonjuPopup2 from '@/components/WonjuPopup2.vue'
-import WonjuPopup3 from '@/components/WonjuPopup3.vue'
+// import WonjuPopup3 from '@/components/WonjuPopup3.vue'
 import WonjuPopup4 from '@/components/WonjuPopup4.vue'
 import KoGasPopup from '@/components/KoGasPopup.vue'
 import ChungbukPopup from '@/components/ChungbukPopup.vue'
@@ -67,7 +67,7 @@ export default {
     WonjuPopup,
     WonjuPopup1,
     WonjuPopup2,
-    WonjuPopup3,
+    // WonjuPopup3,
     WonjuPopup4,
     KoGasPopup,
     ChungbukPopup
@@ -171,9 +171,6 @@ export default {
     }
     if (this.$cookie.get('kogas_pop') === 'Y') {
       this.$store.state.KoGasPopup = false
-    }
-    if (this.$cookie.get('korea_pop1') === 'Y') {
-      this.$store.state.wonjuPopup3 = false
     }
     if (this.$cookie.get('wonju_pop') === 'Y') {
       this.$store.state.wonjuPopup = false
