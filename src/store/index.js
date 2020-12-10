@@ -1047,6 +1047,35 @@ export default new Vuex.Store({
         })
     },
     /*
+    머니콘 신청 여부 체크
+    */
+    ApplyCheckMoneycon ({ state, dispatch }, data) {
+      console.log(data)
+      const fd = new FormData()
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('token', state.token)
+      fd.append('gift', data.pGift.mingle_gift_seq)
+      const url = 'https://api.tranggle.com/mingle/courses/user_gift_chk.json'
+      axios
+        .post(url, fd)
+        .then(response => {
+          console.log(response.data.response)
+          if (response.data.response.code === '00') {
+            // 기프티콘 신청
+            dispatch('ApplyMoneycon', {
+              pGift: data.pGift,
+              mInfo: data.mInfo
+            })
+          } else if (response.data.response.code === '05') {
+            // 발급된 기프티콘 있음
+            alert('이미 발급된 기프티콘이 있습니다.')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
     머니콘 선물 신청
     */
     ApplyMoneycon ({ state, commit, dispatch }, data) {

@@ -46,7 +46,6 @@
                     <span>{{memberInfo.mobile || '정보 없음'}}</span>
                   </div>
                 </div>
-                <!-- <div class="check durunubi" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ=='"> -->
                 <div class="check durunubi" v-if="popupGift.mingle_no === '16' && durunubiCheck === '0'">
                   <input type="checkbox" id="durunubi"  name="durunubi" @click="durunubiAgreeCheck($event)" v-model="durunubi"> <label for="durunubi">두루누비 계정확인</label>
                 </div>
@@ -55,7 +54,6 @@
                 </div>
             </div>
             <button class="type1" :class="popupGift.mingle_no === '25' ? 'w100' : ''" @click="closeBtn">닫기</button>
-            <!-- <button class="type2" @click="receiveGift">모바일 상품권 받기</button> -->
             <button class="type2" @click="receiveGift" v-if="popupGift.mingle_no !== '25'">{{receiveBtn(popupGift)}}</button>
         </div>
         <PopupGiftPop v-if="popupNoti.open" />
@@ -133,25 +131,17 @@ export default {
               })
             }
             if (url) {
-              // this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo })
               setTimeout(() => {
                 appEvent.externalLinks(url)
               }, 10)
-              // appEvent.externalLinks(url)
-              // this.$store.dispatch('openPopupGift', {})
             }
           } else {
-            // 주석
-            // this.$store.dispatch('openNotiPopup', {
-            //   tit1: '선물이 신청되었습니다.<br/>선물은 입력된 휴대폰으로<br/>발송됩니다.',
-            //   tit2: '',
-            //   close: 'Y'
-            // })
-            // this.$store.dispatch('loadGiftReceive', { pGift: this.popupGift, mInfo: this.memberInfo, mcResponse: {} })
             if (!this.submitCheck) {
               // 머니콘 신청
               this.$store.state.submitCheck = true
-              this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
+              //  신청 로그 체크
+              this.$store.dispatch('ApplyCheckMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
+              // this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
             }
           }
         }
