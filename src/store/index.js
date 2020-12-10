@@ -1055,7 +1055,7 @@ export default new Vuex.Store({
       fd.append('mingleCode', state.mingleCode)
       fd.append('token', state.token)
       fd.append('gift', data.pGift.mingle_gift_seq)
-      const url = 'https://api.tranggle.com/mingle/courses/user_gift_chk.json'
+      const url = 'https://api.tranggle.com/v2/mingle/courses/user_gift_chk.json'
       axios
         .post(url, fd)
         .then(response => {
