@@ -4,14 +4,15 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju">
-                  <b class="wonju3tit">[신세계 상품권 증정 이벤트]</b><br>
-                  충북 나드리 스탬프투어 1개만<br>
-                  받아도 2만원 상당 신세계 상품권<br>
-                  증정!!<br><br>
-                  <span class="tal">
-                    <b>이벤트 기간 :</b> 2020.12.01 ~ 12.10<br>
-                    <b>대 상 :</b> 800명
-                  </span>
+                  <b class="wonju3tit">[완주기념패 전달 안내]</b><br>
+                  ‘꼭 가봐야 할 현중시설 100’<br>
+                  스탬프투어에 참여해 주신<br>
+                  모든 분들께 감사드립니다.<br><br>
+                  완주기념패 전달 안내는<br>
+                  상세보기에서 확인하시기 바랍니다.<br>
+                  [‘꼭 가봐야 할 현충시설 100’]<br>
+                  2021년에도 많은 관심과<br>
+                  참여 부탁 드립니다.
                 </div>
                 <div class="chkbox">
                   <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="check"><label for="noviewpop1">다시 보지 않기</label>
@@ -21,7 +22,7 @@
             <button class="type2" @click="viewDetail">자세히 보기</button>
         </div>
         <div class="popDetailImage" v-if="popImg">
-          <img class="vimg" src="@/assets/images/event/popup/nadri_pop1.jpg" alt="충북 이벤트">
+          <img class="vimg" src="@/assets/images/event/popup/hyunchung_pop.jpg" alt="현충 팝업">
           <div class="cbox" @click="popImg = false">
             <img class="close" src="@/assets/images/close.png" alt="close">
           </div>
@@ -30,7 +31,7 @@
 </template>
 <script>
 export default {
-  name: 'ChungbukPopup',
+  name: 'Hyunchung100',
   data () {
     return {
       check: false,
@@ -42,13 +43,13 @@ export default {
   methods: {
     closeBtn () {
       if (this.check) {
-        this.$cookie.set('chungbuk_pop', 'Y', 9999)
+        this.$cookie.set('hyunchung_pop', 'Y', 9999)
       }
-      this.$store.state.chungbukPopup = false
+      this.$store.state.hyunchungPopup = false
     },
     viewDetail () {
       if (this.check) {
-        this.$cookie.set('chungbuk_pop', 'Y', 9999)
+        this.$cookie.set('hyunchung_pop', 'Y', 9999)
       }
       this.popImg = true
     }

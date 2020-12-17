@@ -123,8 +123,6 @@ export default new Vuex.Store({
     wonjuPopup: true, // 원주
     wonjuPopup1: true, // 원주 이벤트 발표
     wonjuPopup2: { open: false }, // 50코스
-    wonjuPopup3: true, // 코리아둘레길
-    wonjuPopup4: true, // 테마관광100
     themaUserInfo: {},
     themaUserMobile: '',
     guestChk: '',
@@ -137,7 +135,8 @@ export default new Vuex.Store({
     stampPoi: [],
     TourPoiData: [],
     KoGasPopup: true, // 코리아 가스
-    chungbukPopup: true // 충북 나드리
+    chungbukPopup: true, // 충북 나드리
+    hyunchungPopup: true // 현충100
   },
   mutations: {
     setIntroData (state, data) {
