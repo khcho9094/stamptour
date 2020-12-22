@@ -1049,7 +1049,6 @@ export default new Vuex.Store({
     머니콘 신청 여부 체크
     */
     ApplyCheckMoneycon ({ state, dispatch }, data) {
-      console.log(data)
       const fd = new FormData()
       fd.append('mingleCode', state.mingleCode)
       fd.append('token', state.token)
@@ -1078,6 +1077,9 @@ export default new Vuex.Store({
     머니콘 선물 신청
     */
     ApplyMoneycon ({ state, commit, dispatch }, data) {
+      if (data.pGift.mingle_member_id.indexOf('@A') > -1) {
+        data.pGift.mingle_member_id = data.pGift.mingle_member_id.substr(0, 10)
+      }
       const giftCode = data.pGift.gift_code.split(',')
       const cData = data
       cData.mcResponse = {}
