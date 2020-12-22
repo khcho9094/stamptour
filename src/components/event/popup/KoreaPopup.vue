@@ -11,9 +11,7 @@
                   사랑 부탁드리겠습니다.<br><br>
                   코리아둘레길 설문이벤트<br>
                   당첨자는 '상세보기'에서<br>
-                  확인하실 수 있습니다.<br><br>
-                  2021년도에도 많은 관심과<br>
-                  참여 부탁드립니다.
+                  확인하실 수 있습니다.
                 </div>
                 <div class="chkbox">
                   <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="check"><label for="noviewpop1">다시 보지 않기</label>
