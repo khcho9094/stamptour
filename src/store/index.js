@@ -136,7 +136,8 @@ export default new Vuex.Store({
     TourPoiData: [],
     KoGasPopup: true, // 코리아 가스
     chungbukPopup: true, // 충북 나드리
-    hyunchungPopup: true // 현충100
+    hyunchungPopup: true, // 현충100
+    koreaPopup: true // 코리아둘레길 이벤트
   },
   mutations: {
     setIntroData (state, data) {
