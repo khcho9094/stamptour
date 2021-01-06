@@ -1,13 +1,13 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut">
-        <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
+        <!-- <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
             <div
               class="themaBanner"
               :style="{ 'background-image': BannerImage('event/allthat_main_banner_2.png') }"
               @click="goThema10Event">
             </div>
-        </swiper-slide>
+        </swiper-slide> -->
         <!-- <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
             <div
               class="themaBanner"

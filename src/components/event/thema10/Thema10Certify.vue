@@ -22,7 +22,7 @@
               <span class="mask">* 마스크는 반드시 코와 입을 가려야 인정됩니다.</span>
             </div>
           </div>
-          <div class="btn" @click="photoUpload(0, 'Edit')">
+          <div class="btn" @click="photoUploadStop(0, 'Edit')">
             + 인증사진 첨부
           </div>
           <div class="menu_btn" @click="thema10Main"></div>
@@ -35,11 +35,11 @@
                 :class="thema10Status.photo_log_auth_type === 'PHOTO' ? 'img2' : 'img1'"
                 :style="{ 'backgroundImage': `url(${thema10Status.photo_log_filename ? thema10Status.photo_log_filename : thema10Status.gps_log_filename})` }">
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUploadStop(0, 'Edit')" v-if="thema10Status.event_finish_chk !== 'Y' && !thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진추가
               </div>
-              <div class="edit_btn" @click="photoUpload(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
+              <div class="edit_btn" @click="photoUploadStop(0, 'reEdit')" v-else-if="thema10Status.event_finish_chk !== 'Y' && thema10Status.photo_log_auth_type">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -70,7 +70,7 @@
               2020년 7월1일 ~ 8월22일, 10월26일 ~ 11월23일<br>숙박 내역만 응모 가능합니다.
             </div>
           </div>
-          <div class="btn" @click="photoUpload(1, 'Edit')">
+          <div class="btn" @click="photoUploadStop(1, 'Edit')">
             + 영수증 첨부
           </div>
         </div>
@@ -78,7 +78,7 @@
           <div class="auth_check">
             <div class="left">
               <div class="img_box img2" :style="{ 'backgroundImage': `url(${thema10Status.receipt_log_filename})` }"></div>
-              <div class="edit_btn" @click="photoUpload(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
+              <div class="edit_btn" @click="photoUploadStop(1, 'reEdit')" v-if="thema10Status.event_finish_chk !== 'Y'">
                 <img src="@/assets/images/event/icon_edit.png" alt="">
                 사진편집
               </div>
@@ -96,7 +96,7 @@
       <div class="add_text">사진 첨부 후 <b>“이벤트 참여”</b> 버튼을 눌러주세요.</div>
     </div>
     <ul class="btn_box">
-      <li @click="enterEvent">이벤트 참여</li>
+      <li @click="photoUploadStop">이벤트 참여</li>
       <!-- <li @click="enterEventStop">이벤트 참여</li> -->
       <li @click="confirm">당첨 확인</li>
     </ul>
@@ -175,9 +175,9 @@ export default {
         this.$store.dispatch('openExamplePop', true)
       }
     },
-    // photoUploadStop () {
-    //   alert('대한민국 안전여행 참여 이벤트는 사회적 거리두기 강화에 따라 8월 24일부로 잠정 중단됨을 알립니다.')
-    // },
+    photoUploadStop () {
+      alert('이벤트 기간이 아닙니다.')
+    },
     enterEvent () {
       let tit1 = ''
       let tit2 = ''

@@ -19,7 +19,7 @@
       <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
       <Hyunchung100 v-if="mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' && hyunchungPopup" />
       <KoreaPopup v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && koreaPopup" />
-      <!-- <Thema10PopupOff v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Stop" /> -->
+      <Thema10Popup v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Popup" />
     </div>
     <Intro v-else/>
   </div>
@@ -46,7 +46,7 @@ import WonjuPopup2 from '@/components/event/popup/WonjuPopup2.vue'
 import KoGasPopup from '@/components/event/popup/KoGasPopup.vue'
 import Hyunchung100 from '@/components/event/popup/Hyunchung100.vue'
 import KoreaPopup from '@/components/event/popup/KoreaPopup.vue'
-// import Thema10PopupOff from '@/components/event/thema10/Thema10PopupOff.vue'
+import Thema10Popup from '@/components/event/popup/Thema10Popup.vue'
 export default {
   name: 'Main',
   components: {
@@ -67,8 +67,8 @@ export default {
     WonjuPopup2,
     KoGasPopup,
     Hyunchung100,
-    KoreaPopup
-    // Thema10PopupOff
+    KoreaPopup,
+    Thema10Popup
   },
   data () {
     return {
@@ -89,7 +89,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'thema10Stop', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup', 'thema10Popup'])
   },
   methods: {
     handleMoreButton () {
@@ -174,6 +174,9 @@ export default {
     }
     if (this.$cookie.get('korea_pop') === 'Y') {
       this.$store.state.koreaPopup = false
+    }
+    if (this.$cookie.get('thema10_pop') === 'Y') {
+      this.$store.state.thema10Popup = false
     }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')

@@ -4,14 +4,9 @@
             <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
             <div class="text_2 noviewpop">
                 <div class="stamp_success wonju">
-                  <b class="wonju3tit">[설문 이벤트 당첨자 발표]</b><br>
-                  2020년 올 한해도 코리아둘레길을<br>
-                  방문해 주셔서 감사드리며<br>
-                  2021년에도 변함없는 관심과<br>
-                  사랑 부탁드리겠습니다.<br><br>
-                  코리아둘레길 설문이벤트<br>
-                  당첨자는 '상세보기'에서<br>
-                  확인하실 수 있습니다.
+                  <b class="wonju3tit">[이벤트 당첨자 발표]</b><br>
+                  2021년 새해를 맞이하여 건강과<br>행운이 가득하시길 바랍니다.<br>
+                  대한민국 안전여행 참여이벤트<br>당첨자는 '상세보기'에서<br>확인하실 수 있습니다.
                 </div>
                 <div class="chkbox">
                   <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="check"><label for="noviewpop1">다시 보지 않기</label>
@@ -25,7 +20,7 @@
 <script>
 import * as appEvent from '@/assets/js/app_event.js'
 export default {
-  name: 'KoreaPopup',
+  name: 'Thema10Popup',
   data () {
     return {
       check: false
@@ -36,16 +31,16 @@ export default {
   methods: {
     closeBtn () {
       if (this.check) {
-        this.$cookie.set('korea_pop', 'Y', 9999)
+        this.$cookie.set('thema10_pop', 'Y', 7)
       }
-      this.$store.state.koreaPopup = false
+      this.$store.state.thema10Popup = false
     },
     viewDetail () {
       if (this.check) {
-        this.$cookie.set('korea_pop', 'Y', 9999)
+        this.$cookie.set('thema10_pop', 'Y', 7)
       }
-      this.$store.state.koreaPopup = false
-      const url = 'https://drive.google.com/file/d/1z_0pF9JrL-CjMkcJdjCnJYDCbfPEMH3_/view?usp=sharing'
+      this.$store.state.thema10Popup = false
+      const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'
       appEvent.externalLinks(url)
     }
   },

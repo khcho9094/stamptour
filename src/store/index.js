@@ -131,13 +131,13 @@ export default new Vuex.Store({
     receiptNumber: '',
     uploadLoading: false,
     submitCheck: false,
-    thema10Stop: true, // 테마10 중단 팝업
     stampPoi: [],
     TourPoiData: [],
     KoGasPopup: true, // 코리아 가스
     chungbukPopup: true, // 충북 나드리
     hyunchungPopup: true, // 현충100
-    koreaPopup: true // 코리아둘레길 이벤트
+    koreaPopup: true, // 코리아둘레길 이벤트
+    thema10Popup: true // 테마10 공지 팝업
   },
   mutations: {
     setIntroData (state, data) {
