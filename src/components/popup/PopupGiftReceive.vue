@@ -56,6 +56,9 @@
             <button class="type1" :class="popupGift.mingle_no === '25' ? 'w100' : ''" @click="closeBtn">닫기</button>
             <button class="type2" @click="receiveGift" v-if="popupGift.mingle_no !== '25'">{{receiveBtn(popupGift)}}</button>
         </div>
+        <div class="loading_back" v-if="submitCheck">
+          <img src="@/assets/images/ajax-loader.gif" alt="loader">
+        </div>
         <PopupGiftPop v-if="popupNoti.open" />
     </div>
 </template>
@@ -141,7 +144,6 @@ export default {
               this.$store.state.submitCheck = true
               //  신청 로그 체크
               this.$store.dispatch('ApplyCheckMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
-              // this.$store.dispatch('ApplyMoneycon', { pGift: this.popupGift, mInfo: this.memberInfo })
             }
           }
         }
@@ -249,5 +251,21 @@ export default {
   .w100 {
     width: 100%!important;
     border:0!important;
+  }
+  .loading_back {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(15, 14, 14, 0.3);
+    z-index: 999999;
+  }
+  .loading_back img {
+    width:40px;
+    position:absolute;
+    top:315px;
+    left:50%;
+    margin-left: -20px;
   }
 </style>

@@ -36,15 +36,27 @@ export default {
       this.$store.state.thema10Popup = false
     },
     viewDetail () {
-      if (this.check) {
-        this.$cookie.set('thema10_pop', 'Y', 7)
-      }
-      this.$store.state.thema10Popup = false
       const url = 'https://www.moneycon.co.kr/MCon-DataCollection/static/Client/view/index.html#/prize'
       appEvent.externalLinks(url)
+    },
+    phoneChk () {
+      var varUA = navigator.userAgent.toLowerCase()
+      var os = null
+      if (varUA.indexOf('android') > -1) {
+        os = 'android'
+      } else if (varUA.indexOf('iphone') > -1 || varUA.indexOf('ipad') > -1 || varUA.indexOf('ipod') > -1) {
+        os = 'ios'
+      } else {
+        os = 'order'
+      }
+      return os
     }
   },
   mounted () {
+    const os = this.phoneChk()
+    if (os === 'ios') {
+      this.$store.state.thema10Popup = false
+    }
   },
   destroyed () {
   }
