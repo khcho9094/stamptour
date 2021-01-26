@@ -17,7 +17,7 @@
       <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
       <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
-      <Hyunchung100 v-if="mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' && hyunchungPopup" />
+      <!-- <Hyunchung100 v-if="mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' && hyunchungPopup" /> -->
       <KoreaPopup v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && koreaPopup" />
       <Thema10Popup v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Popup" />
     </div>
@@ -44,7 +44,7 @@ import WonjuPopup from '@/components/event/popup/WonjuPopup.vue' // 원주1
 import WonjuPopup1 from '@/components/event/popup/WonjuPopup1.vue' // 원주2
 import WonjuPopup2 from '@/components/event/popup/WonjuPopup2.vue'
 import KoGasPopup from '@/components/event/popup/KoGasPopup.vue'
-import Hyunchung100 from '@/components/event/popup/Hyunchung100.vue'
+// import Hyunchung100 from '@/components/event/popup/Hyunchung100.vue'
 import KoreaPopup from '@/components/event/popup/KoreaPopup.vue'
 import Thema10Popup from '@/components/event/popup/Thema10Popup.vue'
 export default {
@@ -66,7 +66,7 @@ export default {
     WonjuPopup1,
     WonjuPopup2,
     KoGasPopup,
-    Hyunchung100,
+    // Hyunchung100,
     KoreaPopup,
     Thema10Popup
   },
@@ -169,9 +169,9 @@ export default {
     if (this.$cookie.get('wonju_pop') === 'Y') {
       this.$store.state.wonjuPopup = false
     }
-    if (this.$cookie.get('hyunchung_pop') === 'Y') {
-      this.$store.state.hyunchungPopup = false
-    }
+    // if (this.$cookie.get('hyunchung_pop') === 'Y') {
+    //   this.$store.state.hyunchungPopup = false
+    // }
     if (this.$cookie.get('korea_pop') === 'Y') {
       this.$store.state.koreaPopup = false
     }

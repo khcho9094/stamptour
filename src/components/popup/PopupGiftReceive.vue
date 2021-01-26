@@ -10,6 +10,11 @@
                 <div class="gift_receive" v-else-if="popupGift.mingle_gift_add_point === 'AUTH' && popupGift.mingle_no === '14'">
                   <b>봉사점수 신청하기</b><br/>
                 </div>
+                <!-- 태백 거주자 필터 -->
+                <div class="gift_receive" v-else-if="popupGift.mingle_no === '15' && memberInfo.address.indexOf('태백시') > -1">
+                  <b>신청 불가</b><br/><br/>
+                  <span>모바일 상품권은 태백시 관내<br>거주민에게는 제공되지 않습니다.</span>
+                </div>
                 <!-- 이응노 팝업 -->
                 <div class="gift_receive" v-else-if="popupGift.mingle_no === '25'">
                   <b>완주를 축하합니다!</b><br><br>
@@ -53,8 +58,8 @@
                   <input type="checkbox" id="personal"  name="personal" v-model="personal"> <label for="personal">개인정보 제3자 제공동의</label>
                 </div>
             </div>
-            <button class="type1" :class="popupGift.mingle_no === '25' ? 'w100' : ''" @click="closeBtn">닫기</button>
-            <button class="type2" @click="receiveGift" v-if="popupGift.mingle_no !== '25'">{{receiveBtn(popupGift)}}</button>
+            <button class="type1" :class="(popupGift.mingle_no === '25' || (popupGift.mingle_no === '15' && memberInfo.address.indexOf('태백시') > -1)) ? 'w100' : ''" @click="closeBtn">닫기</button>
+            <button class="type2" @click="receiveGift" v-if="popupGift.mingle_no !== '25' && (popupGift.mingle_no !== '15' || memberInfo.address.indexOf('태백시') === -1)">{{receiveBtn(popupGift)}}</button>
         </div>
         <div class="loading_back" v-if="submitCheck">
           <img src="@/assets/images/ajax-loader.gif" alt="loader">
