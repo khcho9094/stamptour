@@ -137,7 +137,8 @@ export default new Vuex.Store({
     chungbukPopup: true, // 충북 나드리
     hyunchungPopup: true, // 현충100
     koreaPopup: true, // 코리아둘레길 이벤트
-    thema10Popup: true // 테마10 공지 팝업
+    thema10Popup: true, // 테마10 공지 팝업
+    moneyconPopup: true // 머니콘 점검 팝업
   },
   mutations: {
     setIntroData (state, data) {
