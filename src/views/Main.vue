@@ -20,6 +20,8 @@
       <!-- <Hyunchung100 v-if="mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' && hyunchungPopup" /> -->
       <KoreaPopup v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && koreaPopup" />
       <Thema10Popup v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Popup" />
+      <!-- 210201 관리자 팝업 hjhj -->
+      <!-- <CommonPopup :mingleCode="mingleCode" /> -->
     </div>
     <Intro v-else/>
   </div>
@@ -47,6 +49,8 @@ import KoGasPopup from '@/components/event/popup/KoGasPopup.vue'
 // import Hyunchung100 from '@/components/event/popup/Hyunchung100.vue'
 import KoreaPopup from '@/components/event/popup/KoreaPopup.vue'
 import Thema10Popup from '@/components/event/popup/Thema10Popup.vue'
+// 210201 관리자 팝업 hjhj
+// import CommonPopup from '@/components/event/popup/CommonPopup.vue'
 export default {
   name: 'Main',
   components: {
@@ -69,6 +73,8 @@ export default {
     // Hyunchung100,
     KoreaPopup,
     Thema10Popup
+    // 210201 관리자 팝업 hjhj
+    // CommonPopup
   },
   data () {
     return {
@@ -89,6 +95,7 @@ export default {
     }
   },
   computed: {
+    // ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo'])
     ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup', 'thema10Popup'])
   },
   methods: {
@@ -178,6 +185,10 @@ export default {
     if (this.$cookie.get('thema10_pop') === 'Y') {
       this.$store.state.thema10Popup = false
     }
+    /* 210201 관리자 팝업 hjhj */
+    // if (this.$cookie.get(this.mingleCode) === 'Y') {
+    //   this.$store.state.thema10Popup = false
+    // }
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {
