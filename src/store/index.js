@@ -139,7 +139,8 @@ export default new Vuex.Store({
     koreaPopup: true, // 코리아둘레길 이벤트
     thema10Popup: true, // 테마10 공지 팝업
     popupList: [], // 팝업 관리자 리스트
-    commonPopupBool: true
+    commonPopupBool: true, // 공통팝업
+    moneyconPopup: true // 머니콘 점검 팝업
   },
   mutations: {
     setIntroData (state, data) {

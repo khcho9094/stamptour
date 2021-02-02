@@ -22,6 +22,7 @@
       <Thema10Popup v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Popup" />
       <!-- 210201 관리자 팝업 hjhj -->
       <!-- <CommonPopup :mingleCode="mingleCode" /> -->
+      <MoneyconPopup v-if="(mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || mingleCode === 'HvbQjGJR2yF9vTu8m2TUZQ==' || mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' || mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==') && moneyconPopup && checkMoneycon()" />
     </div>
     <Intro v-else/>
   </div>
@@ -51,6 +52,7 @@ import KoreaPopup from '@/components/event/popup/KoreaPopup.vue'
 import Thema10Popup from '@/components/event/popup/Thema10Popup.vue'
 // 210201 관리자 팝업 hjhj
 // import CommonPopup from '@/components/event/popup/CommonPopup.vue'
+import MoneyconPopup from '@/components/event/popup/MoneyconPopup.vue'
 export default {
   name: 'Main',
   components: {
@@ -72,9 +74,10 @@ export default {
     KoGasPopup,
     // Hyunchung100,
     KoreaPopup,
-    Thema10Popup
+    Thema10Popup,
     // 210201 관리자 팝업 hjhj
     // CommonPopup
+    MoneyconPopup
   },
   data () {
     return {
@@ -95,8 +98,8 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo'])
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup', 'thema10Popup'])
+    // ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo, 'moneyconPopup''])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup', 'thema10Popup', 'moneyconPopup'])
   },
   methods: {
     handleMoreButton () {
@@ -104,6 +107,29 @@ export default {
     },
     handleMoreSnsButton () {
       this.snsVisible = !this.snsVisible
+    },
+    checkMoneycon () {
+      const date = new Date()
+      const year = date.getFullYear()
+      let month = date.getMonth() + 1
+      let day = date.getDate()
+      let hour = date.getHours()
+      let minute = date.getMinutes()
+      if ((month + '').length < 2) {
+        month = `0${month}`
+      }
+      if ((day + '').length < 2) {
+        day = `0${day}`
+      }
+      if ((hour + '').length < 2) {
+        hour = `0${hour}`
+      }
+      if ((minute + '').length < 2) {
+        minute = `0${minute}`
+      }
+      const getDate = `${year}${month}${day}${hour}${minute}`
+      const timeCheck = getDate >= '202102012359' && getDate < '202102020400'
+      return timeCheck
     }
   },
   beforeCreate () {
