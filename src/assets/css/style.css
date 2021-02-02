@@ -2483,10 +2483,6 @@ ul.photo_select li input[type="file"] {
 }
 .themaBanner {
     width:100%;
-    height:57px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 .stamp_box .title .restart {
     border:1px solid #cb6e5b;

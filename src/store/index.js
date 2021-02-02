@@ -139,6 +139,7 @@ export default new Vuex.Store({
     koreaPopup: true, // 코리아둘레길 이벤트
     thema10Popup: true, // 테마10 공지 팝업
     popupList: [], // 팝업 관리자 리스트
+    bannerList: [], // 배너 관리자 리스트
     commonPopupBool: true, // 공통팝업
     moneyconPopup: true // 머니콘 점검 팝업
   },
@@ -387,6 +388,9 @@ export default new Vuex.Store({
     },
     setPopupList (state, data) {
       state.popupList = data
+    },
+    setBannerList (state, data) {
+      state.bannerList = data
     }
   },
   actions: {
@@ -1228,7 +1232,7 @@ export default new Vuex.Store({
     /*
     팝업 관리자 API
     */
-    PopupManager ({ state, commit }, data) {
+    PopupBannerManager ({ state, commit }, data) {
       const url = 'http://sung-api.tranggle.com/mingle/stamptour/popup_banner_data.json'
       const fd = new FormData()
       fd.append('mingleCode', data)
@@ -1238,6 +1242,7 @@ export default new Vuex.Store({
           console.log(response.data.response)
           if (response.data.response.code === '00') {
             commit('setPopupList', response.data.response.content.popup_data)
+            commit('setBannerList', response.data.response.content.banner_data)
           }
         })
         .catch(err => {

@@ -1,33 +1,8 @@
 <template>
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut">
-        <!-- <swiper-slide v-if="this.mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg=='">
-            <div
-              class="themaBanner"
-              :style="{ 'background-image': BannerImage('event/allthat_main_banner_2.png') }"
-              @click="goThema10Event">
-            </div>
-        </swiper-slide> -->
-        <!-- <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
-            <div
-              class="themaBanner"
-              :style="{ 'background-image': BannerImage('allthat_main_banner_kogas_1.png') }"
-              @click="goKogasEvent">
-            </div>
-        </swiper-slide> -->
-        <swiper-slide v-if="this.mingleCode === '0lDg6JT7iYoHXLAPV4p8wA=='">
-            <div
-              class="themaBanner"
-              :style="{ 'background-image': BannerImage('allthat_main_banner_kogas_2.png') }"
-              @click="goKogasEvent">
-            </div>
-        </swiper-slide>
-        <swiper-slide v-if="this.mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA=='">
-            <div
-              class="themaBanner"
-              :style="{ 'background-image': BannerImage('allthat_main_banner_kor100_2.png') }"
-              @click="goExternalEvent('https://korean.visitkorea.or.kr/detail/event_detail.do?cotid=641e4780-112c-4da2-af27-87648c0be27b')">
-            </div>
+        <swiper-slide v-for="(banner, idx) in bannerList" :key="idx">
+          <img class="themaBanner" :src="`https://stamp.tranggle.com/${banner.notice_popup_img_url.replace('html/', '')}`" :alt="banner.notice_popup_title" />
         </swiper-slide>
         <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== '0lDg6JT7iYoHXLAPV4p8wA=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
@@ -70,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['sumPrice', 'mingleCode', 'stampCodeInfo'])
+    ...mapState(['sumPrice', 'mingleCode', 'stampCodeInfo', 'bannerList'])
   },
   methods: {
     goGift () {
@@ -85,19 +60,6 @@ export default {
       })
       return cMsg
     },
-    goThema10Event () {
-      appEvent.thema10Page()
-    },
-    goKogasEvent () {
-      appEvent.kogasPage()
-    },
-    goExternalEvent (url) {
-      appEvent.externalLinks(url)
-    },
-    BannerImage (name) {
-      const url = require(`@/assets/images/${name}`)
-      return `url(${url})`
-    },
     fullPathChk () {
       let chk = false
       if (location.href.indexOf('stagestamp') > -1) {
@@ -106,6 +68,15 @@ export default {
         chk = false
       }
       return chk
+    },
+    checkUrl (url) {
+      if (url.indexOf('mstamp.tranggle.com')) {
+        // 내부링크
+        appEvent.interiorLink(url)
+      } else {
+        // 외부링크
+        appEvent.externalLinks(url.split('.com')[1])
+      }
     }
   },
   created () {
@@ -126,7 +97,7 @@ export default {
 </script>
 <style>
     .swiper {
-        width: 100%;
+      width: 100%;
     }
     .swiperbut {
       padding-bottom:10px!important;

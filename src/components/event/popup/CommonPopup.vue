@@ -40,14 +40,8 @@ export default {
       check: false
     }
   },
-  watch: {
-    popupList () {
-      console.log(this.popupList)
-    }
-  },
   mounted () {
     this.$store.state.commonPopupBool = true
-    this.$store.dispatch('PopupManager', this.mingleCode)
   },
   methods: {
     closeBtn () {

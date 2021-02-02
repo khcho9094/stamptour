@@ -76,7 +76,7 @@ export default {
     KoreaPopup,
     Thema10Popup,
     // 210201 관리자 팝업 hjhj
-    // CommonPopup
+    // CommonPopup,
     MoneyconPopup
   },
   data () {
@@ -212,9 +212,10 @@ export default {
       this.$store.state.thema10Popup = false
     }
     /* 210201 관리자 팝업 hjhj */
-    // if (this.$cookie.get(this.mingleCode) === 'Y') {
-    //   this.$store.state.thema10Popup = false
-    // }
+    if (this.$cookie.get(this.mingleCode) === 'Y') {
+      this.$store.state.thema10Popup = false
+    }
+    this.$store.dispatch('PopupBannerManager', this.mingleCode)
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
     setTimeout(() => {

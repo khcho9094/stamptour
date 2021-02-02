@@ -134,6 +134,16 @@ export function kogasPage () {
   }
 }
 
+export function interiorLink (url) {
+  var os = chkUserAgent()
+  if (os === 'android') {
+    // eslint-disable-next-line no-undef
+    tranggle3.tranggle_callback('event_thema10', `{ "url": ${url} }`)
+  } else if (os === 'ios') {
+    window.location = `tranggle://event_thema10?url=${url}`
+  }
+}
+
 /**
  * 테마10선 미로그인 로그인페이지로 이동
  */
