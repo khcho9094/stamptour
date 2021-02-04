@@ -13,16 +13,9 @@
       <PopupStampSuccess v-if="popupStampSuccess" />
       <PopupMyStamp />
       <PopupRestart />
-      <WonjuPopup1 v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup1" />
-      <WonjuPopup v-if="mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' && wonjuPopup" />
       <WonjuPopup2 v-if="wonjuPopup2.open" />
-      <KoGasPopup v-if="mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' && KoGasPopup" />
-      <!-- <Hyunchung100 v-if="mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' && hyunchungPopup" /> -->
-      <KoreaPopup v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' && koreaPopup" />
-      <Thema10Popup v-if="mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' && thema10Popup" />
       <!-- 210201 관리자 팝업 hjhj -->
-      <!-- <CommonPopup :mingleCode="mingleCode" /> -->
-      <MoneyconPopup v-if="(mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === '/GN62eV1c4Q78ghWNMWRsQ==' || mingleCode === 'HvbQjGJR2yF9vTu8m2TUZQ==' || mingleCode === '4k68KEPNtv/xCP0/x2Hirw==' || mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==') && moneyconPopup && checkMoneycon()" />
+      <CommonPopup :mingleCode="mingleCode" />
     </div>
     <Intro v-else/>
   </div>
@@ -43,16 +36,9 @@ import PopupStampSuccess from '@/components/popup/PopupStampSuccess.vue'
 import Intro from '@/components/Intro.vue'
 import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 import PopupRestart from '@/components/popup/PopupRestart.vue'
-import WonjuPopup from '@/components/event/popup/WonjuPopup.vue' // 원주1
-import WonjuPopup1 from '@/components/event/popup/WonjuPopup1.vue' // 원주2
 import WonjuPopup2 from '@/components/event/popup/WonjuPopup2.vue'
-import KoGasPopup from '@/components/event/popup/KoGasPopup.vue'
-// import Hyunchung100 from '@/components/event/popup/Hyunchung100.vue'
-import KoreaPopup from '@/components/event/popup/KoreaPopup.vue'
-import Thema10Popup from '@/components/event/popup/Thema10Popup.vue'
 // 210201 관리자 팝업 hjhj
-// import CommonPopup from '@/components/event/popup/CommonPopup.vue'
-import MoneyconPopup from '@/components/event/popup/MoneyconPopup.vue'
+import CommonPopup from '@/components/event/popup/CommonPopup.vue'
 export default {
   name: 'Main',
   components: {
@@ -68,16 +54,9 @@ export default {
     Intro,
     PopupMyStamp,
     PopupRestart,
-    WonjuPopup,
-    WonjuPopup1,
     WonjuPopup2,
-    KoGasPopup,
-    // Hyunchung100,
-    KoreaPopup,
-    Thema10Popup,
     // 210201 관리자 팝업 hjhj
-    // CommonPopup,
-    MoneyconPopup
+    CommonPopup
   },
   data () {
     return {
@@ -98,8 +77,7 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo, 'moneyconPopup''])
-    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup1', 'wonjuPopup2', 'KoGasPopup', 'wonjuPopup', 'hyunchungPopup', 'koreaPopup', 'thema10Popup', 'moneyconPopup'])
+    ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup2'])
   },
   methods: {
     handleMoreButton () {
@@ -107,29 +85,6 @@ export default {
     },
     handleMoreSnsButton () {
       this.snsVisible = !this.snsVisible
-    },
-    checkMoneycon () {
-      const date = new Date()
-      const year = date.getFullYear()
-      let month = date.getMonth() + 1
-      let day = date.getDate()
-      let hour = date.getHours()
-      let minute = date.getMinutes()
-      if ((month + '').length < 2) {
-        month = `0${month}`
-      }
-      if ((day + '').length < 2) {
-        day = `0${day}`
-      }
-      if ((hour + '').length < 2) {
-        hour = `0${hour}`
-      }
-      if ((minute + '').length < 2) {
-        minute = `0${minute}`
-      }
-      const getDate = `${year}${month}${day}${hour}${minute}`
-      const timeCheck = getDate >= '202102012359' && getDate < '202102020400'
-      return timeCheck
     }
   },
   beforeCreate () {
@@ -193,24 +148,6 @@ export default {
     }
   },
   mounted () {
-    if (this.$cookie.get('wonju_pop1') === 'Y') {
-      this.$store.state.wonjuPopup1 = false
-    }
-    if (this.$cookie.get('kogas_pop') === 'Y') {
-      this.$store.state.KoGasPopup = false
-    }
-    if (this.$cookie.get('wonju_pop') === 'Y') {
-      this.$store.state.wonjuPopup = false
-    }
-    // if (this.$cookie.get('hyunchung_pop') === 'Y') {
-    //   this.$store.state.hyunchungPopup = false
-    // }
-    if (this.$cookie.get('korea_pop') === 'Y') {
-      this.$store.state.koreaPopup = false
-    }
-    if (this.$cookie.get('thema10_pop') === 'Y') {
-      this.$store.state.thema10Popup = false
-    }
     /* 210201 관리자 팝업 hjhj */
     if (this.$cookie.get(this.mingleCode) === 'Y') {
       this.$store.state.thema10Popup = false

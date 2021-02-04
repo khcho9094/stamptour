@@ -219,7 +219,7 @@ export default {
       // }
     },
     getResize () {
-      this.dotW = document.getElementById('stampId').offsetWidth / 4 - 53
+      this.dotW = (document.getElementById('stampId')) ? document.getElementById('stampId').offsetWidth / 4 - 53 : ''
     },
     goMyStamp () {
       router.push('/mystamp')

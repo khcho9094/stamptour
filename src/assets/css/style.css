@@ -2626,3 +2626,33 @@ ul.photo_select li input[type="file"] {
     background-position: center;
     border-radius: 100%;
 }
+.noviewpop b {
+    display: block;
+    margin-bottom: 10px;
+}
+.popDetailImage {
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow: auto;
+    background: #eee;
+  }
+  .popDetailImage img.vimg {
+    width: 100%;
+  }
+  .popDetailImage .cbox {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width:50px;
+    height:50px;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-radius: 10px;
+  }
+  .popDetailImage .cbox img.close {
+    width: 30px;
+    margin-top: 10px;
+  }

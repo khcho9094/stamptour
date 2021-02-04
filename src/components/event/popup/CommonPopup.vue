@@ -1,21 +1,28 @@
 <template>
-    <div v-if="commonPopupBool">
-        <div v-for="(list, idx) in popupList" :key="idx"  class="pop_overay">
+    <div>
+        <div v-for="(list, idx) in popupList" :key="idx">
+          <div class="pop_overay" v-if="$cookie.get(`popup_${list.notice_popup_seq}`) !== 'Y'">
             <div class="pop_cont">
-                <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
-                <div class="text_2 noviewpop">
-                    <div class="stamp_success wonju">
-                    <b class="wonju3tit">[{{ list.notice_popup_title}}]</b><br>
-                    <div v-html="list.notice_popup_content"></div>
-                    </div>
-                    <div v-if="list.notice_popup_close_yn == 'Y'" class="chkbox">
-                    <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="check"><label for="noviewpop1">다시 보지 않기</label>
-                    </div>
-                </div>
-                <button v-if="list.notice_popup_url" class="type1" @click="closeBtn">닫기</button>
-                <button v-if="list.notice_popup_url" class="type2" @click="viewDetail">자세히 보기</button>
-                <button v-if="!list.notice_popup_url" @click="closeBtn">닫기</button>
+              <img class="icon_img" src="@/assets/images/popup_icon.png" alt="icon">
+              <div class="text_2 noviewpop">
+                  <div class="stamp_success">
+                  <b>[{{ list.notice_popup_title}}]</b>
+                  <div v-html="list.notice_popup_content"></div>
+                  </div>
+                  <div v-if="list.notice_popup_close_yn == 'Y'" class="chkbox">
+                  <input type="checkbox" id="noviewpop1"  name="noviewpop1" checked="checked" v-model="list.pop_check"><label for="noviewpop1">일주일 동안 보지 않기</label>
+                  </div>
+              </div>
+              <button :class="list.notice_popup_url ? 'type1' : ''" @click="closeBtn(list, idx)">닫기</button>
+              <button v-if="list.notice_popup_url" class="type2" @click="viewDetail(list)">자세히 보기</button>
             </div>
+          </div>
+        </div>
+        <div class="popDetailImage" v-if="popImg">
+          <img class="vimg" :src="popImg" alt="">
+          <div class="cbox" @click="popImg = ''">
+            <img class="close" src="@/assets/images/close.png" alt="close">
+          </div>
         </div>
     </div>
 </template>
@@ -28,27 +35,34 @@
   3. 상세보기 링크가 외부가 아닌 내부에 레이어팝업으로 이미지만 띄울 경우
      url 받아와서 외부에 띄우기로함
 */
+import * as appEvent from '@/assets/js/app_event.js'
 import { mapState } from 'vuex'
 export default {
   name: 'CommonPopup',
   props: ['mingleCode'],
   computed: {
-    ...mapState(['popupList', 'commonPopupBool'])
+    ...mapState(['popupList'])
   },
   data () {
     return {
-      check: false
+      popImg: ''
     }
   },
   mounted () {
-    this.$store.state.commonPopupBool = true
   },
   methods: {
-    closeBtn () {
-      if (this.check) {
-        this.$cookie.set(this.mingleCode, 'Y', 9999)
+    closeBtn (list, idx) {
+      if (list.pop_check) {
+        this.$cookie.set(`popup_${list.notice_popup_seq}`, 'Y', 7)
       }
-      this.$store.state.commonPopupBool = false
+      this.popupList.splice(idx, 1)
+    },
+    viewDetail (list) {
+      if (list.notice_popup_url.indexOf('stamp.tranggle.com') > -1) {
+        this.popImg = list.notice_popup_url
+      } else {
+        appEvent.externalLinks(list.notice_popup_url)
+      }
     }
   }
 }

@@ -139,9 +139,7 @@ export default new Vuex.Store({
     koreaPopup: true, // 코리아둘레길 이벤트
     thema10Popup: true, // 테마10 공지 팝업
     popupList: [], // 팝업 관리자 리스트
-    bannerList: [], // 배너 관리자 리스트
-    commonPopupBool: true, // 공통팝업
-    moneyconPopup: true // 머니콘 점검 팝업
+    bannerList: [] // 배너 관리자 리스트
   },
   mutations: {
     setIntroData (state, data) {
@@ -388,6 +386,9 @@ export default new Vuex.Store({
     },
     setPopupList (state, data) {
       state.popupList = data
+      state.popupList.map((val) => {
+        val.pop_check = false
+      })
     },
     setBannerList (state, data) {
       state.bannerList = data
