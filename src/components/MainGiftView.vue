@@ -2,7 +2,7 @@
   <div>
     <swiper :options="swiperOption" class="swiper swiperbut">
         <swiper-slide v-for="(banner, idx) in bannerList" :key="idx">
-          <img class="themaBanner" :src="`https://stamp.tranggle.com/${banner.notice_popup_img_url.replace('html/', '')}`" :alt="banner.notice_popup_title" />
+          <img class="themaBanner" :src="`https://stamp.tranggle.com/${banner.notice_popup_img_url.replace('html/', '')}`" :alt="banner.notice_popup_title" @click="checkUrl(banner.notice_popup_url)"/>
         </swiper-slide>
         <swiper-slide v-if="this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== '0lDg6JT7iYoHXLAPV4p8wA=='">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
@@ -70,12 +70,12 @@ export default {
       return chk
     },
     checkUrl (url) {
-      if (url.indexOf('mstamp.tranggle.com')) {
+      if (url.indexOf('mstamp.tranggle.com') > -1) {
         // 내부링크
-        appEvent.interiorLink(url)
+        appEvent.interiorLink(url.split('.com')[1])
       } else {
         // 외부링크
-        appEvent.externalLinks(url.split('.com')[1])
+        appEvent.externalLinks(url)
       }
     }
   },
