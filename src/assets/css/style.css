@@ -2629,6 +2629,7 @@ ul.photo_select li input[type="file"] {
 .noviewpop b {
     display: block;
     margin-bottom: 10px;
+    font-size: 1.1em;
 }
 .popDetailImage {
     z-index: 9999;
