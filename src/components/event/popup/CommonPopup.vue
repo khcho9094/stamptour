@@ -58,8 +58,10 @@ export default {
       this.popupList.splice(idx, 1)
     },
     viewDetail (list) {
-      if (list.notice_popup_url.indexOf('stamp.tranggle.com') > -1) {
+      if (list.notice_popup_url.indexOf('stamp.tranggle.com') > -1 && (list.notice_popup_url.indexOf('jpg') > -1 || list.notice_popup_url.indexOf('png') > -1)) {
         this.popImg = list.notice_popup_url
+      } else if (list.notice_popup_url.indexOf('mstamp.tranggle.com') > -1 || list.notice_popup_url.indexOf('stagestamp.tranggle.com') > -1) {
+        appEvent.interiorLink(list.notice_popup_url.split('.com')[1])
       } else {
         appEvent.externalLinks(list.notice_popup_url)
       }
