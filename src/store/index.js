@@ -169,8 +169,10 @@ export default new Vuex.Store({
         sum += parseInt(val.mingle_gift_price)
       })
       state.sumPrice = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      state.memberInfo.address = data[0].member_address
-      state.memberInfo.mobile = data[0].member_mobile
+      if (data.length) {
+        state.memberInfo.address = data[0].member_address
+        state.memberInfo.mobile = data[0].member_mobile
+      }
     },
     setTotalData (state, data) {
       state.userInfo = data.view
