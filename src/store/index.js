@@ -1236,7 +1236,7 @@ export default new Vuex.Store({
     팝업 관리자 API
     */
     PopupBannerManager ({ state, commit }, data) {
-      const url = 'http://sung-api.tranggle.com/mingle/stamptour/popup_banner_data.json'
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/popup_banner_data.json'
       const fd = new FormData()
       fd.append('mingleCode', data)
       axios
