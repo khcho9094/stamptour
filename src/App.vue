@@ -74,5 +74,5 @@ export default {
 }
 </script>
 <style>
-  @import './assets/css/style.css?202007141145';
+  @import './assets/css/style.css?202103031118';
 </style>

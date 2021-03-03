@@ -949,7 +949,6 @@ header .head_back span {
     background-position: center;
     border-radius: 100%;
 }
-
 .course_box ul.list {
     background-color: #f6f1e7;
     padding:17px 15px 55px 25px;
@@ -1569,8 +1568,38 @@ header .head_back span {
                  참가자 보기 페이지
 
 =============================================*/
+.tour_sub_wrap ul.my_info {
+    background-color: #faf7f1
+}
+.tour_sub_wrap ul.my_info li {
+    padding:15px 20px 15px 25px;
+    overflow: hidden;
+}
+.tour_sub_wrap .member_list_tab {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 13px;
+    background-color: #fff;
+    text-align: center;
+}
+.tour_sub_wrap .member_list_tab li {
+    /* display: inline-block; */
+    vertical-align: middle;
+    font-size: 12px;
+    padding: 7px 15px;
+    color: #d0a287;
+    border-radius: 14px;
+}
+.tour_sub_wrap .member_list_tab li:first-child {
+    margin-right: 3px;
+}
+.tour_sub_wrap .member_list_tab li.active {
+    color: #c86550;
+    background-color: #ffecde;
+
+}
 .tour_sub_wrap ul.user_list {
-    /* padding-left: 25px; */
     background-color: #f7f8f9;
     padding-bottom: 65px;
 }
@@ -1579,7 +1608,8 @@ header .head_back span {
     overflow: hidden;
     padding:15px 20px 15px 25px;
 }
-.tour_sub_wrap ul.user_list li .user_img {
+.tour_sub_wrap ul.user_list li .user_img,
+.tour_sub_wrap ul.my_info li .user_img {
     float: left;
     width: 40px;
     height: 40px;
@@ -1590,29 +1620,50 @@ header .head_back span {
     background-size: cover;
     background-position: center;
 }
-.tour_sub_wrap ul.user_list li p {
+.tour_sub_wrap ul.user_list li > p,
+.tour_sub_wrap ul.my_info li > p {
     float: left;
     font-family:inaviL;
     font-size: 14px;
     color:#010101;
     padding:11px 0;
+    width: calc(100% - 150px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
-.tour_sub_wrap ul.user_list li span {
+.tour_sub_wrap ul li .badge_count {
     float: right;
-    padding:6px 10px 6px 26px;
-    border-radius: 20px;
-    background-color: #fbe6d3;
-    font-family:arialRound;
-    font-size: 12px;
-    color:#c86550;
-    background-image: url('../images/star.png');
-    background-repeat: no-repeat;
-    background-size: 17px;
-    background-position: top 3px left 4px;
-    margin-top: 7px;
 }
-.tour_sub_wrap ul.user_list li.first {
-    background-color: #e6e9ed;
+.tour_sub_wrap ul li .badge_count p {
+    width: 90px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    text-align: right;
+}
+.tour_sub_wrap ul li .badge_count p.finish {
+    margin-top: 10px;
+}
+.tour_sub_wrap ul li .badge_count p span {
+    padding-left: 18px;
+    height: 13px;
+    color: rgba(0,0,0,0.5);
+    line-height: 1;
+}
+.tour_sub_wrap ul li .badge_count p strong {
+    color: #c86550;
+    font-size: 13px;
+    font-family: inaviEB;
+    font-weight: normal;
+}
+.tour_sub_wrap ul li .badge_count p.stamp span {
+    background: url('../images/star.png') left center / 13px no-repeat;
+}
+.tour_sub_wrap ul li .badge_count p.finish span {
+    background: url('../images/flag.png') left center / 13px no-repeat;
 }
 .swiper-pagination {
     font-size: 11px;
@@ -1751,9 +1802,13 @@ header .head_back span {
     padding:15px 25px 0;
     height:calc(100vh - 50px);
 }
-.mystamp_wrap ul {
+.mystamp_wrap ul,
+.laststamp_wrap ul {
     overflow: hidden;
     margin-bottom: 55px;
+}
+.laststamp_wrap ul {
+    padding: 12px 25px 55px;
 }
 .mystamp_wrap ul li {
     float: left;
@@ -1761,19 +1816,33 @@ header .head_back span {
     margin-right: 15px;
     margin-bottom:18px;
 }
+.laststamp_wrap ul li {
+    float: left;
+    width: calc((100% - 24px)/3);
+    margin-bottom: 20px;
+}
+.laststamp_wrap ul li:nth-child(3n+2) {
+    margin: 0 12px 20px;
+}
 .mystamp_wrap ul li:nth-child(3n) {
     margin-right: 0px;
 }
-.mystamp_wrap ul li .mystamp {
+.mystamp_wrap ul li .mystamp,
+.laststamp_wrap ul li .mystamp {
     width:100%;
     background:#fff;
     padding:6px;
     margin-bottom: 11px;
 }
-.mystamp_wrap ul li .mystamp img {
+.laststamp_wrap ul li .mystamp {
+    border-radius: 5px;
+}
+.mystamp_wrap ul li .mystamp img,
+.laststamp_wrap ul li .mystamp img {
     width:100%;
 }
-.mystamp_wrap ul li span {
+.mystamp_wrap ul li span,
+.laststamp_wrap ul li span {
     width:100%;
     display: inline-block;
     font-size: 14px;
@@ -2657,3 +2726,241 @@ ul.photo_select li input[type="file"] {
     width: 30px;
     margin-top: 10px;
   }
+/*============================================
+
+                프로필
+
+=============================================*/
+.profile_detail {
+    background-color: #f7f8f9;
+}
+.profile_detail .course_box ul.recent {
+    background-color: transparent;
+}
+.profile_detail .course_box > p {
+    font-size: 13px;
+    padding: 25px 25px 8px;
+}
+.cf::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.userProfile {
+    background-color: #f7f8f9;
+    font-family: inaviL;
+    padding-bottom: 25px;
+}
+.userProfile .user {
+    text-align: center;
+    padding-top: 15px;
+}
+.userProfile .user .profile {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px;
+}
+.userProfile .user .profile .img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 17px;
+    overflow: hidden;
+}
+.userProfile .user .profile img {
+    width: 100%;
+    
+}
+.userProfile .user .profile input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    
+}
+.userProfile .user .profile label {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: url(../images/profile/icon_camera.png) 0 0 / cover no-repeat;
+    font-size: 0;
+}
+.userProfile .user h2 {
+    font-size: 15px;
+    color: #c86550;
+    font-weight: normal;
+    line-height: 1;
+}
+.userProfile .user p {
+    font-size: 12px;
+    line-height: 16px;
+}
+.user_stamp {
+    padding: 16px 0;
+    margin: 15px 25px 25px;
+    height: 62px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.user_stamp li {
+    float: left;
+    width: 33.333%;
+    text-align: center;
+    line-height: 1;
+}
+.user_stamp li:nth-child(2) {
+    border-left: 1px solid #edeeef;
+    border-right: 1px solid #edeeef;
+}
+.user_stamp li strong {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #808080;
+    font-size: 12px;
+}
+.user_stamp li p {
+    font-size: 15px;
+    color: #cc6f5c
+}
+.userProfile .title {
+    margin-right: 25px;
+}
+.userProfile .t_point .title {
+    margin: 0 25px;
+}
+.userProfile .title h2 {
+    position: relative;
+    float: left;
+    font-size: 14px;
+    padding-left: 23px;
+}
+.userProfile .title h2::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%)
+}
+.userProfile .title span {
+    float: right;
+    height: 16px;
+    line-height: 16px;
+    font-size: 11px;
+    color:#7b7c7c;
+    padding-right: 11px;
+    background: url(../images/arrow_4.png) right center / 5px no-repeat ;
+}
+.userProfile .t_point .title h2::before {
+    width: 14px;
+    height: 14px;
+    background: url(../images/profile/icon_p_1.png) 0 0 / cover no-repeat;
+}
+.userProfile .t_point {
+    margin-bottom: 25px;
+    text-align: center;
+    font-family: 'inaviM';
+}
+.userProfile .t_point strong {
+    font-size: 12px;
+    color: #808080;
+    font-weight: normal;
+    line-height: 1;
+}
+.userProfile .t_point p {
+    font-size: 30px;
+    font-family: 'arialRound';
+    color: #3bb9fa;
+    line-height: 1;
+}
+.userProfile .visit_list,
+.userProfile .stamp_list {
+    margin-left: 25px;
+}
+.userProfile .visit_list {
+    margin-bottom: 25px;
+}
+.userProfile .visit_list h2::before {
+    width: 12px;
+    height: 17px;
+    background: url(../images/profile/icon_p_2.png) 0 0 / 12px no-repeat;
+}
+.userProfile .stamp_list h2::before {
+    width: 14px;
+    height: 17px;
+    background: url(../images/profile/icon_p_3.png) 0 0 / 14px no-repeat;
+}
+.userProfile .swiper {
+    /* margin: 12px 0 0 25px; */
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #000
+}
+.userProfile .swiper .swiper-slide {
+    width: 81px;
+}
+.userProfile .swiper .stamp_img {
+    width: 100%;
+    height: 81px;
+    background-color: #fff;
+}
+.userProfile .stamp_list .swiper .stamp_img {
+    padding: 6px;
+    border-radius: 5px;
+}
+.userProfile .swiper .stamp_img img {
+    width: 100%;
+}
+.userProfile .visit_list h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: normal;
+}
+.userProfile .visit_list h3 + p {
+    font-size: 12px;
+    color: #7c7c7d;
+}
+.userProfile .stamp_list h3 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+}
+.userProfile .no_stamp {
+    font-size: 12px;
+    text-align: center;
+    color: #7c7c7d;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading_upload.member_list {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255,255,255, 0.3);
+}
+.loading_upload.member_list img {
+    position: static;
+    width: 50px;
+    margin: 0;
+}
+.loading_upload.member_list p {
+    color: #333;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.no_memeber {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+}

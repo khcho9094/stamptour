@@ -88,6 +88,24 @@ const routes = [
     path: '/landing',
     name: 'Landing',
     component: () => import('../components/Landing.vue')
+  },
+  {
+    // 프로필
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/profile/Profile.vue')
+  },
+  {
+    // 최근 방문 스탬프
+    path: '/profile/lastvisit',
+    name: 'Profile',
+    component: () => import('../views/profile/LastVisit.vue')
+  },
+  {
+    // 최근 찍은 스탬프
+    path: '/profile/laststamp',
+    name: 'Profile',
+    component: () => import('../views/profile/LastStamp.vue')
   }
 ]
 

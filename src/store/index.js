@@ -139,7 +139,8 @@ export default new Vuex.Store({
     koreaPopup: true, // 코리아둘레길 이벤트
     thema10Popup: true, // 테마10 공지 팝업
     popupList: [], // 팝업 관리자 리스트
-    bannerList: [] // 배너 관리자 리스트
+    bannerList: [], // 배너 관리자 리스트
+    profile: [] // 프로필
   },
   mutations: {
     setIntroData (state, data) {
@@ -394,6 +395,9 @@ export default new Vuex.Store({
     },
     setBannerList (state, data) {
       state.bannerList = data
+    },
+    setProfile (state, data) {
+      state.profile = data
     }
   },
   actions: {
@@ -585,12 +589,17 @@ export default new Vuex.Store({
       view_count / 출력갯수 / 옵션
       page / 페이지 / 옵션
     */
-    loadMemberData ({ state, commit }, pageCount) {
-      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}&status=CHALLENGE&view_count=20&page=${pageCount}&token=${state.token}`
+    loadMemberData ({ state, commit }, data) {
+      state.loadingMainList = true
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
+      // const url = `http://khy-api.tranggle.com/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
       Vue
         .jsonp(url)
         .then(response => {
+          // console.log('idx', data.status)
+          state.loadingMainList = false
           commit('setMemberData', response.response.content)
+          console.log(response.response.content)
         })
         .catch(err => {
           console.log(err)
@@ -1242,11 +1251,45 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
-          console.log(response.data.response)
+          // console.log(response.data.response)
           if (response.data.response.code === '00') {
             commit('setPopupList', response.data.response.content.popup_data)
             commit('setBannerList', response.data.response.content.banner_data)
           }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    프로필
+    */
+    GetProfile ({ state, commit }) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/getProfile.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      axios
+        .post(url, fd)
+        .then(response => {
+          console.log(response.data.response.content)
+          commit('setProfile', response.data.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    proFileImageUpload ({ state, dispatch }, data) {
+      const url = 'https://storage.tranggle.com/mingle/proFileImageUpload'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('ext', 'json')
+      fd.append('upload_type', 'PHOTO')
+      fd.append('imageFile', data.imageFile)
+      axios
+        .post(url, fd)
+        .then(response => {
+          console.log(response)
+          dispatch('GetProfile', state.token)
         })
         .catch(err => {
           console.log(err)
