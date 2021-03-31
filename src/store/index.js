@@ -1110,12 +1110,10 @@ export default new Vuex.Store({
       let count = 0
       let msg = ''
       // 상품 코드 2개 이상인 상품 처리
-      giftCode.map((val) => {
-        const mUrl = `https://m.tranggle.com/mingle/login/stampTourMoneycon.json?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}&mingleCode=${state.mingleCode}`
-        // const mUrl = 'http://ckh-api.tranggle.com/mingle/stamptour/stampTourMoneycon.json'
+      giftCode.map((val, idx) => {
+        const mUrl = `https://m.tranggle.com/mingle/login/stampTourMoneycon.json?postCd=${data.pGift.gift_post_code}&cmd=100&prodCd1=${val}&prodCnt1=1&senderMobileNo=&mobileNo=${tel}&name=${data.pGift.mingle_member_id}&mingleCode=${state.mingleCode}&idx=${idx}`
         axios({
           url: mUrl
-          // contentType: 'application/x-www-form-urlencoded;charset=utf-8'
         }).then((res) => {
           cData.mcResponse = {
             resCd: (!cData.mcResponse.resCd) ? res.data.resCd : cData.mcResponse.resCd.concat(',' + res.data.resCd),
@@ -1127,13 +1125,10 @@ export default new Vuex.Store({
           if (giftCode.length === count) {
             if (String(res.data.resCd) === '100') {
               msg = '모바일 기프티콘이 휴대폰<br>문자메시지로 발송되었습니다.<br>60일 이내에 가까운 가맹점에서<br>사용하시기 바랍니다.<br>감사합니다.'
-              // msg = res.data.resMsg
             } else if (String(res.data.resCd) === '102') {
               msg = '선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
-              // msg = res.data.resMsg
             } else {
               msg = '서버 오류로 선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
-              // msg = res.data.resMsg
             }
             state.submitCheck = false
             dispatch('openNotiPopup', {
