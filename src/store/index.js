@@ -191,12 +191,30 @@ export default new Vuex.Store({
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
       localStorage.stampCount = data.stampget_info.mingle_badge_count
+      // 2021-04-05 대구창조경제혁신센터 처리
+      if (state.mingleCode === '/oJtXiRvYqdKNzlb35o5NA==') {
+        state.mainStampList.map((v, idx) => {
+          if (v.info_badge_code === '677') {
+            state.mainStampList.push(v)
+            state.mainStampList.splice(idx, 1)
+          }
+        })
+      }
     },
     setMainDataChange (state, data) {
       state.mainStampList = data.stamplist_info
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
       localStorage.stampCount = data.stampget_info.mingle_badge_count
+      // 2021-04-05 대구창조경제혁신센터 처리
+      if (state.mingleCode === '/oJtXiRvYqdKNzlb35o5NA==') {
+        state.mainStampList.map((v, idx) => {
+          if (v.info_badge_code === '677') {
+            state.mainStampList.push(v)
+            state.mainStampList.splice(idx, 1)
+          }
+        })
+      }
     },
     setMainAll (state, data) {
       state.stampAll = data.stamplist_info
