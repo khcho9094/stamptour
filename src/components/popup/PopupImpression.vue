@@ -30,6 +30,7 @@ export default {
   methods: {
     closeBtn () {
       this.$store.state.impressionOpen = !this.$store.state.impressionOpen
+      localStorage.removeItem('impressionData')
     },
     impressionURL () {
       router.push(`/impression/write?giftCode=${this.imporessionGiftCode}`)

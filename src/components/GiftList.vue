@@ -32,19 +32,19 @@ export default {
     }
   },
   watch: {
-    // giftData () {
-    //   if (!this.load) {
-    //     // 페이지 로딩시 방문소감 작성해야 되는 선물 있을때
-    //     console.log(this.giftData)
-    //     if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
-    //       this.giftData.map(v => {
-    //         if (v.mingle_gift_receive === 'Y' && v.mingle_comment_no === '') {
-    //           this.$store.state.impressionOpen = true
-    //         }
-    //       })
-    //     }
-    //   }
-    // }
+    giftData () {
+      if (!this.load) {
+        // 페이지 로딩시 방문소감 작성해야 되는 선물 있을때
+        console.log(this.giftData)
+        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
+          this.giftData.map(v => {
+            if (v.mingle_gift_receive === 'Y' && v.mingle_comment_no === '') {
+              this.$store.state.impressionOpen = true
+            }
+          })
+        }
+      }
+    }
   },
   computed: {
     ...mapState(['giftData', 'stampCodeInfo', 'mingleCode'])
@@ -140,7 +140,11 @@ export default {
     }
   },
   mounted () {
+    // console.log(this.giftData.every(el => el.mingle_comment_no === ''))
+    // if(this.giftData.every(el => el.mingle_comment_no === '')) {
+    // }
     if (localStorage.giftopen) {
+      console.log('if2')
       this.$store.dispatch('openPopupGift', JSON.parse(localStorage.giftopen))
       localStorage.removeItem('giftopen')
     }
