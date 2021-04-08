@@ -43,7 +43,8 @@ export default new Vuex.Store({
       { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24', giftMessage: '충북 나드리 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -충북 나드리 스탬프투어 드림-' },
       { name: '이응노 미술관', code: 'UQ3+JiYENuJBR+gw6zSYPA==', info: 'number', no: '25', msg: '미디어 파사드에서 완주자 보기', giftMessage: '[원주 구석구석 어디까지 가봤니?]' },
       { name: 'KOGAS와 즐기는 대구 스탬프투어', code: '0lDg6JT7iYoHXLAPV4p8wA==', info: 'number', no: '26', msg: '', giftMessage: '‘조심조심 착한소비 스탬프투어 with KOGAS 대구의 히어로가 되어도!’는 대구지역 경제 활성화를 위해 한국가스공사가 준비한 행사로, 지역 관광명소를 즐길 수 있는 스탬프투어와 구매 영수증 인증 이벤트를 진행하여 다양한 경품을 제공합니다. 여러분의 많은 관심과 참여 부탁드립니다.' },
-      { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30', giftMessage: '대구광역시와 삼성전자가 협력하여 설립한 대구창조경제혁신센터로 캠퍼스 내부를 둘러보는 스탬프투어입니다.' }
+      { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30', giftMessage: '대구광역시와 삼성전자가 협력하여 설립한 대구창조경제혁신센터로 캠퍼스 내부를 둘러보는 스탬프투어입니다.' },
+      { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31', giftMessage: '경기도 7개 시의 대표적인 둘레길들을 지나는 스탬프투어입니다.' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -141,7 +142,10 @@ export default new Vuex.Store({
     thema10Popup: true, // 테마10 공지 팝업
     popupList: [], // 팝업 관리자 리스트
     bannerList: [], // 배너 관리자 리스트
-    profile: [] // 프로필
+    profile: [], // 프로필
+    impressionOpen: false, // 방문소감팝업
+    impressionList: [], // 방문소감조회리스트
+    impressionGiftCode: ''
   },
   mutations: {
     setIntroData (state, data) {
@@ -417,6 +421,10 @@ export default new Vuex.Store({
     },
     setProfile (state, data) {
       state.profile = data
+    },
+    setImpressionList (state, data) {
+      state.impressionList = state.impressionList.concat(data)
+      // state.impressionList = data
     }
   },
   actions: {
@@ -454,6 +462,7 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
+          console.log(response)
           commit('setGiftData', response.response.content)
         })
         .catch(err => {
@@ -489,6 +498,7 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
+          console.log(response)
           commit('setGiftDataNew', response.response.content)
         })
         .catch(err => {
@@ -1302,6 +1312,96 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response)
           dispatch('GetProfile', state.token)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    방문소감조회 API
+    */
+    GetvisitComment ({ state, commit }, data) {
+      if (!data) {
+        data = {
+          page: 1,
+          order: 'date',
+          order_sort: 'asc',
+          me: ''
+        }
+      }
+      state.lon = localStorage.getItem('setLon') || 0
+      state.lat = localStorage.getItem('setLat') || 0
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/getvisitComment.json'
+      const fd = new FormData()
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('token', state.token)
+      fd.append('page', data.page)
+      fd.append('view_count', 20)
+      fd.append('order', data.order)
+      fd.append('order_sort', data.order_sort)
+      fd.append('me', data.me)
+      fd.append('lat', state.lat)
+      fd.append('lon', state.lon)
+      axios
+        .post(url, fd)
+        .then(res => {
+          // console.log(res)
+          commit('setImpressionList', res.data.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    방문소감등록 API
+    */
+    setVisitComment ({ state, dispatch }, data) {
+      const url = 'https://storage.tranggle.com/mingle/setVisitComment'
+      const fd = new FormData()
+      fd.append('imageFile01', data.imageFile01)
+      fd.append('imageFile02', data.imageFile02)
+      fd.append('imageFile03', data.imageFile03)
+      fd.append('token', state.token)
+      fd.append('ext', 'json')
+      fd.append('title', data.title)
+      fd.append('comment', data.comment)
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('badgeid', data.badgeid)
+      fd.append('mingle_user_gift_no', data.mingle_user_gift_no)
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res)
+          if (res.data.response.code === '00') {
+            alert('정상적으로 등록되었습니다.')
+            router.push('/gift?impression=y')
+            state.impressionOpen = false
+          } else {
+            alert(res.data.response.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
+    방문소감삭제 API
+    */
+    setVisitCommentDel ({ state, dispatch }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/setVisitCommentDel.json'
+      const fd = new FormData()
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('token', state.token)
+      fd.append('mingle_comment_no', data)
+      axios
+        .post(url, fd)
+        .then(res => {
+          if (res.data.response.code === '00') {
+            alert('삭제되었습니다.')
+          } else {
+            alert(res.data.response.message)
+          }
+          dispatch('GetvisitComment')
         })
         .catch(err => {
           console.log(err)
