@@ -300,8 +300,9 @@ header .head_back span {
     color:#010101;
     line-height:21px;
     background:#fff;
-    padding:50px 0 20px;
+    padding:50px 10px 20px;
     font-family:inaviL;
+    word-break: keep-all;
 }
 .pop_overay .pop_cont .text_2 .check {
     text-align: left;
