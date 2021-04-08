@@ -38,7 +38,8 @@ export default {
       '+0DVeHum2c+rBgEjLoPi6Q==',
       'UQ3+JiYENuJBR+gw6zSYPA==',
       '0lDg6JT7iYoHXLAPV4p8wA==',
-      '/oJtXiRvYqdKNzlb35o5NA=='
+      '/oJtXiRvYqdKNzlb35o5NA==',
+      'ClJDKcCIq5mBFLdPmkYwPQ=='
     ]
     if (this.$route.query.minglecode) {
       mArr.map((data) => {
