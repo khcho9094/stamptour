@@ -35,11 +35,18 @@ export default {
     giftData () {
       if (!this.load) {
         // 페이지 로딩시 방문소감 작성해야 되는 선물 있을때
-        console.log(this.giftData)
         if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
-          this.giftData.map(v => {
-            if (v.mingle_gift_receive === 'Y' && v.mingle_comment_no === '') {
+          var giftIdx = 0
+          for (giftIdx; giftIdx < this.giftData.length; giftIdx++) {
+            if (this.$route.query.impression !== 'y' && this.giftData[giftIdx].mingle_gift_receive === 'Y' && this.giftData[giftIdx].mingle_comment_no === '') {
               this.$store.state.impressionOpen = true
+              this.$store.state.imporessionGiftCode = this.giftData[giftIdx].mingle_user_gift_no
+              break
+            }
+          }
+          this.giftData.map((v, idx) => {
+            if (idx === giftIdx) {
+              localStorage.impressionData = JSON.stringify(v)
             }
           })
         }
@@ -144,11 +151,14 @@ export default {
     // if(this.giftData.every(el => el.mingle_comment_no === '')) {
     // }
     if (localStorage.giftopen) {
-      console.log('if2')
       this.$store.dispatch('openPopupGift', JSON.parse(localStorage.giftopen))
       localStorage.removeItem('giftopen')
     }
-    if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
+    // 경기서부 7길
+    if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
+      if (!this.$route.query.impression) {
+        localStorage.removeItem('impressionData')
+      }
       // 방문소감 작성 완료후 돌아오자마자 선물 받기 팝업
       if (this.$route.query && localStorage.impressionData) {
         this.$store.dispatch('openPopupGift', JSON.parse(localStorage.impressionData))

@@ -62,6 +62,8 @@ export default {
       } else if (data === 'e현충시설 국민제보') {
         const url = 'http://mfis.mpva.go.kr/report_center.do'
         appEvent.externalLinks(url)
+      } else if (data === '방문 소감') {
+        router.push('/impression/list')
       }
     }
   },
