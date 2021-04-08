@@ -149,6 +149,9 @@ header button.share {
     background-size: 15px;
     background-position: center;
 }
+header button.complete {
+    background: url(../images/impression/icon_complete.png) center / 17px no-repeat;
+}
 header .head_back .back_box {
     display: inline-block;
     cursor: pointer;
@@ -1192,6 +1195,8 @@ header .head_back span {
     height:60px;
     line-height: 60px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 .tour_sub_wrap ul.gift_list li .point {
     display: inline-block;
@@ -1225,6 +1230,9 @@ header .head_back span {
     font-family: inaviL;
     font-size: 12px;
     color: #010101;
+    line-height: 1.2;
+    word-break: keep-all;
+    width: calc(100% - 100px);
 }
 .tour_sub_wrap ul.gift_list li .gift_icon {
     padding:0 15px;
@@ -2963,4 +2971,241 @@ ul.photo_select li input[type="file"] {
     font-size: 12px;
     color: #888;
     text-align: center;
+}
+.impression.list_wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #f7f8f9;
+}
+.impression .box {
+    padding: 15px 25px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.impression .box .mySelect {
+    float: left;
+    width: 202px;
+    height:30px;
+    border:1px solid #698093;
+    border-radius: 3px;
+    font-size: 12px;
+    color:#698093;
+    font-family:inaviM;
+    position: relative;
+    background-image: url('../images/sd_arrow2.png');
+    background-size: 11px 6px;
+    background-repeat: no-repeat;
+    background-position: top 10px right 10px;
+    padding-right: 30px;
+    padding-left: 11px;
+}
+.impression .box .checkbox {
+    float: right;
+}
+.impression .box .checkbox input {
+    display: none;
+}
+.impression .box .checkbox input + label {
+    padding-left: 17px;
+    font-size: 12px;
+    color: #3bb9fa;
+    position: relative;
+}
+.impression .box .checkbox input + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    border: 1px solid #3bb9fa;
+    border-radius: 100%;
+    box-sizing: border-box;
+}
+.impression .box .checkbox input:checked + label::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-image:url('../images/checked.png');
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    border-radius: 100%;
+}
+.impression_scroll {
+    height: calc(100% - 110px);
+    overflow: auto;
+}
+.impression .no_list {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    line-height: 100px;
+}
+.impression .list {
+    position: relative;
+    padding: 12px 0 12px 25px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.impression .list h3 {
+    font-size: 14px;
+    line-height: 1;
+}
+.impression .list .writer_info {
+    overflow: hidden;
+    margin: 5px 0 12px;
+    line-height: 1;
+}
+.impression .list .writer_info > li {
+    position: relative;
+    float: left;
+    font-size: 12px;
+    color: #808080;
+    padding: 0 7px;
+}
+.impression .list .writer_info > li:first-child {
+    padding-left: 0;
+}
+.impression .list .writer_info > li:not(:last-child)::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 7px;
+    background-color: #ccc;
+    content: '';
+}
+.impression .list p {
+    padding-top: 12px;
+    border-top: 1px solid #f5f5f5;
+    font-size: 12px;
+    word-break: keep-all;
+    line-height: 15px;
+}
+.impression .slide {
+    width: 90px;
+    height: 65px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #ddd;
+}
+.impression .swiper {
+    margin-top: 12px;
+}
+.impression .list .del_list {
+    position: absolute;
+    right: 25px;
+    top: 12px;
+    width: 16px;
+    height: 18px;
+    background: url(../images/impression/icon_del.png) 0 0 / cover no-repeat;
+}
+.impression.write_wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.impression .write {
+    padding: 12px 25px 0;
+    height: calc(100% - 255px);
+    border-top: 1px solid #d9d9d9;
+}
+.impression .impression_title {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 17px;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid #000;
+}
+.impression .impression_content {
+    margin-top: 15px;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    resize: none;
+    overflow: auto;
+}
+.impression .impression_upload {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+.impression .impression_upload .bar {
+    padding: 0 25px;
+    display: flex;
+    height: 51px;
+    align-items: center;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+.impression .impression_upload input {
+    display: none;
+}
+.impression .impression_upload input + label {
+    margin-right: 25px;
+    display: block;
+    width: 25px;
+    height: 25px;
+}
+.impression .impression_upload input + label.album {
+    background: url(../images/impression/icon_album.png) center / contain no-repeat;
+}
+.impression .impression_upload input + label.camera {
+    background: url(../images/impression/icon_camera.png) center / contain no-repeat;
+}
+.impression .write .swiper {
+    position: absolute;
+    left: 25px;
+    bottom: 80px;
+    width: 100%;
+}
+.impression .write .slide {
+    position: relative;
+}
+.impression .write .slide button {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    background: rgba(0,0,0,0.7) url(../images/impression/del_picture.png) center / 8px no-repeat;
+    border-radius: 50%;
+}
+.pop_impression .text {
+    font-size: 14px;
+    line-height: 21px;
+}
+.pop_impression .text span {
+    margin-bottom: 10px;
+    display: block;
+    color: #c86550;
+}
+@media screen and (max-width: 320px) {
+    .impression .box {
+        padding: 15px;
+    }
+    .impression .list {
+        padding: 12px 0 12px 15px;
+    }
+    .impression .list .del_list {
+        right: 15px;
+    }
 }

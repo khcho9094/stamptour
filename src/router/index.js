@@ -106,6 +106,18 @@ const routes = [
     path: '/profile/laststamp',
     name: 'Profile',
     component: () => import('../views/profile/LastStamp.vue')
+  },
+  {
+    // 방문소감 작성
+    path: '/impression/write',
+    name: 'ImpressionWrite',
+    component: () => import('../views/impression/ImpressionWrite.vue')
+  },
+  {
+    // 방문소감 리스트
+    path: '/impression/list',
+    name: 'ImpressionList',
+    component: () => import('../views/impression/ImpressionList.vue')
   }
 ]
 

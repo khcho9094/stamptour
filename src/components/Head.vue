@@ -20,7 +20,9 @@ export default {
   props: {
     type: String,
     name: String,
-    title: String
+    title: String,
+    registData: Object,
+    registImg: Array
   },
   data () {
     return {
@@ -28,7 +30,8 @@ export default {
         intro: 'close',
         main: 'more',
         tour: 'share',
-        gift: 'share'
+        gift: 'share',
+        write: 'complete'
       }
     }
   },
@@ -55,6 +58,22 @@ export default {
         this.$store.dispatch('loadSnsPopup', openChk)
       } else if (this.name === 'intro') {
         this.goHome()
+      } else if (this.name === 'write') { // 방문소감
+        this.registData.imageFile01 = this.registImg[0]
+        this.registData.imageFile02 = this.registImg[1] ? this.registImg[1] : ''
+        this.registData.imageFile03 = this.registImg[2] ? this.registImg[2] : ''
+        // 유효성 체크
+        if (!this.registData.title) {
+          alert('제목을 입력하세요.')
+          return false
+        } else if (!this.registData.comment) {
+          alert('내용을 입력하세요.')
+          return false
+        } else if (!this.registData.imageFile01) {
+          alert('사진은 최소 1장 등록해야 합니다.')
+          return false
+        }
+        this.$store.dispatch('setVisitComment', this.registData)
       }
     },
     goHome () {

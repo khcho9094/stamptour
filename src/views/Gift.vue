@@ -8,6 +8,7 @@
         <GiftGuide />
         <PopupGiftReceive  v-if="popupGift.open"/>
         <PopupSns />
+        <PopupImpression :title='introData.mingle_title' />
     </div>
   </div>
 </template>
@@ -19,6 +20,7 @@ import GiftList from '@/components/GiftList.vue'
 import GiftGuide from '@/components/GiftGuide.vue'
 import PopupGiftReceive from '@/components/popup/PopupGiftReceive.vue'
 import PopupSns from '@/components/popup/PopupSns.vue'
+import PopupImpression from '@/components/popup/PopupImpression.vue'
 export default {
   name: 'Gift',
   components: {
@@ -27,10 +29,11 @@ export default {
     GiftList,
     GiftGuide,
     PopupGiftReceive,
-    PopupSns
+    PopupSns,
+    PopupImpression
   },
   computed: {
-    ...mapState(['token', 'popupGift'])
+    ...mapState(['mingleCode', 'token', 'popupGift', 'introData'])
   },
   beforeCreate () {
     if (this.$route.query.mingleCode) {

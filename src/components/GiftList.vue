@@ -27,8 +27,24 @@ export default {
   name: 'GiftList',
   data () {
     return {
-      unit: ''
+      unit: '',
+      load: false
     }
+  },
+  watch: {
+    // giftData () {
+    //   if (!this.load) {
+    //     // 페이지 로딩시 방문소감 작성해야 되는 선물 있을때
+    //     console.log(this.giftData)
+    //     if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
+    //       this.giftData.map(v => {
+    //         if (v.mingle_gift_receive === 'Y' && v.mingle_comment_no === '') {
+    //           this.$store.state.impressionOpen = true
+    //         }
+    //       })
+    //     }
+    //   }
+    // }
   },
   computed: {
     ...mapState(['giftData', 'stampCodeInfo', 'mingleCode'])
@@ -56,8 +72,19 @@ export default {
     },
     giftReceive (data) {
       if (data.mingle_gift_receive === 'Y') {
+        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
+          if (data.mingle_comment_no === '') { // 방문소감을 안 썼음
+            // 방문소감 링크 팝업 팝업 띄우기
+            this.$store.state.impressionOpen = true
+            this.$store.state.imporessionGiftCode = data.mingle_user_gift_no
+            localStorage.impressionData = JSON.stringify(data)
+          } else { // 방문소감을 썼음
+            this.$store.dispatch('openPopupGift', data)
+          }
+        } else {
+          this.$store.dispatch('openPopupGift', data)
+        }
         // window.history.pushState({}, 'modal', '/modal')
-        this.$store.dispatch('openPopupGift', data)
       }
     },
     setStamp () {
@@ -116,6 +143,13 @@ export default {
     if (localStorage.giftopen) {
       this.$store.dispatch('openPopupGift', JSON.parse(localStorage.giftopen))
       localStorage.removeItem('giftopen')
+    }
+    if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
+      // 방문소감 작성 완료후 돌아오자마자 선물 받기 팝업
+      if (this.$route.query && localStorage.impressionData) {
+        this.$store.dispatch('openPopupGift', JSON.parse(localStorage.impressionData))
+        localStorage.removeItem('impressionData')
+      }
     }
     this.setStamp()
   }
