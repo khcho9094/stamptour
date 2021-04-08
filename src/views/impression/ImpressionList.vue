@@ -42,7 +42,7 @@
                 class="slide">
               </swiper-slide>
             </swiper>
-            <button v-if="(data.mingle_comment_member_id === userInfo.user_mingle_member_id)" class="del_list" type="button" @click="deleteList(data.mingle_comment_no)"></button>
+            <button v-if="(data.mingle_comment_member_id === userInfo.user_mingle_member_id) && mingleCode !== 'ClJDKcCIq5mBFLdPmkYwPQ=='" class="del_list" type="button" @click="deleteList(data.mingle_comment_no)"></button>
           </article>
           <!-- //v-for -->
           <article v-if="impressionList.length === 0">
