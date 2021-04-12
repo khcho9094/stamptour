@@ -145,7 +145,8 @@ export default new Vuex.Store({
     profile: [], // 프로필
     impressionOpen: false, // 방문소감팝업
     impressionList: [], // 방문소감조회리스트
-    impressionGiftCode: ''
+    impressionGiftCode: '',
+    impressionComplete: false // 방문소감 완료
   },
   mutations: {
     setIntroData (state, data) {
@@ -1378,6 +1379,7 @@ export default new Vuex.Store({
             state.impressionOpen = false
           } else {
             alert(res.data.response.message)
+            state.impressionComplete = false
           }
         })
         .catch(err => {

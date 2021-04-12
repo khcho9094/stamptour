@@ -10,7 +10,7 @@
           <span>{{title}}</span>
       </div>
       <button v-show="name === 'main'" class="r_type2 home" @click="goHome">홈가기</button>
-      <button v-bind:class="headBtn" @click="moreClick">{{btnType[name]}}</button>
+      <button v-if="!impressionComplete" v-bind:class="headBtn" @click="moreClick">{{btnType[name]}}</button>
   </header>
 </template>
 <script>
@@ -46,7 +46,7 @@ export default {
       })
       return btnClass
     },
-    ...mapState(['introData', 'giftSolo'])
+    ...mapState(['introData', 'giftSolo', 'impressionComplete'])
   },
   methods: {
     moreClick () {
@@ -73,6 +73,8 @@ export default {
           alert('사진은 최소 1장 등록해야 합니다.')
           return false
         }
+        // 버튼 가리기 추가
+        this.$store.state.impressionComplete = true
         this.$store.dispatch('setVisitComment', this.registData)
       }
     },
