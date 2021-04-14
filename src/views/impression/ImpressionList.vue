@@ -1,18 +1,20 @@
 <template>
     <div class="impression list_wrap">
-        <Head type='back' name='view_stamp' title='방문 소감' />
-        <!-- 솔팅 셀렉트 -->
-        <div class="box">
-          <select class="mySelect" @change="changeList($event)">
-            <option v-bind:value="'date_asc'">날짜순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
-            <option v-bind:value="'date_desc'">날짜순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
-            <option v-bind:value="'distance_asc'">거리순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
-            <option v-bind:value="'distance_desc'">거리순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
-          </select>
-          <div class="checkbox">
-            <input type="checkbox" id="onlyMine" v-model="onlyMine">
-            <label for="onlyMine">내가 쓴 글</label>
-          </div>
+        <div class="fixed">
+            <Head type='back' name='view_stamp' title='방문 소감' />
+            <!-- 솔팅 셀렉트 -->
+            <div class="box">
+              <select class="mySelect" @change="changeList($event)">
+                <option v-bind:value="'date_asc'">날짜순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
+                <option v-bind:value="'date_desc'">날짜순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
+                <option v-bind:value="'distance_asc'">거리순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
+                <option v-bind:value="'distance_desc'">거리순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
+              </select>
+              <div class="checkbox">
+                <input type="checkbox" id="onlyMine" v-model="onlyMine">
+                <label for="onlyMine">내가 쓴 글</label>
+              </div>
+            </div>
         </div>
         <div id="scrollWrap" class="impression_scroll" v-on:scroll="scrollBottom">
           <!-- v-for -->
@@ -114,6 +116,7 @@ export default {
     }
   },
   mounted () {
+    document.getElementById('app').classList.add('impression_full_height')
     // 유저 정보
     this.$store.dispatch('loadTotalData')
     // 리스트 조회
