@@ -28,17 +28,17 @@
             <swiper :options="swiperOption" class="swiper">
               <swiper-slide
                 v-if="data.mingle_comment_image01"
-                :style="{'background': `url(${data.mingle_comment_image01}) center / cover no-repeat`}"
+                :style="{'background': `url(${data.mingle_comment_image01.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide">
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image02"
-                :style="{'background': `url(${data.mingle_comment_image02}) center / cover no-repeat`}"
+                :style="{'background': `url(${data.mingle_comment_image02.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide">
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image03"
-                :style="{'background': `url(${data.mingle_comment_image03}) center / cover no-repeat`}"
+                :style="{'background': `url(${data.mingle_comment_image03.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide">
               </swiper-slide>
             </swiper>

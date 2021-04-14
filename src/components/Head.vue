@@ -112,6 +112,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.state.impressionComplete = false
     // this.$store.dispatch('loadIntroData')
   }
 }

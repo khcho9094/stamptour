@@ -24,9 +24,14 @@
             </div>
           </div>
         </article>
+        <div class="loading" v-if="impressionComplete">
+          <img src="@/assets/images/intro_loading.gif" alt="loader">
+          <p>등록중입니다.</p>
+        </div>
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
 export default {
   name: 'ImpressionWrite',
@@ -54,6 +59,9 @@ export default {
       },
       userComment: ''
     }
+  },
+  computed: {
+    ...mapState(['impressionComplete'])
   },
   watch: {
     userComment () {
