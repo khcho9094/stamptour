@@ -1,12 +1,12 @@
 <template>
   <article class="visit_list">
     <div class="title cf">
-      <h2>최근 방문 스탬프</h2>
-      <span v-if="badgeTrack && badgeTrack.length" @click="fnLink('/profile/lastvisit')">모두보기</span>
+      <h2>최근 조회 스탬프</h2>
+      <span v-if="badgeSearch && badgeSearch.length" @click="fnLink('/profile/lastvisit')">모두보기</span>
     </div>
     <swiper :options="swiperOption" class="swiper">
       <swiper-slide
-        v-for="(item, idx) in badgeTrack" :key="idx"
+        v-for="(item, idx) in badgeSearch" :key="idx"
       >
         <div class="stamp_img"
           :style="{'background': `url(${item.mingle_badge_image}) center / cover no-repeat`}"
@@ -16,15 +16,15 @@
         <p>여기에서 {{Math.floor(item.distance)}}km</p>
       </swiper-slide>
     </swiper>
-    <div v-if="badgeTrack && !badgeTrack.length" class="no_stamp">
-      <p>최근 한달간 방문 스탬프가 없습니다.</p>
+    <div v-if="badgeSearch && !badgeSearch.length" class="no_stamp">
+      <p>최근 한달간 조회 스탬프가 없습니다.</p>
     </div>
   </article>
 </template>
 <script>
 export default {
-  name: 'ProfileVisitStamp',
-  props: ['badgeTrack'],
+  name: 'ProfileLookUpStamp',
+  props: ['badgeSearch'],
   data () {
     return {
       swiperOption: {

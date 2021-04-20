@@ -97,9 +97,9 @@ const routes = [
   },
   {
     // 최근 방문 스탬프
-    path: '/profile/lastvisit',
+    path: '/profile/lastsearch',
     name: 'Profile',
-    component: () => import('../views/profile/LastVisit.vue')
+    component: () => import('../views/profile/LastSearch.vue')
   },
   {
     // 최근 찍은 스탬프

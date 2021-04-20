@@ -2797,6 +2797,7 @@ ul.photo_select li input[type="file"] {
     height: 50px;
     border-radius: 17px;
     overflow: hidden;
+    background: url(../images/default.png) center / cover no-repeat;
 }
 .userProfile .user .profile img {
     width: 100%;
@@ -2911,17 +2912,20 @@ ul.photo_select li input[type="file"] {
     text-align: center;
     font-family: 'inaviM';
 }
-.userProfile .t_point strong {
+.userProfile .t_point > strong {
     font-size: 12px;
     color: #808080;
     font-weight: normal;
     line-height: 1;
 }
 .userProfile .t_point p {
-    font-size: 30px;
+    font-size: 20px;
     font-family: 'arialRound';
     color: #3bb9fa;
     line-height: 1;
+}
+.userProfile .t_point p strong {
+    font-size: 30px;
 }
 .userProfile .visit_list,
 .userProfile .stamp_list {
@@ -3418,6 +3422,8 @@ ul.photo_select li input[type="file"] {
     width: 100%;
 }
 .pop_star_rating h2 {
+    padding: 0 10px;
+    word-break: keep-all;
     font-size: 17px;
     font-weight: normal;
     line-height: 1;
@@ -3453,40 +3459,62 @@ ul.photo_select li input[type="file"] {
 /* 통합 포인트 */
 .total_point {
     background-color: #f7f8f9;
+    font-family: inaviL;
 }
 .total_point .pt_available {
     padding: 25px 25px 15px;
 }
 .total_point .pt_available .box {
-    padding: 0 16px 0 10px;
-    height: 62px;
+    padding: 17px 10px;
+    
+    background-color: #fff;
+    border-radius: 4px;
+}
+.total_point .pt_available .box .top {
+    padding-bottom: 17px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+.total_point .pt_available .box .top h2 {
+    color: #808080;
+    font-size: 12px;
+    font-weight: normal;
+}
+.total_point .pt_available .box .top h2 span {
+    color: #c86550
+}
+.total_point .pt_available .box .top p {
+    color: #3bb9fa;
+    font-size: 20px;
+    font-family: 'arialRound';
+    line-height: 1;
+}
+.total_point .pt_available .box .top p strong {
+    font-size: 30px;
+}
+.total_point .pt_available .box .bottom {
+    padding-top: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
-    border-radius: 4px;
-    
 }
-.total_point .pt_available .box h2 {
+.total_point .pt_available .box .bottom h2 {
     font-size: 12px;
     color: #808080;
     font-weight: normal;
     font-family: 'inaviL';
 }
-.total_point .pt_available .box h2 + div {
+.total_point .pt_available .box .bottom h2 + div {
     display: flex;
     align-items: center;
 }
-.total_point .pt_available .box div p {
-    color: #3bb9fa;
-    font-size: 20px;
-    font-family: 'arialRound';
+.total_point .pt_available .box .bottom h2 + div p {
+    color: #cc6f5c;
+    font-size: 16px;
 }
-.total_point .pt_available .box div p strong {
-    font-size: 30px;
-}
-.total_point .pt_available .box div button {
-    margin-left: 18px;
+
+.total_point .pt_available .box .bottom button {
+    margin-left: 26px;
     width: 18px;
     height: 20px;
     background: url(../images/point/icon_history.png) center / cover no-repeat;
@@ -3821,4 +3849,12 @@ ul.photo_select li input[type="file"] {
     width: 17px;
     height: 17px;
     background: url(../images/close_pop_b.png) center / cover no-repeat;
+}
+/* 포인트 소멸 예정 안내 팝업 */
+.pop_point_extinguish strong {
+    display: block;
+    margin-bottom: 20px;
+}
+.pop_point_extinguish span {
+    color: #c86550;
 }
