@@ -25,7 +25,14 @@
                 </div>
                 <div class="box_rt">
                     <h2>{{data.info_badge_name}}</h2>
-                    <p class="txt">여기에서 {{parseFloat(data.distance).toFixed(2)}}km</p>
+                    <p class="txt">
+                      여기에서 {{parseFloat(data.distance).toFixed(2)}}km
+                      <span class="star">
+                        <img v-if="false" src="@/assets/images/star_n.png" alt="" />
+                        <img v-else src="@/assets/images/star_p.png" alt="" />
+                        4.0
+                      </span>
+                    </p>
                     <div class="stamp_count">
                         <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                         <span class="stxt">{{stampKind(data)}}</span>
@@ -61,6 +68,7 @@ export default {
       sortList: [
         { name: '인기순', active: true, param: 'pop' },
         { name: '거리순', active: false, param: 'distance' }
+        // { name: '이름순', active: false, param: 'name' }
       ],
       params: {
         order: 'pop',

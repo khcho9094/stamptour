@@ -118,6 +118,30 @@ const routes = [
     path: '/impression/list',
     name: 'ImpressionList',
     component: () => import('../views/impression/ImpressionList.vue')
+  },
+  {
+    // 검색페이지
+    path: '/search',
+    name: 'Search',
+    component: () => import('../views/Search.vue')
+  },
+  {
+    // 포인트
+    path: '/point',
+    name: 'Point',
+    component: () => import('../views/point/Point.vue')
+  },
+  {
+    // 포인트 내역
+    path: '/point/history',
+    name: 'History',
+    component: () => import('../views/point/History.vue')
+  },
+  {
+    // 따라가기 스탬프 인증
+    path: '/stamp/finish',
+    name: 'StampFinish',
+    component: () => import('../views/StampFinish.vue')
   }
 ]
 

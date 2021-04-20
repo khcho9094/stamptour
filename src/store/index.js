@@ -146,7 +146,8 @@ export default new Vuex.Store({
     impressionOpen: false, // 방문소감팝업
     impressionList: [], // 방문소감조회리스트
     impressionGiftCode: '',
-    impressionComplete: false // 방문소감 완료
+    impressionComplete: false, // 방문소감 완료
+    openProfileStamp: false // 프로필스탬프팝업
   },
   mutations: {
     setIntroData (state, data) {
@@ -1346,7 +1347,7 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(res => {
-          // console.log(res)
+          console.log(res)
           commit('setImpressionList', res.data.response.content)
         })
         .catch(err => {

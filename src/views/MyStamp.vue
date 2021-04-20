@@ -1,7 +1,7 @@
 <template>
   <div class="tour">
     <!-- 헤더 -->
-    <Head type='back' name='tour' :title='myTitle()' />
+    <Head type='back' name='stamp' :title='myTitle()' />
     <div class="mystamp_wrap">
       <div class="box">
         <select class="mySelect" v-model="selectValue" @change="setOrder">
@@ -22,36 +22,48 @@
             <img :src="data.mingle_stamp_image" alt="mystamp">
           </div>
           <span>{{data.info_badge_name}}</span>
+          <div class="star">
+            <img src="@/assets/images/star_n.png" alt="" />
+            <img src="@/assets/images/star_p.png" alt="" />
+            4.0
+          </div>
         </li>
       </ul>
     </div>
     <PopupSns />
-    <PopupMyStamp />
+    <!-- <PopupMyStamp /> -->
+    <PopupProfileStamp :stampInfo="stampInfo"/>
   </div>
 </template>
 <script>
 import Head from '@/components/Head.vue'
 import PopupSns from '@/components/popup/PopupSns.vue'
-import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
+// import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
+import PopupProfileStamp from '@/components/popup/PopupProfileStamp.vue'
 import { mapState } from 'vuex'
 export default {
   name: 'MyStamp',
   components: {
     Head,
     PopupSns,
-    PopupMyStamp
+    // PopupMyStamp,
+    PopupProfileStamp
   },
   data () {
     return {
       selectValue: '0',
-      allCount: localStorage.stampCount
+      allCount: localStorage.stampCount,
+      stampInfo: null
     }
   },
   computed: {
-    ...mapState(['myStampData', 'guestChk'])
+    ...mapState(['myStampData', 'guestChk', 'openProfileStamp'])
   },
   methods: {
     stampClick (data) {
+      this.stampInfo = data
+      console.log(data)
+      this.$store.state.openProfileStamp = true
       this.$store.state.getStampImage = data.mingle_stamp_image
       this.$store.state.getStampName = data.info_badge_name
       this.$store.state.getStampDate = data.user_mingle_badge_badge_date

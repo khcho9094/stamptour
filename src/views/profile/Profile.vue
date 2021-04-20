@@ -8,8 +8,25 @@
         <!-- <div class="img"> -->
           <!-- <img :src="profile.member_profile" alt="프로필 이미지"> -->
         </div>
-        <input id="profileUpload" type="file" accept="image/*" @change="profileUpload($event, '')">
-        <label for="profileUpload">프로필 업로드</label>
+        <!-- 프로필 업로드 버튼 -->
+        <button class="btn_upload" type="button" @click="profileUploadPopup">프로필 업로드</button>
+        <!-- 프로필 사진 업로드 팝업 -->
+        <!-- <div class="profile_upload_layer"> -->
+        <div class="pop_overay profile_upload_layer" v-if="openProfilePopup">
+          <div class="pop_cont" style="background-color: #fff">
+            <ul>
+              <li>
+                <input id="profileUpload" type="file" accept="image/*" capture="camera" @change="profileUpload($event, '')">
+                <label for="profileUpload">사진 촬영</label>
+              </li>
+              <li>
+                <input id="profileUpload" type="file" accept="image/*" @change="profileUpload($event, '')">
+                <label for="profileUpload">앨범에서 사진 선택</label>
+              </li>
+            </ul>
+            <button type="button" @click="closeUploadLayer">닫기</button>
+          </div>
+        </div>
       </div>
       <h2>{{ profile.member_nickname ? profile.member_nickname : profile.member_id }}</h2>
       <p>{{profile.member_joindate}}</p>
@@ -28,11 +45,11 @@
         <p>{{profile.badge_get_y}}개</p>
       </li>
     </ul>
-    <article v-if="false" class="t_point">
+    <article class="t_point">
       <!-- 포인트 관련은 일단 숨김 -->
       <div class="title cf">
         <h2>T 포인트</h2>
-        <span>사용하기</span>
+        <span @click="fnLink('/point')">사용하기</span>
       </div>
       <strong>사용 가능한 포인트</strong>
       <p>25,000P</p>
@@ -55,9 +72,11 @@ export default {
   },
   data () {
     return {
+      openProfilePopup: false
     }
   },
   mounted () {
+    document.getElementById('app').classList.add('full_height')
     this.$store.dispatch('GetProfile')
   },
   computed: {
@@ -68,12 +87,16 @@ export default {
       this.$store.dispatch('proFileImageUpload', {
         imageFile: event.target.files ? event.target.files[0] : ''
       })
+    },
+    profileUploadPopup () {
+      this.openProfilePopup = true
+    },
+    closeUploadLayer () {
+      this.openProfilePopup = false
+    },
+    fnLink (url) {
+      this.$router.push(url)
     }
   }
 }
 </script>
-<style>
-  body {
-    background-color: #f7f8f9;
-  }
-</style>
