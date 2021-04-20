@@ -143,7 +143,15 @@ export default {
           }
         }
       }
-      return `신청 유효 기간 만료 ${text}`
+      if (data.mingle_gift_add_point !== 'AUTH') {
+        return `신청 유효 기간 만료 ${text}`
+      } else {
+        if (data.mingle_gift_end_date !== '0000-00-00 00:00:00' && data.mingle_gift_receive === 'N' && data.mingle_no === '1') {
+          return '인증서 신청 완료'
+        } else {
+          return ''
+        }
+      }
     }
   },
   mounted () {

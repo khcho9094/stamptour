@@ -39,7 +39,8 @@ export default {
       'UQ3+JiYENuJBR+gw6zSYPA==',
       '0lDg6JT7iYoHXLAPV4p8wA==',
       '/oJtXiRvYqdKNzlb35o5NA==',
-      'ClJDKcCIq5mBFLdPmkYwPQ=='
+      'ClJDKcCIq5mBFLdPmkYwPQ==',
+      'j9SPKDZVAqJagE3rrMCgug=='
     ]
     if (this.$route.query.minglecode) {
       mArr.map((data) => {

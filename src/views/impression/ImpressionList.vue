@@ -16,7 +16,7 @@
               </div>
             </div>
         </div>
-        <div id="scrollWrap" class="impression_scroll" v-on:scroll="scrollBottom">
+        <div id="scrollWrap" class="impression_scroll">
           <!-- v-for -->
           <article v-for="(data, idx) in impressionList" :key="idx" class="list">
             <h3>{{ data.mingle_comment_title }}</h3>
@@ -95,8 +95,7 @@ export default {
       this.$store.dispatch('setVisitCommentDel', idx)
     },
     scrollBottom () {
-      var scrollContainer = document.getElementById('scrollWrap')
-      if (scrollContainer.scrollTop >= scrollContainer.scrollHeight - scrollContainer.clientHeight && !this.loading) {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight && !this.loading) {
         this.listData.page += 1
         this.$store.dispatch('GetvisitComment', this.listData)
         this.loading = true
@@ -116,7 +115,8 @@ export default {
     }
   },
   mounted () {
-    document.getElementById('app').classList.add('impression_full_height')
+    window.addEventListener('scroll', this.scrollBottom)
+    document.getElementById('app').classList.add('full_height')
     // 유저 정보
     this.$store.dispatch('loadTotalData')
     // 리스트 조회
