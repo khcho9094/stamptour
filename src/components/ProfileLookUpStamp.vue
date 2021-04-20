@@ -2,7 +2,7 @@
   <article class="visit_list">
     <div class="title cf">
       <h2>최근 조회 스탬프</h2>
-      <span v-if="badgeSearch && badgeSearch.length" @click="fnLink('/profile/lastvisit')">모두보기</span>
+      <span v-if="badgeSearch && badgeSearch.length" @click="fnLink('/profile/lastsearch')">모두보기</span>
     </div>
     <swiper :options="swiperOption" class="swiper">
       <swiper-slide
