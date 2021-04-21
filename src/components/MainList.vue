@@ -6,7 +6,7 @@
                 <input type="checkbox" id="complete_off"  name="complete_off" @change="checkStatus($event)"> <label for="complete_off">완료 코스 숨기기</label>
             </div>
         </div>
-        <div class="area_box" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' || mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' || mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' || mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==' || mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' || mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==' || mingleCode === 'j9SPKDZVAqJagE3rrMCgug=='">
+        <div class="area_box" v-if="mingleCode === 'SzActcWN5QXozxDixoG4zQ==' || mingleCode === 'iQxiUpF8ZfaGodRQJ6s0mg==' || mingleCode === 'YQTt4DYGRx7iBHRXs2IlPA==' || mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==' || mingleCode === '+0DVeHum2c+rBgEjLoPi6Q==' || mingleCode === '0lDg6JT7iYoHXLAPV4p8wA==' || mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==' || mingleCode === 'j9SPKDZVAqJagE3rrMCgug==' || mingleCode === 'l67rfc/aqMF2GpOTzN/5lA=='">
             <select name="areaInfo" id="areaInfo" v-model="params.areaCode" @change="setArea">
               <option v-bind:value="'0'">전체</option>
               <option v-for="(data, idx) in areaList" v-bind:key="idx" v-bind:value="data.mingle_area_code">
