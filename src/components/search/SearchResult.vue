@@ -1,8 +1,8 @@
 <template>
-    <div class="search_result">
+    <div class="search_result course_box">
         <!-- v-for -->
-        <ul class="list recent">
-            <li v-for="(data, idx) in profile.badge_track" v-bind:key="idx">
+        <ul v-if="searchResult.length !== 0" class="list recent">
+            <li v-for="(data, idx) in searchResult" v-bind:key="idx">
             <div
                 class="box_lt"
                 :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
@@ -33,6 +33,7 @@
             </div>
             </li>
         </ul>
+        <p v-else class="no_result">검색 결과가 없습니다.</p>
     </div>
 </template>
 <script>
@@ -116,10 +117,10 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('GetProfile')
+    // this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['profile', 'mingleCode'])
+    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo'])
   }
 }
 </script>

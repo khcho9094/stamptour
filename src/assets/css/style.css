@@ -3338,6 +3338,7 @@ ul.photo_select li input[type="file"] {
     border-radius: 8px;
     background-color: #fff;
     box-shadow: -8px 8px 15px rgba(0,0,0,0.1);
+    min-height: 90px;
 }
 .total_search .search_card h2 {
     margin-bottom: 15px;
@@ -3347,6 +3348,15 @@ ul.photo_select li input[type="file"] {
 .total_search .search_card h2 span {
     font-size: 12px;
     color: #3bb9fa;
+}
+.total_search .search_card p {
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: #888
 }
 .total_search .search_card ul {
     overflow: hidden;
@@ -3410,6 +3420,15 @@ ul.photo_select li input[type="file"] {
     height: calc(100% - 60px);
     padding: 10px 25px;
     overflow: auto;
+}
+.total_search .search_result ul.list {
+    background-color: transparent;
+    padding: 0;
+}
+.total_search .search_result .no_result {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
 }
 .pop_star_rating .img_wrap {
     margin: 35px auto 25px;

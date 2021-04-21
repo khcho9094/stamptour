@@ -148,7 +148,13 @@ export default new Vuex.Store({
     impressionList: [], // 방문소감조회리스트
     impressionGiftCode: '',
     impressionComplete: false, // 방문소감 완료
-    openProfileStamp: false // 프로필스탬프팝업
+    openProfileStamp: false, // 프로필스탬프팝업
+    recentSearch: [], // 최근검색어
+    popSearch: [], // 인기검색어
+    recomSearch: [], // 추천검색어
+    searchWord: '', // 클릭검색어
+    searchResult: [], // 검색결과
+    searchBool: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -428,6 +434,14 @@ export default new Vuex.Store({
     setImpressionList (state, data) {
       state.impressionList = state.impressionList.concat(data)
       // state.impressionList = data
+    },
+    setSearchList (state, data) {
+      state.recentSearch = data.recent
+      state.popSearch = data.pop
+      state.recomSearch = data.recom
+    },
+    setSearchResult (state, data) {
+      state.searchResult = data
     }
   },
   actions: {
@@ -1406,6 +1420,66 @@ export default new Vuex.Store({
             alert(res.data.response.message)
           }
           dispatch('GetvisitComment')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 최근/인기/추천 검색어 조회
+    getSearchStats ({ state, commit }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/getSearchStats.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      axios
+        .post(url, fd)
+        .then(res => {
+          commit('setSearchList', res.data.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 최근 검색어 삭제 API
+    setSearchWordDel ({ state, dispatch }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/setSearchWordDel.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('search_seq', data)
+      axios
+        .post(url, fd)
+        .then(res => {
+          dispatch('getSearchStats')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 검색어 조회
+    getSearchWord ({ state, commit }, data) {
+      // if (!data) {
+      //   data = {
+      //     page: 1,
+      //     order: 'date',
+      //     order_sort: 'asc',
+      //     me: ''
+      //   }
+      // }
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/getSearchWord.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('search', state.searchWord)
+      fd.append('lat', state.lat)
+      fd.append('lon', state.lon)
+      fd.append('order', data.order)
+      fd.append('stamp', data.stamp)
+      fd.append('area', data.area)
+      fd.append('page', data.page)
+      fd.append('view_count', data.view_count)
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res.data.response.content)
+          commit('setSearchResult', res.data.response.content)
         })
         .catch(err => {
           console.log(err)
