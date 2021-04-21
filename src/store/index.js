@@ -148,7 +148,8 @@ export default new Vuex.Store({
     impressionOpen: false, // 방문소감팝업
     impressionList: [], // 방문소감조회리스트
     impressionGiftCode: '',
-    impressionComplete: false // 방문소감 완료
+    impressionComplete: false, // 방문소감 완료
+    giftYN: false // 메인 선물 배너 유무
   },
   mutations: {
     setIntroData (state, data) {
@@ -173,6 +174,10 @@ export default new Vuex.Store({
       state.allStampPoint = total
     },
     setGiftDataNew (state, data) {
+      console.log(data)
+      if (data.length) {
+        state.giftYN = true
+      }
       let sum = 0
       data.map((val) => {
         sum += parseInt(val.mingle_gift_price)
