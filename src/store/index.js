@@ -45,7 +45,8 @@ export default new Vuex.Store({
       { name: 'KOGAS와 즐기는 대구 스탬프투어', code: '0lDg6JT7iYoHXLAPV4p8wA==', info: 'number', no: '26', msg: '', giftMessage: '‘조심조심 착한소비 스탬프투어 with KOGAS 대구의 히어로가 되어도!’는 대구지역 경제 활성화를 위해 한국가스공사가 준비한 행사로, 지역 관광명소를 즐길 수 있는 스탬프투어와 구매 영수증 인증 이벤트를 진행하여 다양한 경품을 제공합니다. 여러분의 많은 관심과 참여 부탁드립니다.' },
       { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30', giftMessage: '대구광역시와 삼성전자가 협력하여 설립한 대구창조경제혁신센터로 캠퍼스 내부를 둘러보는 스탬프투어입니다.' },
       { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31', giftMessage: '경기도 7개 시의 대표적인 둘레길들을 지나는 스탬프투어입니다.' },
-      { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32', giftMessage: '봄 하면 떠오르는 것, 바로 봄꽃!' }
+      { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32', giftMessage: '봄 하면 떠오르는 것, 바로 봄꽃!' },
+      { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33', giftMessage: '충청북도, 충청남도, 대전, 세종 4개 지역에 위치한 관광지 스탬프투어입니다.' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
