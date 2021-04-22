@@ -1489,6 +1489,27 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    /*
+    내가 찍은 스탬프 별점 등록
+    */
+    setStarPoint ({ state, dispatch }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/setStarPoint.json'
+      const fd = new FormData()
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('token', state.token)
+      fd.append('badge_id', data.user_mingle_badge_id)
+      fd.append('star_cnt', data.change_star)
+      axios
+        .post(url, fd)
+        .then(res => {
+          if (res.data.response.code === '00') {
+            dispatch('loadMyStamp', '0')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {
