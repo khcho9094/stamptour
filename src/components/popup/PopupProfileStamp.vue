@@ -10,11 +10,8 @@
             <p>{{ stampInfo.user_mingle_badge_stamp_date || stampInfo.user_mingle_badge_badge_date}}</p>
             <!-- 별점별점 -->
             <ul class="star_rating">
-                <li><input id="starRating1" type="radio" name="stars" value="1" @change="starRating(1)"><label for="starRating1"></label></li>
-                <li><input id="starRating2" type="radio" name="stars" value="2" @change="starRating(2)"><label for="starRating2"></label></li>
-                <li><input id="starRating3" type="radio" name="stars" value="3" @change="starRating(3)"><label for="starRating3"></label></li>
-                <li><input id="starRating4" type="radio" name="stars" value="4" @change="starRating(4)"><label for="starRating4"></label></li>
-                <li><input id="starRating5" type="radio" name="stars" value="5" @change="starRating(5)"><label for="starRating5"></label></li>
+            <!-- <ul> -->
+                <li v-for="(item, idx) in 5" :key="idx"><input :id="`starRating${item}`" type="radio" name="stars" :value="item" @change="starRating(item, 'change')" ><label :for="`starRating${item}`"></label></li>
             </ul>
             <button class="type1" @click="closeBtn">닫기</button>
             <button class="type2">공유하기</button>
@@ -24,16 +21,32 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data () {
+    return {
+    }
+  },
   props: ['stampInfo'],
   computed: {
     ...mapState(['openProfileStamp'])
+  },
+  watch: {
+    stampInfo (data) {
+      // dom이 모두 생성된 후 실행
+      this.$nextTick(() => {
+        this.starRating(parseInt(data.star_point))
+      })
+    }
   },
   name: 'PopupProfileStamp',
   methods: {
     closeBtn () {
       this.$store.state.openProfileStamp = false
     },
-    starRating (val) {
+    starRating (val, change) {
+      if (change) {
+        this.stampInfo.change_star = val
+        this.$store.dispatch('setStarPoint', this.stampInfo)
+      }
       document.querySelectorAll('[id^="starRating"]').forEach(v => {
         v.classList.remove('on')
       })

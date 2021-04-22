@@ -23,9 +23,8 @@
           </div>
           <span>{{data.info_badge_name}}</span>
           <div class="star">
-            <img src="@/assets/images/star_n.png" alt="" />
-            <img src="@/assets/images/star_p.png" alt="" />
-            4.0
+            <img :src="starIcon(data.star_point)" alt="" />
+            {{(data.star_point === '0.0') ? '별점없음' : data.star_point}}
           </div>
         </li>
       </ul>
@@ -62,7 +61,6 @@ export default {
   methods: {
     stampClick (data) {
       this.stampInfo = data
-      console.log(data)
       this.$store.state.openProfileStamp = true
       this.$store.state.getStampImage = data.mingle_stamp_image
       this.$store.state.getStampName = data.info_badge_name
@@ -81,6 +79,10 @@ export default {
         tit = '내가 찍은 스탬프'
       }
       return tit
+    },
+    starIcon (star) {
+      const starScore = (star === '0.0') ? 'n' : 'p'
+      return require(`@/assets/images/star_${starScore}.png`)
     }
   },
   mounted () {
