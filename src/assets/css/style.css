@@ -3425,11 +3425,6 @@ ul.photo_select li input[type="file"] {
     background-color: transparent;
     padding: 0;
 }
-.total_search .search_result .no_result {
-    font-size: 12px;
-    color: #888;
-    text-align: center;
-}
 .pop_star_rating .img_wrap {
     margin: 35px auto 25px;
     width: 154px;
@@ -3876,4 +3871,9 @@ ul.photo_select li input[type="file"] {
 }
 .pop_point_extinguish span {
     color: #c86550;
+}
+.no_result {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
 }

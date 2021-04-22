@@ -1,11 +1,12 @@
 <template>
   <div class="profile_detail">
     <!-- 헤더 -->
-    <Head type='back' name='view_stamp' title='최근 방문 스탬프' />
+    <Head type='back' name='view_stamp' title='최근 조회 스탬프' />
     <div class="course_box">
-      <p>* 최근 1달간의 방문 스탬프가 표시됩니다.</p>
-      <ul class="list recent">
-        <li v-for="(data, idx) in profile.badge_track" v-bind:key="idx">
+      <p>* 최근 1달간의 조회 스탬프가 표시됩니다.</p>
+      <p v-if="badgeSearch.length === 0" class="no_result">최근 조회 스탬프가 없습니다.</p>
+      <ul v-else class="list recent">
+        <li v-for="(data, idx) in badgeSearch" v-bind:key="idx">
           <div
             class="box_lt"
             :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
@@ -127,7 +128,7 @@ export default {
     this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['profile', 'mingleCode'])
+    ...mapState(['badgeSearch', 'mingleCode'])
   }
 }
 </script>

@@ -144,6 +144,8 @@ export default new Vuex.Store({
     popupList: [], // 팝업 관리자 리스트
     bannerList: [], // 배너 관리자 리스트
     profile: [], // 프로필
+    badgeSearch: [], // 최근 조회 스탬프
+    badgeStamp: [], // 최근 찍은 스탬프
     impressionOpen: false, // 방문소감팝업
     impressionList: [], // 방문소감조회리스트
     impressionGiftCode: '',
@@ -430,6 +432,8 @@ export default new Vuex.Store({
     },
     setProfile (state, data) {
       state.profile = data
+      state.badgeSearch = data.badge_search
+      state.badgeStamp = data.badge_stamp
     },
     setImpressionList (state, data) {
       state.impressionList = state.impressionList.concat(data)

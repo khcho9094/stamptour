@@ -3,9 +3,10 @@
     <!-- 헤더 -->
     <Head type='back' name='view_stamp' title='최근 찍은 스탬프' />
     <div class="course_box laststamp_wrap">
-      <p>* 최근 1달간의 방문 스탬프가 표시됩니다.</p>
+      <p>* 최근 1달간의 획득 스탬프가 표시됩니다.</p>
+      <p v-if="badgeStamp.length === 0" class="no_result">최근 획득 스탬프가 없습니다.</p>
       <ul>
-        <li v-for="(data, idx) in profile.badge_stamp" v-bind:key="idx">
+        <li v-for="(data, idx) in badgeStamp" v-bind:key="idx">
           <div class="mystamp" @click="RecentStampPopup(data)">
             <img :src="data.mingle_stamp_image" alt="mystamp">
           </div>
@@ -42,11 +43,16 @@ export default {
       this.stampInfo = item
     }
   },
+  watch: {
+    badgeStamp () {
+      console.log(this.badgeStamp)
+    }
+  },
   mounted () {
     this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['profile', 'openProfileStamp'])
+    ...mapState(['badgeStamp', 'openProfileStamp'])
   }
 }
 </script>
