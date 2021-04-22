@@ -13,9 +13,8 @@
         </div>
         <h3>{{item.user_mingle_badge_stamp_date.substr(0,10).replaceAll('-','.')}}</h3>
         <div class="star">
-          <img src="@/assets/images/star_n.png" alt="" />
-          <img src="@/assets/images/star_p.png" alt="" />
-          4.0
+          <img :src="starIcon(item.user_mingle_star_cnt)" alt="" />
+          {{(item.user_mingle_star_cnt === '0.0') ? '별점없음' : item.user_mingle_star_cnt}}
         </div>
       </swiper-slide>
     </swiper>
@@ -26,10 +25,11 @@
   </article>
 </template>
 <script>
+import { mapState } from 'vuex'
 import PopupProfileStamp from '@/components/popup/PopupProfileStamp.vue'
 export default {
   name: 'ProfileRecentStamp',
-  props: ['badgeStamp', 'openProfileStamp'],
+  props: ['openProfileStamp'],
   components: {
     PopupProfileStamp
   },
@@ -43,6 +43,9 @@ export default {
       stampInfo: null
     }
   },
+  computed: {
+    ...mapState(['badgeStamp'])
+  },
   methods: {
     fnLink (url) {
       this.$router.push(url)
@@ -50,10 +53,14 @@ export default {
     RecentStampPopup (item) {
       this.$store.state.openProfileStamp = true
       this.stampInfo = item
+    },
+    starIcon (star) {
+      const starScore = (star === '0.0') ? 'n' : 'p'
+      return require(`@/assets/images/star_${starScore}.png`)
     }
   },
   mounted () {
-    // console.log(2)
+    console.log(this.badgeStamp)
   }
 }
 </script>

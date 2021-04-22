@@ -1460,14 +1460,15 @@ export default new Vuex.Store({
     },
     // 검색어 조회
     getSearchWord ({ state, commit }, data) {
-      // if (!data) {
-      //   data = {
-      //     page: 1,
-      //     order: 'date',
-      //     order_sort: 'asc',
-      //     me: ''
-      //   }
-      // }
+      if (!data) {
+        data = {
+          page: 1,
+          order: '',
+          stamp: '',
+          area: '',
+          view_count: 20
+        }
+      }
       const url = 'https://api.tranggle.com/v2/mingle/stamptour/getSearchWord.json'
       const fd = new FormData()
       fd.append('token', state.token)

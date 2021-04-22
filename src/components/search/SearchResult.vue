@@ -12,7 +12,12 @@
             </div>
             <div class="box_rt">
                 <h2>{{data.info_badge_name}}</h2>
-                <p class="txt">여기에서 {{parseFloat(data.distance).toFixed(2)}}km</p>
+                <p class="txt">여기에서 {{parseFloat(data.distance).toFixed(2)}}km
+                  <span class="star">
+                    <img :src="starIcon(data.user_mingle_star_cnt)" alt="" />
+                    {{(data.user_mingle_star_cnt === '0.0') ? '별점없음' : data.user_mingle_star_cnt}}
+                  </span>
+                </p>
                 <div class="stamp_count">
                     <img class="stamp" src="@/assets/images/stamp_icon_2.png" alt="stamp">
                     <span class="stxt">{{stampKind(data)}}</span>
@@ -20,10 +25,9 @@
                     <span v-if="data.mingle_badge_category === 'BICYCLE'" class="cycle">자전거</span>
                 </div>
                 <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==' || mingleCode === 'xYwbII8pDWTT1VzPbK3E1g==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
-                <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick($event ,data)">
-                    <!-- <img src="@/assets/images/dummy_img/stamp.png" alt=""> -->
+                <!-- <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick($event ,data)">
                     <img :src="data.mingle_stamp_image" alt="">
-                </div>
+                </div> -->
                 <div class="progress_box" v-if="progressOn(data)">
                     <div class="p_back">
                         <div class="progress" :style="{'width':progressWidth(data)}"></div>
@@ -114,6 +118,10 @@ export default {
         val = JSON.parse(localStorage.united_ios)
       }
       return val
+    },
+    starIcon (star) {
+      const starScore = (star === '0.0') ? 'n' : 'p'
+      return require(`@/assets/images/star_${starScore}.png`)
     }
   },
   mounted () {

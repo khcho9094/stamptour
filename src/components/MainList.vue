@@ -28,9 +28,8 @@
                     <p class="txt">
                       여기에서 {{parseFloat(data.distance).toFixed(2)}}km
                       <span class="star">
-                        <img v-if="false" src="@/assets/images/star_n.png" alt="" />
-                        <img v-else src="@/assets/images/star_p.png" alt="" />
-                        4.0
+                        <img :src="starIcon(data.star_point)" alt="" />
+                        {{(data.star_point === '0.0') ? '별점없음' : data.star_point}}
                       </span>
                     </p>
                     <div class="stamp_count">
@@ -275,6 +274,10 @@ export default {
           this.$store.dispatch('loadMainData', this.params)
         }
       }
+    },
+    starIcon (star) {
+      const starScore = (star === '0.0') ? 'n' : 'p'
+      return require(`@/assets/images/star_${starScore}.png`)
     }
   },
   beforeCreate () {

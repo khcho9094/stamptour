@@ -13,8 +13,9 @@ export default {
       searchInput: '',
       searchInfo: {
         page: 1,
-        order: '', // 거리순:DISTANCE, 인기순:POP
-        stamp: '', // 방문스탬프:BADGE, 전자스탬프:STAMP, 코스스탬프:TRACK
+        order: '',
+        stamp: '',
+        area: '',
         view_count: 20
       }
     }
@@ -32,12 +33,12 @@ export default {
       if (searchWord === '' || searchWord === null) {
         this.$store.state.searchBool = false
         this.$store.state.searchWord = ''
-        this.$router.push('/search')
+        this.$router.push('/search').catch(() => {})
       } else {
         this.$store.state.searchBool = true
         this.$store.state.searchWord = searchWord
         this.$store.dispatch('getSearchWord', this.searchInfo)
-        this.$router.push(`/search?result=${searchWord}`)
+        this.$router.push(`/search?result=${searchWord}`).catch(() => {})
       }
     }
   }

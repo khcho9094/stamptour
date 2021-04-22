@@ -22,9 +22,10 @@
   </article>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProfileLookUpStamp',
-  props: ['badgeSearch'],
+  // props: ['badgeSearch'],
   data () {
     return {
       swiperOption: {
@@ -33,6 +34,9 @@ export default {
         spaceBetween: 10
       }
     }
+  },
+  computed: {
+    ...mapState(['badgeSearch'])
   },
   methods: {
     fnLink (url) {

@@ -54,8 +54,8 @@
       <strong>사용 가능한 포인트</strong>
       <p><strong>25,000</strong>P</p>
     </article>
-    <ProfileLookUpStamp :badgeSearch="profile.badge_search"/>
-    <ProfileRecentStamp :badgeStamp="profile.badge_stamp"/>
+    <ProfileLookUpStamp :badgeSearch="badgeSearch"/>
+    <ProfileRecentStamp :badgeStamp="badgeStamp"/>
   </div>
 </template>
 <script>
@@ -80,7 +80,7 @@ export default {
     this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['profile', 'token'])
+    ...mapState(['profile', 'badgeStamp', 'badgeSearch', 'token'])
   },
   methods: {
     profileUpload (event) {

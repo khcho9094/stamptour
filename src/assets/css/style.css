@@ -1046,7 +1046,7 @@ header .head_back span {
     font-size: 12px;
 }
 .course_box ul.list li .box_rt p .star img {
-    margin-left: 20px;
+    margin-left: 10px;
     width: 12px;
 }
 .course_box ul.list li .box_rt .stamp_count {
@@ -2777,7 +2777,7 @@ ul.photo_select li input[type="file"] {
 .userProfile {
     background-color: #f7f8f9;
     font-family: inaviL;
-    padding-bottom: 25px;
+    padding-bottom: 70px;
 }
 .userProfile .user {
     text-align: center;
@@ -2987,9 +2987,11 @@ ul.photo_select li input[type="file"] {
     color: #c86550;
     text-align: center;
     font-size: 12px;
+    line-height: 1;
 }
 .userProfile .stamp_list h3 + .star img {
     width: 12px;
+    vertical-align: top;
 }
 .userProfile .no_stamp {
     font-size: 12px;
