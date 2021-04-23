@@ -1510,6 +1510,23 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    // 조회기록 저장 API (앱인지 웹인지 판단필요)
+    setSearchTrack ({ state, dispatch }, data) {
+      const url = 'https://api.tranggle.com/v2/mingle/stamptour/setSearchTrack.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('search', data)
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res)
+          if (res.data.response.code === '00') {
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

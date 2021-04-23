@@ -28,6 +28,7 @@ export default {
         '주변 관광정보',
         '스탬프 획득방법',
         '투어 참가자',
+        '방문 소감',
         '공유하기'
       ]
     }
@@ -70,8 +71,6 @@ export default {
   mounted () {
     if (this.mingleCode === 'Nvn2hlG+v6mVAUJsmrbJ8w==') {
       this.btnArr.push('e현충시설 국민제보')
-    } else if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
-      this.btnArr.splice(3, 0, '방문 소감')
     }
   }
 }

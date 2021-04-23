@@ -44,7 +44,7 @@ export default {
       this.$store.state.searchBool = true
       this.$store.state.searchWord = searchWord
       this.$store.dispatch('getSearchWord', this.searchInfo)
-      this.$router.push(`/search?result=${searchWord}`)
+      this.$router.push(`/search?result=${searchWord}`).catch(() => {})
     }
   },
   mounted () {

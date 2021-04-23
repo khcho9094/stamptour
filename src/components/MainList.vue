@@ -66,8 +66,9 @@ export default {
     return {
       sortList: [
         { name: '인기순', active: true, param: 'pop' },
-        { name: '거리순', active: false, param: 'distance' }
-        // { name: '이름순', active: false, param: 'name' }
+        { name: '거리순', active: false, param: 'distance' },
+        { name: '이름순', active: false, param: 'name' }
+        // { name: '별점순', active: false, param: 'star' }
       ],
       params: {
         order: 'pop',
@@ -111,6 +112,7 @@ export default {
       return require(`@/assets/images/${iType}.png`)
     },
     sortBtn (param, ev) {
+      console.log(param)
       for (const i in this.sortList) {
         if (ev.target.className !== 'on') {
           this.sortList[i].active = !this.sortList[i].active
