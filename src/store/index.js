@@ -445,7 +445,7 @@ export default new Vuex.Store({
       state.recomSearch = data.recom
     },
     setSearchResult (state, data) {
-      state.searchResult = data
+      state.searchResult = state.searchResult.concat(data)
     }
   },
   actions: {

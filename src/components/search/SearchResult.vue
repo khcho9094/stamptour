@@ -25,9 +25,9 @@
                     <span v-if="data.mingle_badge_category === 'BICYCLE'" class="cycle">자전거</span>
                 </div>
                 <div class="position" v-if="(data.mingle_badge_type === 'STAMP' || mingleCode === 'vSi8Z9QlNS5wushabGnrhA==' || mingleCode === 'xYwbII8pDWTT1VzPbK3E1g==') && data.user_mingle_badge_get_stamp_yn !== 'Y' && token" @click="stampAuth($event, data)">전자스탬프</div>
-                <!-- <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick($event ,data)">
+                <div class="stamp_badge" v-else-if="data.user_mingle_badge_get_stamp_yn === 'Y'" @click="stampClick($event ,data)">
                     <img :src="data.mingle_stamp_image" alt="">
-                </div> -->
+                </div>
                 <div class="progress_box" v-if="progressOn(data)">
                     <div class="p_back">
                         <div class="progress" :style="{'width':progressWidth(data)}"></div>
@@ -38,10 +38,14 @@
             </li>
         </ul>
         <p v-else class="no_result">검색 결과가 없습니다.</p>
+        <div class="loading_box" v-if="loadingMainList">
+          <img src="@/assets/images/ajax-loader.gif" alt="loader">
+        </div>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
+import * as appEvent from '@/assets/js/app_event.js'
 export default {
   name: 'SearchResult',
   data () {
@@ -49,8 +53,12 @@ export default {
       progressData: this.localData()
     }
   },
+  computed: {
+    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo', 'loadingMainList'])
+  },
   methods: {
     stampClick (e, data) {
+      console.log(data)
       e.stopPropagation()
       this.$store.state.getStampImage = data.mingle_stamp_image
       this.$store.state.getStampName = data.info_badge_name
@@ -138,10 +146,8 @@ export default {
     },
     scrollBottom () {
       if (Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight) {
-        if (this.searchResult.length / this.params.page === 10) {
-          this.params.page += 1
-          this.$store.dispatch('loadMainData', this.params)
-        }
+        this.params.page += 1
+        this.$store.dispatch('getSearchWord', this.params)
       }
     },
     starIcon (star) {
@@ -149,11 +155,18 @@ export default {
       return require(`@/assets/images/star_${starScore}.png`)
     }
   },
+  beforeCreate () {
+    appEvent.trackProgress()
+  },
+  created () {
+    window.addEventListener('scroll', this.scrollBottom)
+  },
   mounted () {
     // this.$store.dispatch('GetProfile')
   },
-  computed: {
-    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo'])
+  destroyed () {
+    window.removeEventListener('scroll', this.scrollBottom)
+    this.$store.state.searchResult = []
   }
 }
 </script>

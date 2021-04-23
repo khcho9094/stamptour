@@ -1033,9 +1033,9 @@ header .head_back span {
     font-weight: normal;
     width: calc(100% - 60px);
     word-break: keep-all;
-    /* overflow: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; */
+    white-space: nowrap;
 }
 .course_box ul.list li .box_rt p {
     font-family:inaviL;
@@ -1055,6 +1055,19 @@ header .head_back span {
 }
 .course_box ul.list li .box_rt .stamp_count {
     margin-top:5px;
+}
+@media screen and (max-width: 320px) {
+    .course_box ul.list li .box_rt p .star {
+        display: block;
+        line-height: 1;
+    }
+    .course_box ul.list li .box_rt p .star img {
+        margin-left: 0;
+        vertical-align: top;
+    }
+    .course_box ul.list li .box_rt .stamp_count {
+        margin-top: 0;
+    }
 }
 .course_box ul.list li .box_rt img.stamp {
     width:10px;
@@ -3292,13 +3305,12 @@ ul.photo_select li input[type="file"] {
     }
 }
 /* 스탬프 검색 */
-.total_search {
+.total_search .fixed {
     position: fixed;
     width: 100%;
-    height: 100%;
     left: 0;
     top: 0;
-    background-color: #f7f8f9;
+    z-index: 3;
 }
 .total_search a:active,
 .total_search button:active {
@@ -3333,11 +3345,6 @@ ul.photo_select li input[type="file"] {
 .total_search .search_bar button:active {
     background-image: url(../images/search_btn_p.png);
 }
-.total_search .search_b {
-    padding: 15px 25px 0;
-    height: calc(100% - 99px);
-    overflow: auto;
-}
 .total_search .search_card {
     padding: 15px 15px 5px;
     margin-bottom: 10px;
@@ -3345,6 +3352,9 @@ ul.photo_select li input[type="file"] {
     background-color: #fff;
     box-shadow: -8px 8px 15px rgba(0,0,0,0.1);
     min-height: 90px;
+}
+.total_search .search_word {
+    padding: 115px 25px 70px;
 }
 .total_search .search_card h2 {
     margin-bottom: 15px;
@@ -3396,12 +3406,10 @@ ul.photo_select li input[type="file"] {
     font-size: 0;
     vertical-align: middle;
 }
-.total_search .search_a {
-    height: calc(100% - 99px);
-}
 .total_search .search_filter {
     overflow: hidden;
     padding: 15px 25px;
+    background-color: #f7f8f9;
 }
 .total_search .search_filter select {
     padding: 0 7px;
@@ -3423,9 +3431,7 @@ ul.photo_select li input[type="file"] {
     width: calc((100% - 106px)/2)
 }
 .total_search .search_result {
-    height: calc(100% - 60px);
-    padding: 10px 25px;
-    overflow: auto;
+    padding: 170px 25px 70px;
 }
 .total_search .search_result ul.list {
     background-color: transparent;

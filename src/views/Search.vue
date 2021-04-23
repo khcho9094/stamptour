@@ -1,15 +1,16 @@
 <template>
-    <div class="total_search">
-        <Head type='back' name='' title='스탬프 검색' />
-        <SearchBar/>
-        <!-- 검색전 -->
-        <div v-if="!searchBool" class="search_b">
+    <div class="total_search" :class="searchBool ? '': ''">
+        <div class="fixed">
+          <Head type='back' name='' title='스탬프 검색' />
+          <SearchBar/>
+          <SearchResultFilter v-if="searchBool"/>
+        </div>
+        <div v-if="!searchBool" class="search_word">
             <SearchWords/>
         </div>
-        <!-- 검색후 -->
         <div v-else class="search_a">
-            <SearchResultFilter/>
             <SearchResult/>
+            <PopupMyStamp/>
         </div>
     </div>
 </template>
@@ -20,6 +21,7 @@ import SearchBar from '@/components/search/SearchBar.vue'
 import SearchWords from '@/components/search/SearchWords.vue'
 import SearchResultFilter from '@/components/search/SearchResultFilter.vue'
 import SearchResult from '@/components/search/SearchResult.vue'
+import PopupMyStamp from '@/components/popup/PopupMyStamp.vue'
 export default {
   name: 'Search',
   components: {
@@ -27,10 +29,11 @@ export default {
     SearchBar,
     SearchWords,
     SearchResultFilter,
-    SearchResult
+    SearchResult,
+    PopupMyStamp
   },
   computed: {
-    ...mapState(['searchWord', 'searchBool'])
+    ...mapState(['searchWord', 'searchBool', 'stampOpen'])
   },
   data () {
     return {
@@ -57,6 +60,9 @@ export default {
         this.$store.dispatch('getSearchWord', this.searchInfo)
       }
     }
+  },
+  mounted () {
+    document.getElementById('app').classList.add('full_height')
   }
 }
 </script>
