@@ -30,11 +30,13 @@ export default {
     ...mapState(['openProfileStamp'])
   },
   watch: {
-    stampInfo (data) {
-      // dom이 모두 생성된 후 실행
-      this.$nextTick(() => {
-        this.starRating(parseInt(data.star_point))
-      })
+    openProfileStamp (open) {
+      if (open) {
+        // dom이 모두 생성된 후 실행
+        this.$nextTick(() => {
+          this.starRating(parseInt(this.stampInfo.star_point))
+        })
+      }
     }
   },
   name: 'PopupProfileStamp',
