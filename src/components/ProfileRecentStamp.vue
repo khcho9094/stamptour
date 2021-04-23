@@ -13,8 +13,8 @@
         </div>
         <h3>{{item.user_mingle_badge_stamp_date.substr(0,10).replaceAll('-','.')}}</h3>
         <div class="star">
-          <img :src="starIcon(item.user_mingle_star_cnt)" alt="" />
-          {{(item.user_mingle_star_cnt === '0.0') ? '별점없음' : item.user_mingle_star_cnt}}
+          <img :src="starIcon(item.star_point)" alt="" />
+          {{(item.star_point === '0.0') ? '별점없음' : item.star_point}}
         </div>
       </swiper-slide>
     </swiper>

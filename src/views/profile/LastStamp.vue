@@ -12,9 +12,8 @@
           </div>
           <span>{{data.info_badge_name}}</span>
           <div class="star">
-            <img src="@/assets/images/star_n.png" alt="" />
-            <img src="@/assets/images/star_p.png" alt="" />
-            4.0
+            <img :src="starIcon(data.star_point)" alt="" />
+            {{(data.star_point === '0.0') ? '별점없음' : data.star_point}}
           </div>
         </li>
       </ul>
@@ -41,6 +40,10 @@ export default {
     RecentStampPopup (item) {
       this.$store.state.openProfileStamp = true
       this.stampInfo = item
+    },
+    starIcon (star) {
+      const starScore = (star === '0.0') ? 'n' : 'p'
+      return require(`@/assets/images/star_${starScore}.png`)
     }
   },
   watch: {

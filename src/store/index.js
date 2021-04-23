@@ -1498,13 +1498,17 @@ export default new Vuex.Store({
       const fd = new FormData()
       fd.append('mingleCode', state.mingleCode)
       fd.append('token', state.token)
-      fd.append('badge_id', data.user_mingle_badge_id)
+      fd.append('badge_id', data.user_mingle_badge_id || data.mingle_badge_id)
       fd.append('star_cnt', data.change_star)
       axios
         .post(url, fd)
         .then(res => {
           if (res.data.response.code === '00') {
-            dispatch('loadMyStamp', '0')
+            if (data.user_mingle_badge_id) {
+              dispatch('loadMyStamp', '0')
+            } else if (data.mingle_badge_id) {
+              dispatch('GetProfile')
+            }
           }
         })
         .catch(err => {
