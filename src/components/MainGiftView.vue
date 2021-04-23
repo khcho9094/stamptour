@@ -4,7 +4,7 @@
         <swiper-slide v-for="(banner, idx) in bannerList" :key="idx">
           <img class="themaBanner" :src="`https://stamp.tranggle.com/${banner.notice_popup_img_url.replace('html/', '')}`" :alt="banner.notice_popup_title" @click="checkUrl(banner.notice_popup_url)"/>
         </swiper-slide>
-        <swiper-slide v-if="this.mingleCode !== 'j9SPKDZVAqJagE3rrMCgug==' && this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==' && this.mingleCode !== 'YQTt4DYGRx7iBHRXs2IlPA==' && this.mingleCode !== '0lDg6JT7iYoHXLAPV4p8wA=='">
+        <swiper-slide v-if="giftYN">
             <div v-if="parseInt(sumPrice) > 0" class="gift_box" @click="goGift">
                 <div class="gift_price">
                     {{sumPrice}}원 상당의 선물이 가득!!
@@ -45,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['sumPrice', 'mingleCode', 'stampCodeInfo', 'bannerList'])
+    ...mapState(['sumPrice', 'mingleCode', 'stampCodeInfo', 'bannerList', 'giftYN'])
   },
   methods: {
     goGift () {
