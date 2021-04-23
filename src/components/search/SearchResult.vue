@@ -38,9 +38,9 @@
             </li>
         </ul>
         <p v-else class="no_result">검색 결과가 없습니다.</p>
-        <div class="loading_box" v-if="loadingMainList">
+        <!-- <div class="loading_box" v-if="loadingMainList">
           <img src="@/assets/images/ajax-loader.gif" alt="loader">
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo', 'loadingMainList'])
+    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo', 'loadingMainList', 'searchInfo'])
   },
   methods: {
     stampClick (e, data) {
@@ -146,8 +146,11 @@ export default {
     },
     scrollBottom () {
       if (Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight) {
-        this.params.page += 1
-        this.$store.dispatch('getSearchWord', this.params)
+        this.$store.state.loadingMainList = true
+        if (this.loadingMainList) {
+          this.$store.state.searchInfo.page++
+          this.$store.dispatch('getSearchWord', this.searchInfo)
+        }
       }
     },
     starIcon (star) {

@@ -152,6 +152,13 @@ export default new Vuex.Store({
     impressionGiftCode: '',
     impressionComplete: false, // 방문소감 완료
     openProfileStamp: false, // 프로필스탬프팝업
+    searchInfo: {
+      page: 1,
+      order: '',
+      stamp: '',
+      area: '',
+      view_count: 20
+    }, // 검색조건
     recentSearch: [], // 최근검색어
     popSearch: [], // 인기검색어
     recomSearch: [], // 추천검색어
@@ -1490,6 +1497,7 @@ export default new Vuex.Store({
         .post(url, fd)
         .then(res => {
           console.log(res.data.response.content)
+          state.loadingMainList = false
           commit('setSearchResult', res.data.response.content)
         })
         .catch(err => {

@@ -1048,10 +1048,12 @@ header .head_back span {
     vertical-align: middle;
     color: #cc705c;
     font-size: 12px;
+    line-height: 1;
 }
 .course_box ul.list li .box_rt p .star img {
     margin-left: 10px;
     width: 12px;
+    vertical-align: top;
 }
 .course_box ul.list li .box_rt .stamp_count {
     margin-top:5px;

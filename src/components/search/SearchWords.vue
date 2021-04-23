@@ -27,14 +27,10 @@ export default {
   name: 'SearchHot',
   data () {
     return {
-      searchInfo: {
-        page: 1,
-        view_count: 20
-      }
     }
   },
   computed: {
-    ...mapState(['recentSearch', 'popSearch', 'recomSearch'])
+    ...mapState(['recentSearch', 'popSearch', 'recomSearch', 'searchInfo'])
   },
   methods: {
     delRecentWord (searchSeq) {
