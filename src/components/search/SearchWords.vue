@@ -39,7 +39,9 @@ export default {
     getSearchResult (searchWord) {
       this.$store.state.searchBool = true
       this.$store.state.searchWord = searchWord
-      this.$store.dispatch('getSearchWord', this.searchInfo)
+      this.$store.state.searchInfo.page = 1
+      this.$store.state.searchResult = []
+      // this.$store.dispatch('getSearchWord', this.searchInfo)
       this.$router.push(`/search?result=${searchWord}`).catch(() => {})
     }
   },
