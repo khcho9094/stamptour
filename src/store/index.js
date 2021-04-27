@@ -166,10 +166,16 @@ export default new Vuex.Store({
     searchResult: [], // 검색결과
     searchBool: false,
     giftYN: false, // 메인 선물 배너 유무
+    totalMemberInfo: {}, // 통합몰 회원정보
     totalGiftPoint: '', // 통합포인트 리스트
     totalGiftList: [], // 통합포인트 리스트
     expectPoint: {}, // 소멸 예정 포인트
-    totalPointLogList: []
+    totalPointLogList: [],
+    totalAgreePop: false, // 통합몰 수집 동의 팝업
+    totalBuyPop: false, // 통합몰 구매 팝업
+    totalLackPop: false, // 통합몰 포인트 부족팝업
+    totalExtinguishPop: false, // 통합몰 소멸예정 포인트 팝업
+    totalSelectGift: {}
   },
   mutations: {
     setIntroData (state, data) {
@@ -466,6 +472,7 @@ export default new Vuex.Store({
     },
     setTotalGiftList (state, data) {
       state.totalGiftPoint = data.total_point
+      state.totalMemberInfo = data.member_info
       let arrNo = 0
       const array = Array.from(Array(Math.ceil(data.total_gift_list.length / 9)), () => [])
       data.total_gift_list.map((val, idx) => {
@@ -1627,6 +1634,30 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res.data.response.content)
           commit('setTotalPointLogList', res.data.response.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 통합 포인트 몰 선물 신청(포인트 차감)
+    totalGiftPresent ({ state, dispatch }, data) {
+      const url = 'https://stage-api.tranggle.com/v2/mingle/stamptour/totalGiftPresent.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('giftId', data.mingle_tot_gift_seq)
+      fd.append('giftPoint', data.mingle_tot_gift_count)
+      fd.append('resCd', '100')
+      fd.append('postCd', '111111')
+      fd.append('pkgCd', '222222')
+      fd.append('couponNo', '123412345')
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res)
+          if (res.data.response.code === '00') {
+            alert('성공!')
+            dispatch('getTotalGiftList')
+          }
         })
         .catch(err => {
           console.log(err)

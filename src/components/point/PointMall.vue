@@ -7,12 +7,12 @@
                 <swiper :options="swiperOption" class="mall_swiper swiper">
                     <swiper-slide class="slide" v-for="(data, idx) in totalGiftList" v-bind:key="idx">
                         <ul>
-                            <li class="item" v-for="(val, cidx) in data" v-bind:key="cidx">
+                            <li class="item" v-for="(val, cidx) in data" v-bind:key="cidx" @click="giftReceive(val)">
                                 <div class="gift_img_wrap">
                                     <img :src="`https://stamp.tranggle.com/${val.mingle_tot_gift_image}`" alt="" />
                                 </div>
                                 <strong>{{val.mingle_tot_gift_title}}</strong>
-                                <em>{{val.mingle_tot_gift_price}}P</em>
+                                <em>{{comma(val.mingle_tot_gift_price)}}P</em>
                             </li>
                         </ul>
                     </swiper-slide>
@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupNoti', 'totalGiftList'])
+    ...mapState(['popupNoti', 'totalGiftList', 'totalMemberInfo'])
   },
   mounted () {
     // 모든화면에서 정사각형으로 보이기
@@ -49,6 +49,18 @@ export default {
   },
   methods: {
     openMallGift () {
+    },
+    comma (val) {
+      return val ? val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0
+    },
+    giftReceive (data) {
+      console.log(data)
+      this.$store.state.totalSelectGift = data
+      if (this.$cookie.get('agree_total_point') === 'Y' && this.totalMemberInfo.member_mobile) {
+        this.$store.state.totalBuyPop = true
+      } else {
+        this.$store.state.totalAgreePop = true
+      }
     }
   }
 }

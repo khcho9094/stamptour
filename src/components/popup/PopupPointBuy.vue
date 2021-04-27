@@ -3,15 +3,15 @@
         <div class="pop_cont">
             <img class="icon_img" src="@/assets/images/popup_icon_gift.png" alt="icon">
             <div class="text_2">
-                <strong>조지아 오리지널 240ml</strong>
+                <strong>{{totalSelectGift.mingle_tot_gift_title}}</strong>
                 <div class="img_box">
-                    <img src="@/assets/images/dummy_img/gift_img_1.png" alt="" />
+                    <img :src="`https://stamp.tranggle.com/${totalSelectGift.mingle_tot_gift_image}`" alt="" />
                 </div>
-                <p>1000P가 차감되며, 회원정보에 등록된<br/>휴대폰 메시지로 모바일 상품권이<br/>발송됩니다. 지금 받으시겠습니까?</p>
+                <p>{{comma(totalSelectGift.mingle_tot_gift_count)}}P가 차감되며, 회원정보에 등록된<br/>휴대폰 메시지로 모바일 상품권이<br/>발송됩니다. 지금 받으시겠습니까?</p>
                 <div class="agree_pop">
                     <div class="agree_info">
                         <div class="tit">휴대폰</div>
-                        <span>{{memberInfo.mobile || '정보 없음'}}</span>
+                        <span>{{totalMemberInfo.member_mobile || '정보 없음'}}</span>
                     </div>
                 </div>
             </div>
@@ -25,14 +25,23 @@ import { mapState } from 'vuex'
 export default {
   name: 'PopupPointBuy',
   computed: {
-    ...mapState(['memberInfo'])
+    ...mapState(['totalMemberInfo', 'totalSelectGift', 'totalGiftPoint'])
   },
   methods: {
     closeBtn () {
-      // 내용내용
+      this.$store.state.totalBuyPop = false
     },
     receiveItem () {
-      // 내용내용
+      if (this.totalSelectGift.mingle_tot_gift_count > this.totalGiftPoint) {
+        this.$store.state.totalBuyPop = false
+        this.$store.state.totalLackPop = true
+      } else {
+        this.$store.state.totalBuyPop = false
+        this.$store.dispatch('totalGiftPresent', this.totalSelectGift)
+      }
+    },
+    comma (val) {
+      return val ? val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0
     }
   }
 }

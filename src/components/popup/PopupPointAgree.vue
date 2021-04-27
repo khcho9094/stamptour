@@ -10,12 +10,12 @@
                     • 수집/이용 목적<br>
                     <span>선물 발급 통계정보 작성</span><br/>
                     • 개인 정보 항목<br>
-                    <span>연락처, 주소, 이름, 성별, 생년월일</span><br/>
+                    <span>연락처</span><br/>
                     • 보유기간 : <span>1년</span>
                   </div>
                   <div class="agree_info">
                     <div class="tit">휴대폰</div>
-                    <span>{{memberInfo.mobile || '정보 없음'}}</span>
+                    <span>{{totalMemberInfo.member_mobile || '정보 없음'}}</span>
                   </div>
                 </div>
                 <div class="check" v-if="agreeCheck">
@@ -51,14 +51,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['popupGift', 'memberInfo', 'popupNoti', 'durunubiCheck', 'submitCheck'])
+    ...mapState(['popupGift', 'memberInfo', 'popupNoti', 'submitCheck', 'totalMemberInfo'])
   },
   methods: {
     closeBtn () {
-      // this.$store.dispatch('openPopupGift', {})
+      this.$store.state.totalAgreePop = false
     },
     agreePoint () {
-      if (!this.memberInfo.mobile) {
+      if (!this.totalMemberInfo.member_mobile) {
         this.$store.dispatch('openNotiPopup', {
           tit1: '선물을 받기 위해<br/>아래의 정보가 필요합니다.',
           tit2: '휴대폰 번호'
@@ -76,42 +76,22 @@ export default {
           })
         }
       }
-    },
-    agreeBtn (btnType) {
-      if (this.memberInfo.mobile) {
-        this.$cookie.set(`agree_point_${btnType}`, 'Y', 9999)
+      if (this.totalMemberInfo.member_mobile && this.collection && this.personal) {
+        this.$cookie.set('agree_total_point', 'Y', 9999)
+        alert('동의!')
+        this.$store.state.totalAgreePop = false
+        this.$store.state.totalBuyPop = true
       }
-    },
-    agreeOn () {
-      let className = ''
-      if (this.memberInfo.address && this.memberInfo.mobile) {
-        className = 'on'
-      }
-      return className
     }
   },
   watch: {
-    collection () {
-      if (this.collection) {
-        this.agreeBtn('collection')
-      } else {
-        this.$cookie.set('agree_point_collection', 'N', 9999)
-      }
-    },
-    personal () {
-      if (this.personal) {
-        this.agreeBtn('personal')
-      } else {
-        this.$cookie.set('agree_point_personal', 'N', 9999)
-      }
-    }
   },
   mounted () {
-    if (this.$cookie.get('agree_point_collection') === 'Y' && this.$cookie.get('agree_point_personal') === 'Y') {
-      this.collection = true
-      this.personal = true
-      this.agreeCheck = false
-    }
+    // if (this.$cookie.get('agree_point_collection') === 'Y' && this.$cookie.get('agree_point_personal') === 'Y') {
+    //   this.collection = true
+    //   this.personal = true
+    //   this.agreeCheck = false
+    // }
   }
 }
 </script>
