@@ -106,7 +106,7 @@ export default {
         console.log(this.$route.query)
         if (this.$route.name === 'Gift') {
           this.$router.push('/')
-        } else if (this.name === 'search' && this.$route.query.length === 0) {
+        } else if ((this.name === 'search' && this.$route.query.length === 0) || this.$route.name === 'Profile') {
           this.goHome()
         } else {
           this.$router.go(-1)
