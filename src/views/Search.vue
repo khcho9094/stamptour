@@ -1,7 +1,7 @@
 <template>
     <div class="total_search" :class="searchBool ? '': ''">
         <div class="fixed">
-          <Head type='back' name='' title='스탬프 검색' />
+          <Head type='back' name='search' title='스탬프 검색' />
           <SearchBar/>
           <SearchResultFilter v-if="searchBool"/>
         </div>

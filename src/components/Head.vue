@@ -105,6 +105,8 @@ export default {
       } else {
         if (this.$route.name === 'Gift') {
           this.$router.push('/')
+        } else if (this.name === 'search' && !this.$router.query) {
+          this.goHome()
         } else {
           this.$router.go(-1)
         }
