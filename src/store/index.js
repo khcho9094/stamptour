@@ -1501,8 +1501,11 @@ export default new Vuex.Store({
         .post(url, fd)
         .then(res => {
           console.log(res.data.response.content)
+          state.loadingMainList = true
+          if (res.data.response.content.length !== 0) {
+            commit('setSearchResult', res.data.response.content)
+          }
           state.loadingMainList = false
-          commit('setSearchResult', res.data.response.content)
         })
         .catch(err => {
           console.log(err)

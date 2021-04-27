@@ -2828,6 +2828,9 @@ ul.photo_select li input[type="file"] {
     height: 0;
     
 }
+.userProfile .user .profile input[type="file"] + label {
+    display: block;
+}
 /* .userProfile .user .profile label { */
 .userProfile .user .profile button.btn_upload {
     width: 19px;
