@@ -103,10 +103,9 @@ export default {
           return false
         }
       } else {
-        console.log(this.$route.query)
         if (this.$route.name === 'Gift') {
           this.$router.push('/')
-        } else if ((this.name === 'search' && this.$route.query.length === 0) || this.$route.name === 'Profile') {
+        } else if ((this.$route.name === 'Search' && Object.keys(this.$route.query).length === 0) || this.$route.name === 'Profile') {
           this.goHome()
         } else {
           this.$router.go(-1)
