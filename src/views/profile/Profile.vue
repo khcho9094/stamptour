@@ -52,7 +52,7 @@
         <span @click="fnLink('/point')">사용하기</span>
       </div>
       <strong>사용 가능한 포인트</strong>
-      <p><strong>25,000</strong>P</p>
+      <p><strong>{{profile.total_point}}</strong>P</p>
     </article>
     <ProfileLookUpStamp :badgeSearch="badgeSearch"/>
     <ProfileRecentStamp :badgeStamp="badgeStamp"/>

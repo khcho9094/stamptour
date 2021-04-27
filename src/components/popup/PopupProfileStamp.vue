@@ -10,7 +10,6 @@
             <p>{{ stampInfo.user_mingle_badge_stamp_date || stampInfo.user_mingle_badge_badge_date}}</p>
             <!-- 별점별점 -->
             <ul class="star_rating">
-            <!-- <ul> -->
                 <li v-for="(item, idx) in 5" :key="idx"><input :id="`starRating${item}`" type="radio" name="stars" :value="item" @change="starRating(item, 'change')" ><label :for="`starRating${item}`"></label></li>
             </ul>
             <button class="type1" @click="closeBtn">닫기</button>

@@ -1,8 +1,8 @@
 <template>
     <div class="total_point">
         <Head type='back' name='view_stamp' title='포인트' />
-        <PointAvailable/>
-        <PointMall/>
+        <PointAvailable />
+        <PointMall />
         <PointUseGuide/>
         <!-- 포인트몰 개인정보 수집동의 -->
         <PopupPointAgree v-if="false"/>
@@ -34,6 +34,13 @@ export default {
     PopupPointBuy,
     PopupPointLack,
     PopupPointExtinguish
+  },
+  computed: {
+  },
+  mounted () {
+    this.$store.dispatch('getTotalGiftList')
+    this.$store.dispatch('delExpectPoint')
+    this.$store.dispatch('loadTotalData')
   }
 }
 </script>

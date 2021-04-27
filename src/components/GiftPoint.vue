@@ -1,7 +1,7 @@
 <template>
     <div class="point_view">
-        <div class="p_name" v-if="userInfo.member_nickname">
-            {{userInfo.member_nickname}}님의 {{name}}
+        <div class="p_name" v-if="userInfo.user_mingle_member_id">
+            {{userInfo.member_nickname || userInfo.user_mingle_member_id}}님의 {{name}}
             <img src="@/assets/images/refresh.png" alt="refresh" @click="pointRefresh">
         </div>
         <div class="point">{{myPoint}}<span>{{unit}}</span></div>

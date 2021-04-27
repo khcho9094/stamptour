@@ -158,7 +158,10 @@ export default new Vuex.Store({
     searchWord: '', // 클릭검색어
     searchResult: [], // 검색결과
     searchBool: false,
-    giftYN: false // 메인 선물 배너 유무
+    giftYN: false, // 메인 선물 배너 유무
+    totalGiftPoint: '', // 통합포인트 리스트
+    totalGiftList: [], // 통합포인트 리스트
+    expectPoint: {} // 소멸 예정 포인트
   },
   mutations: {
     setIntroData (state, data) {
@@ -452,6 +455,21 @@ export default new Vuex.Store({
     },
     setSearchResult (state, data) {
       state.searchResult = state.searchResult.concat(data)
+    },
+    setTotalGiftList (state, data) {
+      state.totalGiftPoint = data.total_point
+      let arrNo = 0
+      const array = Array.from(Array(Math.ceil(data.total_gift_list.length / 9)), () => [])
+      data.total_gift_list.map((val, idx) => {
+        array[arrNo].push(val)
+        if ((idx + 1) % 9 === 0 && idx > 0) {
+          arrNo++
+        }
+      })
+      state.totalGiftList = array
+    },
+    setExpectPoint (state, data) {
+      state.expectPoint = data.ded_data
     }
   },
   actions: {
@@ -1314,7 +1332,7 @@ export default new Vuex.Store({
     프로필
     */
     GetProfile ({ state, commit }) {
-      const url = 'https://api.tranggle.com/v2/mingle/stamptour/getProfile.json'
+      const url = 'https://stage-api.tranggle.com:4081/v2/mingle/stamptour/getProfile.json'
       const fd = new FormData()
       fd.append('token', state.token)
       axios
@@ -1500,11 +1518,12 @@ export default new Vuex.Store({
     내가 찍은 스탬프 별점 등록
     */
     setStarPoint ({ state, dispatch }, data) {
+      console.log(data)
       const url = 'https://api.tranggle.com/v2/mingle/stamptour/setStarPoint.json'
       const fd = new FormData()
       fd.append('mingleCode', state.mingleCode)
       fd.append('token', state.token)
-      fd.append('badge_id', data.user_mingle_badge_id || data.mingle_badge_id)
+      fd.append('badge_id', data.user_mingle_badge_id || data.mingle_badge_id || data.badge_id)
       fd.append('star_cnt', data.change_star)
       axios
         .post(url, fd)
@@ -1532,6 +1551,39 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res)
           if (res.data.response.code === '00') {
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+
+    // 통합 포인트 몰 리스트 조회
+    getTotalGiftList ({ state, commit }) {
+      const url = 'https://stage-api.tranggle.com:4081/v2/mingle/stamptour/getTotalGiftList.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      axios
+        .post(url, fd)
+        .then(res => {
+          if (res.data.response.code === '00') {
+            commit('setTotalGiftList', res.data.response.content)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 소멸 예정 포인트 안내
+    delExpectPoint ({ state, commit }) {
+      const url = 'https://stage-api.tranggle.com:4081/v2/mingle/stamptour/delExpectPoint.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      axios
+        .post(url, fd)
+        .then(res => {
+          if (res.data.response.code === '00') {
+            commit('setExpectPoint', res.data.response.content)
           }
         })
         .catch(err => {
