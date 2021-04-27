@@ -16,12 +16,12 @@
           <div class="pop_cont" style="background-color: #fff">
             <ul>
               <li>
-                <input id="profileUpload" type="file" accept="image/*" capture="camera" @change="profileUpload($event, '')">
-                <label for="profileUpload">사진 촬영</label>
+                <input id="profileCamera" type="file" accept="image/*" capture="camera" @change="profileUpload($event, '')">
+                <label for="profileCamera">사진 촬영</label>
               </li>
               <li>
-                <input id="profileUpload" type="file" accept="image/*" @change="profileUpload($event, '')">
-                <label for="profileUpload">앨범에서 사진 선택</label>
+                <input id="profileAlbum" type="file" accept="image/*" @change="profileUpload($event, '')">
+                <label for="profileAlbum">앨범에서 사진 선택</label>
               </li>
             </ul>
             <button type="button" @click="closeUploadLayer">닫기</button>

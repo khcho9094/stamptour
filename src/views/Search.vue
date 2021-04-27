@@ -33,7 +33,7 @@ export default {
     PopupMyStamp
   },
   computed: {
-    ...mapState(['searchWord', 'searchBool', 'stampOpen'])
+    ...mapState(['searchWord', 'searchBool', 'stampOpen', 'searchInfo'])
   },
   data () {
     return {
@@ -43,21 +43,13 @@ export default {
     $route (to, from) {
       if (to.query.result) {
         this.$store.state.searchBool = true
-      } else {
-        this.$store.state.searchBool = false
-        this.$store.state.searchWord = ''
-      }
-    }
-  },
-  methods: {
-    getSearchResult (searchWord) {
-      if (searchWord === '' || searchWord === null) {
-        this.$store.state.searchBool = false
-        this.$store.state.searchWord = ''
-      } else {
-        this.$store.state.searchBool = true
-        this.$store.state.searchWord = searchWord
+        this.$store.state.searchWord = to.query.result
+        this.$store.state.searchInfo.page = 1
+        this.$store.state.searchResult = []
         this.$store.dispatch('getSearchWord', this.searchInfo)
+      } else {
+        this.$store.state.searchBool = false
+        this.$store.state.searchWord = ''
       }
     }
   },

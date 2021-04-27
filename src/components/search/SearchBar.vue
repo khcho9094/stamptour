@@ -10,18 +10,11 @@ export default {
   name: 'SearchBar',
   data () {
     return {
-      searchInput: '',
-      searchInfo: {
-        page: 1,
-        order: '',
-        stamp: '',
-        area: '',
-        view_count: 20
-      }
+      searchInput: ''
     }
   },
   computed: {
-    ...mapState(['searchWord'])
+    ...mapState(['searchWord', 'searchInfo'])
   },
   watch: {
     searchWord () {
@@ -37,7 +30,6 @@ export default {
       } else {
         this.$store.state.searchBool = true
         this.$store.state.searchWord = searchWord
-        this.$store.dispatch('getSearchWord', this.searchInfo)
         this.$router.push(`/search?result=${searchWord}`).catch(() => {})
       }
     }

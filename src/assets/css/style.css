@@ -1048,10 +1048,12 @@ header .head_back span {
     vertical-align: middle;
     color: #cc705c;
     font-size: 12px;
+    line-height: 1;
 }
 .course_box ul.list li .box_rt p .star img {
     margin-left: 10px;
     width: 12px;
+    vertical-align: top;
 }
 .course_box ul.list li .box_rt .stamp_count {
     margin-top:5px;
@@ -2826,6 +2828,9 @@ ul.photo_select li input[type="file"] {
     height: 0;
     
 }
+.userProfile .user .profile input[type="file"] + label {
+    display: block;
+}
 /* .userProfile .user .profile label { */
 .userProfile .user .profile button.btn_upload {
     width: 19px;
@@ -3354,7 +3359,7 @@ ul.photo_select li input[type="file"] {
     min-height: 90px;
 }
 .total_search .search_word {
-    padding: 115px 25px 70px;
+    padding: 115px 25px 60px;
 }
 .total_search .search_card h2 {
     margin-bottom: 15px;

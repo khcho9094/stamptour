@@ -152,6 +152,13 @@ export default new Vuex.Store({
     impressionGiftCode: '',
     impressionComplete: false, // 방문소감 완료
     openProfileStamp: false, // 프로필스탬프팝업
+    searchInfo: {
+      page: 1,
+      order: '',
+      stamp: '',
+      area: '',
+      view_count: 20
+    }, // 검색조건
     recentSearch: [], // 최근검색어
     popSearch: [], // 인기검색어
     recomSearch: [], // 추천검색어
@@ -161,7 +168,8 @@ export default new Vuex.Store({
     giftYN: false, // 메인 선물 배너 유무
     totalGiftPoint: '', // 통합포인트 리스트
     totalGiftList: [], // 통합포인트 리스트
-    expectPoint: {} // 소멸 예정 포인트
+    expectPoint: {}, // 소멸 예정 포인트
+    totalPointLogList: []
   },
   mutations: {
     setIntroData (state, data) {
@@ -470,6 +478,9 @@ export default new Vuex.Store({
     },
     setExpectPoint (state, data) {
       state.expectPoint = data.ded_data
+    },
+    setTotalPointLogList (state, data) {
+      state.totalPointLogList = state.totalPointLogList.concat(data.total_log_list)
     }
   },
   actions: {
@@ -1508,7 +1519,11 @@ export default new Vuex.Store({
         .post(url, fd)
         .then(res => {
           console.log(res.data.response.content)
-          commit('setSearchResult', res.data.response.content)
+          state.loadingMainList = true
+          if (res.data.response.content.length !== 0) {
+            commit('setSearchResult', res.data.response.content)
+          }
+          state.loadingMainList = false
         })
         .catch(err => {
           console.log(err)
@@ -1585,6 +1600,33 @@ export default new Vuex.Store({
           if (res.data.response.code === '00') {
             commit('setExpectPoint', res.data.response.content)
           }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 통합 포인트 로그 내역 리스트
+    getTotalPointLogList ({ state, commit }, data) {
+      if (!data) {
+        data = {
+          page: 1,
+          order: '',
+          stamp: '',
+          area: '',
+          view_count: 20
+        }
+      }
+      const url = 'https://stage-api.tranggle.com:4081/v2/mingle/stamptour/totalPointLogList.json'
+      const fd = new FormData()
+      fd.append('token', state.token)
+      fd.append('order_type', data.order_type)
+      fd.append('view_count', data.view_count)
+      fd.append('page', data.page)
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res.data.response.content)
+          commit('setTotalPointLogList', res.data.response.content)
         })
         .catch(err => {
           console.log(err)

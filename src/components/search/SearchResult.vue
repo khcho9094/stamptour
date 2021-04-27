@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo', 'loadingMainList'])
+    ...mapState(['profile', 'mingleCode', 'searchResult', 'stampCodeInfo', 'loadingMainList', 'searchInfo'])
   },
   methods: {
     stampClick (e, data) {
@@ -146,8 +146,8 @@ export default {
     },
     scrollBottom () {
       if (Math.ceil(window.scrollY + window.innerHeight) === document.body.scrollHeight) {
-        this.params.page += 1
-        this.$store.dispatch('getSearchWord', this.params)
+        this.$store.state.searchInfo.page++
+        this.$store.dispatch('getSearchWord', this.searchInfo)
       }
     },
     starIcon (star) {

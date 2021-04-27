@@ -24,21 +24,18 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'SearchResultFilter',
   data () {
     return {
       sortingOrder: '',
       sortingStamp: '',
-      sortingArea: '',
-      searchInfo: {
-        page: 1,
-        order: '',
-        stamp: '',
-        area: '',
-        view_count: 20
-      }
+      sortingArea: ''
     }
+  },
+  computed: {
+    ...mapState(['searchInfo'])
   },
   mounted () {
     // console.log(this.sortingOrder)
@@ -47,9 +44,11 @@ export default {
   },
   methods: {
     sortingList () {
-      this.searchInfo.order = this.sortingOrder
-      this.searchInfo.stamp = this.sortingStamp
-      this.searchInfo.area = this.sortingArea
+      this.$store.state.searchResult = []
+      this.$store.state.searchInfo.page = 1
+      this.$store.state.searchInfo.order = this.sortingOrder
+      this.$store.state.searchInfo.stamp = this.sortingStamp
+      this.$store.state.searchInfo.area = this.sortingArea
       this.$store.dispatch('getSearchWord', this.searchInfo)
     }
   }

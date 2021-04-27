@@ -112,12 +112,12 @@ export default {
       return require(`@/assets/images/${iType}.png`)
     },
     sortBtn (param, ev) {
-      console.log(param)
       for (const i in this.sortList) {
         if (ev.target.className !== 'on') {
-          this.sortList[i].active = !this.sortList[i].active
+          this.sortList[i].active = false
           this.params.order = param
           if (ev.target.innerText === this.sortList[i].name) {
+            this.sortList[i].active = true
             this.listCall()
           }
         }
