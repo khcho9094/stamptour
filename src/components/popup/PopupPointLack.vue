@@ -15,7 +15,7 @@ export default {
   name: 'PopupPointLack',
   methods: {
     closeBtn () {
-      // 닫기닫기
+      this.$store.state.totalLackPop = false
     }
   }
 }

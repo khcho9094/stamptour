@@ -52,7 +52,7 @@
         <span @click="fnLink('/point')">사용하기</span>
       </div>
       <strong>사용 가능한 포인트</strong>
-      <p><strong>{{profile.total_point}}</strong>P</p>
+      <p><strong>{{comma(profile.total_point)}}</strong>P</p>
     </article>
     <ProfileLookUpStamp :badgeSearch="badgeSearch"/>
     <ProfileRecentStamp :badgeStamp="badgeStamp"/>
@@ -97,6 +97,9 @@ export default {
     },
     fnLink (url) {
       this.$router.push(url)
+    },
+    comma (val) {
+      return val ? val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0
     }
   }
 }

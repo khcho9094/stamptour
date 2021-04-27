@@ -5,13 +5,13 @@
         <PointMall />
         <PointUseGuide/>
         <!-- 포인트몰 개인정보 수집동의 -->
-        <PopupPointAgree v-if="false"/>
+        <PopupPointAgree v-if="totalAgreePop"/>
         <!-- 구매팝업 -->
-        <PopupPointBuy v-if="false"/>
+        <PopupPointBuy v-if="totalBuyPop"/>
         <!-- 포인트 부족팝업 -->
-        <PopupPointLack v-if="false"/>
+        <PopupPointLack v-if="totalLackPop"/>
         <!-- 소멸예정 포인트 팝업 -->
-        <PopupPointExtinguish v-if="false"/>
+        <PopupPointExtinguish v-if="totalExtinguishPop"/>
     </div>
 </template>
 <script>
@@ -23,6 +23,7 @@ import PopupPointAgree from '@/components/popup/PopupPointAgree.vue'
 import PopupPointBuy from '@/components/popup/PopupPointBuy.vue'
 import PopupPointLack from '@/components/popup/PopupPointLack.vue'
 import PopupPointExtinguish from '@/components/popup/PopupPointExtinguish.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'Point',
   components: {
@@ -36,11 +37,11 @@ export default {
     PopupPointExtinguish
   },
   computed: {
+    ...mapState(['totalAgreePop', 'totalBuyPop', 'totalLackPop', 'totalExtinguishPop'])
   },
   mounted () {
     this.$store.dispatch('getTotalGiftList')
     this.$store.dispatch('delExpectPoint')
-    this.$store.dispatch('loadTotalData')
   }
 }
 </script>
