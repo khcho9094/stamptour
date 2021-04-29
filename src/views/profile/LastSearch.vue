@@ -6,7 +6,7 @@
       <p>* 최근 1달간의 조회 스탬프가 표시됩니다.</p>
       <p v-if="badgeSearch.length === 0" class="no_result">최근 조회 스탬프가 없습니다.</p>
       <ul v-else class="list recent">
-        <li v-for="(data, idx) in badgeSearch" v-bind:key="idx">
+        <li v-for="(data, idx) in badgeSearch" v-bind:key="idx" @click="stampDetail(data)">
           <div
             class="box_lt"
             :style="{ 'background-image': `url(${data.mingle_badge_image})` }">
@@ -69,6 +69,23 @@ export default {
         iType = 'complete'
       }
       return require(`@/assets/images/${iType}.png`)
+    },
+    stampDetail (sid) {
+      if (sid.mingle_badge_id === '21524279') {
+        // alert('코로나19 확산 예방을 위해, 고성 통일전망대가 잠정 폐쇄(2020년 2월 25일 ~ 무기한) 되었으므로 50코스 이용시 참고하여 주시기 바랍니다.')
+        this.$store.state.wonjuPopup2.open = true
+        this.$store.state.wonjuPopup2.data = sid
+      } else {
+        localStorage.stampDetail = JSON.stringify(sid)
+        if (/Android/i.test(navigator.userAgent)) {
+          // eslint-disable-next-line no-undef
+          tranggle3.tranggle_callback('stamp_loc', `{lat:${sid.info_org_lat} ,lon:${sid.info_org_lon} ,badge_id:${sid.mingle_badge_id} }`)
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location = `tranggle_callback://stamp_loc?lat=${sid.info_org_lat}&lon=${sid.info_org_lon}&badge_Id=${sid.mingle_badge_id}`
+        } else {
+          return false
+        }
+      }
     },
     setStamp () {
       let tg = false

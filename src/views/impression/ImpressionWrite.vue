@@ -86,7 +86,7 @@ export default {
     }
   },
   mounted () {
-    this.registData.mingle_user_gift_no = this.$route.query.giftCode
+    this.registData.mingle_user_gift_no = this.$route.query.giftCode || ''
   }
 }
 </script>
