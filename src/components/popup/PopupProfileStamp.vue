@@ -13,7 +13,7 @@
                 <li v-for="(item, idx) in 5" :key="idx"><input :id="`starRating${item}`" type="radio" name="stars" :value="item" @change="starRating(item, 'change')" ><label :for="`starRating${item}`"></label></li>
             </ul>
             <button class="type1" @click="closeBtn">닫기</button>
-            <button class="type2">공유하기</button>
+            <button class="type2" @click="shareBtn">공유하기</button>
         </div>
     </div>
 </template>
@@ -53,6 +53,19 @@ export default {
       })
       for (var i = 1; i <= val; i++) {
         document.getElementById('starRating' + i).classList.add('on')
+      }
+    },
+    // 공유하기
+    shareBtn () {
+      const badgeId = this.stampInfo.mingle_badge_id
+      const badgeDate = this.stampInfo.user_mingle_badge_stamp_date
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('stamp_share', `{ badge_id:${badgeId} ,badge_date:${badgeDate} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://stamp_share?badge_id=${badgeId}&badge_date=${badgeDate}`
+      } else {
+        return false
       }
     }
   }

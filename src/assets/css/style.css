@@ -3863,8 +3863,7 @@ ul.photo_select li input[type="file"] {
     overflow: hidden;
 }
 .app_layer .btn_wrap button {
-    float: left;
-    width: 50%;
+    width: 100%;
     background-color: #c86550;
     color: #fff;
     font-size: 14px;
@@ -3875,11 +3874,12 @@ ul.photo_select li input[type="file"] {
 }
 .app_layer .close {
     position: absolute;
-    right: 17px;
-    top: 17px;
-    width: 17px;
-    height: 17px;
+    right: 8px;
+    top: 8px;
+    width: 40px;
+    height: 40px;
     background: url(../images/close_pop_b.png) center / cover no-repeat;
+    background-size: 17px;
 }
 /* 포인트 소멸 예정 안내 팝업 */
 .pop_point_extinguish strong {

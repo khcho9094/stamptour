@@ -15,8 +15,8 @@
             <em class="tip">* 내 별점은 이후 ‘내가 찍은 스탬프’ 화면에서도<br/>등록/ 수정 가능합니다.</em>
         </div>
         <div class="btn_wrap">
-            <button class="type1">방문 소감 등록</button>
-            <button class="type2">공유하기</button>
+            <button @click="impressionWrite">방문 소감 등록</button>
+            <!-- <button class="type2">공유하기</button> -->
         </div>
         <button type="button" class="close" @click="closeBtn"></button>
     </div>
@@ -37,6 +37,14 @@ export default {
   methods: {
     closeBtn () {
       // close 앱이벤트
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('stamp_finish_close', '{}')
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = 'tranggle_callback://stamp_finish_close'
+      } else {
+        return false
+      }
     },
     starRating (val, change) {
       if (change) {
@@ -49,6 +57,18 @@ export default {
       })
       for (var i = 1; i <= val; i++) {
         document.getElementById('starRating' + i).classList.add('on')
+      }
+    },
+    // 방문 소감 작성
+    impressionWrite () {
+      const curl = '/impression/write'
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('stamp_impression_write', `{ url:${curl} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://stamp_impression_write?url=${curl}`
+      } else {
+        return false
       }
     }
   },
