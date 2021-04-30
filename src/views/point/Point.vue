@@ -12,6 +12,7 @@
         <PopupPointLack v-if="totalLackPop"/>
         <!-- 소멸예정 포인트 팝업 -->
         <PopupPointExtinguish v-if="totalExtinguishPop"/>
+        <PopupGiftPop v-if="popupNoti.open" />
     </div>
 </template>
 <script>
@@ -23,6 +24,7 @@ import PopupPointAgree from '@/components/popup/PopupPointAgree.vue'
 import PopupPointBuy from '@/components/popup/PopupPointBuy.vue'
 import PopupPointLack from '@/components/popup/PopupPointLack.vue'
 import PopupPointExtinguish from '@/components/popup/PopupPointExtinguish.vue'
+import PopupGiftPop from '@/components/popup/PopupGiftPop.vue'
 import { mapState } from 'vuex'
 export default {
   name: 'Point',
@@ -34,10 +36,11 @@ export default {
     PopupPointAgree,
     PopupPointBuy,
     PopupPointLack,
-    PopupPointExtinguish
+    PopupPointExtinguish,
+    PopupGiftPop
   },
   computed: {
-    ...mapState(['totalAgreePop', 'totalBuyPop', 'totalLackPop', 'totalExtinguishPop'])
+    ...mapState(['totalAgreePop', 'totalBuyPop', 'totalLackPop', 'totalExtinguishPop', 'popupNoti'])
   },
   mounted () {
     this.$store.dispatch('getTotalGiftList')

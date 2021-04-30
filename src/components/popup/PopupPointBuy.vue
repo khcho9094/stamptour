@@ -37,7 +37,8 @@ export default {
         this.$store.state.totalLackPop = true
       } else {
         this.$store.state.totalBuyPop = false
-        this.$store.dispatch('totalGiftPresent', this.totalSelectGift)
+        console.log(this.totalSelectGift)
+        this.$store.dispatch('ApplyTotalMall', { pGift: this.totalSelectGift, mInfo: this.totalMemberInfo })
       }
     },
     comma (val) {

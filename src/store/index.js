@@ -1662,6 +1662,52 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    /*
+    통합몰 머니콘 신청
+    */
+    ApplyTotalMall ({ state, commit, dispatch }, data) {
+      console.log(data)
+      if (data.mInfo.member_id.indexOf('@A') > -1) {
+        data.mInfo.member_id = data.mInfo.member_id.substr(0, 10)
+      }
+      const postCode = data.pGift.mingle_tot_gift_post_code
+      const giftCode = data.pGift.mingle_tot_gift_code
+      const tel = data.mInfo.member_mobile.replace(/-/gi, '')
+      const mid = data.mInfo.member_id
+      let msg = ''
+      const url = 'https://m.tranggle.com/mingle/login/stampTourMoneycon.json'
+      const fd = new FormData()
+      fd.append('postCd', postCode) // 발송코드
+      fd.append('cmd', '100') // 동작구분
+      fd.append('prodCd1', giftCode) // 상품코드
+      fd.append('prodCnt1', '1') // 상품수량
+      fd.append('senderMobileNo', '') // 발송자번호
+      fd.append('mobileNo', tel) // 수신자번호
+      fd.append('name', mid) // 이름(member_id)
+      fd.append('mingleCode', state.mingleCode) // mingle_code
+      axios
+        .post(url, fd)
+        .then(res => {
+          console.log(res)
+          if (String(res.data.resCd) === '100') {
+            msg = '모바일 기프티콘이 휴대폰<br>문자메시지로 발송되었습니다.<br>60일 이내에 가까운 가맹점에서<br>사용하시기 바랍니다.<br>감사합니다.'
+            dispatch('totalGiftPresent', data.pGift)
+          } else if (String(res.data.resCd) === '102') {
+            msg = '선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
+            dispatch('totalGiftPresent', data.pGift)
+          } else {
+            msg = '서버 오류로 선물 신청에 실패했습니다. 올댓스탬프에 문의해주세요.'
+          }
+          dispatch('openNotiPopup', {
+            tit1: msg,
+            tit2: '',
+            close: 'Y'
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {
