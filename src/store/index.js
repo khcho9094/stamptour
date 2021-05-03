@@ -175,7 +175,9 @@ export default new Vuex.Store({
     totalBuyPop: false, // 통합몰 구매 팝업
     totalLackPop: false, // 통합몰 포인트 부족팝업
     totalExtinguishPop: false, // 통합몰 소멸예정 포인트 팝업
-    totalSelectGift: {}
+    totalSelectGift: {},
+    app_star_point: '', // 평균 별점
+    app_profile: '' // 앱 전달용 프로필 URL
   },
   mutations: {
     setIntroData (state, data) {
@@ -1356,7 +1358,7 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
-          console.log(response.data.response.content)
+          // console.log(response.data.response.content)
           commit('setProfile', response.data.response.content)
         })
         .catch(err => {
@@ -1373,7 +1375,7 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(response => {
-          console.log(response)
+          state.app_profile = response.data.response.content.save_url
           dispatch('GetProfile', state.token)
         })
         .catch(err => {
@@ -1550,12 +1552,16 @@ export default new Vuex.Store({
       axios
         .post(url, fd)
         .then(res => {
+          console.log(res)
           if (res.data.response.code === '00') {
             if (data.user_mingle_badge_id) {
               dispatch('loadMyStamp', '0')
             } else if (data.mingle_badge_id) {
               dispatch('GetProfile')
             }
+            console.log('tetet')
+            console.log(res.data.response.content)
+            state.app_star_point = res.data.response.content.star_cnt
           }
         })
         .catch(err => {

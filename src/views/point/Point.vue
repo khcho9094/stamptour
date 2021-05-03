@@ -40,7 +40,14 @@ export default {
     PopupGiftPop
   },
   computed: {
-    ...mapState(['totalAgreePop', 'totalBuyPop', 'totalLackPop', 'totalExtinguishPop', 'popupNoti'])
+    ...mapState(['totalAgreePop', 'totalBuyPop', 'totalLackPop', 'totalExtinguishPop', 'popupNoti', 'expectPoint'])
+  },
+  watch: {
+    expectPoint () {
+      if (this.expectPoint.ded_cnt > 0 && this.$cookie.get('total_extinguish_pop') !== 'Y') {
+        this.$store.state.totalExtinguishPop = true
+      }
+    }
   },
   mounted () {
     this.$store.dispatch('getTotalGiftList')

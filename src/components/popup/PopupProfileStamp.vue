@@ -26,7 +26,7 @@ export default {
   },
   props: ['stampInfo'],
   computed: {
-    ...mapState(['openProfileStamp'])
+    ...mapState(['openProfileStamp', 'app_star_point'])
   },
   watch: {
     openProfileStamp (open) {
@@ -35,6 +35,16 @@ export default {
         this.$nextTick(() => {
           this.starRating(parseInt(this.stampInfo.star_point))
         })
+      }
+    },
+    app_star_point () {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('star_point', `{ star:${this.app_star_point}, badge_id:${this.stampInfo.mingle_badge_id} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://star_point?star=${this.app_star_point}&badge_id=${this.stampInfo.mingle_badge_id}`
+      } else {
+        return false
       }
     }
   },
@@ -57,13 +67,14 @@ export default {
     },
     // 공유하기
     shareBtn () {
+      this.$store.state.openProfileStamp = false
       const badgeId = this.stampInfo.mingle_badge_id
       const badgeDate = this.stampInfo.user_mingle_badge_stamp_date
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
-        tranggle3.tranggle_callback('stamp_share', `{ badge_id:${badgeId} ,badge_date:${badgeDate} }`)
+        tranggle3.tranggle_callback('stamp_share', `{ badge_id:${badgeId} ,badge_date:'${badgeDate}' }`)
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = `tranggle_callback://stamp_share?badge_id=${badgeId}&badge_date=${badgeDate}`
+        window.location = `tranggle_callback://stamp_share?badge_id=${badgeId}&badge_date='${badgeDate}'`
       } else {
         return false
       }

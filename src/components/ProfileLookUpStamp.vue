@@ -10,6 +10,7 @@
       >
         <div class="stamp_img"
           :style="{'background': `url(${item.mingle_badge_image}) center / cover no-repeat`}"
+          @click="RecentLookUpPopup(item)"
         >
         </div>
         <h3>{{item.info_badge_name}}</h3>
@@ -41,6 +42,16 @@ export default {
   methods: {
     fnLink (url) {
       this.$router.push(url)
+    },
+    RecentLookUpPopup (data) {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('stamp_loc', `{lat:${data.info_org_lat} ,lon:${data.info_org_lon} ,badge_id:${data.mingle_badge_id} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://stamp_loc?lat=${data.info_org_lat}&lon=${data.info_org_lon}&badge_Id=${data.mingle_badge_id}`
+      } else {
+        return false
+      }
     }
   },
   mounted () {

@@ -86,6 +86,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.query.badge_id) {
+      this.registData.badgeid = this.$route.query.badge_id
+    }
     this.registData.mingle_user_gift_no = this.$route.query.giftCode || ''
   }
 }

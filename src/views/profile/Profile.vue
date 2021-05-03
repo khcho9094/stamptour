@@ -75,12 +75,26 @@ export default {
       openProfilePopup: false
     }
   },
+  watch: {
+    app_profile () {
+      if (this.app_profile) {
+        if (/Android/i.test(navigator.userAgent)) {
+          // eslint-disable-next-line no-undef
+          tranggle3.tranggle_callback('profile_change', `{ url:${this.app_profile} }`)
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location = `tranggle_callback://profile_change?url=${this.app_profile}`
+        } else {
+          return false
+        }
+      }
+    }
+  },
   mounted () {
     document.getElementById('app').classList.add('full_height')
     this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['profile', 'badgeStamp', 'badgeSearch', 'token'])
+    ...mapState(['profile', 'badgeStamp', 'badgeSearch', 'token', 'app_profile'])
   },
   methods: {
     profileUpload (event) {

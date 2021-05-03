@@ -89,13 +89,15 @@ export default {
     },
     setStamp () {
       let tg = false
-      this.stampCodeInfo.map((data) => {
-        if (data.code === this.mingleCode && data.info === 'point') {
-          tg = true
-        } else if (data.code === this.mingleCode && data.info === 'number') {
-          tg = false
-        }
-      })
+      if (this.stampCodeInfo) {
+        this.stampCodeInfo.map((data) => {
+          if (data.code === this.mingleCode && data.info === 'point') {
+            tg = true
+          } else if (data.code === this.mingleCode && data.info === 'number') {
+            tg = false
+          }
+        })
+      }
       return tg
     },
     stampKind (data) {
@@ -145,7 +147,7 @@ export default {
     this.$store.dispatch('GetProfile')
   },
   computed: {
-    ...mapState(['badgeSearch', 'mingleCode'])
+    ...mapState(['badgeSearch', 'mingleCode', 'stampCodeInfo'])
   }
 }
 </script>

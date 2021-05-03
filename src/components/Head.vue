@@ -89,7 +89,7 @@ export default {
       }
     },
     goBack () {
-      if ((this.$route.name === 'Gift' && !this.giftSolo) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift' || this.$route.name === 'EventThema10' || this.$route.name === 'Kogas') {
+      if ((this.$route.name === 'Gift' && !this.giftSolo) || (this.$route.name === 'ImpressionWrite' && this.$route.query.badge_id) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift' || this.$route.name === 'EventThema10' || this.$route.name === 'Kogas') {
         if (this.$route.query.back === 'y') {
           this.$router.go(-1)
           return false

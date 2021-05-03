@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     badgeStamp () {
-      console.log(this.badgeStamp)
+      // console.log(this.badgeStamp)
     }
   },
   mounted () {

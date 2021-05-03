@@ -32,7 +32,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod', 'stampPoi'])
+    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod', 'stampPoi', 'app_star_point'])
+  },
+  watch: {
+    app_star_point () {
+      if (/Android/i.test(navigator.userAgent)) {
+        // eslint-disable-next-line no-undef
+        tranggle3.tranggle_callback('star_point', `{ star:${this.app_star_point}, badge_id:${this.stampInfo.badge_id} }`)
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = `tranggle_callback://star_point?star=${this.app_star_point}&badge_id=${this.stampInfo.badge_id}`
+      } else {
+        return false
+      }
+    }
   },
   methods: {
     closeBtn () {
@@ -61,7 +73,7 @@ export default {
     },
     // 방문 소감 작성
     impressionWrite () {
-      const curl = '/impression/write'
+      const curl = `/impression/write?badge_id=${this.$route.query.badge_id}`
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
         tranggle3.tranggle_callback('stamp_impression_write', `{ url:${curl} }`)

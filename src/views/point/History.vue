@@ -8,7 +8,7 @@
                     <option value="">전체</option>
                     <option value="U">사용 내역</option>
                     <option value="G">적립 내역</option>
-                    <option value="D">회수 내역</option>
+                    <option value="D">소멸 내역</option>
                 </select>
                 <p>* 최근 3개월의 포인트 내역만 표출됩니다.</p>
             </div>
@@ -94,7 +94,7 @@ export default {
       } else if (type === 'G') {
         return '적립'
       } else if (type === 'D') {
-        return '회수'
+        return '소멸'
       } else if (type === '') {
         return '전체'
       }

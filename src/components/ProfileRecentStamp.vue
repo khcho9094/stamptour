@@ -60,7 +60,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.badgeStamp)
+    // console.log(this.badgeStamp)
   }
 }
 </script>
