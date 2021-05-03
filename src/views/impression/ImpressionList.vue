@@ -5,10 +5,10 @@
             <!-- 솔팅 셀렉트 -->
             <div class="box">
               <select class="mySelect" @change="changeList($event)">
-                <option v-bind:value="'date_asc'">날짜순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
                 <option v-bind:value="'date_desc'">날짜순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
-                <option v-bind:value="'distance_asc'">거리순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
+                <option v-bind:value="'date_asc'">날짜순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
                 <option v-bind:value="'distance_desc'">거리순 ▼<img src="@/assets/images/arrow_d.png" alt="ad"></option>
+                <option v-bind:value="'distance_asc'">거리순 ▲<img src="@/assets/images/arrow_u.png" alt="au"></option>
               </select>
               <div class="checkbox">
                 <input type="checkbox" id="onlyMine" v-model="onlyMine">
@@ -75,7 +75,7 @@ export default {
       listData: {
         page: 1,
         order: 'date',
-        order_sort: 'asc',
+        order_sort: 'desc',
         me: ''
       },
       loading: false
