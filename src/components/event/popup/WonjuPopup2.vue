@@ -32,7 +32,7 @@ export default {
         // eslint-disable-next-line no-undef
         tranggle3.tranggle_callback('stamp_loc', `{lat:${this.$store.state.wonjuPopup2.data.info_org_lat} ,lon:${this.$store.state.wonjuPopup2.data.info_org_lon} ,badge_id:${this.$store.state.wonjuPopup2.data.mingle_badge_id} }`)
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = `tranggle_callback://stamp_loc?lat=${this.$store.state.wonjuPopup2.data.info_org_lat}&lon=${this.$store.state.wonjuPopup2.data.info_org_lon}&badge_id=${this.$store.state.wonjuPopup2.data.mingle_badge_id}`
+        window.location = `tranggle_callback://stamp_loc?lat=${this.$store.state.wonjuPopup2.data.info_org_lat}&lon=${this.$store.state.wonjuPopup2.data.info_org_lon}&badge_Id=${this.$store.state.wonjuPopup2.data.mingle_badge_id}`
       } else {
         return false
       }

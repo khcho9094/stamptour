@@ -155,7 +155,7 @@ export default {
           // eslint-disable-next-line no-undef
           tranggle3.tranggle_callback('stamp_loc', `{lat:${sid.info_org_lat} ,lon:${sid.info_org_lon} ,badge_id:${sid.mingle_badge_id} }`)
         } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-          window.location = `tranggle_callback://stamp_loc?lat=${sid.info_org_lat}&lon=${sid.info_org_lon}&badge_id=${sid.mingle_badge_id}`
+          window.location = `tranggle_callback://stamp_loc?lat=${sid.info_org_lat}&lon=${sid.info_org_lon}&badge_Id=${sid.mingle_badge_id}`
         } else {
           return false
         }
