@@ -10,15 +10,6 @@ Vue.use(Vuex)
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 export default new Vuex.Store({
   state: {
-    // SzActcWN5QXozxDixoG4zQ== 코리아둘레길(권역, 갯수)
-    // /GN62eV1c4Q78ghWNMWRsQ== 부안 (포인트)
-    // QAAPpA7foDPqF3zEzdvHrw== 구로 (인증서1개, 포인트)
-    // M0ZRcktVl8H3kJaRKq3Irg== 양천 (봉사 신청 2개, 포인트)
-    // HvbQjGJR2yF9vTu8m2TUZQ== 태백 (포인트)
-    // iQxiUpF8ZfaGodRQJ6s0mg== 테마여행(권역, 참여신청, 갯수)
-    // vSi8Z9QlNS5wushabGnrhA== 평화누리길 (선물 1개, 갯수)
-    // 테스트 x2pb29pxoROYDl4jl1TOzQ==
-    // 0lDg6JT7iYoHXLAPV4p8wA== 한국가스공사
     domain: 'https://api.tranggle.com', // 공통 URL
     domainTest: 'https://stage-api.tranggle.com:4081', // 공통 URL Test
     domainKhy: 'http://khy-api.tranggle.com', // 강수석님 URL Test
@@ -29,24 +20,24 @@ export default new Vuex.Store({
     yanchanAuthUrl2: 'https://drive.google.com/open?id=1LGPnKRK-Bom_v-mKo41-0kAOunyWg-rd6QI7H0ZrJR8', // 양천 봉사활동 인증서 신청 주소2 (3개스탬프획득시)
     peaceAuthUrl: 'https://drive.google.com/open?id=1XCxQGyTe4KRGUH_U40AKZ0SDmRqDYYwH2KCIWKnlz5M', // 평화누리길 인증서 신청 주소 (12개) 인증서 신청하기
     stampCodeInfo: [
-      { name: '비글테스트', code: 'x2pb29pxoROYDl4jl1TOzQ==', info: 'number', no: '10', giftMessage: '테스트테스트테스트테스트 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -부안 잼버리&부안관광 스탬프투어 드림-' },
-      { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number', no: '16', giftMessage: '코리아둘레길 선물 도착!! 이벤트에 참여해주셔서 감사합니다. -투어는 곧 혜택. 코리아둘레길 스탬프투어 드림-' },
-      { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point', no: '1', giftMessage: '부안군 잼버리&부안관광 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -부안 잼버리&부안관광 스탬프투어 드림-' },
-      { name: '양천', code: 'M0ZRcktVl8H3kJaRKq3Irg==', info: 'number', msg: '스탬프도 찍고 봉사 시간도 채우고!!', no: '14' },
-      { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15', giftMessage: '태백에서 꼭 가봐야 할 명소 33선 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -태백 스탬프투어 드림-' },
-      { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
-      { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
-      { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20', giftMessage: '[원주 구석구석 어디까지 가봤니?] 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -원주 스탬프투어 드림-' },
-      { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
-      { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
-      { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23', msg: '스탬프도 찍고 국가보훈처 기념패도 받고!!' },
-      { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24', giftMessage: '충북 나드리 스탬프투어 선물 도착! 이벤트에 참여해주셔서 감사합니다. 앞으로 운동할 땐 트랭글, 여행할 땐 올댓스탬프 잊지마세요~~ -충북 나드리 스탬프투어 드림-' },
-      { name: '이응노 미술관', code: 'UQ3+JiYENuJBR+gw6zSYPA==', info: 'number', no: '25', msg: '미디어 파사드에서 완주자 보기', giftMessage: '[원주 구석구석 어디까지 가봤니?]' },
-      { name: 'KOGAS와 즐기는 대구 스탬프투어', code: '0lDg6JT7iYoHXLAPV4p8wA==', info: 'number', no: '26', msg: '', giftMessage: '‘조심조심 착한소비 스탬프투어 with KOGAS 대구의 히어로가 되어도!’는 대구지역 경제 활성화를 위해 한국가스공사가 준비한 행사로, 지역 관광명소를 즐길 수 있는 스탬프투어와 구매 영수증 인증 이벤트를 진행하여 다양한 경품을 제공합니다. 여러분의 많은 관심과 참여 부탁드립니다.' },
-      { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30', giftMessage: '대구광역시와 삼성전자가 협력하여 설립한 대구창조경제혁신센터로 캠퍼스 내부를 둘러보는 스탬프투어입니다.' },
-      { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31', giftMessage: '경기도 7개 시의 대표적인 둘레길들을 지나는 스탬프투어입니다.' },
-      { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32', giftMessage: '봄 하면 떠오르는 것, 바로 봄꽃!' },
-      { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33', giftMessage: '충청북도, 충청남도, 대전, 세종 4개 지역에 위치한 관광지 스탬프투어입니다.' }
+      // { name: '비글테스트', code: 'x2pb29pxoROYDl4jl1TOzQ==', info: 'number', no: '10' },
+      // { name: '코리아둘레길', code: 'SzActcWN5QXozxDixoG4zQ==', info: 'number', no: '16' },
+      // { name: '부안', code: '/GN62eV1c4Q78ghWNMWRsQ==', info: 'point', no: '1' },
+      // { name: '양천', code: 'M0ZRcktVl8H3kJaRKq3Irg==', info: 'number', msg: '스탬프도 찍고 봉사 시간도 채우고!!', no: '14' },
+      // { name: '태백', code: 'HvbQjGJR2yF9vTu8m2TUZQ==', info: 'point', no: '15' },
+      // { name: '테마여행', code: 'iQxiUpF8ZfaGodRQJ6s0mg==', info: 'number', no: '17' },
+      // { name: '평화누리길', code: 'vSi8Z9QlNS5wushabGnrhA==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '18' },
+      // { name: '원주', code: '4k68KEPNtv/xCP0/x2Hirw==', info: 'point', no: '20' },
+      // { name: '관광100', code: 'YQTt4DYGRx7iBHRXs2IlPA==', info: 'number', no: '21' },
+      // { name: '평화누리 자전거길', code: 'xYwbII8pDWTT1VzPbK3E1g==', info: 'number', msg: '스탬프도 찍고 인증서도 받고!!', no: '22' },
+      // { name: '현충시설100', code: 'Nvn2hlG+v6mVAUJsmrbJ8w==', info: 'number', no: '23', msg: '스탬프도 찍고 국가보훈처 기념패도 받고!!' },
+      // { name: '충북나드리', code: '+0DVeHum2c+rBgEjLoPi6Q==', info: 'number', no: '24' },
+      // { name: '이응노 미술관', code: 'UQ3+JiYENuJBR+gw6zSYPA==', info: 'number', no: '25', msg: '미디어 파사드에서 완주자 보기' },
+      // { name: 'KOGAS와 즐기는 대구 스탬프투어', code: '0lDg6JT7iYoHXLAPV4p8wA==', info: 'number', no: '26', msg: '' },
+      // { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30' },
+      // { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31' },
+      // { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32' },
+      // { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
@@ -429,6 +420,7 @@ export default new Vuex.Store({
       state.thema10Status = data
     },
     setStampList (state, data) {
+      const arr = []
       data.map((val, idx) => {
         const obj = {
           name: val.mingle_title,
@@ -442,9 +434,9 @@ export default new Vuex.Store({
         } else if (val.mingle_seq === '14') {
           obj.msg = '스탬프도 찍고 봉사 시간도 채우고!!'
         }
-        state.stampCodeInfo[idx] = obj
+        arr.push(obj)
       })
-      console.log(state.stampCodeInfo)
+      state.stampCodeInfo = arr
     },
     setPopupList (state, data) {
       state.popupList = data
@@ -498,8 +490,8 @@ export default new Vuex.Store({
     - 파라미터
       mingleCode / 서비스코드 / 필수
     */
-    loadIntroData ({ state, commit }) {
-      const url = `${state.domain}/v2/mingle/stamptour/serviceInfo.jsonp?mingleCode=${state.mingleCode}`
+    loadIntroData ({ state, commit }, data) {
+      const url = `${state.domain}/v2/mingle/stamptour/serviceInfo.jsonp?mingleCode=${data}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -523,7 +515,6 @@ export default new Vuex.Store({
         appvertest = 'Y'
       }
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
-      // const url = `http://sung-api.tranggle.com/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -546,7 +537,7 @@ export default new Vuex.Store({
         })
     },
     /*
-    - 선물소개 NEW stampTourMainGiftInfo
+    - 선물소개 NEW
     - 파라미터
       mingleCode / 서비스코드 / 필수
       token / 토큰정보 / 필수
@@ -624,6 +615,7 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
+          console.log(response.response.content)
           commit('setMainData', response.response.content)
           state.loadingMainList = false
         })
@@ -666,7 +658,10 @@ export default new Vuex.Store({
       Vue
         .jsonp(url)
         .then(response => {
-          commit('setMainRecommend', response.response.content)
+          console.log(response)
+          if (response.response.code === '00') {
+            commit('setMainRecommend', response.response.content)
+          }
         })
         .catch(err => {
           console.log(err)
@@ -1439,7 +1434,12 @@ export default new Vuex.Store({
           console.log(res)
           if (res.data.response.code === '00') {
             alert('정상적으로 등록되었습니다.')
-            router.push('/gift?impression=y')
+            state.impressionComplete = false
+            if (data.badgeId) {
+              router.push('/impression/list?impression=y')
+            } else {
+              router.push('/gift?impression=y')
+            }
             state.impressionOpen = false
           } else {
             alert(res.data.response.message)

@@ -76,6 +76,37 @@ export default {
       }
     }
   },
+  watch: {
+    mingleCode () {
+      // 인트로 페이지로
+      let mingleN = ''
+      this.stampCodeInfo.map((data, idx) => {
+        if (this.mingleCode === data.code) {
+          mingleN = idx
+        }
+      })
+      if (!this.$cookie.get(`setIntro${mingleN}`) && this.$route.query.mingleCode) {
+        const query = Object.assign({}, this.$route.query)
+        delete query.mingleCode
+        this.$router.replace({ query })
+        localStorage.setIntroPopup = 'Y'
+        this.$store.dispatch('setIntroPopup', true)
+      }
+      /* 210201 관리자 팝업 hjhj */
+      if (this.$cookie.get(this.mingleCode) === 'Y') {
+        this.$store.state.thema10Popup = false
+      }
+      this.$store.dispatch('PopupBannerManager', this.mingleCode)
+      // setTimeout(() => {
+      const mingleCodeArr = this.$cookie.get('service_code')
+      this.$store.state.mingleCodeArr = mingleCodeArr
+      if (this.$store.state.token !== '') {
+        this.$store.dispatch('loadPointSumApi')
+      }
+      // this.$store.dispatch('loadMainData', this.params)
+      // }, 100)
+    }
+  },
   computed: {
     ...mapState(['popupStampSuccess', 'mingleCode', 'introPopup', 'stampCodeInfo', 'wonjuPopup2'])
   },
@@ -133,36 +164,36 @@ export default {
       this.$store.dispatch('setIntroPopup', true)
     }
     // 인트로 페이지로
-    let mingleN = ''
-    this.stampCodeInfo.map((data, idx) => {
-      if (this.mingleCode === data.code) {
-        mingleN = idx
-      }
-    })
-    if (!this.$cookie.get(`setIntro${mingleN}`) && this.$route.query.mingleCode) {
-      const query = Object.assign({}, this.$route.query)
-      delete query.mingleCode
-      this.$router.replace({ query })
-      localStorage.setIntroPopup = 'Y'
-      this.$store.dispatch('setIntroPopup', true)
-    }
+    // let mingleN = ''
+    // this.stampCodeInfo.map((data, idx) => {
+    //   if (this.mingleCode === data.code) {
+    //     mingleN = idx
+    //   }
+    // })
+    // if (!this.$cookie.get(`setIntro${mingleN}`) && this.$route.query.mingleCode) {
+    //   const query = Object.assign({}, this.$route.query)
+    //   delete query.mingleCode
+    //   this.$router.replace({ query })
+    //   localStorage.setIntroPopup = 'Y'
+    //   this.$store.dispatch('setIntroPopup', true)
+    // }
   },
   mounted () {
     /* 210201 관리자 팝업 hjhj */
-    if (this.$cookie.get(this.mingleCode) === 'Y') {
-      this.$store.state.thema10Popup = false
-    }
-    this.$store.dispatch('PopupBannerManager', this.mingleCode)
+    // if (this.$cookie.get(this.mingleCode) === 'Y') {
+    //   this.$store.state.thema10Popup = false
+    // }
+    // this.$store.dispatch('PopupBannerManager', this.mingleCode)
     this.$store.state.lon = localStorage.getItem('setLon')
     this.$store.state.lat = localStorage.getItem('setLat')
-    setTimeout(() => {
-      const mingleCodeArr = this.$cookie.get('service_code')
-      this.$store.state.mingleCodeArr = mingleCodeArr
-      if (this.$store.state.token !== '') {
-        this.$store.dispatch('loadPointSumApi')
-      }
-      this.$store.dispatch('loadMainData', this.params)
-    }, 100)
+    // setTimeout(() => {
+    //   const mingleCodeArr = this.$cookie.get('service_code')
+    //   this.$store.state.mingleCodeArr = mingleCodeArr
+    //   if (this.$store.state.token !== '') {
+    //     this.$store.dispatch('loadPointSumApi')
+    //   }
+    //   this.$store.dispatch('loadMainData', this.params)
+    // }, 100)
   }
 }
 </script>

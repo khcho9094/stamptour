@@ -45,7 +45,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['mainRecommendList', 'areaCode'])
+    ...mapState(['mainRecommendList', 'areaCode', 'mingleCode'])
+  },
+  watch: {
+    mingleCode () {
+      this.$store.dispatch('loadMainRecommend')
+    }
   },
   methods: {
     stampDetail (sid) {
@@ -71,7 +76,9 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadMainRecommend')
+    if (this.mingleCode) {
+      this.$store.dispatch('loadMainRecommend')
+    }
   }
 }
 </script>

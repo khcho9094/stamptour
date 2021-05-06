@@ -17,6 +17,11 @@ export default {
       unit: ''
     }
   },
+  watch: {
+    stampCodeInfo () {
+      this.setStamp()
+    }
+  },
   computed: {
     ...mapState(['myPoint', 'userInfo', 'stampCodeInfo', 'mingleCode'])
   },

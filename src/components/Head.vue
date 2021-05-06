@@ -75,6 +75,11 @@ export default {
         }
         // 버튼 가리기 추가
         this.$store.state.impressionComplete = true
+        if (this.$route.query.badge_id) {
+          this.registData.badgeId = this.$route.query.badge_id
+        } else {
+          this.registData.badgeId = ''
+        }
         this.$store.dispatch('setVisitComment', this.registData)
       }
     },
@@ -89,7 +94,8 @@ export default {
       }
     },
     goBack () {
-      if ((this.$route.name === 'Gift' && !this.giftSolo) || (this.$route.name === 'ImpressionWrite' && this.$route.query.badge_id) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift' || this.$route.name === 'EventThema10' || this.$route.name === 'Kogas') {
+      // alert(location.href)
+      if ((this.$route.name === 'Gift' && !this.giftSolo) || (this.$route.name === 'ImpressionWrite' && this.$route.query.badge_id) || (this.$route.name === 'ImpressionList' && this.$route.query.impression) || this.$route.name === 'Stamp' || this.$route.name === 'AllGift' || this.$route.name === 'EventThema10' || this.$route.name === 'Kogas') {
         if (this.$route.query.back === 'y') {
           this.$router.go(-1)
           return false
@@ -105,7 +111,7 @@ export default {
       } else {
         if (this.$route.name === 'Gift') {
           this.$router.push('/')
-        } else if ((this.$route.name === 'Search' && Object.keys(this.$route.query).length === 0) || this.$route.path === '/profile') {
+        } else if ((this.$route.name === 'Search' && this.$route.query.AppVer) || this.$route.path === '/profile') {
           this.goHome()
         } else {
           this.$router.go(-1)

@@ -80,7 +80,7 @@ export default {
       if (this.app_profile) {
         if (/Android/i.test(navigator.userAgent)) {
           // eslint-disable-next-line no-undef
-          tranggle3.tranggle_callback('profile_change', `{ url:${this.app_profile} }`)
+          tranggle3.tranggle_callback('profile_change', `{ url:'${this.app_profile}' }`)
         } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
           window.location = `tranggle_callback://profile_change?url=${this.app_profile}`
         } else {

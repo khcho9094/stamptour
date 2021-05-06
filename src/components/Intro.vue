@@ -8,7 +8,7 @@
         <div class="title">
             {{introData.mingle_title}}
         </div>
-        <swiper :options="swiperOption" class="swiper">
+        <swiper :options="swiperOption" class="swiper" v-if="sview">
             <swiper-slide
               class="slide"
               v-for="(img, idx) in introImage"
@@ -43,16 +43,22 @@ export default {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 10,
-        loop: true
+        loop: false
       },
       visible: false,
       count: 5,
       pageOut: false,
-      ino: 0
+      ino: 0,
+      sview: false
     }
   },
   computed: {
     ...mapState(['introData', 'introImage', 'mingleCode', 'stampCodeInfo', 'zoomPop'])
+  },
+  watch: {
+    introImage () {
+      this.sview = true
+    }
   },
   methods: {
     tourStartButton () {

@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod', 'stampPoi', 'app_star_point'])
+    ...mapState(['stampCommon', 'stampIntro', 'stampImage', 'stampMethod', 'stampPoi', 'app_star_point', 'mingleCode'])
   },
   watch: {
     app_star_point () {
@@ -44,6 +44,14 @@ export default {
       } else {
         return false
       }
+    },
+    mingleCode () {
+      this.$store.dispatch('loadStampData', {
+        mingle_badge_id: this.$route.query.badge_id,
+        mingle_badge_content_type: this.$route.query.contentTypeId,
+        mingle_badge_content_id: this.$route.query.contentId,
+        mingle_poi_no: this.$route.query.mingle_poi_no
+      })
     }
   },
   methods: {
@@ -84,13 +92,20 @@ export default {
       }
     }
   },
+  beforeCreate () {
+    // const mcArr = this.$route.query.mingleCode.replace(/ /gi, '+').split('|')
+    // console.log(mcArr[0])
+    // this.$cookie.set('service_code', 'mcArr[0]', 9999)
+  },
   mounted () {
-    this.$store.dispatch('loadStampData', {
-      mingle_badge_id: this.$route.query.badge_id,
-      mingle_badge_content_type: this.$route.query.contentTypeId,
-      mingle_badge_content_id: this.$route.query.contentId,
-      mingle_poi_no: this.$route.query.mingle_poi_no
-    })
+    if (this.mingleCode) {
+      this.$store.dispatch('loadStampData', {
+        mingle_badge_id: this.$route.query.badge_id,
+        mingle_badge_content_type: this.$route.query.contentTypeId,
+        mingle_badge_content_id: this.$route.query.contentId,
+        mingle_poi_no: this.$route.query.mingle_poi_no
+      })
+    }
   }
 }
 </script>

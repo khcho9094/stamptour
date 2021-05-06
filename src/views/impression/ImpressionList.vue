@@ -112,6 +112,10 @@ export default {
       this.$store.state.impressionList = []
       this.listData.page = 1
       this.$store.dispatch('GetvisitComment', this.listData)
+    },
+    mingleCode () {
+      this.listData.page = 1
+      this.$store.dispatch('GetvisitComment', this.listData)
     }
   },
   mounted () {

@@ -3584,14 +3584,15 @@ ul.photo_select li input[type="file"] {
     width: calc((100% - 22px)/3);
     font-family: 'inaviL';
     text-align: center;
+    min-height: 200px;
 }
 
 .total_point .pt_mall ul li:nth-child(3n+2) {
     margin: 0 11px;
 }
-.total_point .pt_mall ul li:nth-child(n+4) {
+/* .total_point .pt_mall ul li:nth-child(n+4) {
     margin-top: 25px;
-}
+} */
 .total_point .pt_mall ul li .gift_img_wrap {
     display: flex;
     align-items: center;
@@ -3608,7 +3609,7 @@ ul.photo_select li input[type="file"] {
     display: block;
     font-size: 14px;
     color: #010101;
-    line-height: 1;
+    line-height: 1.2;
     font-weight: normal;
 }
 .total_point .pt_mall ul li em {

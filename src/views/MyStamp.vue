@@ -65,8 +65,8 @@ export default {
       this.$store.state.getStampImage = data.mingle_stamp_image
       this.$store.state.getStampName = data.info_badge_name
       this.$store.state.getStampDate = data.user_mingle_badge_badge_date
-      const openChk = this.$store.state.stampOpen
-      this.$store.dispatch('loadStampPopup', openChk)
+      // const openChk = this.$store.state.stampOpen
+      // this.$store.dispatch('loadStampPopup', openChk)
     },
     setOrder () {
       this.$store.dispatch('loadMyStamp', this.selectValue)

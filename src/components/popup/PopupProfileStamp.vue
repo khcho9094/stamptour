@@ -40,9 +40,9 @@ export default {
     app_star_point () {
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
-        tranggle3.tranggle_callback('star_point', `{ star:${this.app_star_point}, badge_id:${this.stampInfo.mingle_badge_id} }`)
+        tranggle3.tranggle_callback('star_point', `{ star:${this.app_star_point}, badge_id:${this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id} }`)
       } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = `tranggle_callback://star_point?star=${this.app_star_point}&badge_id=${this.stampInfo.mingle_badge_id}`
+        window.location = `tranggle_callback://star_point?star=${this.app_star_point}&badge_id=${this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id}`
       } else {
         return false
       }

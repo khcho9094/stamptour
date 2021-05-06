@@ -13,7 +13,7 @@
             <div class="badge_count">
               <p class="stamp">
                 <span>스탬프</span>
-                <strong>{{memberMyList.user_mingle_gift_point}}개</strong>
+                <strong>{{memberMyList.mingle_badge_get_count}}개</strong>
               </p>
               <p class="finish">
                 <span>완주</span>
@@ -36,7 +36,7 @@
             <div class="badge_count">
               <p class="stamp">
                 <span>스탬프</span>
-                <strong>{{ data.user_mingle_gift_point }}개</strong>
+                <strong>{{ data.mingle_badge_get_count }}개</strong>
               </p>
               <p class="finish">
                 <span>완주</span>

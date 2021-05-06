@@ -93,6 +93,22 @@ export default {
       dotW: 0
     }
   },
+  watch: {
+    mingleCode () {
+      if (this.token) {
+        this.$store.dispatch('loadGiftData')
+      } else {
+        this.$store.dispatch('loadGiftNoToken')
+      }
+      this.$nextTick(() => {
+        window.addEventListener('resize', this.getResize)
+      })
+      window.onload = () => {
+        this.getResize()
+      }
+      this.getResize()
+    }
+  },
   computed: {
     ...mapState(['allStampCount', 'getStampCount', 'giftData', 'token', 'stampAll', 'stampCodeInfo', 'mingleCode', 'myPoint', 'allStampPoint', 'guestChk'])
   },
@@ -219,6 +235,7 @@ export default {
       // }
     },
     getResize () {
+      console.log(document.getElementById('stampId').offsetWidth)
       this.dotW = (document.getElementById('stampId')) ? document.getElementById('stampId').offsetWidth / 4 - 53 : ''
     },
     goMyStamp () {
@@ -252,21 +269,25 @@ export default {
     }
   },
   created () {
-    if (this.token) {
-      this.$store.dispatch('loadGiftData')
-    } else {
-      this.$store.dispatch('loadGiftNoToken')
+    if (this.mingleCode) {
+      if (this.token) {
+        this.$store.dispatch('loadGiftData')
+      } else {
+        this.$store.dispatch('loadGiftNoToken')
+      }
     }
     // this.$store.dispatch('loadMainAll')
   },
   mounted () {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.getResize)
-    })
-    window.onload = () => {
+    if (this.mingleCode) {
+      this.$nextTick(() => {
+        window.addEventListener('resize', this.getResize)
+      })
+      window.onload = () => {
+        this.getResize()
+      }
       this.getResize()
     }
-    this.getResize()
   }
 }
 </script>

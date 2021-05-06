@@ -44,6 +44,13 @@ export default {
       }
     }
   },
+  watch: {
+    mingleCode () {
+      if (this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==') {
+        this.$store.dispatch('loadGiftDataNew')
+      }
+    }
+  },
   computed: {
     ...mapState(['sumPrice', 'mingleCode', 'stampCodeInfo', 'bannerList', 'giftYN'])
   },
@@ -79,17 +86,8 @@ export default {
       }
     }
   },
-  created () {
-    // if (this.mingleCode === '4k68KEPNtv/xCP0/x2Hirw==') {
-    //   this.swiperOption.autoplay.delay = 3000
-    //   this.swiperOption.loop = true
-    // } else {
-    //   this.swiperOption.autoplay.delay = 99999
-    //   this.swiperOption.loop = false
-    // }
-  },
   mounted () {
-    if (this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==') {
+    if (this.mingleCode && this.mingleCode !== 'iQxiUpF8ZfaGodRQJ6s0mg==') {
       this.$store.dispatch('loadGiftDataNew')
     }
   }

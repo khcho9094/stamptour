@@ -80,6 +80,13 @@ export default {
       progressData: this.localData()
     }
   },
+  watch: {
+    mingleCode () {
+      this.$store.dispatch('loadAreaList')
+      this.$store.dispatch('loadMingleVersionChk')
+      this.$store.dispatch('loadMainData', this.params)
+    }
+  },
   computed: {
     ...mapState(['mainStampList', 'areaList', 'mingleCode', 'token', 'stampCodeInfo', 'allStampCount', 'loadingMainList'])
   },
@@ -289,8 +296,11 @@ export default {
     window.addEventListener('scroll', this.scrollBottom)
   },
   mounted () {
-    this.$store.dispatch('loadAreaList')
-    this.$store.dispatch('loadMingleVersionChk')
+    if (this.mingleCode) {
+      this.$store.dispatch('loadAreaList')
+      this.$store.dispatch('loadMingleVersionChk')
+      this.$store.dispatch('loadMainData', this.params)
+    }
     // window.onpopstate = history.onpushstate = (e) => {
     //   if (window.location.href.split('/').pop().indexOf('modal') === -1) {
     //     // this.$store.dispatch('openPopupGift', {})

@@ -51,6 +51,9 @@ export default {
           })
         }
       }
+    },
+    stampCodeInfo () {
+      this.setStamp()
     }
   },
   computed: {
