@@ -132,8 +132,16 @@ export default {
               }
               // this.$store.dispatch('openPopupGift', {})
             } else if (this.popupGift.mingle_no === '23') {
+              let tit23 = ''
+              if (this.popupGift.mingle_gift_seq === 'yvVPgx4rJ56PY+bWFnnfPg==') {
+                tit23 = '<b>축하합니다!!</b><br>금년도 12월 16일 이후 추첨을 통해 110명에게 [GS편의점 5,000원 교환권] 전달을 위해 개별적으로 연락 드릴 예정입니다.<br>감사합니다.'
+              } else if (this.popupGift.mingle_gift_seq === 'Wxe5GrfU54c+pTRg8IRg8g==') {
+                tit23 = '<b>축하합니다!!</b><br>선착순 10명에게 금년도 12월 16일 이후 [완주기념패] 전달을 위하여 개별적으로 연락을 드릴 예정입니다.<br>감사합니다.'
+              } else if (this.popupGift.mingle_gift_seq === 'aJxMFDIlo2yisjwNrgz+Sw==') {
+                tit23 = '<b>축하합니다!!</b><br>선착순 10명에게 금년도 12월 16일 이후 [완주기념패] 전달을 위하여 개별적으로 연락을 드릴 예정입니다.<br>감사합니다.'
+              }
               this.$store.dispatch('openNotiPopup', {
-                tit1: '<b>축하합니다!!</b><br>선착순 15분께 2020년<br>12월 16일 이후 [완주기념패]<br>전달을 위하여 개별적으로<br>연락을 드릴 예정입니다.<br>감사합니다.',
+                tit1: tit23,
                 tit2: '',
                 close: 'Y'
               })
@@ -208,7 +216,7 @@ export default {
       } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '14') {
         val = '봉사점수 신청하기'
       } else if (data.mingle_gift_add_point === 'AUTH' && data.mingle_no === '23') {
-        val = '기념패 수령하기'
+        val = '신청하기'
       } else {
         val = '모바일 상품권 받기'
       }
