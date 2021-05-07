@@ -626,7 +626,7 @@ export default new Vuex.Store({
     */
     loadMemberData ({ state, commit }, data) {
       state.loadingMainList = true
-      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=BADGE&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
       // const url = `http://khy-api.tranggle.com/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
       Vue
         .jsonp(url)
