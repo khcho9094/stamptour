@@ -149,7 +149,8 @@ export default new Vuex.Store({
     impressionList: [], // 방문소감조회리스트
     impressionGiftCode: '',
     impressionComplete: false, // 방문소감 완료
-    giftYN: false // 메인 선물 배너 유무
+    giftYN: false, // 메인 선물 배너 유무
+    blackListPop: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -1125,6 +1126,8 @@ export default new Vuex.Store({
           } else if (response.data.response.code === '05') {
             // 발급된 기프티콘 있음
             alert('이미 발급된 기프티콘이 있습니다.')
+          } else if (response.data.response.code === '06') {
+            alert(response.data.response)
           }
         })
         .catch(err => {

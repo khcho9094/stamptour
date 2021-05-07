@@ -29,7 +29,7 @@
                   <span>축하합니다!!</span>
                 </div>
                 <span v-if="popupGift.mingle_no !== '25'">
-                    <img :src="imgIcon()" alt="gs25">
+                    <img :src="imgIcon()" alt="gs25"><br/>
                     {{popupGift.mingle_gift_title}}
                 </span>
                 <div class="agree_pop" v-if="agreeCheck">
