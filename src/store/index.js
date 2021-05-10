@@ -432,8 +432,8 @@ export default new Vuex.Store({
         }
         if (val.mingle_seq === '18' || val.mingle_seq === '22') {
           obj.msg = '스탬프도 찍고 인증서도 받고!!'
-        } else if (val.mingle_seq === '14') {
-          obj.msg = '스탬프도 찍고 봉사 시간도 채우고!!'
+        } else if (val.mingle_seq === '23') {
+          obj.msg = '스탬프도 찍고 국가보훈처 기념패도 받고!!'
         }
         arr.push(obj)
       })
