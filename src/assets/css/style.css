@@ -439,6 +439,7 @@ header .head_back span {
     color:#c86550;
     display: block;
     margin-bottom: 25px;
+    word-break: break-all;
 }
 .pop_overay .pop_cont .text_2 > span img {
     width:30px;
@@ -1260,7 +1261,7 @@ header .head_back span {
     font-size: 12px;
     color: #010101;
     line-height: 1.2;
-    word-break: keep-all;
+    /* word-break: keep-all; */
     width: calc(100% - 100px);
 }
 .tour_sub_wrap ul.gift_list li .gift_icon {
@@ -2017,6 +2018,8 @@ header .head_back span {
     height:60px;
     line-height: 60px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 .all_gift ul.tour_list > li > ul.all_list li .point {
     display: inline-block;
@@ -2050,6 +2053,8 @@ header .head_back span {
     font-family: inaviL;
     font-size: 12px;
     color: #010101;
+    width: calc(100% - 130px);
+    line-height: 1.2;
 }
 .all_gift ul.tour_list > li > ul.all_list li .gift_icon {
     padding:0 30px;
@@ -3895,3 +3900,16 @@ ul.photo_select li input[type="file"] {
     color: #888;
     text-align: center;
 }
+.limit_gift {
+    font-weight: normal;
+    display: inline-block;
+    margin-left: 5px;
+}
+/* @media screen and (max-width: 320px) {
+    .total_search .search_b {
+        padding: 15px 15px 0;
+    }
+    .total_search .search_card {
+        padding: 10px 10px 5px;
+    }
+} */

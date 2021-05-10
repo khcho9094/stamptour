@@ -168,7 +168,8 @@ export default new Vuex.Store({
     totalExtinguishPop: false, // 통합몰 소멸예정 포인트 팝업
     totalSelectGift: {},
     app_star_point: '', // 평균 별점
-    app_profile: '' // 앱 전달용 프로필 URL
+    app_profile: '', // 앱 전달용 프로필 URL
+    blackListPop: false
   },
   mutations: {
     setIntroData (state, data) {
@@ -678,7 +679,7 @@ export default new Vuex.Store({
     */
     loadMemberData ({ state, commit }, data) {
       state.loadingMainList = true
-      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
+      const url = `${state.domain}/v2/mingle/courses/CourseStatusList.jsonp?search_order=BADGE&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
       // const url = `http://khy-api.tranggle.com/mingle/courses/CourseStatusList.jsonp?search_order=POP&mingleCode=${state.mingleCode}==&status=${data.status}&view_count=20&page=${data.pageCount}&token=${state.token}`
       Vue
         .jsonp(url)
@@ -1164,6 +1165,7 @@ export default new Vuex.Store({
       fd.append('token', state.token)
       fd.append('gift', data.pGift.mingle_gift_seq)
       const url = 'https://api.tranggle.com/v2/mingle/courses/user_gift_chk.json'
+      // const url = 'http://sung-api.tranggle.com/mingle/courses/user_gift_chk.json'
       axios
         .post(url, fd)
         .then(response => {
@@ -1174,9 +1176,11 @@ export default new Vuex.Store({
               pGift: data.pGift,
               mInfo: data.mInfo
             })
-          } else if (response.data.response.code === '05') {
-            // 발급된 기프티콘 있음
-            alert('이미 발급된 기프티콘이 있습니다.')
+          } else {
+            state.submitCheck = false
+            dispatch('openNotiPopup', {
+              tit1: response.data.response.message
+            })
           }
         })
         .catch(err => {

@@ -1,34 +1,54 @@
 <template>
-    <ul class="gift_list">
-        <li v-for="(data, idx) in giftData" v-bind:key="idx">
-            <div class="point" v-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='"><span class="stxt">잼버리<br/>코스</span></div>
-            <div class="point" v-else-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"><span class="stxt">{{auth(data)}}</span></div>
-            <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
-            <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
-            <span>{{data.mingle_gift_title}}</span>
-            <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y'" class="gift_complete">
-              완료
-            </div>
-            <div v-else-if="data.mingle_gift_receive === 'E'" class="gift_complete">
-              마감
-            </div>
-            <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
-                <img :src="giftOn(data)" alt="gift">
-                <div class="dot"></div>
-            </div>
-            <div class="line"></div>
-            <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null && data.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ==' && mingleCode !== 'UQ3+JiYENuJBR+gw6zSYPA=='">{{dDay(data)}}</div>
-        </li>
-    </ul>
+    <div>
+        <ul class="gift_list">
+            <li v-for="(data, idx) in giftData" v-bind:key="idx">
+                <div class="point" v-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='/GN62eV1c4Q78ghWNMWRsQ=='"><span class="stxt">잼버리<br/>코스</span></div>
+                <div class="point" v-else-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"><span class="stxt">{{auth(data)}}</span></div>
+                <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
+                <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
+                <span>{{data.mingle_gift_title}}</span>
+                <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y'" class="gift_complete">
+                  완료
+                </div>
+                <div v-else-if="data.mingle_gift_receive === 'E'" class="gift_complete">
+                  마감
+                </div>
+                <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
+                    <img :src="giftOn(data)" alt="gift">
+                    <div class="dot"></div>
+                </div>
+                <div class="line"></div>
+                <div class="giftDday" v-if="(dotOn(data) === 'on' || dotOn(data) === 'end') && data.mingle_gift_end_date !== null && data.user_gift_send_date === null && data.user_gift_request_date === null && data.mingle_gift_seq !== 'vgzyuHho9L7fX0sxzjDZhQ==' && mingleCode !== 'UQ3+JiYENuJBR+gw6zSYPA=='">{{dDay(data)}}</div>
+            </li>
+        </ul>
+        <PopupBlackList v-if="blackListPop" />
+    </div>
 </template>
 <script>
 import { mapState } from 'vuex'
+import PopupBlackList from '@/components/popup/PopupBlackList.vue'
 export default {
   name: 'GiftList',
+  components: {
+    PopupBlackList
+  },
   data () {
     return {
       unit: '',
-      load: false
+      load: false,
+      blackList: [ // 머니콘 부정 발급자들 임시 막기
+        '010-3723-4410',
+        '010-4573-6178',
+        '010-4886-7932',
+        '010-5163-0422',
+        '010-6227-8799',
+        '010-6239-6504',
+        '010-7107-7179',
+        '010-7135-7504',
+        '010-8660-3636',
+        '010-8960-8201',
+        '010-9999-9999'
+      ]
     }
   },
   watch: {
@@ -57,7 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['giftData', 'stampCodeInfo', 'mingleCode'])
+    ...mapState(['giftData', 'stampCodeInfo', 'mingleCode', 'blackListPop'])
   },
   methods: {
     // 점 표시
@@ -81,7 +101,14 @@ export default {
       return require(`@/assets/images/${img}.png`)
     },
     giftReceive (data) {
-      if (data.mingle_gift_receive === 'Y') {
+      let flag = false
+      this.blackList.map((val) => {
+        if (data.member_mobile === val) {
+          this.$store.state.blackListPop = true
+          flag = true
+        }
+      })
+      if (data.mingle_gift_receive === 'Y' && !flag) {
         if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
           if (data.mingle_comment_no === '') { // 방문소감을 안 썼음
             // 방문소감 링크 팝업 팝업 띄우기
