@@ -1113,6 +1113,7 @@ export default new Vuex.Store({
       fd.append('token', state.token)
       fd.append('gift', data.pGift.mingle_gift_seq)
       const url = 'https://api.tranggle.com/v2/mingle/courses/user_gift_chk.json'
+      // const url = 'http://sung-api.tranggle.com/mingle/courses/user_gift_chk.json'
       axios
         .post(url, fd)
         .then(response => {
@@ -1123,11 +1124,11 @@ export default new Vuex.Store({
               pGift: data.pGift,
               mInfo: data.mInfo
             })
-          } else if (response.data.response.code === '05') {
-            // 발급된 기프티콘 있음
-            alert('이미 발급된 기프티콘이 있습니다.')
-          } else if (response.data.response.code === '06') {
-            alert(response.data.response)
+          } else {
+            state.submitCheck = false
+            dispatch('openNotiPopup', {
+              tit1: response.data.response.message
+            })
           }
         })
         .catch(err => {

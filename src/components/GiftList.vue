@@ -6,7 +6,7 @@
                 <div class="point" v-else-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"><span class="stxt">{{auth(data)}}</span></div>
                 <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
                 <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
-                <span>{{data.mingle_gift_title}}<b class="limit_gift">(100/2000)</b></span>
+                <span>{{data.mingle_gift_title}}</span>
                 <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y'" class="gift_complete">
                   완료
                 </div>
