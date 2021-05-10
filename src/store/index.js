@@ -22,6 +22,7 @@ export default new Vuex.Store({
     domain: 'https://api.tranggle.com', // 공통 URL
     domainTest: 'https://stage-api.tranggle.com:4081', // 공통 URL Test
     domainKhy: 'http://khy-api.tranggle.com', // 강수석님 URL Test
+    domainSung: 'http://sung-api.tranggle.com',
     token: '', // 임시 토큰
     buanAuthUrl: 'https://goo.gl/forms/1pXkfZ9C31kLXMEJ3', // 부안 인증서 신청 주소 (잼버리 코스) 인증서 신청하기
     guroAuthUrl: 'https://drive.google.com/open?id=17w8ksUmERZOKxlwf8z1ihAvQtFR66eOgqmzzn6dalTA', // 구로 인증서 신청 주소 (100P) 인증서 신청하기
@@ -162,20 +163,19 @@ export default new Vuex.Store({
       })
     },
     setGiftData (state, data) {
-      let total = 0
+      // let total = 0
       state.giftData = data
-      if (data.length && data[0].user_mingle_gift_point) {
-        state.myPoint = data[0].user_mingle_gift_point
-      }
-      data.map((val) => {
-        if (parseInt(val.mingle_count) > total) {
-          total = parseInt(val.mingle_count)
-        }
-      })
-      state.allStampPoint = total
+      // if (data.length && data[0].user_mingle_gift_point) {
+      //   state.myPoint = data[0].user_mingle_gift_point
+      // }
+      // data.map((val) => {
+      //   if (parseInt(val.mingle_count) > total) {
+      //     total = parseInt(val.mingle_count)
+      //   }
+      // })
+      // state.allStampPoint = total
     },
     setGiftDataNew (state, data) {
-      console.log(data)
       if (data.length) {
         state.giftYN = true
       }
@@ -200,9 +200,12 @@ export default new Vuex.Store({
       state.stampPoi = data.POI
     },
     setMainData (state, data) {
+      console.log(data)
       state.mainStampList = state.mainStampList.concat(data.stamplist_info)
       state.allStampCount = parseInt(data.stampget_info.mingle_badge_count)
       state.getStampCount = parseInt(data.stampget_info.badge_get_count)
+      state.allStampPoint = parseInt(data.stampget_info.mingle_total_badge_point)
+      state.myPoint = parseInt(data.stampget_info.user_mingle_gift_point)
       localStorage.stampCount = data.stampget_info.mingle_badge_count
       // 2021-04-05 대구창조경제혁신센터 처리
       if (state.mingleCode === '/oJtXiRvYqdKNzlb35o5NA==') {
@@ -467,7 +470,6 @@ export default new Vuex.Store({
         appvertest = 'Y'
       }
       const url = `${state.domain}/v2/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
-      // const url = `http://sung-api.tranggle.com/mingle/stamptour/stampTourMainGiftInfo.jsonp?mingleCode=${state.mingleCode}&token=${state.token}&appver_test=${appvertest}`
       Vue
         .jsonp(url)
         .then(response => {
@@ -490,7 +492,7 @@ export default new Vuex.Store({
         })
     },
     /*
-    - 선물소개 NEW stampTourMainGiftInfo
+    - 선물소개 NEW
     - 파라미터
       mingleCode / 서비스코드 / 필수
       token / 토큰정보 / 필수
