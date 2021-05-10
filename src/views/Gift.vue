@@ -35,6 +35,12 @@ export default {
   computed: {
     ...mapState(['mingleCode', 'token', 'popupGift', 'introData'])
   },
+  watch: {
+    mingleCode () {
+      this.$store.dispatch('loadGiftDataNew')
+      this.$store.dispatch('loadTotalData')
+    }
+  },
   beforeCreate () {
     if (this.$route.query.mingleCode) {
       this.$store.state.mingleCode = this.$route.query.mingleCode
@@ -44,13 +50,10 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadGiftDataNew')
-    if (this.token) {
-      this.$store.dispatch('loadGiftData')
-    } else {
-      this.$store.dispatch('loadGiftNoToken')
+    if (this.mingleCode) {
+      this.$store.dispatch('loadGiftDataNew')
+      this.$store.dispatch('loadTotalData')
     }
-    this.$store.dispatch('loadTotalData')
     this.$store.dispatch('loadDurunubiCheck', this.token)
   }
 }
