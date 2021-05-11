@@ -29,7 +29,7 @@
                         <img class="gift" v-if="giftChkPoint(index_in+(index*10-10))" :src="giftIconPoint(index_in+(index*10-10))" @click="giftClickPoint(index_in+(index*10-10))">
                         <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${getResize()}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -65,7 +65,7 @@
                         <img class="gift" v-if="giftChk(index_in+(index*10-10))" :src="giftIcon(index_in+(index*10-10))" @click="giftClick(index_in+(index*10-10))">
                         <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${getResize()}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -221,9 +221,6 @@ export default {
       // } else {
       //   return false
       // }
-    },
-    getResize () {
-      return (document.getElementById('swiperBox')) ? document.getElementById('swiperBox').offsetWidth / 4 - 53 : 0
     },
     goMyStamp () {
       router.push('/mystamp')

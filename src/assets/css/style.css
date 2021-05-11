@@ -667,6 +667,7 @@ header .head_back span {
 
 
 .stamp_box ul.stamp_list {
+    --main-width: calc(100vw - 70px);
     overflow: hidden;
     margin-bottom: 0px;
 }
@@ -679,10 +680,8 @@ header .head_back span {
 }
 .stamp_box ul.stamp_list li .line {
     text-indent: -9999px;
-    background-image: url('../images/dotdot.png');
-    background-repeat: repeat-x;
-    background-size: 5px;
-    width:20px;
+    background: url('../images/dotdot.png') 0 0 / 5px repeat-x;
+    width: calc((var(--main-width) - 215px) / 4);
     height:3px;
     position: absolute;
     top: 22px;
