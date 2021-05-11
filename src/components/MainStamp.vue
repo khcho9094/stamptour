@@ -95,11 +95,7 @@ export default {
   },
   watch: {
     mingleCode () {
-      if (this.token) {
-        this.$store.dispatch('loadGiftData')
-      } else {
-        this.$store.dispatch('loadGiftNoToken')
-      }
+      this.$store.dispatch('loadGiftData')
       this.$nextTick(() => {
         window.addEventListener('resize', this.getResize)
       })
@@ -269,10 +265,11 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('loadGiftData')
+    // this.$store.dispatch('loadGiftData')
   },
   mounted () {
     if (this.mingleCode) {
+      this.$store.dispatch('loadGiftData')
       this.$nextTick(() => {
         window.addEventListener('resize', this.getResize)
       })
