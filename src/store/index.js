@@ -47,7 +47,8 @@ export default new Vuex.Store({
       { name: '대구창조경제혁신센터 창업 캠퍼스 투어', code: '/oJtXiRvYqdKNzlb35o5NA==', info: 'number', no: '30', giftMessage: '대구광역시와 삼성전자가 협력하여 설립한 대구창조경제혁신센터로 캠퍼스 내부를 둘러보는 스탬프투어입니다.' },
       { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31', giftMessage: '경기도 7개 시의 대표적인 둘레길들을 지나는 스탬프투어입니다.' },
       { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32', giftMessage: '봄 하면 떠오르는 것, 바로 봄꽃!' },
-      { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33', giftMessage: '충청북도, 충청남도, 대전, 세종 4개 지역에 위치한 관광지 스탬프투어입니다.' }
+      { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33', giftMessage: '충청북도, 충청남도, 대전, 세종 4개 지역에 위치한 관광지 스탬프투어입니다.' },
+      { name: '김포 방방곡곡 모바일 스탬프 투어', code: 'eQrgky8nqusaT5/PVbxMjw==', info: 'number', no: '34' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
