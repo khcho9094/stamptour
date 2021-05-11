@@ -269,14 +269,7 @@ export default {
     }
   },
   created () {
-    if (this.mingleCode) {
-      if (this.token) {
-        this.$store.dispatch('loadGiftData')
-      } else {
-        this.$store.dispatch('loadGiftNoToken')
-      }
-    }
-    // this.$store.dispatch('loadMainAll')
+    this.$store.dispatch('loadGiftData')
   },
   mounted () {
     if (this.mingleCode) {

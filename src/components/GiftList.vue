@@ -6,11 +6,11 @@
                 <div class="point" v-else-if="data.mingle_gift_add_point === 'AUTH' && mingleCode ==='M0ZRcktVl8H3kJaRKq3Irg=='"><span class="stxt">{{auth(data)}}</span></div>
                 <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
                 <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
-                <span>{{data.mingle_gift_title}}</span>
+                <span>{{data.mingle_gift_title}}<b class="limit_gift" v-if="data.mingle_gift_com_yn === 'Y'" >({{data.user_com_cnt}}/{{data.mingle_gift_com_cnt}})</b></span>
                 <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y'" class="gift_complete">
                   완료
                 </div>
-                <div v-else-if="data.mingle_gift_receive === 'E'" class="gift_complete">
+                <div v-else-if="data.mingle_gift_receive === 'E' || (data.user_com_cnt >= data.mingle_gift_com_cnt && data.mingle_gift_com_yn === 'Y')" class="gift_complete">
                   마감
                 </div>
                 <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
@@ -55,7 +55,7 @@ export default {
     giftData () {
       if (!this.load) {
         // 페이지 로딩시 방문소감 작성해야 되는 선물 있을때
-        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
+        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==' || this.mingleCode === 'eQrgky8nqusaT5/PVbxMjw==') {
           var giftIdx = 0
           for (giftIdx; giftIdx < this.giftData.length; giftIdx++) {
             if (this.$route.query.impression !== 'y' && this.giftData[giftIdx].mingle_gift_receive === 'Y' && this.giftData[giftIdx].mingle_comment_no === '') {
@@ -109,7 +109,7 @@ export default {
         }
       })
       if (data.mingle_gift_receive === 'Y' && !flag) {
-        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') { // 경기서부 7길
+        if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==' || this.mingleCode === 'eQrgky8nqusaT5/PVbxMjw==') { // 경기서부 7길
           if (data.mingle_comment_no === '') { // 방문소감을 안 썼음
             // 방문소감 링크 팝업 팝업 띄우기
             this.$store.state.impressionOpen = true
@@ -193,7 +193,7 @@ export default {
       localStorage.removeItem('giftopen')
     }
     // 경기서부 7길
-    if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==') {
+    if (this.mingleCode === 'ClJDKcCIq5mBFLdPmkYwPQ==' || this.mingleCode === 'eQrgky8nqusaT5/PVbxMjw==') {
       if (!this.$route.query.impression) {
         localStorage.removeItem('impressionData')
       }
