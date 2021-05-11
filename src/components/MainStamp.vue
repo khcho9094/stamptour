@@ -22,14 +22,14 @@
           class="slide"
           v-for="index in swiperPaging()"
           v-bind:key="index">
-            <ul class="stamp_list" id="stampId">
+            <ul class="stamp_list">
                 <li v-for="index_in in stampCount(index)" v-bind:key="index_in">
                     <div class="box">
                         <img class="round" :style="{ zIndex : zIn(index_in+(index*10-10)) }" :src="completeChk(index_in+(index*10-10))">
                         <img class="gift" v-if="giftChkPoint(index_in+(index*10-10))" :src="giftIconPoint(index_in+(index*10-10))" @click="giftClickPoint(index_in+(index*10-10))">
                         <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${dotW}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${getResize()}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -53,19 +53,19 @@
           </span>
       </div>
       <!-- <div class="title" @click="loginOpen" v-else>스탬프를 찍기 위해 로그인이 필요합니다</div> -->
-      <swiper :options="swiperOption" class="swiper">
+      <swiper :options="swiperOption" class="swiper" id="swiperBox">
         <swiper-slide
           class="slide"
           v-for="index in swiperPaging()"
           v-bind:key="index">
-            <ul class="stamp_list" id="stampId">
+            <ul class="stamp_list">
                 <li v-for="index_in in stampCount(index)" v-bind:key="index_in" class="dot_box">
                     <div class="box">
                         <img class="round" :style="{ zIndex : zIn(index_in+(index*10-10)) }" :src="completeChk(index_in+(index*10-10))">
                         <img class="gift" v-if="giftChk(index_in+(index*10-10))" :src="giftIcon(index_in+(index*10-10))" @click="giftClick(index_in+(index*10-10))">
                         <span v-else>{{index_in+(index*10-10)}}</span>
                     </div>
-                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${dotW}px` }">line</div>
+                    <div class="line" :class="lineChk(index_in+(index*10-10))" :style="{ width : `${getResize()}px` }">line</div>
                 </li>
             </ul>
         </swiper-slide>
@@ -89,20 +89,12 @@ export default {
           el: '.swiper-pagination',
           type: 'fraction'
         }
-      },
-      dotW: 0
+      }
     }
   },
   watch: {
     mingleCode () {
       this.$store.dispatch('loadGiftData')
-      this.$nextTick(() => {
-        window.addEventListener('resize', this.getResize)
-      })
-      window.onload = () => {
-        this.getResize()
-      }
-      this.getResize()
     }
   },
   computed: {
@@ -231,8 +223,7 @@ export default {
       // }
     },
     getResize () {
-      console.log(document.getElementById('stampId').offsetWidth)
-      this.dotW = (document.getElementById('stampId')) ? document.getElementById('stampId').offsetWidth / 4 - 53 : ''
+      return (document.getElementById('swiperBox')) ? document.getElementById('swiperBox').offsetWidth / 4 - 53 : 0
     },
     goMyStamp () {
       router.push('/mystamp')
@@ -270,13 +261,6 @@ export default {
   mounted () {
     if (this.mingleCode) {
       this.$store.dispatch('loadGiftData')
-      this.$nextTick(() => {
-        window.addEventListener('resize', this.getResize)
-      })
-      window.onload = () => {
-        this.getResize()
-      }
-      this.getResize()
     }
   }
 }
