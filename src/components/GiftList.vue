@@ -10,7 +10,7 @@
                 <div v-if="(data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y'" class="gift_complete">
                   완료
                 </div>
-                <div v-else-if="data.mingle_gift_receive === 'E' || (data.user_com_cnt >= data.mingle_gift_com_cnt && data.mingle_gift_com_yn === 'Y')" class="gift_complete">
+                <div v-else-if="data.mingle_gift_receive === 'E' || (parseInt(data.user_com_cnt) >= parseInt(data.mingle_gift_com_cnt) && data.mingle_gift_com_yn === 'Y')" class="gift_complete">
                   마감
                 </div>
                 <div v-else class="gift_icon" :class="dotOn(data)" @click="giftReceive(data)">
