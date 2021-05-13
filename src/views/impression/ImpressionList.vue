@@ -33,21 +33,21 @@
                 :style="{'background': `url(${data.mingle_comment_image01.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide_list"
                 >
-                  <div @click="onSelected(data)"></div>
+                  <div @click="onSelected(data, 0)"></div>
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image02"
                 :style="{'background': `url(${data.mingle_comment_image02.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide_list"
-                @click="onSelected(data)"
                 >
+                  <div @click="onSelected(data, 1)"></div>
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image03"
                 :style="{'background': `url(${data.mingle_comment_image03.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
                 class="slide_list"
-                @click="onSelected(data)"
                 >
+                  <div @click="onSelected(data, 2)"></div>
               </swiper-slide>
             </swiper>
             <button v-if="(data.mingle_comment_member_id === userInfo.user_mingle_member_id) && mingleCode !== 'ClJDKcCIq5mBFLdPmkYwPQ==' && mingleCode !== 'eQrgky8nqusaT5/PVbxMjw=='" class="del_list" type="button" @click="deleteList(data.mingle_comment_no)"></button>
@@ -111,9 +111,7 @@ export default {
         this.loading = true
       }
     },
-    onSelected (obj) {
-      console.log('click')
-      console.log(obj)
+    onSelected (obj, num) {
       this.$store.state.zoomPop = !this.$store.state.zoomPop
       document.body.style.overscrollBehaviorY = 'contain'
       this.$store.state.impressionPopupImg = []
@@ -126,13 +124,7 @@ export default {
       if (obj.mingle_comment_image03) {
         this.$store.state.impressionPopupImg.push(obj.mingle_comment_image03)
       }
-      console.log()
-      // this.introImage.map((data, idx) => {
-      //   if (data.replace('thumb', 'origin') === image) {
-      //     this.ino = idx
-      //     console.log(this.ino)
-      //   }
-      // })
+      this.ino = num
     }
   },
   watch: {
