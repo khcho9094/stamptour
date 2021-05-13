@@ -3912,3 +3912,14 @@ ul.photo_select li input[type="file"] {
         padding: 10px 10px 5px;
     }
 } */
+.close_icon {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 40px;
+    height: 40px;
+    background: url(../images/close_pop_b.png) center / cover no-repeat;
+    background-size: 17px;
+    text-indent: -999px;
+    cursor: pointer;
+}

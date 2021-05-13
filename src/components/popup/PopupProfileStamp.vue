@@ -12,8 +12,9 @@
             <ul class="star_rating">
                 <li v-for="(item, idx) in 5" :key="idx"><input :id="`starRating${item}`" type="radio" name="stars" :value="item" @change="starRating(item, 'change')" ><label :for="`starRating${item}`"></label></li>
             </ul>
-            <button class="type1" @click="closeBtn">닫기</button>
+            <button class="type1" @click="impressionWrite">방문 소감 등록</button>
             <button class="type2" @click="shareBtn">공유하기</button>
+            <div class="close_icon" @click="closeBtn">닫기</div>
         </div>
     </div>
 </template>
@@ -78,6 +79,10 @@ export default {
       } else {
         return false
       }
+    },
+    impressionWrite () {
+      const curl = `/impression/write?badge_id=${this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id}`
+      this.$router.push(curl)
     }
   }
 }
