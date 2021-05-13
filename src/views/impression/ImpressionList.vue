@@ -31,17 +31,23 @@
               <swiper-slide
                 v-if="data.mingle_comment_image01"
                 :style="{'background': `url(${data.mingle_comment_image01.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
-                class="slide">
+                class="slide_list"
+                >
+                  <div @click="onSelected(data)"></div>
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image02"
                 :style="{'background': `url(${data.mingle_comment_image02.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
-                class="slide">
+                class="slide_list"
+                @click="onSelected(data)"
+                >
               </swiper-slide>
               <swiper-slide
                 v-if="data.mingle_comment_image03"
                 :style="{'background': `url(${data.mingle_comment_image03.replace(/.(?:png|jpg|jpeg|gif)$/i, '_180x$&')}) center / cover no-repeat`}"
-                class="slide">
+                class="slide_list"
+                @click="onSelected(data)"
+                >
               </swiper-slide>
             </swiper>
             <button v-if="(data.mingle_comment_member_id === userInfo.user_mingle_member_id) && mingleCode !== 'ClJDKcCIq5mBFLdPmkYwPQ==' && mingleCode !== 'eQrgky8nqusaT5/PVbxMjw=='" class="del_list" type="button" @click="deleteList(data.mingle_comment_no)"></button>
@@ -51,18 +57,21 @@
             <p class="no_list">작성한 글이 없습니다.</p>
           </article>
         </div>
+        <PopupImpressionImage v-if="this.zoomPop === true" :initNo="ino" />
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import Head from '@/components/Head.vue'
+import PopupImpressionImage from '@/components/popup/PopupImpressionImage.vue'
 export default {
   name: 'ImpressionList',
   components: {
-    Head
+    Head,
+    PopupImpressionImage
   },
   computed: {
-    ...mapState(['mingleCode', 'impressionList', 'userInfo'])
+    ...mapState(['mingleCode', 'impressionList', 'userInfo', 'zoomPop'])
   },
   data () {
     return {
@@ -78,7 +87,8 @@ export default {
         order_sort: 'desc',
         me: ''
       },
-      loading: false
+      loading: false,
+      ino: 0
     }
   },
   methods: {
@@ -100,6 +110,29 @@ export default {
         this.$store.dispatch('GetvisitComment', this.listData)
         this.loading = true
       }
+    },
+    onSelected (obj) {
+      console.log('click')
+      console.log(obj)
+      this.$store.state.zoomPop = !this.$store.state.zoomPop
+      document.body.style.overscrollBehaviorY = 'contain'
+      this.$store.state.impressionPopupImg = []
+      if (obj.mingle_comment_image01) {
+        this.$store.state.impressionPopupImg.push(obj.mingle_comment_image01)
+      }
+      if (obj.mingle_comment_image02) {
+        this.$store.state.impressionPopupImg.push(obj.mingle_comment_image02)
+      }
+      if (obj.mingle_comment_image03) {
+        this.$store.state.impressionPopupImg.push(obj.mingle_comment_image03)
+      }
+      console.log()
+      // this.introImage.map((data, idx) => {
+      //   if (data.replace('thumb', 'origin') === image) {
+      //     this.ino = idx
+      //     console.log(this.ino)
+      //   }
+      // })
     }
   },
   watch: {

@@ -171,7 +171,8 @@ export default new Vuex.Store({
     totalSelectGift: {},
     app_star_point: '', // 평균 별점
     app_profile: '', // 앱 전달용 프로필 URL
-    blackListPop: false
+    blackListPop: false,
+    impressionPopupImg: [] // 방문소감 팝업 이미지 리스트
   },
   mutations: {
     setIntroData (state, data) {
