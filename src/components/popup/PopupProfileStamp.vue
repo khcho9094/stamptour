@@ -81,7 +81,7 @@ export default {
       }
     },
     impressionWrite () {
-      const curl = `/impression/write?badge_id=${this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id}`
+      const curl = `/impression/write?badge_id=${this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id}&back=y`
       this.$router.push(curl)
     }
   }
