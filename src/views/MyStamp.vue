@@ -56,7 +56,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['myStampData', 'guestChk', 'openProfileStamp'])
+    ...mapState(['myStampData', 'guestChk', 'openProfileStamp', 'mingleCode'])
+  },
+  watch: {
+    mingleCode () {
+      this.$store.dispatch('loadMyStamp', this.selectValue)
+    }
   },
   methods: {
     stampClick (data) {
@@ -86,7 +91,9 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadMyStamp', this.selectValue)
+    if (this.mingleCode) {
+      this.$store.dispatch('loadMyStamp', this.selectValue)
+    }
   }
 }
 </script>

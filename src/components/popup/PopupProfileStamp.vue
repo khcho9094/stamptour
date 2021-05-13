@@ -68,8 +68,8 @@ export default {
     // 공유하기
     shareBtn () {
       this.$store.state.openProfileStamp = false
-      const badgeId = this.stampInfo.mingle_badge_id
-      const badgeDate = this.stampInfo.user_mingle_badge_stamp_date
+      const badgeId = this.stampInfo.mingle_badge_id || this.stampInfo.user_mingle_badge_id
+      const badgeDate = this.stampInfo.user_mingle_badge_stamp_date || this.stampInfo.user_mingle_badge_badge_date
       if (/Android/i.test(navigator.userAgent)) {
         // eslint-disable-next-line no-undef
         tranggle3.tranggle_callback('stamp_share', `{ badge_id:${badgeId} ,badge_date:'${badgeDate}' }`)
