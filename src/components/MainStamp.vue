@@ -40,7 +40,7 @@
     <div class="stamp_box" v-else>
       <div class="title" v-if="this.token || this.$cookie.get('login_token') || this.$cookie.get('guest_token')">
           <span @click="goMyStamp">{{guestCheck()}}<img src="@/assets/images/arrow_3.png" alt="arrow" class="myStamp"></span>
-          <span class="count" v-if="(this.getStampCount !== this.allStampCount || this.mingleCode === '/oJtXiRvYqdKNzlb35o5NA==')">
+          <span class="count" v-if="(this.getStampCount !== this.allStampCount || this.mingleCode === '/oJtXiRvYqdKNzlb35o5NA==' || this.mingleCode === 'eQrgky8nqusaT5/PVbxMjw==')">
               <em>{{this.getStampCount}}</em>
               <img src="@/assets/images/dot.png" alt="dot">
               <em>{{this.allStampCount}}</em>
