@@ -79,8 +79,10 @@ export default {
         val = '문화시설'
       } else if (this.common.contenttypeid === '12') {
         val = '관광지'
-      } else {
+      } else if (this.common.contenttypeid === '99') {
         val = '생태정보'
+      } else {
+        val = this.common.contenttypeid
       }
       return val
     }
