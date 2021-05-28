@@ -1139,6 +1139,24 @@ export default new Vuex.Store({
         })
     },
     /*
+    머니콘 추첨 신청
+    */
+    ApplyAuthCheck ({ state }, data) {
+      const fd = new FormData()
+      fd.append('mingleCode', state.mingleCode)
+      fd.append('token', state.token)
+      fd.append('gift', data.pGift.mingle_gift_seq)
+      const url = 'https://api.tranggle.com/v2/mingle/courses/user_gift_chk.json'
+      axios
+        .post(url, fd)
+        .then(response => {
+          console.log(response.data.response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /*
     머니콘 선물 신청
     */
     ApplyMoneycon ({ state, commit, dispatch }, data) {

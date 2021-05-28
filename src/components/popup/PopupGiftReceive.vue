@@ -132,6 +132,7 @@ export default {
               }
               // this.$store.dispatch('openPopupGift', {})
             } else if (this.popupGift.mingle_no === '23') {
+              this.$store.dispatch('ApplyAuthCheck', { pGift: this.popupGift, mInfo: this.memberInfo })
               let tit23 = ''
               if (this.popupGift.mingle_gift_order === '1') {
                 tit23 = '<b>축하합니다!!</b><br>금년도 12월 16일 이후 추첨을 통해 110명에게 [GS편의점 5,000원 교환권] 전달을 위해 개별적으로 연락 드릴 예정입니다.<br>감사합니다.'
