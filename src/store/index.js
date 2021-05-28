@@ -39,7 +39,8 @@ export default new Vuex.Store({
       // { name: '경기서부 7길 스탬프투어', code: 'ClJDKcCIq5mBFLdPmkYwPQ==', info: 'number', no: '31' },
       // { name: '새로운 시작, 새로운 설렘, 봄 꽃 투어', code: 'j9SPKDZVAqJagE3rrMCgug==', info: 'number', no: '32' },
       // { name: '대세충청 스탬프투어', code: 'l67rfc/aqMF2GpOTzN/5lA==', info: 'number', no: '33' },
-      // { name: '김포 방방곡곡 모바일 스탬프 투어', code: 'eQrgky8nqusaT5/PVbxMjw==', info: 'number', no: '34' }
+      // { name: '김포 방방곡곡 모바일 스탬프 투어', code: 'eQrgky8nqusaT5/PVbxMjw==', info: 'number', no: '34' },
+      // { name: '비단물결 금강천리길 스탬프투어', code: 'ZLy8ZhR5sW5UE08Qt0eP8Q==', info: 'number', no: '35' }
     ],
     mingleCode: '',
     contentId: null, // 투어 API content ID 값
