@@ -187,9 +187,9 @@ export default new Vuex.Store({
     setGiftData (state, data) {
       // let total = 0
       state.giftData = data
-      // if (data.length && data[0].user_mingle_gift_point) {
-      //   state.myPoint = data[0].user_mingle_gift_point
-      // }
+      if (data.length && data[0].user_mingle_gift_point) {
+        state.myPoint = data[0].user_mingle_gift_point
+      }
       // data.map((val) => {
       //   if (parseInt(val.mingle_count) > total) {
       //     total = parseInt(val.mingle_count)
