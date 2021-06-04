@@ -7,7 +7,8 @@
                 <div class="point" v-else>{{data.mingle_count}}{{unit}}</div>
                 <img class="gift_img" :src="'https://m.tranggle.com/html/images/mingle/'+data.mingle_gift_image" alt="gift">
                 <span>{{data.mingle_gift_title}}<b class="limit_gift" v-if="data.mingle_gift_com_yn === 'Y'" >({{data.user_com_cnt}}/{{data.mingle_gift_com_cnt}})</b></span>
-                <div v-if="data.mingle_gift_receive === 'S'" class="gift_complete">
+                <!-- <div v-if="data.mingle_gift_receive === 'S'" class="gift_complete"> -->
+                <div v-if="data.mingle_gift_receive === 'S' || ((data.user_gift_send_date !== null || data.user_gift_request_date !== null) && data.mingle_gift_request_date !== '' && data.mingle_gift_receive !== 'Y')" class="gift_complete">
                   완료
                 </div>
                 <div v-else-if="data.mingle_gift_receive === 'E' || (parseInt(data.user_com_cnt) >= parseInt(data.mingle_gift_com_cnt) && data.mingle_gift_com_yn === 'Y')" class="gift_complete">
